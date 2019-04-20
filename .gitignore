@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+lib/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/npm-*
+/.rpt2_cache/
