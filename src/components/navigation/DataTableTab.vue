@@ -35,7 +35,7 @@ import Vue from "vue";
 import { Component, Prop } from "sitewhere-ide-common";
 
 import Pager from "../list/Pager.vue";
-import LoadingOverlay from "./LoadingOverlay.vue";
+import LoadingOverlay from "../common/LoadingOverlay.vue";
 
 import { IPaging, IPageSizes, ITableHeaders } from "sitewhere-ide-common";
 
