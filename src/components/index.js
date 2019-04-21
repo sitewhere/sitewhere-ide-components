@@ -10,12 +10,30 @@ import IconSelector from "./common/IconSelector.vue";
 import LinkedHeaderField from "./common/LinkedHeaderField.vue";
 import LoadingOverlay from "./common/LoadingOverlay.vue";
 
+// Dialog components.
+import BaseDialog from "./dialog/BaseDialog.vue";
+import ConfirmDialog from "./dialog/ConfirmDialog.vue";
+import DeleteDialog from "./dialog/DeleteDialog.vue";
+import MetadataPanel from "./dialog/MetadataPanel.vue";
+
 // List components.
 import ListEntry from "./list/ListEntry.vue";
 import ListLayout from "./list/ListLayout.vue";
 import ListPage from "./list/ListPage.vue";
 import ListTab from "./list/ListTab.vue";
 import Pager from "./list/Pager.vue";
+
+// Navigation components.
+import ContentTab from "./navigation/ContentTab.vue";
+import DataEntryPanel from "./navigation/DataEntryPanel.vue";
+import DataTableTab from "./navigation/DataTableTab.vue";
+import DetailPage from "./navigation/DetailPage.vue";
+import InAppFooter from "./navigation/InAppFooter.vue";
+import InAppSystemBar from "./navigation/InAppSystemBar.vue";
+import Navigation from "./navigation/Navigation.vue";
+import NavigationActionButton from "./navigation/NavigationActionButton.vue";
+import NavigationHeaderPanel from "./navigation/NavigationHeaderPanel.vue";
+import NavigationPage from "./navigation/NavigationPage.vue";
 
 // Process as Vue plugin.
 const SiteWhere = {
@@ -32,12 +50,30 @@ const SiteWhere = {
     Vue.component("sw-linked-header-field", LinkedHeaderField);
     Vue.component("sw-loading-overlay", LoadingOverlay);
 
+    // Register dialog components.
+    Vue.component("sw-base-dialog", BaseDialog);
+    Vue.component("sw-confirm-dialog", ConfirmDialog);
+    Vue.component("sw-delete-dialog", DeleteDialog);
+    Vue.component("sw-metadata-panel", MetadataPanel);
+
     // Register list components.
     Vue.component("sw-list-entry", ListEntry);
     Vue.component("sw-list-layout", ListLayout);
     Vue.component("sw-list-page", ListPage);
     Vue.component("sw-list-tab", ListTab);
     Vue.component("sw-pager", Pager);
+
+    // Register navigation components.
+    Vue.component("sw-content-tab", ContentTab);
+    Vue.component("sw-data-entry-panel", DataEntryPanel);
+    Vue.component("sw-data-table-tab", DataTableTab);
+    Vue.component("sw-detail-page", DetailPage);
+    Vue.component("sw-in-app-footer", InAppFooter);
+    Vue.component("sw-in-app-system-bar", InAppSystemBar);
+    Vue.component("sw-navigation", Navigation);
+    Vue.component("sw-navigation-action-button", NavigationActionButton);
+    Vue.component("sw-navigation-header-panel", NavigationHeaderPanel);
+    Vue.component("sw-navigation-page", NavigationPage);
   }
 };
 
@@ -55,7 +91,24 @@ export {
   LoadingOverlay
 };
 
+// Export dialog components.
+export { BaseDialog, ConfirmDialog, DeleteDialog, MetadataPanel };
+
 // Export list components.
 export { ListEntry, ListLayout, ListPage, ListTab, Pager };
+
+// Export navigation components.
+export {
+  ContentTab,
+  DataEntryPanel,
+  DataTableTab,
+  DetailPage,
+  InAppFooter,
+  InAppSystemBar,
+  Navigation,
+  NavigationActionButton,
+  NavigationHeaderPanel,
+  NavigationPage
+};
 
 export default SiteWhere;

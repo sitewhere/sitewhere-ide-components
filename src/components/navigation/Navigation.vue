@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { isAuthForAll } from "./Utils";
+import { isAuthForAll } from "../common/Utils";
 
 export default {
   data: () => ({

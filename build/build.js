@@ -42,7 +42,7 @@ function genConfig(opts) {
   const config = {
     input: {
       input: resolve("src/components/index.js"),
-      external: ["vue", "sitewhere-ide-common"],
+      external: ["vue", "sitewhere-ide-common", "electron", "moment"],
       plugins: [
         nodeResolve(),
         commonjs(),

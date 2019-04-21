@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HeaderField from "./HeaderField";
+import HeaderField from "./HeaderField.vue";
 
 import { routeTo } from "../common/Utils";
 
