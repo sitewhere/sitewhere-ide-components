@@ -1,11 +1,12 @@
 {
   "name": "sitewhere-ide-components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Common Vue.js components used in building SiteWhere IDEs",
   "main": "dist/sitewhere-ide-components.common.js",
   "typings": "types/sitewhere.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "build": "npm run build:comp",
