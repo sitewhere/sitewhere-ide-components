@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.1
+  * SiteWhere IDE Components v0.0.2
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -732,12 +732,14 @@
     // List of auto-registered components.
 
     // Process as Vue plugin.
-    function install(Vue, options) {
-      Vue.component("sw-pager", Pager$1);
-      Vue.component("sw-loading-overlay", LoadingOverlay$1);
-    }
+    const SiteWhere = {
+      install(Vue, options) {
+        Vue.component("sw-pager", Pager$1);
+        Vue.component("sw-loading-overlay", LoadingOverlay$1);
+      }
+    };
 
-    exports.install = install;
+    exports.default = SiteWhere;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
