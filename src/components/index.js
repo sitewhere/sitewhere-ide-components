@@ -36,46 +36,44 @@ import NavigationHeaderPanel from "./navigation/NavigationHeaderPanel.vue";
 import NavigationPage from "./navigation/NavigationPage.vue";
 
 // Process as Vue plugin.
-const SiteWhere = {
-  install(Vue, options) {
-    // Register common components.
-    Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
-    Vue.component("sw-color-input-field", ColorInputField);
-    Vue.component("sw-color-picker", ColorPicker);
-    Vue.component("sw-date-time-picker", DateTimePicker);
-    Vue.component("sw-error-banner", ErrorBanner);
-    Vue.component("sw-fab", FloatingActionButton);
-    Vue.component("sw-header-field", HeaderField);
-    Vue.component("sw-icon-selector", IconSelector);
-    Vue.component("sw-linked-header-field", LinkedHeaderField);
-    Vue.component("sw-loading-overlay", LoadingOverlay);
+function SiteWhere(Vue) {
+  // Register common components.
+  Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
+  Vue.component("sw-color-input-field", ColorInputField);
+  Vue.component("sw-color-picker", ColorPicker);
+  Vue.component("sw-date-time-picker", DateTimePicker);
+  Vue.component("sw-error-banner", ErrorBanner);
+  Vue.component("sw-fab", FloatingActionButton);
+  Vue.component("sw-header-field", HeaderField);
+  Vue.component("sw-icon-selector", IconSelector);
+  Vue.component("sw-linked-header-field", LinkedHeaderField);
+  Vue.component("sw-loading-overlay", LoadingOverlay);
 
-    // Register dialog components.
-    Vue.component("sw-base-dialog", BaseDialog);
-    Vue.component("sw-confirm-dialog", ConfirmDialog);
-    Vue.component("sw-delete-dialog", DeleteDialog);
-    Vue.component("sw-metadata-panel", MetadataPanel);
+  // Register dialog components.
+  Vue.component("sw-base-dialog", BaseDialog);
+  Vue.component("sw-confirm-dialog", ConfirmDialog);
+  Vue.component("sw-delete-dialog", DeleteDialog);
+  Vue.component("sw-metadata-panel", MetadataPanel);
 
-    // Register list components.
-    Vue.component("sw-list-entry", ListEntry);
-    Vue.component("sw-list-layout", ListLayout);
-    Vue.component("sw-list-page", ListPage);
-    Vue.component("sw-list-tab", ListTab);
-    Vue.component("sw-pager", Pager);
+  // Register list components.
+  Vue.component("sw-list-entry", ListEntry);
+  Vue.component("sw-list-layout", ListLayout);
+  Vue.component("sw-list-page", ListPage);
+  Vue.component("sw-list-tab", ListTab);
+  Vue.component("sw-pager", Pager);
 
-    // Register navigation components.
-    Vue.component("sw-content-tab", ContentTab);
-    Vue.component("sw-data-entry-panel", DataEntryPanel);
-    Vue.component("sw-data-table-tab", DataTableTab);
-    Vue.component("sw-detail-page", DetailPage);
-    Vue.component("sw-in-app-footer", InAppFooter);
-    Vue.component("sw-in-app-system-bar", InAppSystemBar);
-    Vue.component("sw-navigation", Navigation);
-    Vue.component("sw-navigation-action-button", NavigationActionButton);
-    Vue.component("sw-navigation-header-panel", NavigationHeaderPanel);
-    Vue.component("sw-navigation-page", NavigationPage);
-  }
-};
+  // Register navigation components.
+  Vue.component("sw-content-tab", ContentTab);
+  Vue.component("sw-data-entry-panel", DataEntryPanel);
+  Vue.component("sw-data-table-tab", DataTableTab);
+  Vue.component("sw-detail-page", DetailPage);
+  Vue.component("sw-in-app-footer", InAppFooter);
+  Vue.component("sw-in-app-system-bar", InAppSystemBar);
+  Vue.component("sw-navigation", Navigation);
+  Vue.component("sw-navigation-action-button", NavigationActionButton);
+  Vue.component("sw-navigation-header-panel", NavigationHeaderPanel);
+  Vue.component("sw-navigation-page", NavigationPage);
+}
 
 // Export common components.
 export {

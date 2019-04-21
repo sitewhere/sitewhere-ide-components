@@ -1,3 +1,5 @@
+import Vue, { PluginFunction } from "vue";
+
 // Common components.
 export const ClipboardCopyField: any;
 export const ColorInputField: any;
@@ -34,3 +36,7 @@ export const Navigation: any;
 export const NavigationActionButton: any;
 export const NavigationHeaderPanel: any;
 export const NavigationPage: any;
+
+// Export Vue plugin.
+export const SiteWhere: PluginFunction<any>;
+export default SiteWhere;
