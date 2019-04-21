@@ -1,6 +1,6 @@
 {
   "name": "sitewhere-ide-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Common Vue.js components used in building SiteWhere IDEs",
   "main": "dist/sitewhere-ide-components.common.js",
   "files": [
@@ -30,6 +30,7 @@
     "sitewhere-ide-common": "0.0.21"
   },
   "devDependencies": {
+    "electron": "^4.1.4",
     "rimraf": "^2.6.3",
     "rollup": "^1.10.0",
     "rollup-plugin-commonjs": "^9.3.4",
