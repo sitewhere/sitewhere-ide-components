@@ -8,8 +8,8 @@
       <span class="header-content">
         <slot name="content"></slot>
       </span>
-      <span class="header-qrcode">
-        <slot name="qrcode"></slot>
+      <span class="header-right">
+        <slot name="right"></slot>
       </span>
       <span class="options-menu">
         <slot name="options"></slot>
@@ -83,7 +83,7 @@ export default class NavigationHeaderPanel extends Vue {
   padding: 45px;
 }
 
-.header-qrcode {
+.header-right {
   position: absolute;
   top: 10px;
   right: 50px;
