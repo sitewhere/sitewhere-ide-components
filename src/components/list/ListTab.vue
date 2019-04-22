@@ -1,5 +1,5 @@
 <template>
-  <v-tab-item :key="tabkey" :id="id">
+  <v-tab-item :key="tabkey">
     <div class="flex-rows">
       <div class="list-filters">
         <slot name="filters"/>
@@ -32,7 +32,6 @@ import { Component, Prop, IPaging, IPageSizes } from "sitewhere-ide-common";
 })
 export default class ListTab extends Vue {
   @Prop() readonly tabkey!: string;
-  @Prop() readonly id!: string;
   @Prop() readonly pageSizes!: IPageSizes;
   @Prop() readonly loadingMessage!: string;
   @Prop() readonly loaded!: boolean;

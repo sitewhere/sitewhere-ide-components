@@ -1,5 +1,5 @@
 <template>
-  <v-tab-item :key="tabkey" :id="id">
+  <v-tab-item :key="tabkey">
     <div class="flex-rows">
       <div class="tab-header">
         <slot name="header"/>
@@ -28,7 +28,6 @@ import { Component, Prop } from "sitewhere-ide-common";
 @Component({})
 export default class ContentTab extends Vue {
   @Prop() readonly tabkey!: string;
-  @Prop() readonly id!: string;
   @Prop() readonly loadingMessage!: string;
   @Prop() readonly loaded!: boolean;
 }

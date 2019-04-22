@@ -1,5 +1,5 @@
 <template>
-  <v-tab-item :key="tabkey" :id="id">
+  <v-tab-item :key="tabkey">
     <div class="flex-rows">
       <div class="tab-header">
         <slot name="header"/>
@@ -47,7 +47,6 @@ import { IPaging, IPageSizes, ITableHeaders } from "sitewhere-ide-common";
 })
 export default class DataTableTab extends Vue {
   @Prop() readonly tabkey!: string;
-  @Prop() readonly id!: string;
   @Prop() readonly headers!: ITableHeaders;
   @Prop() readonly pageSizes!: IPageSizes;
   @Prop() readonly noDataText!: string;
