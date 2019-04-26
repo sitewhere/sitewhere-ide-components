@@ -1,6 +1,12 @@
 <template>
   <v-tooltip left>
-    <v-icon v-if="material" class="ma-1 navbutton" @click="onAction" slot="activator">{{ icon }}</v-icon>
+    <v-icon
+      small
+      v-if="material"
+      class="ml-1 navbutton"
+      @click="onAction"
+      slot="activator"
+    >{{ icon }}</v-icon>
     <font-awesome-icon
       v-else
       class="ma-1 navbutton"
