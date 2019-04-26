@@ -34,7 +34,7 @@ export default class ColorInputField extends Vue {
   @Prop() readonly text!: string;
 
   menu: string | null = null;
-  updatedColor: string | null = "#ffffff";
+  updatedColor: string | null = null;
 
   set value(updated: string | null) {
     this.updatedColor = updated;

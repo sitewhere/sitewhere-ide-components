@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.19
+  * SiteWhere IDE Components v0.0.20
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -347,7 +347,7 @@ var ColorInputField = /** @class */ (function (_super) {
     function ColorInputField() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.menu = null;
-        _this.updatedColor = "#ffffff";
+        _this.updatedColor = null;
         return _this;
     }
     Object.defineProperty(ColorInputField.prototype, "value", {
@@ -468,11 +468,11 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-732c74d6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+    inject("data-v-43f34e5e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$1 = "data-v-732c74d6";
+  const __vue_scope_id__$1 = "data-v-43f34e5e";
   /* module identifier */
   const __vue_module_identifier__$1 = undefined;
   /* functional template */
