@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.21
+  * SiteWhere IDE Components v0.0.22
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -412,11 +412,11 @@
                     "prepend-icon": "color_lens"
                   },
                   model: {
-                    value: _vm.updatedColor,
+                    value: _vm.value,
                     callback: function($$v) {
-                      _vm.updatedColor = $$v;
+                      _vm.value = $$v;
                     },
-                    expression: "updatedColor"
+                    expression: "value"
                   }
                 })
               ],
@@ -473,11 +473,11 @@
     /* style */
     const __vue_inject_styles__$1 = function (inject) {
       if (!inject) return
-      inject("data-v-72f483ed_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+      inject("data-v-06aa0d99_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$1 = "data-v-72f483ed";
+    const __vue_scope_id__$1 = "data-v-06aa0d99";
     /* module identifier */
     const __vue_module_identifier__$1 = undefined;
     /* functional template */

@@ -2,12 +2,7 @@
   <v-container fluid class="pa-0 mb-3">
     <v-layout row wrap>
       <v-flex xs6>
-        <v-text-field
-          :label="text"
-          placeholder=" "
-          v-model="updatedColor"
-          prepend-icon="color_lens"
-        ></v-text-field>
+        <v-text-field :label="text" placeholder=" " v-model="value" prepend-icon="color_lens"></v-text-field>
       </v-flex>
       <v-flex xs6>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
