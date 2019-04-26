@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.14
+  * SiteWhere IDE Components v0.0.15
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -5597,6 +5597,10 @@ var NavigationActionButton = /** @class */ (function (_super) {
         __metadata("design:type", String)
     ], NavigationActionButton.prototype, "icon", void 0);
     __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", String)
+    ], NavigationActionButton.prototype, "tooltip", void 0);
+    __decorate([
         sitewhereIdeCommon.Prop({ default: false }),
         __metadata("design:type", Boolean)
     ], NavigationActionButton.prototype, "material", void 0);
@@ -5647,11 +5651,11 @@ __vue_render__$r._withStripped = true;
   /* style */
   const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-723bfd4d_0", { source: "\n.navbutton[data-v-723bfd4d] {\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-723bfd4d]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA8BA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon v-if=\"material\" class=\"ma-1 navbutton\" @click=\"onAction\" slot=\"activator\">{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-7c0ecda8_0", { source: "\n.navbutton[data-v-7c0ecda8] {\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-7c0ecda8]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA+BA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon v-if=\"material\" class=\"ma-1 navbutton\" @click=\"onAction\" slot=\"activator\">{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = "data-v-723bfd4d";
+  const __vue_scope_id__$r = "data-v-7c0ecda8";
   /* module identifier */
   const __vue_module_identifier__$r = undefined;
   /* functional template */

@@ -19,6 +19,7 @@ import { Component, Prop } from "sitewhere-ide-common";
 @Component({})
 export default class NavigationActionButton extends Vue {
   @Prop() readonly icon!: string;
+  @Prop() readonly tooltip!: string;
   @Prop({ default: false }) readonly material!: boolean;
 
   onAction() {
