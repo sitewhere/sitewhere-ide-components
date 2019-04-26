@@ -1,17 +1,17 @@
 /**
-  * SiteWhere IDE Components v0.0.18
+  * SiteWhere IDE Components v0.0.19
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue-color'), require('vue-flatpickr-component'), require('moment'), require('sitewhere-ide-common'), require('vue'), require('electron')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'vue-color', 'vue-flatpickr-component', 'moment', 'sitewhere-ide-common', 'vue', 'electron'], factory) :
-  (global = global || self, factory(global.SiteWhereIdeComponents = {}, global.vueColor, global.FlatPickr, global.moment, global.sitewhereIdeCommon, global.Vue, global.Electron));
-}(this, function (exports, vueColor, FlatPickr, moment, sitewhereIdeCommon, Vue, Electron) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('sitewhere-ide-common'), require('vue'), require('vue-color'), require('vue-flatpickr-component'), require('moment'), require('electron')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'sitewhere-ide-common', 'vue', 'vue-color', 'vue-flatpickr-component', 'moment', 'electron'], factory) :
+  (global = global || self, factory(global.SiteWhereIdeComponents = {}, global.sitewhereIdeCommon, global.Vue, global.vueColor, global.FlatPickr, global.moment, global.Electron));
+}(this, function (exports, sitewhereIdeCommon, Vue, vueColor, FlatPickr, moment, Electron) { 'use strict';
 
+  Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
   FlatPickr = FlatPickr && FlatPickr.hasOwnProperty('default') ? FlatPickr['default'] : FlatPickr;
   moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
-  Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
   Electron = Electron && Electron.hasOwnProperty('default') ? Electron['default'] : Electron;
 
   //
@@ -300,47 +300,86 @@
       undefined
     );
 
-  //
+  /*! *****************************************************************************
+  Copyright (c) Microsoft Corporation. All rights reserved.
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+  this file except in compliance with the License. You may obtain a copy of the
+  License at http://www.apache.org/licenses/LICENSE-2.0
 
-  var script$1 = {
-    data: () => ({
-      menu: null,
-      updatedColor: null
-    }),
+  THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+  WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+  MERCHANTABLITY OR NON-INFRINGEMENT.
 
-    components: {
-      Chrome: vueColor.Chrome
-    },
+  See the Apache Version 2.0 License for specific language governing permissions
+  and limitations under the License.
+  ***************************************************************************** */
+  /* global Reflect, Promise */
 
-    computed: {
-      chromeColor: function() {
-        return {
-          hex: this.currentColor
-        };
-      },
-      currentColor: function() {
-        return this.updatedColor || this.value;
-      }
-    },
-
-    props: ["value", "text"],
-
-    created: function() {
-      this.$data.updatedColor = this.value;
-    },
-
-    methods: {
-      // Called when a color is chosen.
-      onColorChosen: function(val) {
-        this.updatedColor = val.hex;
-        this.$emit("input", val.hex);
-        this.$emit("opacityChanged", val.a);
-      }
-    }
+  var extendStatics = function(d, b) {
+      extendStatics = Object.setPrototypeOf ||
+          ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+          function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+      return extendStatics(d, b);
   };
 
+  function __extends(d, b) {
+      extendStatics(d, b);
+      function __() { this.constructor = d; }
+      d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+
+  function __decorate(decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  }
+
+  function __metadata(metadataKey, metadataValue) {
+      if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+  }
+
+  var ColorInputField = /** @class */ (function (_super) {
+      __extends(ColorInputField, _super);
+      function ColorInputField() {
+          var _this = _super !== null && _super.apply(this, arguments) || this;
+          _this.menu = null;
+          _this.updatedColor = "#ffffff";
+          return _this;
+      }
+      Object.defineProperty(ColorInputField.prototype, "value", {
+          get: function () {
+              return this.updatedColor;
+          },
+          set: function (updated) {
+              this.updatedColor = updated;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      /** Called when color is chosen */
+      ColorInputField.prototype.onColorChosen = function (val) {
+          this.updatedColor = val.hex;
+          this.$emit("input", val.hex);
+          this.$emit("opacityChanged", val.a);
+      };
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ColorInputField.prototype, "text", void 0);
+      ColorInputField = __decorate([
+          sitewhereIdeCommon.Component({
+              components: {
+                  Chrome: vueColor.Chrome
+              }
+          })
+      ], ColorInputField);
+      return ColorInputField;
+  }(Vue));
+
   /* script */
-  const __vue_script__$1 = script$1;
+  const __vue_script__$1 = ColorInputField;
 
   /* template */
   var __vue_render__$1 = function() {
@@ -399,13 +438,13 @@
                   },
                   [
                     _c("v-btn", {
-                      style: { "background-color": _vm.currentColor },
+                      style: { "background-color": _vm.updatedColor },
                       attrs: { slot: "activator" },
                       slot: "activator"
                     }),
                     _vm._v(" "),
                     _c("chrome", {
-                      attrs: { value: _vm.chromeColor },
+                      attrs: { value: _vm.updatedColor },
                       on: { input: _vm.onColorChosen }
                     })
                   ],
@@ -427,11 +466,11 @@
     /* style */
     const __vue_inject_styles__$1 = function (inject) {
       if (!inject) return
-      inject("data-v-fc9e3582_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+      inject("data-v-732c74d6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$1 = "data-v-fc9e3582";
+    const __vue_scope_id__$1 = "data-v-732c74d6";
     /* module identifier */
     const __vue_module_identifier__$1 = undefined;
     /* functional template */
@@ -440,7 +479,7 @@
     
 
     
-    var ColorInputField = normalizeComponent_1(
+    var ColorInputField$1 = normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
@@ -453,7 +492,7 @@
 
   //
 
-  var script$2 = {
+  var script$1 = {
     data: () => ({
       menu: null,
       updatedColor: null
@@ -487,7 +526,7 @@
   };
 
   /* script */
-  const __vue_script__$2 = script$2;
+  const __vue_script__$2 = script$1;
 
   /* template */
   var __vue_render__$2 = function() {
@@ -557,7 +596,7 @@
 
   //
 
-  var script$3 = {
+  var script$2 = {
     data: () => ({
       date: null,
       formattedValue: null,
@@ -594,7 +633,7 @@
   };
 
   /* script */
-  const __vue_script__$3 = script$3;
+  const __vue_script__$3 = script$2;
 
   /* template */
   var __vue_render__$3 = function() {
@@ -688,7 +727,7 @@
   //
   //
 
-  var script$4 = {
+  var script$3 = {
     data: () => ({
       errorDisplayed: false
     }),
@@ -726,7 +765,7 @@
   };
 
   /* script */
-  const __vue_script__$4 = script$4;
+  const __vue_script__$4 = script$3;
 
   /* template */
   var __vue_render__$4 = function() {
@@ -816,7 +855,7 @@
   //
   //
 
-  var script$5 = {
+  var script$4 = {
     data: () => ({}),
 
     props: ["label", "icon"],
@@ -830,7 +869,7 @@
   };
 
   /* script */
-  const __vue_script__$5 = script$5;
+  const __vue_script__$5 = script$4;
 
   /* template */
   var __vue_render__$5 = function() {
@@ -913,7 +952,7 @@
   //
   //
 
-  var script$6 = {
+  var script$5 = {
     data: () => ({}),
 
     props: ["label"],
@@ -922,7 +961,7 @@
   };
 
   /* script */
-  const __vue_script__$6 = script$6;
+  const __vue_script__$6 = script$5;
 
   /* template */
   var __vue_render__$6 = function() {
@@ -1012,7 +1051,7 @@
   //
   //
 
-  var script$7 = {
+  var script$6 = {
     computed: {
       // Compute style of logo.
       ddStyle: function() {
@@ -2187,7 +2226,7 @@
   };
 
   /* script */
-  const __vue_script__$7 = script$7;
+  const __vue_script__$7 = script$6;
 
   /* template */
   var __vue_render__$7 = function() {
@@ -2380,7 +2419,7 @@
 
   //
 
-  var script$8 = {
+  var script$7 = {
     data: () => ({}),
 
     props: ["label", "url", "text"],
@@ -2398,7 +2437,7 @@
   };
 
   /* script */
-  const __vue_script__$8 = script$8;
+  const __vue_script__$8 = script$7;
 
   /* template */
   var __vue_render__$8 = function() {
@@ -2445,46 +2484,6 @@
       browser,
       undefined
     );
-
-  /*! *****************************************************************************
-  Copyright (c) Microsoft Corporation. All rights reserved.
-  Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-  this file except in compliance with the License. You may obtain a copy of the
-  License at http://www.apache.org/licenses/LICENSE-2.0
-
-  THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-  WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-  MERCHANTABLITY OR NON-INFRINGEMENT.
-
-  See the Apache Version 2.0 License for specific language governing permissions
-  and limitations under the License.
-  ***************************************************************************** */
-  /* global Reflect, Promise */
-
-  var extendStatics = function(d, b) {
-      extendStatics = Object.setPrototypeOf ||
-          ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-          function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-      return extendStatics(d, b);
-  };
-
-  function __extends(d, b) {
-      extendStatics(d, b);
-      function __() { this.constructor = d; }
-      d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  }
-
-  function __decorate(decorators, target, key, desc) {
-      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-  }
-
-  function __metadata(metadataKey, metadataValue) {
-      if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-  }
 
   var LoadingOverlay = /** @class */ (function (_super) {
       __extends(LoadingOverlay, _super);
@@ -2846,7 +2845,7 @@
   //
   //
 
-  var script$9 = {
+  var script$8 = {
     data: () => ({
       visible: false,
       error: null
@@ -2890,7 +2889,7 @@
   };
 
   /* script */
-  const __vue_script__$b = script$9;
+  const __vue_script__$b = script$8;
 
   /* template */
   var __vue_render__$b = function() {
@@ -5418,7 +5417,7 @@
 
   //
 
-  var script$a = {
+  var script$9 = {
     data: () => ({
       sites: null,
       drawerEdit: true
@@ -5443,7 +5442,7 @@
   };
 
   /* script */
-  const __vue_script__$q = script$a;
+  const __vue_script__$q = script$9;
 
   /* template */
   var __vue_render__$q = function() {
@@ -5818,7 +5817,7 @@
   function SiteWhere(Vue) {
     // Register common components.
     Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
-    Vue.component("sw-color-input-field", ColorInputField);
+    Vue.component("sw-color-input-field", ColorInputField$1);
     Vue.component("sw-color-picker", ColorPicker);
     Vue.component("sw-date-time-picker", DateTimePicker);
     Vue.component("sw-error-banner", ErrorBanner);
@@ -5856,7 +5855,7 @@
 
   exports.BaseDialog = BaseDialog$1;
   exports.ClipboardCopyField = ClipboardCopyField;
-  exports.ColorInputField = ColorInputField;
+  exports.ColorInputField = ColorInputField$1;
   exports.ColorPicker = ColorPicker;
   exports.ConfirmDialog = ConfirmDialog;
   exports.ContentTab = ContentTab$1;

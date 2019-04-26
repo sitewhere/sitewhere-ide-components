@@ -11,53 +11,46 @@
       </v-flex>
       <v-flex xs6>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
-          <v-btn :style="{ 'background-color' : currentColor }" slot="activator"></v-btn>
-          <chrome :value="chromeColor" @input="onColorChosen"></chrome>
+          <v-btn :style="{ 'background-color' : updatedColor }" slot="activator"></v-btn>
+          <chrome :value="updatedColor" @input="onColorChosen"/>
         </v-menu>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop } from "sitewhere-ide-common";
+import Vue from "vue";
+
 import { Chrome } from "vue-color";
 
-export default {
-  data: () => ({
-    menu: null,
-    updatedColor: null
-  }),
-
+@Component({
   components: {
     Chrome
-  },
-
-  computed: {
-    chromeColor: function() {
-      return {
-        hex: this.currentColor
-      };
-    },
-    currentColor: function() {
-      return this.updatedColor || this.value;
-    }
-  },
-
-  props: ["value", "text"],
-
-  created: function() {
-    this.$data.updatedColor = this.value;
-  },
-
-  methods: {
-    // Called when a color is chosen.
-    onColorChosen: function(val) {
-      this.updatedColor = val.hex;
-      this.$emit("input", val.hex);
-      this.$emit("opacityChanged", val.a);
-    }
   }
-};
+})
+export default class ColorInputField extends Vue {
+  @Prop() readonly text!: string;
+
+  menu: string | null = null;
+  updatedColor: string | null = "#ffffff";
+
+  set value(updated: string | null) {
+    this.updatedColor = updated;
+  }
+
+  get value() {
+    return this.updatedColor;
+  }
+
+  /** Called when color is chosen */
+  onColorChosen(val: any) {
+    this.updatedColor = val.hex;
+    this.$emit("input", val.hex);
+    this.$emit("opacityChanged", val.a);
+  }
+}
 </script>
 
 <style scoped>
