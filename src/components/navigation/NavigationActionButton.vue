@@ -1,12 +1,6 @@
 <template>
   <v-tooltip left>
-    <v-icon
-      small
-      v-if="material"
-      class="ml-1 navbutton"
-      @click="onAction"
-      slot="activator"
-    >{{ icon }}</v-icon>
+    <v-icon v-if="material" class="ml-1 navbutton" @click="onAction" slot="activator">{{ icon }}</v-icon>
     <font-awesome-icon
       v-else
       class="ma-1 navbutton"
@@ -36,6 +30,8 @@ export default class NavigationActionButton extends Vue {
 
 <style scoped>
 .navbutton {
+  font-size: 22px;
+  padding-left: 6px;
   color: #666;
   vertical-align: middle;
 }
