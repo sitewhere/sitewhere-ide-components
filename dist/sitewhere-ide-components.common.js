@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.13
+  * SiteWhere IDE Components v0.0.14
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -5584,30 +5584,30 @@ __vue_render__$q._withStripped = true;
     undefined
   );
 
-//
-//
-//
-//
-//
-//
-//
-
-var script$b = {
-  data: () => ({}),
-
-  props: ["icon", "tooltip"],
-
-  components: {},
-
-  methods: {
-    onAction: function() {
-      this.$emit("action");
+var NavigationActionButton = /** @class */ (function (_super) {
+    __extends(NavigationActionButton, _super);
+    function NavigationActionButton() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-  }
-};
+    NavigationActionButton.prototype.onAction = function () {
+        this.$emit("action");
+    };
+    __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", String)
+    ], NavigationActionButton.prototype, "icon", void 0);
+    __decorate([
+        sitewhereIdeCommon.Prop({ default: false }),
+        __metadata("design:type", Boolean)
+    ], NavigationActionButton.prototype, "material", void 0);
+    NavigationActionButton = __decorate([
+        sitewhereIdeCommon.Component({})
+    ], NavigationActionButton);
+    return NavigationActionButton;
+}(Vue));
 
 /* script */
-const __vue_script__$r = script$b;
+const __vue_script__$r = NavigationActionButton;
 
 /* template */
 var __vue_render__$r = function() {
@@ -5618,12 +5618,23 @@ var __vue_render__$r = function() {
     "v-tooltip",
     { attrs: { left: "" } },
     [
-      _c("font-awesome-icon", {
-        staticClass: "ma-1 navbutton",
-        attrs: { slot: "activator", icon: _vm.icon },
-        on: { click: _vm.onAction },
-        slot: "activator"
-      }),
+      _vm.material
+        ? _c(
+            "v-icon",
+            {
+              staticClass: "ma-1 navbutton",
+              attrs: { slot: "activator" },
+              on: { click: _vm.onAction },
+              slot: "activator"
+            },
+            [_vm._v(_vm._s(_vm.icon))]
+          )
+        : _c("font-awesome-icon", {
+            staticClass: "ma-1 navbutton",
+            attrs: { slot: "activator", icon: _vm.icon },
+            on: { click: _vm.onAction },
+            slot: "activator"
+          }),
       _vm._v(" "),
       _c("span", [_vm._v(_vm._s(_vm.tooltip))])
     ],
@@ -5636,11 +5647,11 @@ __vue_render__$r._withStripped = true;
   /* style */
   const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-efaeea38_0", { source: "\n.navbutton[data-v-efaeea38] {\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-efaeea38]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AAwBA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <font-awesome-icon class=\"ma-1 navbutton\" :icon=\"icon\" @click=\"onAction\" slot=\"activator\"/>\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data: () => ({}),\r\n\r\n  props: [\"icon\", \"tooltip\"],\r\n\r\n  components: {},\r\n\r\n  methods: {\r\n    onAction: function() {\r\n      this.$emit(\"action\");\r\n    }\r\n  }\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-723bfd4d_0", { source: "\n.navbutton[data-v-723bfd4d] {\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-723bfd4d]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA8BA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon v-if=\"material\" class=\"ma-1 navbutton\" @click=\"onAction\" slot=\"activator\">{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = "data-v-efaeea38";
+  const __vue_scope_id__$r = "data-v-723bfd4d";
   /* module identifier */
   const __vue_module_identifier__$r = undefined;
   /* functional template */
@@ -5649,7 +5660,7 @@ __vue_render__$r._withStripped = true;
   
 
   
-  var NavigationActionButton = normalizeComponent_1(
+  var NavigationActionButton$1 = normalizeComponent_1(
     { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
     __vue_inject_styles__$r,
     __vue_script__$r,
@@ -5837,7 +5848,7 @@ function SiteWhere(Vue) {
   Vue.component("sw-in-app-footer", InAppFooter$1);
   Vue.component("sw-in-app-system-bar", InAppSystemBar$1);
   Vue.component("sw-navigation", Navigation);
-  Vue.component("sw-navigation-action-button", NavigationActionButton);
+  Vue.component("sw-navigation-action-button", NavigationActionButton$1);
   Vue.component("sw-navigation-header-panel", NavigationHeaderPanel$1);
   Vue.component("sw-navigation-page", NavigationPage$1);
 }
@@ -5867,7 +5878,7 @@ exports.ListTab = ListTab$1;
 exports.LoadingOverlay = LoadingOverlay$1;
 exports.MetadataPanel = MetadataPanel$1;
 exports.Navigation = Navigation;
-exports.NavigationActionButton = NavigationActionButton;
+exports.NavigationActionButton = NavigationActionButton$1;
 exports.NavigationHeaderPanel = NavigationHeaderPanel$1;
 exports.NavigationPage = NavigationPage$1;
 exports.Pager = Pager$1;

@@ -1,24 +1,30 @@
 <template>
   <v-tooltip left>
-    <font-awesome-icon class="ma-1 navbutton" :icon="icon" @click="onAction" slot="activator"/>
+    <v-icon v-if="material" class="ma-1 navbutton" @click="onAction" slot="activator">{{ icon }}</v-icon>
+    <font-awesome-icon
+      v-else
+      class="ma-1 navbutton"
+      :icon="icon"
+      @click="onAction"
+      slot="activator"
+    />
     <span>{{ tooltip }}</span>
   </v-tooltip>
 </template>
 
-<script>
-export default {
-  data: () => ({}),
+<script lang="ts">
+import Vue from "vue";
+import { Component, Prop } from "sitewhere-ide-common";
 
-  props: ["icon", "tooltip"],
+@Component({})
+export default class NavigationActionButton extends Vue {
+  @Prop() readonly icon!: string;
+  @Prop({ default: false }) readonly material!: boolean;
 
-  components: {},
-
-  methods: {
-    onAction: function() {
-      this.$emit("action");
-    }
+  onAction() {
+    this.$emit("action");
   }
-};
+}
 </script>
 
 <style scoped>
