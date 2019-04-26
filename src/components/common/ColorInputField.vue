@@ -2,7 +2,12 @@
   <v-container fluid class="pa-0 mb-3">
     <v-layout row wrap>
       <v-flex xs6>
-        <v-text-field :label="text" placeholder=" " v-model="value" prepend-icon="color_lens"></v-text-field>
+        <v-text-field
+          :label="text"
+          placeholder=" "
+          v-model="updatedColor"
+          prepend-icon="color_lens"
+        ></v-text-field>
       </v-flex>
       <v-flex xs6>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
@@ -15,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "sitewhere-ide-common";
 import Vue from "vue";
 
 import { Chrome } from "vue-color";
@@ -26,21 +31,19 @@ import { Chrome } from "vue-color";
   }
 })
 export default class ColorInputField extends Vue {
+  @Prop() readonly value!: string;
   @Prop() readonly text!: string;
 
   menu: string | null = null;
   updatedColor: string | null = null;
 
-  set value(updated: string | null) {
-    this.updatedColor = updated;
-  }
-
-  get value() {
-    return this.updatedColor;
+  @Watch("value")
+  onValueChanged(val: string, oldVal: string) {
+    this.updatedColor = val;
   }
 
   get valueOrDefault() {
-    return this.value || "#fff";
+    return this.updatedColor || "#fff";
   }
 
   /** Called when color is chosen */

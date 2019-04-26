@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.22
+  * SiteWhere IDE Components v0.0.23
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -350,19 +350,12 @@ var ColorInputField = /** @class */ (function (_super) {
         _this.updatedColor = null;
         return _this;
     }
-    Object.defineProperty(ColorInputField.prototype, "value", {
-        get: function () {
-            return this.updatedColor;
-        },
-        set: function (updated) {
-            this.updatedColor = updated;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    ColorInputField.prototype.onValueChanged = function (val, oldVal) {
+        this.updatedColor = val;
+    };
     Object.defineProperty(ColorInputField.prototype, "valueOrDefault", {
         get: function () {
-            return this.value || "#fff";
+            return this.updatedColor || "#fff";
         },
         enumerable: true,
         configurable: true
@@ -376,7 +369,17 @@ var ColorInputField = /** @class */ (function (_super) {
     __decorate([
         sitewhereIdeCommon.Prop(),
         __metadata("design:type", String)
+    ], ColorInputField.prototype, "value", void 0);
+    __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", String)
     ], ColorInputField.prototype, "text", void 0);
+    __decorate([
+        sitewhereIdeCommon.Watch("value"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String, String]),
+        __metadata("design:returntype", void 0)
+    ], ColorInputField.prototype, "onValueChanged", null);
     ColorInputField = __decorate([
         sitewhereIdeCommon.Component({
             components: {
@@ -414,11 +417,11 @@ var __vue_render__$1 = function() {
                   "prepend-icon": "color_lens"
                 },
                 model: {
-                  value: _vm.value,
+                  value: _vm.updatedColor,
                   callback: function($$v) {
-                    _vm.value = $$v;
+                    _vm.updatedColor = $$v;
                   },
-                  expression: "value"
+                  expression: "updatedColor"
                 }
               })
             ],
@@ -475,11 +478,11 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-06aa0d99_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+    inject("data-v-9f3288c4_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$1 = "data-v-06aa0d99";
+  const __vue_scope_id__$1 = "data-v-9f3288c4";
   /* module identifier */
   const __vue_module_identifier__$1 = undefined;
   /* functional template */
