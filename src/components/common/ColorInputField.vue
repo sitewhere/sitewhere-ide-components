@@ -11,8 +11,8 @@
       </v-flex>
       <v-flex xs6>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
-          <v-btn :style="{ 'background-color' : updatedColor }" slot="activator"></v-btn>
-          <chrome :value="updatedColor" @input="onColorChosen"/>
+          <v-btn :style="{ 'background-color' : valueOrDefault }" slot="activator"></v-btn>
+          <chrome :value="valueOrDefault" @input="onColorChosen"/>
         </v-menu>
       </v-flex>
     </v-layout>
@@ -42,6 +42,10 @@ export default class ColorInputField extends Vue {
 
   get value() {
     return this.updatedColor;
+  }
+
+  get valueOrDefault() {
+    return this.value || "#fff";
   }
 
   /** Called when color is chosen */

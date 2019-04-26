@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.20
+  * SiteWhere IDE Components v0.0.21
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -358,6 +358,13 @@
           enumerable: true,
           configurable: true
       });
+      Object.defineProperty(ColorInputField.prototype, "valueOrDefault", {
+          get: function () {
+              return this.value || "#fff";
+          },
+          enumerable: true,
+          configurable: true
+      });
       /** Called when color is chosen */
       ColorInputField.prototype.onColorChosen = function (val) {
           this.updatedColor = val.hex;
@@ -438,13 +445,13 @@
                   },
                   [
                     _c("v-btn", {
-                      style: { "background-color": _vm.updatedColor },
+                      style: { "background-color": _vm.valueOrDefault },
                       attrs: { slot: "activator" },
                       slot: "activator"
                     }),
                     _vm._v(" "),
                     _c("chrome", {
-                      attrs: { value: _vm.updatedColor },
+                      attrs: { value: _vm.valueOrDefault },
                       on: { input: _vm.onColorChosen }
                     })
                   ],
@@ -466,11 +473,11 @@
     /* style */
     const __vue_inject_styles__$1 = function (inject) {
       if (!inject) return
-      inject("data-v-43f34e5e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+      inject("data-v-72f483ed_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$1 = "data-v-43f34e5e";
+    const __vue_scope_id__$1 = "data-v-72f483ed";
     /* module identifier */
     const __vue_module_identifier__$1 = undefined;
     /* functional template */
