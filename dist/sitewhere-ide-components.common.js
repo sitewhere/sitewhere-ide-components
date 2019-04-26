@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.17
+  * SiteWhere IDE Components v0.0.18
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -351,7 +351,7 @@ var __vue_render__$1 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "v-container",
-    { staticClass: "pa-0", attrs: { fluid: "" } },
+    { staticClass: "pa-0 mb-3", attrs: { fluid: "" } },
     [
       _c(
         "v-layout",
@@ -429,11 +429,11 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-76b7719e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+    inject("data-v-fc9e3582_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$1 = "data-v-76b7719e";
+  const __vue_scope_id__$1 = "data-v-fc9e3582";
   /* module identifier */
   const __vue_module_identifier__$1 = undefined;
   /* functional template */
@@ -5626,7 +5626,7 @@ var __vue_render__$r = function() {
         ? _c(
             "v-icon",
             {
-              staticClass: "ml-1 navbutton",
+              staticClass: "ma-0 ml-1 navbutton",
               attrs: { slot: "activator" },
               on: { click: _vm.onAction },
               slot: "activator"
@@ -5651,11 +5651,11 @@ __vue_render__$r._withStripped = true;
   /* style */
   const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-584b5dae_0", { source: "\n.navbutton[data-v-584b5dae] {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-584b5dae]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA+BA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon v-if=\"material\" class=\"ml-1 navbutton\" @click=\"onAction\" slot=\"activator\">{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-4588e05d_0", { source: "\n.navbutton[data-v-4588e05d] {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-4588e05d]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AAoCA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon\r\n      v-if=\"material\"\r\n      class=\"ma-0 ml-1 navbutton\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    >{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = "data-v-584b5dae";
+  const __vue_scope_id__$r = "data-v-4588e05d";
   /* module identifier */
   const __vue_module_identifier__$r = undefined;
   /* functional template */
