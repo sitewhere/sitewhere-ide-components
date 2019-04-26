@@ -4,7 +4,7 @@
       <v-container fluid class="pa-0">
         <v-layout row wrap>
           <v-flex xs12>
-            <v-text-field label="Icon" v-model="icon" prepend-icon="image"></v-text-field>
+            <v-text-field label="Icon" placeholder=" " v-model="icon" prepend-icon="image"/>
           </v-flex>
         </v-layout>
       </v-container>
