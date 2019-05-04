@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.23
+  * SiteWhere IDE Components v0.0.24
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -2636,6 +2636,10 @@
           __metadata("design:type", Boolean)
       ], BaseDialog.prototype, "visible", void 0);
       __decorate([
+          sitewhereIdeCommon.Prop({ default: true }),
+          __metadata("design:type", Boolean)
+      ], BaseDialog.prototype, "tabbed", void 0);
+      __decorate([
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
       ], BaseDialog.prototype, "createLabel", void 0);
@@ -2736,20 +2740,24 @@
                 "div",
                 { staticStyle: { position: "relative" } },
                 [
-                  _c(
-                    "v-tabs",
-                    {
-                      model: {
-                        value: _vm.active,
-                        callback: function($$v) {
-                          _vm.active = $$v;
+                  _vm._t("default"),
+                  _vm._v(" "),
+                  _vm.tabbed
+                    ? _c(
+                        "v-tabs",
+                        {
+                          model: {
+                            value: _vm.active,
+                            callback: function($$v) {
+                              _vm.active = $$v;
+                            },
+                            expression: "active"
+                          }
                         },
-                        expression: "active"
-                      }
-                    },
-                    [_vm._t("tabs"), _vm._v(" "), _vm._t("tab-items")],
-                    2
-                  ),
+                        [_vm._t("tabs"), _vm._v(" "), _vm._t("tab-items")],
+                        2
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   !_vm.loaded
                     ? _c("loading-overlay", {
@@ -2757,7 +2765,7 @@
                       })
                     : _vm._e()
                 ],
-                1
+                2
               )
             ]),
             _vm._v(" "),
@@ -2803,11 +2811,11 @@
     /* style */
     const __vue_inject_styles__$a = function (inject) {
       if (!inject) return
-      inject("data-v-5affffe8_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
+      inject("data-v-2df34a87_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$a = "data-v-5affffe8";
+    const __vue_scope_id__$a = "data-v-2df34a87";
     /* module identifier */
     const __vue_module_identifier__$a = undefined;
     /* functional template */

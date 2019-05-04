@@ -11,7 +11,8 @@
 
       <v-card-text class="pa-0">
         <div style="position: relative;">
-          <v-tabs v-model="active">
+          <slot/>
+          <v-tabs v-model="active" v-if="tabbed">
             <slot name="tabs"/>
             <slot name="tab-items"/>
           </v-tabs>
@@ -52,6 +53,7 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   @Prop({ default: 600 }) readonly width!: number;
   @Prop() readonly icon!: string;
   @Prop({ default: true }) readonly visible!: boolean;
+  @Prop({ default: true }) readonly tabbed!: boolean;
   @Prop() readonly createLabel!: string;
   @Prop() readonly cancelLabel!: string;
   @Prop() readonly error!: string;
