@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.24
+  * SiteWhere IDE Components v0.0.25
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -4592,21 +4592,11 @@ __vue_render__$k._withStripped = true;
     undefined
   );
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var vueClassComponent_common = createCommonjsModule(function (module, exports) {
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var Vue$1 = _interopDefault(Vue);
+/**
+  * vue-class-component v7.1.0
+  * (c) 2015-present Evan You
+  * @license MIT
+  */
 
 // The rational behind the verbose Reflect-feature check below is the fact that there are polyfills
 // which add an implementation for Reflect.defineMetadata but not for Reflect.getOwnMetadataKeys.
@@ -4640,27 +4630,6 @@ function forwardMetadata(to, from, propertyKey) {
 
 var fakeArray = { __proto__: [] };
 var hasProto = fakeArray instanceof Array;
-function createDecorator(factory) {
-    return function (target, key, index) {
-        var Ctor = typeof target === 'function'
-            ? target
-            : target.constructor;
-        if (!Ctor.__decorators__) {
-            Ctor.__decorators__ = [];
-        }
-        if (typeof index !== 'number') {
-            index = undefined;
-        }
-        Ctor.__decorators__.push(function (options) { return factory(options, key, index); });
-    };
-}
-function mixins() {
-    var Ctors = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        Ctors[_i] = arguments[_i];
-    }
-    return Vue$1.extend({ mixins: Ctors });
-}
 function isPrimitive(value) {
     var type = typeof value;
     return value == null || (type !== 'object' && type !== 'function');
@@ -4708,7 +4677,7 @@ function collectDataFromConstructor(vm, Component) {
         }
     });
     if (process.env.NODE_ENV !== 'production') {
-        if (!(Component.prototype instanceof Vue$1) && Object.keys(plainData).length > 0) {
+        if (!(Component.prototype instanceof Vue) && Object.keys(plainData).length > 0) {
             warn('Component class must inherit Vue or its descendant class ' +
                 'when class property is used.');
         }
@@ -4783,9 +4752,9 @@ function componentFactory(Component, options) {
     }
     // find super
     var superProto = Object.getPrototypeOf(Component.prototype);
-    var Super = superProto instanceof Vue$1
+    var Super = superProto instanceof Vue
         ? superProto.constructor
-        : Vue$1;
+        : Vue;
     var Extended = Super.extend(options);
     forwardStaticMembers(Extended, Component, Super);
     if (reflectionIsSupported) {
@@ -4871,16 +4840,7 @@ Component.registerHooks = function registerHooks(keys) {
     $internalHooks.push.apply($internalHooks, keys);
 };
 
-exports.default = Component;
-exports.createDecorator = createDecorator;
-exports.mixins = mixins;
-});
-
-var Component = unwrapExports(vueClassComponent_common);
-var vueClassComponent_common_1 = vueClassComponent_common.createDecorator;
-var vueClassComponent_common_2 = vueClassComponent_common.mixins;
-
-/** vue-property-decorator verson 8.1.0 MIT LICENSE copyright 2018 kaorun343 */
+/** vue-property-decorator verson 8.1.1 MIT LICENSE copyright 2018 kaorun343 */
 
 var DataEntryPanel = /** @class */ (function (_super) {
     __extends(DataEntryPanel, _super);
