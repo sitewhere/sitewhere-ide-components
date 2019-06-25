@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.25
+  * SiteWhere IDE Components v0.0.26
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -4837,7 +4837,7 @@
       $internalHooks.push.apply($internalHooks, keys);
   };
 
-  /** vue-property-decorator verson 8.1.1 MIT LICENSE copyright 2018 kaorun343 */
+  /** vue-property-decorator verson 8.2.1 MIT LICENSE copyright 2019 kaorun343 */
 
   var DataEntryPanel = /** @class */ (function (_super) {
       __extends(DataEntryPanel, _super);
