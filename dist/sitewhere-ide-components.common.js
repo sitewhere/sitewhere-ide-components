@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.26
+  * SiteWhere IDE Components v0.0.27
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -2666,6 +2666,10 @@ var BaseDialog = /** @class */ (function (_super) {
         __metadata("design:type", Boolean)
     ], BaseDialog.prototype, "invalid", void 0);
     __decorate([
+        sitewhereIdeCommon.Prop({ default: false }),
+        __metadata("design:type", Boolean)
+    ], BaseDialog.prototype, "lazy", void 0);
+    __decorate([
         sitewhereIdeCommon.Prop({ default: true }),
         __metadata("design:type", Boolean)
     ], BaseDialog.prototype, "loaded", void 0);
@@ -2695,7 +2699,7 @@ var __vue_render__$a = function() {
   return _c(
     "v-dialog",
     {
-      attrs: { persistent: "", width: _vm.width },
+      attrs: { lazy: _vm.lazy, persistent: "", width: _vm.width },
       model: {
         value: _vm.visible,
         callback: function($$v) {
@@ -2813,11 +2817,11 @@ __vue_render__$a._withStripped = true;
   /* style */
   const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
-    inject("data-v-2df34a87_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
+    inject("data-v-60ac1d6e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$a = "data-v-2df34a87";
+  const __vue_scope_id__$a = "data-v-60ac1d6e";
   /* module identifier */
   const __vue_module_identifier__$a = undefined;
   /* functional template */

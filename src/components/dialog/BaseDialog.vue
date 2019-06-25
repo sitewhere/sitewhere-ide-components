@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="visible" persistent :width="width">
+  <v-dialog v-model="visible" :lazy="lazy" persistent :width="width">
     <v-card>
       <v-toolbar dense flat card dark class="mb-0" color="primary">
         <v-toolbar-title>
@@ -60,6 +60,7 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   @Prop() readonly hideButtons!: boolean;
   @Prop() readonly hideCreate!: boolean;
   @Prop() readonly invalid!: boolean;
+  @Prop({ default: false }) readonly lazy!: boolean;
   @Prop({ default: true }) readonly loaded!: boolean;
   @Prop({ default: "Loading..." }) readonly loadingMessage!: string;
 
