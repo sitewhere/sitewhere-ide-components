@@ -3,21 +3,21 @@
     <template slot="content">
       <div class="flex-rows">
         <div class="list-filters">
-          <slot name="filters"/>
+          <slot name="filters" />
         </div>
         <div class="list-content">
-          <slot/>
+          <slot />
         </div>
       </div>
     </template>
     <template slot="footer">
-      <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes"/>
+      <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes" />
     </template>
     <template slot="actions">
-      <slot name="actions"/>
+      <slot name="actions" />
     </template>
     <template slot="dialogs">
-      <slot name="dialogs"/>
+      <slot name="dialogs" />
     </template>
   </navigation-page>
 </template>
@@ -63,5 +63,6 @@ export default class ListPage extends Vue {
 .list-content {
   flex: 1;
   background-color: #eee;
+  overflow-y: auto;
 }
 </style>
