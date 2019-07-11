@@ -11,14 +11,15 @@
 
       <v-card-text class="pa-0">
         <div style="position: relative;">
-          <slot/>
+          <slot />
           <v-tabs v-model="active" v-if="tabbed">
-            <slot name="tabs"/>
-            <slot name="tab-items"/>
+            <slot name="tabs" />
+            <slot name="tab-items" />
           </v-tabs>
-          <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage"/>
+          <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
         </div>
       </v-card-text>
+      <v-divider class="mt-2 mb-2" />
       <v-card-actions v-if="!hideButtons">
         <v-spacer></v-spacer>
         <v-btn outline color="primary" @click="onCancelClicked">{{cancelLabel}}</v-btn>
