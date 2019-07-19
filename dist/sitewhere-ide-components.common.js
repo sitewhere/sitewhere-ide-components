@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.31
+  * SiteWhere IDE Components v0.0.33
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -2614,7 +2614,10 @@ var BaseDialog = /** @class */ (function (_super) {
     };
     /** Set the active tab */
     BaseDialog.prototype.setActiveTab = function (tab) {
-        this.active = tab;
+        var _this = this;
+        this.$nextTick(function () {
+            _this.active = tab;
+        });
     };
     /** Handle cancel clicked */
     BaseDialog.prototype.onCancelClicked = function (e) {
@@ -2828,11 +2831,11 @@ __vue_render__$a._withStripped = true;
   /* style */
   const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
-    inject("data-v-4a1b62db_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
+    inject("data-v-52b511bf_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$a = "data-v-4a1b62db";
+  const __vue_scope_id__$a = "data-v-52b511bf";
   /* module identifier */
   const __vue_module_identifier__$a = undefined;
   /* functional template */
