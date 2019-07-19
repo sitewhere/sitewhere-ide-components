@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.30
+  * SiteWhere IDE Components v0.0.31
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -2609,6 +2609,9 @@ var BaseDialog = /** @class */ (function (_super) {
         _this.active = null;
         return _this;
     }
+    BaseDialog.prototype.onTabSelected = function (updated) {
+        this.$emit("tabSelected", updated);
+    };
     /** Set the active tab */
     BaseDialog.prototype.setActiveTab = function (tab) {
         this.active = tab;
@@ -2677,6 +2680,12 @@ var BaseDialog = /** @class */ (function (_super) {
         sitewhereIdeCommon.Prop({ default: "Loading..." }),
         __metadata("design:type", String)
     ], BaseDialog.prototype, "loadingMessage", void 0);
+    __decorate([
+        sitewhereIdeCommon.Watch("active", { immediate: true }),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String]),
+        __metadata("design:returntype", void 0)
+    ], BaseDialog.prototype, "onTabSelected", null);
     BaseDialog = __decorate([
         sitewhereIdeCommon.Component({
             components: {
@@ -2819,11 +2828,11 @@ __vue_render__$a._withStripped = true;
   /* style */
   const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
-    inject("data-v-7d2372cc_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
+    inject("data-v-4a1b62db_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$a = "data-v-7d2372cc";
+  const __vue_scope_id__$a = "data-v-4a1b62db";
   /* module identifier */
   const __vue_module_identifier__$a = undefined;
   /* functional template */

@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "sitewhere-ide-common";
 import Vue from "vue";
 
 import ErrorBanner from "../common/ErrorBanner.vue";
@@ -66,6 +66,11 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   @Prop({ default: "Loading..." }) readonly loadingMessage!: string;
 
   active: string | null = null;
+
+  @Watch("active", { immediate: true })
+  onTabSelected(updated: string) {
+    this.$emit("tabSelected", updated);
+  }
 
   /** Set the active tab */
   setActiveTab(tab: string): void {
