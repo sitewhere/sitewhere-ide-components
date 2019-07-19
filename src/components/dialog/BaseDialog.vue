@@ -65,7 +65,7 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   @Prop({ default: true }) readonly loaded!: boolean;
   @Prop({ default: "Loading..." }) readonly loadingMessage!: string;
 
-  active: string | null = null;
+  active: number | null = null;
 
   @Watch("active", { immediate: true })
   onTabSelected(updated: string) {
@@ -73,8 +73,10 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   }
 
   /** Set the active tab */
-  setActiveTab(tab: string): void {
-    this.active = tab;
+  setActiveTab(tab: number): void {
+    this.$nextTick(() => {
+      this.active = tab;
+    });
   }
 
   /** Handle cancel clicked */
