@@ -1,6 +1,6 @@
 <template>
   <navigation-header-left>
-    <span v-if="imageUrl" class="header-image" :style="imageStyle" />
+    <image-zoom-on-hover v-if="imageUrl" :imageUrl="imageUrl" />
     <span v-else-if="icon" class="header-icon">
       <font-awesome-icon class="grey--text" :icon="icon" size="7x" />
     </span>
@@ -13,12 +13,14 @@ import Vue from "vue";
 import { Component, Prop } from "sitewhere-ide-common";
 
 import NavigationHeaderLeft from "./NavigationHeaderLeft.vue";
+import ImageZoomOnHover from "../common/ImageZoomOnHover.vue";
 
 import { IBrandedEntity } from "sitewhere-rest-api";
 
 @Component({
   components: {
-    NavigationHeaderLeft
+    NavigationHeaderLeft,
+    ImageZoomOnHover
   }
 })
 export default class HeaderBrandingPanel extends Vue {

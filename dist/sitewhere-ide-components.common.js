@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.35
+  * SiteWhere IDE Components v0.0.36
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -5412,7 +5412,8 @@ var HeaderBrandingPanel = /** @class */ (function (_super) {
     HeaderBrandingPanel = __decorate([
         sitewhereIdeCommon.Component({
             components: {
-                NavigationHeaderLeft: NavigationHeaderLeft$1
+                NavigationHeaderLeft: NavigationHeaderLeft$1,
+                ImageZoomOnHover: ImageZoomOnHover$1
             }
         })
     ], HeaderBrandingPanel);
@@ -5427,23 +5428,27 @@ var __vue_render__$q = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("navigation-header-left", [
-    _vm.imageUrl
-      ? _c("span", { staticClass: "header-image", style: _vm.imageStyle })
-      : _vm.icon
-      ? _c(
-          "span",
-          { staticClass: "header-icon" },
-          [
-            _c("font-awesome-icon", {
-              staticClass: "grey--text",
-              attrs: { icon: _vm.icon, size: "7x" }
-            })
-          ],
-          1
-        )
-      : _c("span", [_vm._v("No Branding")])
-  ])
+  return _c(
+    "navigation-header-left",
+    [
+      _vm.imageUrl
+        ? _c("image-zoom-on-hover", { attrs: { imageUrl: _vm.imageUrl } })
+        : _vm.icon
+        ? _c(
+            "span",
+            { staticClass: "header-icon" },
+            [
+              _c("font-awesome-icon", {
+                staticClass: "grey--text",
+                attrs: { icon: _vm.icon, size: "7x" }
+              })
+            ],
+            1
+          )
+        : _c("span", [_vm._v("No Branding")])
+    ],
+    1
+  )
 };
 var __vue_staticRenderFns__$q = [];
 __vue_render__$q._withStripped = true;
@@ -5451,11 +5456,11 @@ __vue_render__$q._withStripped = true;
   /* style */
   const __vue_inject_styles__$q = function (inject) {
     if (!inject) return
-    inject("data-v-6e6bb7a6_0", { source: "\n.header-image[data-v-6e6bb7a6] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-6e6bb7a6] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAkDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <span v-if=\"imageUrl\" class=\"header-image\" :style=\"imageStyle\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n    <span v-else>No Branding</span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-097d1760_0", { source: "\n.header-image[data-v-097d1760] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-097d1760] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAoDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <image-zoom-on-hover v-if=\"imageUrl\" :imageUrl=\"imageUrl\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n    <span v-else>No Branding</span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\nimport ImageZoomOnHover from \"../common/ImageZoomOnHover.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft,\r\n    ImageZoomOnHover\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$q = "data-v-6e6bb7a6";
+  const __vue_scope_id__$q = "data-v-097d1760";
   /* module identifier */
   const __vue_module_identifier__$q = undefined;
   /* functional template */
@@ -5911,6 +5916,60 @@ __vue_render__$u._withStripped = true;
     undefined
   );
 
+var NavigationHeaderFields = /** @class */ (function (_super) {
+    __extends(NavigationHeaderFields, _super);
+    function NavigationHeaderFields() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    NavigationHeaderFields = __decorate([
+        sitewhereIdeCommon.Component({})
+    ], NavigationHeaderFields);
+    return NavigationHeaderFields;
+}(Vue));
+
+/* script */
+const __vue_script__$v = NavigationHeaderFields;
+
+/* template */
+var __vue_render__$v = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "v-card",
+    { staticClass: "mt-2", attrs: { flat: "" } },
+    [_vm._t("default")],
+    2
+  )
+};
+var __vue_staticRenderFns__$v = [];
+__vue_render__$v._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$v = undefined;
+  /* scoped */
+  const __vue_scope_id__$v = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$v = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$v = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var NavigationHeaderFields$1 = normalizeComponent_1(
+    { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
+    __vue_inject_styles__$v,
+    __vue_script__$v,
+    __vue_scope_id__$v,
+    __vue_is_functional_template__$v,
+    __vue_module_identifier__$v,
+    undefined,
+    undefined
+  );
+
 var NavigationHeaderPanel = /** @class */ (function (_super) {
     __extends(NavigationHeaderPanel, _super);
     function NavigationHeaderPanel() {
@@ -5937,10 +5996,10 @@ var NavigationHeaderPanel = /** @class */ (function (_super) {
 }(Vue));
 
 /* script */
-const __vue_script__$v = NavigationHeaderPanel;
+const __vue_script__$w = NavigationHeaderPanel;
 
 /* template */
-var __vue_render__$v = function() {
+var __vue_render__$w = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5965,32 +6024,32 @@ var __vue_render__$v = function() {
     1
   )
 };
-var __vue_staticRenderFns__$v = [];
-__vue_render__$v._withStripped = true;
+var __vue_staticRenderFns__$w = [];
+__vue_render__$w._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$v = function (inject) {
+  const __vue_inject_styles__$w = function (inject) {
     if (!inject) return
     inject("data-v-6b0c2a59_0", { source: "\n.header-panel[data-v-6b0c2a59] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-left[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-right[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-content[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\n}\n.options-menu[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AAqCA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span class=\"header-left\">\r\n        <slot name=\"left\" />\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\" />\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\" />\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\" />\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-left {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$v = "data-v-6b0c2a59";
+  const __vue_scope_id__$w = "data-v-6b0c2a59";
   /* module identifier */
-  const __vue_module_identifier__$v = undefined;
+  const __vue_module_identifier__$w = undefined;
   /* functional template */
-  const __vue_is_functional_template__$v = false;
+  const __vue_is_functional_template__$w = false;
   /* style inject SSR */
   
 
   
   var NavigationHeaderPanel$1 = normalizeComponent_1(
-    { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
-    __vue_inject_styles__$v,
-    __vue_script__$v,
-    __vue_scope_id__$v,
-    __vue_is_functional_template__$v,
-    __vue_module_identifier__$v,
+    { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
+    __vue_inject_styles__$w,
+    __vue_script__$w,
+    __vue_scope_id__$w,
+    __vue_is_functional_template__$w,
+    __vue_module_identifier__$w,
     browser,
     undefined
   );
@@ -6035,6 +6094,7 @@ function SiteWhere(Vue) {
   Vue.component("sw-in-app-system-bar", InAppSystemBar$1);
   Vue.component("sw-navigation", Navigation);
   Vue.component("sw-navigation-action-button", NavigationActionButton$1);
+  Vue.component("sw-navigation-header-fields", NavigationHeaderFields$1);
   Vue.component("sw-navigation-header-left", NavigationHeaderLeft$1);
   Vue.component("sw-navigation-header-panel", NavigationHeaderPanel$1);
   Vue.component("sw-navigation-page", NavigationPage$1);
@@ -6068,6 +6128,7 @@ exports.LoadingOverlay = LoadingOverlay$1;
 exports.MetadataPanel = MetadataPanel$1;
 exports.Navigation = Navigation;
 exports.NavigationActionButton = NavigationActionButton$1;
+exports.NavigationHeaderFields = NavigationHeaderFields$1;
 exports.NavigationHeaderLeft = NavigationHeaderLeft$1;
 exports.NavigationHeaderPanel = NavigationHeaderPanel$1;
 exports.NavigationPage = NavigationPage$1;

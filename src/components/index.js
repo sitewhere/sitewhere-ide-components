@@ -34,6 +34,7 @@ import InAppFooter from "./navigation/InAppFooter.vue";
 import InAppSystemBar from "./navigation/InAppSystemBar.vue";
 import Navigation from "./navigation/Navigation.vue";
 import NavigationActionButton from "./navigation/NavigationActionButton.vue";
+import NavigationHeaderFields from "./navigation/NavigationHeaderFields.vue";
 import NavigationHeaderLeft from "./navigation/NavigationHeaderLeft.vue";
 import NavigationHeaderPanel from "./navigation/NavigationHeaderPanel.vue";
 import NavigationPage from "./navigation/NavigationPage.vue";
@@ -76,6 +77,7 @@ function SiteWhere(Vue) {
   Vue.component("sw-in-app-system-bar", InAppSystemBar);
   Vue.component("sw-navigation", Navigation);
   Vue.component("sw-navigation-action-button", NavigationActionButton);
+  Vue.component("sw-navigation-header-fields", NavigationHeaderFields);
   Vue.component("sw-navigation-header-left", NavigationHeaderLeft);
   Vue.component("sw-navigation-header-panel", NavigationHeaderPanel);
   Vue.component("sw-navigation-page", NavigationPage);
@@ -113,6 +115,7 @@ export {
   InAppSystemBar,
   Navigation,
   NavigationActionButton,
+  NavigationHeaderFields,
   NavigationHeaderLeft,
   NavigationHeaderPanel,
   NavigationPage
