@@ -7,6 +7,7 @@ import ErrorBanner from "./common/ErrorBanner.vue";
 import FloatingActionButton from "./common/FloatingActionButton.vue";
 import HeaderField from "./common/HeaderField.vue";
 import IconSelector from "./common/IconSelector.vue";
+import ImageZoomOnHover from "./common/ImageZoomOnHover.vue";
 import LinkedHeaderField from "./common/LinkedHeaderField.vue";
 import LoadingOverlay from "./common/LoadingOverlay.vue";
 
@@ -48,6 +49,7 @@ function SiteWhere(Vue) {
   Vue.component("sw-fab", FloatingActionButton);
   Vue.component("sw-header-field", HeaderField);
   Vue.component("sw-icon-selector", IconSelector);
+  Vue.component("sw-image-zoom-on-hover", ImageZoomOnHover);
   Vue.component("sw-linked-header-field", LinkedHeaderField);
   Vue.component("sw-loading-overlay", LoadingOverlay);
 
@@ -89,6 +91,7 @@ export {
   FloatingActionButton,
   HeaderField,
   IconSelector,
+  ImageZoomOnHover,
   LinkedHeaderField,
   LoadingOverlay
 };
