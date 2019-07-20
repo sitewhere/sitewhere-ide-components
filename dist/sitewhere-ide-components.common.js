@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.33
+  * SiteWhere IDE Components v0.0.34
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -5234,6 +5234,174 @@ __vue_render__$n._withStripped = true;
     undefined
   );
 
+var NavigationHeaderLeft = /** @class */ (function (_super) {
+    __extends(NavigationHeaderLeft, _super);
+    function NavigationHeaderLeft() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    NavigationHeaderLeft = __decorate([
+        sitewhereIdeCommon.Component({})
+    ], NavigationHeaderLeft);
+    return NavigationHeaderLeft;
+}(Vue));
+
+/* script */
+const __vue_script__$o = NavigationHeaderLeft;
+
+/* template */
+var __vue_render__$o = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "v-card",
+    {
+      staticStyle: { position: "relative", height: "100%" },
+      attrs: { flat: "" }
+    },
+    [
+      _vm._t("default"),
+      _vm._v(" "),
+      _c("div", { staticClass: "right-overlay" }, [_vm._t("right-overlay")], 2)
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$o = [];
+__vue_render__$o._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$o = function (inject) {
+    if (!inject) return
+    inject("data-v-f78ad04a_0", { source: "\n.right-overlay[data-v-f78ad04a] {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderLeft.vue"],"names":[],"mappings":";AAkBA;EACA,kBAAA;EACA,QAAA;EACA,MAAA;AACA","file":"NavigationHeaderLeft.vue","sourcesContent":["<template>\r\n  <v-card flat style=\"position: relative; height: 100%\">\r\n    <slot />\r\n    <div class=\"right-overlay\">\r\n      <slot name=\"right-overlay\" />\r\n    </div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderLeft extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.right-overlay {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$o = "data-v-f78ad04a";
+  /* module identifier */
+  const __vue_module_identifier__$o = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$o = false;
+  /* style inject SSR */
+  
+
+  
+  var NavigationHeaderLeft$1 = normalizeComponent_1(
+    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+    __vue_inject_styles__$o,
+    __vue_script__$o,
+    __vue_scope_id__$o,
+    __vue_is_functional_template__$o,
+    __vue_module_identifier__$o,
+    browser,
+    undefined
+  );
+
+var HeaderBrandingPanel = /** @class */ (function (_super) {
+    __extends(HeaderBrandingPanel, _super);
+    function HeaderBrandingPanel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Object.defineProperty(HeaderBrandingPanel.prototype, "imageUrl", {
+        /** Accessor for image URL */
+        get: function () {
+            return this.entity ? this.entity.imageUrl : null;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HeaderBrandingPanel.prototype, "icon", {
+        /** Accessor for icon */
+        get: function () {
+            return this.entity ? this.entity.icon : null;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HeaderBrandingPanel.prototype, "imageStyle", {
+        // Compute style of image.
+        get: function () {
+            return {
+                "background-color": "#fff",
+                "background-image": "url(" + this.entity.imageUrl + ")",
+                "background-size": "contain",
+                "background-repeat": "no-repeat",
+                "background-position": "50% 50%"
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", Object)
+    ], HeaderBrandingPanel.prototype, "entity", void 0);
+    HeaderBrandingPanel = __decorate([
+        sitewhereIdeCommon.Component({
+            components: {
+                NavigationHeaderLeft: NavigationHeaderLeft$1
+            }
+        })
+    ], HeaderBrandingPanel);
+    return HeaderBrandingPanel;
+}(Vue));
+
+/* script */
+const __vue_script__$p = HeaderBrandingPanel;
+
+/* template */
+var __vue_render__$p = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("navigation-header-left", [
+    _vm.imageUrl
+      ? _c("span", { staticClass: "header-image", style: _vm.imageStyle })
+      : _vm.icon
+      ? _c(
+          "span",
+          { staticClass: "header-icon" },
+          [
+            _c("font-awesome-icon", {
+              staticClass: "grey--text",
+              attrs: { icon: _vm.icon, size: "7x" }
+            })
+          ],
+          1
+        )
+      : _c("span", [_vm._v("No Branding")])
+  ])
+};
+var __vue_staticRenderFns__$p = [];
+__vue_render__$p._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$p = function (inject) {
+    if (!inject) return
+    inject("data-v-6e6bb7a6_0", { source: "\n.header-image[data-v-6e6bb7a6] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-6e6bb7a6] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAkDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <span v-if=\"imageUrl\" class=\"header-image\" :style=\"imageStyle\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n    <span v-else>No Branding</span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$p = "data-v-6e6bb7a6";
+  /* module identifier */
+  const __vue_module_identifier__$p = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$p = false;
+  /* style inject SSR */
+  
+
+  
+  var HeaderBrandingPanel$1 = normalizeComponent_1(
+    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+    __vue_inject_styles__$p,
+    __vue_script__$p,
+    __vue_scope_id__$p,
+    __vue_is_functional_template__$p,
+    __vue_module_identifier__$p,
+    browser,
+    undefined
+  );
+
 var InAppFooter = /** @class */ (function (_super) {
     __extends(InAppFooter, _super);
     function InAppFooter() {
@@ -5246,10 +5414,10 @@ var InAppFooter = /** @class */ (function (_super) {
 }(Vue));
 
 /* script */
-const __vue_script__$o = InAppFooter;
+const __vue_script__$q = InAppFooter;
 
 /* template */
-var __vue_render__$o = function() {
+var __vue_render__$q = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5259,32 +5427,32 @@ var __vue_render__$o = function() {
     ])
   ])
 };
-var __vue_staticRenderFns__$o = [];
-__vue_render__$o._withStripped = true;
+var __vue_staticRenderFns__$q = [];
+__vue_render__$q._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$o = function (inject) {
+  const __vue_inject_styles__$q = function (inject) {
     if (!inject) return
     inject("data-v-b556a29e_0", { source: "\n.footer-content[data-v-b556a29e] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <span>Footer content goes here..</span>\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$o = "data-v-b556a29e";
+  const __vue_scope_id__$q = "data-v-b556a29e";
   /* module identifier */
-  const __vue_module_identifier__$o = undefined;
+  const __vue_module_identifier__$q = undefined;
   /* functional template */
-  const __vue_is_functional_template__$o = false;
+  const __vue_is_functional_template__$q = false;
   /* style inject SSR */
   
 
   
   var InAppFooter$1 = normalizeComponent_1(
-    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
+    { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
+    __vue_inject_styles__$q,
+    __vue_script__$q,
+    __vue_scope_id__$q,
+    __vue_is_functional_template__$q,
+    __vue_module_identifier__$q,
     browser,
     undefined
   );
@@ -5316,10 +5484,10 @@ var InAppSystemBar = /** @class */ (function (_super) {
 }(Vue));
 
 /* script */
-const __vue_script__$p = InAppSystemBar;
+const __vue_script__$r = InAppSystemBar;
 
 /* template */
-var __vue_render__$p = function() {
+var __vue_render__$r = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5384,32 +5552,32 @@ var __vue_render__$p = function() {
     1
   )
 };
-var __vue_staticRenderFns__$p = [];
-__vue_render__$p._withStripped = true;
+var __vue_staticRenderFns__$r = [];
+__vue_render__$r._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$p = function (inject) {
+  const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
     inject("data-v-660b8b92_0", { source: "\n.title-bar-button[data-v-660b8b92] {\r\n  -webkit-app-region: no-drag;\n}\n.system-bar-title[data-v-660b8b92] {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppSystemBar.vue"],"names":[],"mappings":";AAiDA;EACA,2BAAA;AACA;AACA;EACA,WAAA;EACA,iBAAA;EACA,kBAAA;AACA","file":"InAppSystemBar.vue","sourcesContent":["<template>\r\n  <v-system-bar color=\"#444\" class=\"title-bar\">\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"openWebTools\">\r\n      <v-icon color=\"white\">menu</v-icon>\r\n    </v-btn>\r\n    <span class=\"system-bar-title\">{{ title }}</span>\r\n    <v-spacer></v-spacer>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"minWindow\">\r\n      <v-icon color=\"white\">remove</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"maxWindow\">\r\n      <v-icon color=\"white\">check_box_outline_blank</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"closeWindow\">\r\n      <v-icon color=\"white\">close</v-icon>\r\n    </v-btn>\r\n  </v-system-bar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\nimport Electron from \"electron\";\r\n\r\n@Component({})\r\nexport default class InAppSystemBar extends Vue {\r\n  title: string = Electron.remote.getCurrentWindow().getTitle();\r\n\r\n  openWebTools() {\r\n    Electron.remote.getCurrentWebContents().openDevTools();\r\n  }\r\n\r\n  minWindow() {\r\n    Electron.remote.getCurrentWindow().minimize();\r\n  }\r\n\r\n  maxWindow() {\r\n    Electron.remote.getCurrentWindow().maximize();\r\n  }\r\n\r\n  closeWindow() {\r\n    Electron.remote.getCurrentWindow().close();\r\n    Electron.app.quit();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.title-bar-button {\r\n  -webkit-app-region: no-drag;\r\n}\r\n.system-bar-title {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$p = "data-v-660b8b92";
+  const __vue_scope_id__$r = "data-v-660b8b92";
   /* module identifier */
-  const __vue_module_identifier__$p = undefined;
+  const __vue_module_identifier__$r = undefined;
   /* functional template */
-  const __vue_is_functional_template__$p = false;
+  const __vue_is_functional_template__$r = false;
   /* style inject SSR */
   
 
   
   var InAppSystemBar$1 = normalizeComponent_1(
-    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
-    __vue_inject_styles__$p,
-    __vue_script__$p,
-    __vue_scope_id__$p,
-    __vue_is_functional_template__$p,
-    __vue_module_identifier__$p,
+    { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
+    __vue_inject_styles__$r,
+    __vue_script__$r,
+    __vue_scope_id__$r,
+    __vue_is_functional_template__$r,
+    __vue_module_identifier__$r,
     browser,
     undefined
   );
@@ -5441,10 +5609,10 @@ var script$9 = {
 };
 
 /* script */
-const __vue_script__$q = script$9;
+const __vue_script__$s = script$9;
 
 /* template */
-var __vue_render__$q = function() {
+var __vue_render__$s = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5549,32 +5717,32 @@ var __vue_render__$q = function() {
       )
     : _vm._e()
 };
-var __vue_staticRenderFns__$q = [];
-__vue_render__$q._withStripped = true;
+var __vue_staticRenderFns__$s = [];
+__vue_render__$s._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$q = function (inject) {
+  const __vue_inject_styles__$s = function (inject) {
     if (!inject) return
     inject("data-v-7dcd91c0_0", { source: "\n.list__tile__action[data-v-7dcd91c0] {\r\n  min-width: 30px;\n}\n.list__tile__title[data-v-7dcd91c0] {\r\n  font-size: 16px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\Navigation.vue"],"names":[],"mappings":";AA+DA;EACA,eAAA;AACA;AACA;EACA,eAAA;AACA","file":"Navigation.vue","sourcesContent":["<template>\r\n  <v-list v-if=\"sections\" dense>\r\n    <v-list-group\r\n      v-for=\"section in sections\"\r\n      :key=\"section.id\"\r\n      v-model=\"section.active\"\r\n      :prepend-icon=\"section.icon\"\r\n      :append-icon=\"section.subsections ? '$vuetify.icons.expand' : ''\"\r\n      no-action\r\n    >\r\n      <template v-slot:activator>\r\n        <v-list-tile @click=\"onSectionClicked(section)\">\r\n          <v-list-tile-content>\r\n            <v-list-tile-title>{{ section.title }}</v-list-tile-title>\r\n          </v-list-tile-content>\r\n        </v-list-tile>\r\n      </template>\r\n\r\n      <v-list-tile\r\n        @click=\"onSectionClicked(subsection)\"\r\n        v-for=\"subsection in section.subsections\"\r\n        :key=\"subsection.id\"\r\n      >\r\n        <v-list-tile-content>\r\n          <v-list-tile-title>{{ subsection.title }}</v-list-tile-title>\r\n        </v-list-tile-content>\r\n        <v-list-tile-action>\r\n          <v-icon>{{ subsection.icon }}</v-icon>\r\n        </v-list-tile-action>\r\n      </v-list-tile>\r\n    </v-list-group>\r\n  </v-list>\r\n</template>\r\n\r\n<script>\r\nimport { isAuthForAll } from \"../common/Utils\";\r\n\r\nexport default {\r\n  data: () => ({\r\n    sites: null,\r\n    drawerEdit: true\r\n  }),\r\n\r\n  props: [\"sections\"],\r\n\r\n  methods: {\r\n    // Determines whether user is authorized for section.\r\n    isAuthForSection: function(section) {\r\n      if (section.requireAll) {\r\n        return isAuthForAll(this, section.requireAll);\r\n      }\r\n      return true;\r\n    },\r\n\r\n    onSectionClicked: function(section) {\r\n      console.log(\"Section clicked\", section);\r\n      this.$emit(\"sectionSelected\", section);\r\n    }\r\n  }\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.list__tile__action {\r\n  min-width: 30px;\r\n}\r\n.list__tile__title {\r\n  font-size: 16px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$q = "data-v-7dcd91c0";
+  const __vue_scope_id__$s = "data-v-7dcd91c0";
   /* module identifier */
-  const __vue_module_identifier__$q = undefined;
+  const __vue_module_identifier__$s = undefined;
   /* functional template */
-  const __vue_is_functional_template__$q = false;
+  const __vue_is_functional_template__$s = false;
   /* style inject SSR */
   
 
   
   var Navigation = normalizeComponent_1(
-    { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
-    __vue_inject_styles__$q,
-    __vue_script__$q,
-    __vue_scope_id__$q,
-    __vue_is_functional_template__$q,
-    __vue_module_identifier__$q,
+    { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
+    __vue_inject_styles__$s,
+    __vue_script__$s,
+    __vue_scope_id__$s,
+    __vue_is_functional_template__$s,
+    __vue_module_identifier__$s,
     browser,
     undefined
   );
@@ -5606,10 +5774,10 @@ var NavigationActionButton = /** @class */ (function (_super) {
 }(Vue));
 
 /* script */
-const __vue_script__$r = NavigationActionButton;
+const __vue_script__$t = NavigationActionButton;
 
 /* template */
-var __vue_render__$r = function() {
+var __vue_render__$t = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5640,32 +5808,32 @@ var __vue_render__$r = function() {
     1
   )
 };
-var __vue_staticRenderFns__$r = [];
-__vue_render__$r._withStripped = true;
+var __vue_staticRenderFns__$t = [];
+__vue_render__$t._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$r = function (inject) {
+  const __vue_inject_styles__$t = function (inject) {
     if (!inject) return
     inject("data-v-4588e05d_0", { source: "\n.navbutton[data-v-4588e05d] {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-4588e05d]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AAoCA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon\r\n      v-if=\"material\"\r\n      class=\"ma-0 ml-1 navbutton\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    >{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = "data-v-4588e05d";
+  const __vue_scope_id__$t = "data-v-4588e05d";
   /* module identifier */
-  const __vue_module_identifier__$r = undefined;
+  const __vue_module_identifier__$t = undefined;
   /* functional template */
-  const __vue_is_functional_template__$r = false;
+  const __vue_is_functional_template__$t = false;
   /* style inject SSR */
   
 
   
   var NavigationActionButton$1 = normalizeComponent_1(
-    { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
-    __vue_inject_styles__$r,
-    __vue_script__$r,
-    __vue_scope_id__$r,
-    __vue_is_functional_template__$r,
-    __vue_module_identifier__$r,
+    { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
+    __vue_inject_styles__$t,
+    __vue_script__$t,
+    __vue_scope_id__$t,
+    __vue_is_functional_template__$t,
+    __vue_module_identifier__$t,
     browser,
     undefined
   );
@@ -5685,50 +5853,10 @@ var NavigationHeaderPanel = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NavigationHeaderPanel.prototype, "imageStyle", {
-        // Compute style of image.
-        get: function () {
-            return {
-                "background-color": "#fff",
-                "background-image": "url(" + this.imageUrl + ")",
-                "background-size": "contain",
-                "background-repeat": "no-repeat",
-                "background-position": "50% 50%"
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NavigationHeaderPanel.prototype, "qrCodeStyle", {
-        // Compute style for QR code URL.
-        get: function () {
-            return {
-                "background-color": "#fff",
-                "background-image": "url(" + this.qrCodeUrl + ")",
-                "background-size": "contain",
-                "background-repeat": "no-repeat",
-                "background-position": "50% 50%"
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
     __decorate([
         sitewhereIdeCommon.Prop(),
         __metadata("design:type", String)
     ], NavigationHeaderPanel.prototype, "height", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationHeaderPanel.prototype, "imageUrl", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationHeaderPanel.prototype, "qrCodeUrl", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationHeaderPanel.prototype, "icon", void 0);
     NavigationHeaderPanel = __decorate([
         sitewhereIdeCommon.Component({})
     ], NavigationHeaderPanel);
@@ -5736,10 +5864,10 @@ var NavigationHeaderPanel = /** @class */ (function (_super) {
 }(Vue));
 
 /* script */
-const __vue_script__$s = NavigationHeaderPanel;
+const __vue_script__$u = NavigationHeaderPanel;
 
 /* template */
-var __vue_render__$s = function() {
+var __vue_render__$u = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5752,23 +5880,7 @@ var __vue_render__$s = function() {
     },
     [
       _c("v-card-text", [
-        _vm.imageUrl
-          ? _c("span", { staticClass: "header-image", style: _vm.imageStyle })
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.icon
-          ? _c(
-              "span",
-              { staticClass: "header-icon" },
-              [
-                _c("font-awesome-icon", {
-                  staticClass: "grey--text",
-                  attrs: { icon: _vm.icon, size: "7x" }
-                })
-              ],
-              1
-            )
-          : _vm._e(),
+        _c("span", { staticClass: "header-left" }, [_vm._t("left")], 2),
         _vm._v(" "),
         _c("span", { staticClass: "header-content" }, [_vm._t("content")], 2),
         _vm._v(" "),
@@ -5780,32 +5892,32 @@ var __vue_render__$s = function() {
     1
   )
 };
-var __vue_staticRenderFns__$s = [];
-__vue_render__$s._withStripped = true;
+var __vue_staticRenderFns__$u = [];
+__vue_render__$u._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$s = function (inject) {
+  const __vue_inject_styles__$u = function (inject) {
     if (!inject) return
-    inject("data-v-1a492378_0", { source: "\n.header-panel[data-v-1a492378] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-image[data-v-1a492378] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 50px;\r\n  bottom: 7px;\r\n  width: 180px;\n}\n.header-icon[data-v-1a492378] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 50px;\r\n  bottom: 7px;\r\n  width: 180px;\r\n  padding: 45px;\n}\n.header-right[data-v-1a492378] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 50px;\r\n  bottom: 7px;\r\n  width: 180px;\r\n  height: 180px;\n}\n.header-content[data-v-1a492378] {\r\n  position: absolute;\r\n  top: 20px;\r\n  left: 250px;\r\n  right: 250px;\n}\n.options-menu[data-v-1a492378] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AA+DA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,WAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,WAAA;EACA,YAAA;EACA,aAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,WAAA;EACA,YAAA;EACA,aAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span v-if=\"imageUrl\" class=\"header-image\" :style=\"imageStyle\"></span>\r\n      <span v-if=\"icon\" class=\"header-icon\">\r\n        <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\"/>\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\"></slot>\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\"></slot>\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\"></slot>\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n  @Prop() readonly imageUrl!: string;\r\n  @Prop() readonly qrCodeUrl!: string;\r\n  @Prop() readonly icon!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n\r\n  // Compute style for QR code URL.\r\n  get qrCodeStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.qrCodeUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-image {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 50px;\r\n  bottom: 7px;\r\n  width: 180px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 50px;\r\n  bottom: 7px;\r\n  width: 180px;\r\n  padding: 45px;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 50px;\r\n  bottom: 7px;\r\n  width: 180px;\r\n  height: 180px;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 20px;\r\n  left: 250px;\r\n  right: 250px;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-6b0c2a59_0", { source: "\n.header-panel[data-v-6b0c2a59] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-left[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-right[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-content[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\n}\n.options-menu[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AAqCA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span class=\"header-left\">\r\n        <slot name=\"left\" />\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\" />\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\" />\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\" />\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-left {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$s = "data-v-1a492378";
+  const __vue_scope_id__$u = "data-v-6b0c2a59";
   /* module identifier */
-  const __vue_module_identifier__$s = undefined;
+  const __vue_module_identifier__$u = undefined;
   /* functional template */
-  const __vue_is_functional_template__$s = false;
+  const __vue_is_functional_template__$u = false;
   /* style inject SSR */
   
 
   
   var NavigationHeaderPanel$1 = normalizeComponent_1(
-    { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
-    __vue_inject_styles__$s,
-    __vue_script__$s,
-    __vue_scope_id__$s,
-    __vue_is_functional_template__$s,
-    __vue_module_identifier__$s,
+    { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
+    __vue_inject_styles__$u,
+    __vue_script__$u,
+    __vue_scope_id__$u,
+    __vue_is_functional_template__$u,
+    __vue_module_identifier__$u,
     browser,
     undefined
   );
@@ -5844,10 +5956,12 @@ function SiteWhere(Vue) {
   Vue.component("sw-data-entry-panel", DataEntryPanel$1);
   Vue.component("sw-data-table-tab", DataTableTab$1);
   Vue.component("sw-detail-page", DetailPage$1);
+  Vue.component("sw-header-branding-panel", HeaderBrandingPanel$1);
   Vue.component("sw-in-app-footer", InAppFooter$1);
   Vue.component("sw-in-app-system-bar", InAppSystemBar$1);
   Vue.component("sw-navigation", Navigation);
   Vue.component("sw-navigation-action-button", NavigationActionButton$1);
+  Vue.component("sw-navigation-header-left", NavigationHeaderLeft$1);
   Vue.component("sw-navigation-header-panel", NavigationHeaderPanel$1);
   Vue.component("sw-navigation-page", NavigationPage$1);
 }
@@ -5865,6 +5979,7 @@ exports.DeleteDialog = DeleteDialog$1;
 exports.DetailPage = DetailPage$1;
 exports.ErrorBanner = ErrorBanner;
 exports.FloatingActionButton = FloatingActionButton;
+exports.HeaderBrandingPanel = HeaderBrandingPanel$1;
 exports.HeaderField = HeaderField;
 exports.IconSelector = IconSelector;
 exports.InAppFooter = InAppFooter$1;
@@ -5878,6 +5993,7 @@ exports.LoadingOverlay = LoadingOverlay$1;
 exports.MetadataPanel = MetadataPanel$1;
 exports.Navigation = Navigation;
 exports.NavigationActionButton = NavigationActionButton$1;
+exports.NavigationHeaderLeft = NavigationHeaderLeft$1;
 exports.NavigationHeaderPanel = NavigationHeaderPanel$1;
 exports.NavigationPage = NavigationPage$1;
 exports.Pager = Pager$1;

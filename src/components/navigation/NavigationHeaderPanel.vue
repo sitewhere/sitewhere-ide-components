@@ -1,18 +1,17 @@
 <template>
   <v-card flat :style="panelStyle" class="white mt-2 mb-3 pr-3 pl-3 header-panel">
     <v-card-text>
-      <span v-if="imageUrl" class="header-image" :style="imageStyle"></span>
-      <span v-if="icon" class="header-icon">
-        <font-awesome-icon class="grey--text" :icon="icon" size="7x"/>
+      <span class="header-left">
+        <slot name="left" />
       </span>
       <span class="header-content">
-        <slot name="content"></slot>
+        <slot name="content" />
       </span>
       <span class="header-right">
-        <slot name="right"></slot>
+        <slot name="right" />
       </span>
       <span class="options-menu">
-        <slot name="options"></slot>
+        <slot name="options" />
       </span>
     </v-card-text>
   </v-card>
@@ -25,36 +24,11 @@ import { Component, Prop } from "sitewhere-ide-common";
 @Component({})
 export default class NavigationHeaderPanel extends Vue {
   @Prop() readonly height!: string;
-  @Prop() readonly imageUrl!: string;
-  @Prop() readonly qrCodeUrl!: string;
-  @Prop() readonly icon!: string;
 
   // Style for top-level panel.
   get panelStyle() {
     return {
       "min-height": this.height
-    };
-  }
-
-  // Compute style of image.
-  get imageStyle() {
-    return {
-      "background-color": "#fff",
-      "background-image": "url(" + this.imageUrl + ")",
-      "background-size": "contain",
-      "background-repeat": "no-repeat",
-      "background-position": "50% 50%"
-    };
-  }
-
-  // Compute style for QR code URL.
-  get qrCodeStyle() {
-    return {
-      "background-color": "#fff",
-      "background-image": "url(" + this.qrCodeUrl + ")",
-      "background-size": "contain",
-      "background-repeat": "no-repeat",
-      "background-position": "50% 50%"
     };
   }
 }
@@ -66,37 +40,30 @@ export default class NavigationHeaderPanel extends Vue {
   overflow-y: hidden;
 }
 
-.header-image {
+.header-left {
   position: absolute;
   top: 10px;
-  left: 50px;
-  bottom: 7px;
-  width: 180px;
-}
-
-.header-icon {
-  position: absolute;
-  top: 10px;
-  left: 50px;
-  bottom: 7px;
-  width: 180px;
-  padding: 45px;
+  left: 10px;
+  bottom: 10px;
+  width: 230px;
+  height: 100%;
 }
 
 .header-right {
   position: absolute;
   top: 10px;
-  right: 50px;
-  bottom: 7px;
-  width: 180px;
-  height: 180px;
+  right: 10px;
+  bottom: 10px;
+  width: 230px;
+  height: 100%;
 }
 
 .header-content {
   position: absolute;
-  top: 20px;
+  top: 10px;
   left: 250px;
   right: 250px;
+  height: 100%;
 }
 
 .options-menu {

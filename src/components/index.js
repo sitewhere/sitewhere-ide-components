@@ -28,10 +28,12 @@ import ContentTab from "./navigation/ContentTab.vue";
 import DataEntryPanel from "./navigation/DataEntryPanel.vue";
 import DataTableTab from "./navigation/DataTableTab.vue";
 import DetailPage from "./navigation/DetailPage.vue";
+import HeaderBrandingPanel from "./navigation/HeaderBrandingPanel.vue";
 import InAppFooter from "./navigation/InAppFooter.vue";
 import InAppSystemBar from "./navigation/InAppSystemBar.vue";
 import Navigation from "./navigation/Navigation.vue";
 import NavigationActionButton from "./navigation/NavigationActionButton.vue";
+import NavigationHeaderLeft from "./navigation/NavigationHeaderLeft.vue";
 import NavigationHeaderPanel from "./navigation/NavigationHeaderPanel.vue";
 import NavigationPage from "./navigation/NavigationPage.vue";
 
@@ -67,10 +69,12 @@ function SiteWhere(Vue) {
   Vue.component("sw-data-entry-panel", DataEntryPanel);
   Vue.component("sw-data-table-tab", DataTableTab);
   Vue.component("sw-detail-page", DetailPage);
+  Vue.component("sw-header-branding-panel", HeaderBrandingPanel);
   Vue.component("sw-in-app-footer", InAppFooter);
   Vue.component("sw-in-app-system-bar", InAppSystemBar);
   Vue.component("sw-navigation", Navigation);
   Vue.component("sw-navigation-action-button", NavigationActionButton);
+  Vue.component("sw-navigation-header-left", NavigationHeaderLeft);
   Vue.component("sw-navigation-header-panel", NavigationHeaderPanel);
   Vue.component("sw-navigation-page", NavigationPage);
 }
@@ -101,10 +105,12 @@ export {
   DataEntryPanel,
   DataTableTab,
   DetailPage,
+  HeaderBrandingPanel,
   InAppFooter,
   InAppSystemBar,
   Navigation,
   NavigationActionButton,
+  NavigationHeaderLeft,
   NavigationHeaderPanel,
   NavigationPage
 };
