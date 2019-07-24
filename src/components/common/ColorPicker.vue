@@ -4,46 +4,55 @@
       :style="{ 'background-color' : currentColor, 'color': '#fff' }"
       slot="activator"
     >{{ text }}</v-btn>
-    <chrome :value="chromeColor" @input="onColorChosen"></chrome>
+    <picker :value="pickerColor" @input="onColorChosen" />
   </v-menu>
 </template>
 
-<script>
-import { Chrome } from "vue-color";
+<script lang="ts">
+import { Component, Prop, Watch } from "sitewhere-ide-common";
+import Vue from "vue";
 
-export default {
-  data: () => ({
-    menu: null,
-    updatedColor: null
-  }),
+import { Sketch as Picker } from "vue-color";
 
+@Component({
   components: {
-    Chrome
-  },
-
-  computed: {
-    chromeColor: function() {
-      return {
-        hex: this.currentColor
-      };
-    },
-    currentColor: function() {
-      return this.updatedColor || this.value;
-    }
-  },
-
-  props: ["value", "text"],
-
-  methods: {
-    // Called when a color is chosen.
-    onColorChosen: function(val) {
-      this.updatedColor = val.hex;
-      this.$emit("input", val.hex);
-      this.$emit("opacityChanged", val.a);
-    }
+    Picker
   }
-};
-</script>
+})
+export default class ColorPicker extends Vue {
+  @Prop() readonly value!: string;
+  @Prop({ default: 1 }) readonly opacity!: string;
+  @Prop() readonly text!: string;
 
-<style scoped>
-</style>
+  menu: boolean = false;
+  currentColor: string | null = null;
+  currentOpacity: number | null = null;
+
+  @Watch("value")
+  onValueChanged(val: string) {
+    this.currentColor = val;
+  }
+
+  @Watch("opacity")
+  onOpacityChanged(val: number) {
+    this.currentOpacity = val;
+  }
+
+  /** Convert color into picker format */
+  get pickerColor() {
+    return {
+      hex: this.currentColor,
+      a: this.opacity
+    };
+  }
+
+  /** Called when a color is chosen */
+  onColorChosen(val: any) {
+    this.currentColor = val.hex;
+    this.$emit("input", val.hex);
+
+    this.currentOpacity = val.a;
+    this.$emit("opacityChanged", val.a);
+  }
+}
+</script>

@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.36
+  * SiteWhere IDE Components v0.0.37
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -500,43 +500,75 @@
       undefined
     );
 
-  //
-
-  var script$1 = {
-    data: () => ({
-      menu: null,
-      updatedColor: null
-    }),
-
-    components: {
-      Chrome: vueColor.Chrome
-    },
-
-    computed: {
-      chromeColor: function() {
-        return {
-          hex: this.currentColor
-        };
-      },
-      currentColor: function() {
-        return this.updatedColor || this.value;
+  var ColorPicker = /** @class */ (function (_super) {
+      __extends(ColorPicker, _super);
+      function ColorPicker() {
+          var _this = _super !== null && _super.apply(this, arguments) || this;
+          _this.menu = false;
+          _this.currentColor = null;
+          _this.currentOpacity = null;
+          return _this;
       }
-    },
-
-    props: ["value", "text"],
-
-    methods: {
-      // Called when a color is chosen.
-      onColorChosen: function(val) {
-        this.updatedColor = val.hex;
-        this.$emit("input", val.hex);
-        this.$emit("opacityChanged", val.a);
-      }
-    }
-  };
+      ColorPicker.prototype.onValueChanged = function (val) {
+          this.currentColor = val;
+      };
+      ColorPicker.prototype.onOpacityChanged = function (val) {
+          this.currentOpacity = val;
+      };
+      Object.defineProperty(ColorPicker.prototype, "pickerColor", {
+          /** Convert color into picker format */
+          get: function () {
+              return {
+                  hex: this.currentColor,
+                  a: this.opacity
+              };
+          },
+          enumerable: true,
+          configurable: true
+      });
+      /** Called when a color is chosen */
+      ColorPicker.prototype.onColorChosen = function (val) {
+          this.currentColor = val.hex;
+          this.$emit("input", val.hex);
+          this.currentOpacity = val.a;
+          this.$emit("opacityChanged", val.a);
+      };
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ColorPicker.prototype, "value", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop({ default: 1 }),
+          __metadata("design:type", String)
+      ], ColorPicker.prototype, "opacity", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ColorPicker.prototype, "text", void 0);
+      __decorate([
+          sitewhereIdeCommon.Watch("value"),
+          __metadata("design:type", Function),
+          __metadata("design:paramtypes", [String]),
+          __metadata("design:returntype", void 0)
+      ], ColorPicker.prototype, "onValueChanged", null);
+      __decorate([
+          sitewhereIdeCommon.Watch("opacity"),
+          __metadata("design:type", Function),
+          __metadata("design:paramtypes", [Number]),
+          __metadata("design:returntype", void 0)
+      ], ColorPicker.prototype, "onOpacityChanged", null);
+      ColorPicker = __decorate([
+          sitewhereIdeCommon.Component({
+              components: {
+                  Picker: vueColor.Sketch
+              }
+          })
+      ], ColorPicker);
+      return ColorPicker;
+  }(Vue));
 
   /* script */
-  const __vue_script__$2 = script$1;
+  const __vue_script__$2 = ColorPicker;
 
   /* template */
   var __vue_render__$2 = function() {
@@ -566,8 +598,8 @@
           [_vm._v(_vm._s(_vm.text))]
         ),
         _vm._v(" "),
-        _c("chrome", {
-          attrs: { value: _vm.chromeColor },
+        _c("picker", {
+          attrs: { value: _vm.pickerColor },
           on: { input: _vm.onColorChosen }
         })
       ],
@@ -578,35 +610,33 @@
   __vue_render__$2._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$2 = function (inject) {
-      if (!inject) return
-      inject("data-v-10e8b9d6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorPicker.vue"}, media: undefined });
-
-    };
+    const __vue_inject_styles__$2 = undefined;
     /* scoped */
-    const __vue_scope_id__$2 = "data-v-10e8b9d6";
+    const __vue_scope_id__$2 = undefined;
     /* module identifier */
     const __vue_module_identifier__$2 = undefined;
     /* functional template */
     const __vue_is_functional_template__$2 = false;
+    /* style inject */
+    
     /* style inject SSR */
     
 
     
-    var ColorPicker = normalizeComponent_1(
+    var ColorPicker$1 = normalizeComponent_1(
       { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
       __vue_inject_styles__$2,
       __vue_script__$2,
       __vue_scope_id__$2,
       __vue_is_functional_template__$2,
       __vue_module_identifier__$2,
-      browser,
+      undefined,
       undefined
     );
 
   //
 
-  var script$2 = {
+  var script$1 = {
     data: () => ({
       date: null,
       formattedValue: null,
@@ -643,7 +673,7 @@
   };
 
   /* script */
-  const __vue_script__$3 = script$2;
+  const __vue_script__$3 = script$1;
 
   /* template */
   var __vue_render__$3 = function() {
@@ -737,7 +767,7 @@
   //
   //
 
-  var script$3 = {
+  var script$2 = {
     data: () => ({
       errorDisplayed: false
     }),
@@ -775,7 +805,7 @@
   };
 
   /* script */
-  const __vue_script__$4 = script$3;
+  const __vue_script__$4 = script$2;
 
   /* template */
   var __vue_render__$4 = function() {
@@ -865,7 +895,7 @@
   //
   //
 
-  var script$4 = {
+  var script$3 = {
     data: () => ({}),
 
     props: ["label", "icon"],
@@ -879,7 +909,7 @@
   };
 
   /* script */
-  const __vue_script__$5 = script$4;
+  const __vue_script__$5 = script$3;
 
   /* template */
   var __vue_render__$5 = function() {
@@ -962,7 +992,7 @@
   //
   //
 
-  var script$5 = {
+  var script$4 = {
     data: () => ({}),
 
     props: ["label"],
@@ -971,7 +1001,7 @@
   };
 
   /* script */
-  const __vue_script__$6 = script$5;
+  const __vue_script__$6 = script$4;
 
   /* template */
   var __vue_render__$6 = function() {
@@ -1061,7 +1091,7 @@
   //
   //
 
-  var script$6 = {
+  var script$5 = {
     computed: {
       // Compute style of logo.
       ddStyle: function() {
@@ -2236,7 +2266,7 @@
   };
 
   /* script */
-  const __vue_script__$7 = script$6;
+  const __vue_script__$7 = script$5;
 
   /* template */
   var __vue_render__$7 = function() {
@@ -2502,7 +2532,7 @@
 
   //
 
-  var script$7 = {
+  var script$6 = {
     data: () => ({}),
 
     props: ["label", "url", "text"],
@@ -2520,7 +2550,7 @@
   };
 
   /* script */
-  const __vue_script__$9 = script$7;
+  const __vue_script__$9 = script$6;
 
   /* template */
   var __vue_render__$9 = function() {
@@ -2954,7 +2984,7 @@
   //
   //
 
-  var script$8 = {
+  var script$7 = {
     data: () => ({
       visible: false,
       error: null
@@ -2998,7 +3028,7 @@
   };
 
   /* script */
-  const __vue_script__$c = script$8;
+  const __vue_script__$c = script$7;
 
   /* template */
   var __vue_render__$c = function() {
@@ -5659,7 +5689,7 @@
 
   //
 
-  var script$9 = {
+  var script$8 = {
     data: () => ({
       sites: null,
       drawerEdit: true
@@ -5684,7 +5714,7 @@
   };
 
   /* script */
-  const __vue_script__$t = script$9;
+  const __vue_script__$t = script$8;
 
   /* template */
   var __vue_render__$t = function() {
@@ -6058,7 +6088,7 @@
     // Register common components.
     Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
     Vue.component("sw-color-input-field", ColorInputField$1);
-    Vue.component("sw-color-picker", ColorPicker);
+    Vue.component("sw-color-picker", ColorPicker$1);
     Vue.component("sw-date-time-picker", DateTimePicker);
     Vue.component("sw-error-banner", ErrorBanner);
     Vue.component("sw-fab", FloatingActionButton);
@@ -6100,7 +6130,7 @@
   exports.BaseDialog = BaseDialog$1;
   exports.ClipboardCopyField = ClipboardCopyField;
   exports.ColorInputField = ColorInputField$1;
-  exports.ColorPicker = ColorPicker;
+  exports.ColorPicker = ColorPicker$1;
   exports.ConfirmDialog = ConfirmDialog;
   exports.ContentTab = ContentTab$1;
   exports.DataEntryPanel = DataEntryPanel$1;
