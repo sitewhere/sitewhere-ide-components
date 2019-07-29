@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.38
+  * SiteWhere IDE Components v0.0.39
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -2504,19 +2504,6 @@
           }
       }
       return metadata;
-  }
-  /**
-   * Indicates if logged-in user is authorized for all auths in list.
-   * @param component
-   * @param list
-   */
-  function isAuthForAll(component, list) {
-      var user = component.$store.getters.user;
-      if (!user) {
-          console.log("No user for permissions check.");
-          return false;
-      }
-      return list.every(function (auth) { return user.authorities.indexOf(auth) > -1; });
   }
   /**
    * Routes to a applicaton-relative URL.
@@ -5687,34 +5674,27 @@
       undefined
     );
 
-  //
-
-  var script$8 = {
-    data: () => ({
-      sites: null,
-      drawerEdit: true
-    }),
-
-    props: ["sections"],
-
-    methods: {
-      // Determines whether user is authorized for section.
-      isAuthForSection: function(section) {
-        if (section.requireAll) {
-          return isAuthForAll(this, section.requireAll);
-        }
-        return true;
-      },
-
-      onSectionClicked: function(section) {
-        console.log("Section clicked", section);
-        this.$emit("sectionSelected", section);
+  var Navigation = /** @class */ (function (_super) {
+      __extends(Navigation, _super);
+      function Navigation() {
+          return _super !== null && _super.apply(this, arguments) || this;
       }
-    }
-  };
+      /** Called when a section is clicked */
+      Navigation.prototype.onSectionClicked = function (section) {
+          this.$emit("sectionSelected", section);
+      };
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Array)
+      ], Navigation.prototype, "sections", void 0);
+      Navigation = __decorate([
+          sitewhereIdeCommon.Component({})
+      ], Navigation);
+      return Navigation;
+  }(Vue));
 
   /* script */
-  const __vue_script__$t = script$8;
+  const __vue_script__$t = Navigation;
 
   /* template */
   var __vue_render__$t = function() {
@@ -5828,11 +5808,11 @@
     /* style */
     const __vue_inject_styles__$t = function (inject) {
       if (!inject) return
-      inject("data-v-7dcd91c0_0", { source: "\n.list__tile__action[data-v-7dcd91c0] {\r\n  min-width: 30px;\n}\n.list__tile__title[data-v-7dcd91c0] {\r\n  font-size: 16px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\Navigation.vue"],"names":[],"mappings":";AA+DA;EACA,eAAA;AACA;AACA;EACA,eAAA;AACA","file":"Navigation.vue","sourcesContent":["<template>\r\n  <v-list v-if=\"sections\" dense>\r\n    <v-list-group\r\n      v-for=\"section in sections\"\r\n      :key=\"section.id\"\r\n      v-model=\"section.active\"\r\n      :prepend-icon=\"section.icon\"\r\n      :append-icon=\"section.subsections ? '$vuetify.icons.expand' : ''\"\r\n      no-action\r\n    >\r\n      <template v-slot:activator>\r\n        <v-list-tile @click=\"onSectionClicked(section)\">\r\n          <v-list-tile-content>\r\n            <v-list-tile-title>{{ section.title }}</v-list-tile-title>\r\n          </v-list-tile-content>\r\n        </v-list-tile>\r\n      </template>\r\n\r\n      <v-list-tile\r\n        @click=\"onSectionClicked(subsection)\"\r\n        v-for=\"subsection in section.subsections\"\r\n        :key=\"subsection.id\"\r\n      >\r\n        <v-list-tile-content>\r\n          <v-list-tile-title>{{ subsection.title }}</v-list-tile-title>\r\n        </v-list-tile-content>\r\n        <v-list-tile-action>\r\n          <v-icon>{{ subsection.icon }}</v-icon>\r\n        </v-list-tile-action>\r\n      </v-list-tile>\r\n    </v-list-group>\r\n  </v-list>\r\n</template>\r\n\r\n<script>\r\nimport { isAuthForAll } from \"../common/Utils\";\r\n\r\nexport default {\r\n  data: () => ({\r\n    sites: null,\r\n    drawerEdit: true\r\n  }),\r\n\r\n  props: [\"sections\"],\r\n\r\n  methods: {\r\n    // Determines whether user is authorized for section.\r\n    isAuthForSection: function(section) {\r\n      if (section.requireAll) {\r\n        return isAuthForAll(this, section.requireAll);\r\n      }\r\n      return true;\r\n    },\r\n\r\n    onSectionClicked: function(section) {\r\n      console.log(\"Section clicked\", section);\r\n      this.$emit(\"sectionSelected\", section);\r\n    }\r\n  }\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.list__tile__action {\r\n  min-width: 30px;\r\n}\r\n.list__tile__title {\r\n  font-size: 16px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+      inject("data-v-615d28ce_0", { source: "\n.list__tile__action[data-v-615d28ce] {\r\n  min-width: 30px;\n}\n.list__tile__title[data-v-615d28ce] {\r\n  font-size: 16px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\Navigation.vue"],"names":[],"mappings":";AAkDA;EACA,eAAA;AACA;AACA;EACA,eAAA;AACA","file":"Navigation.vue","sourcesContent":["<template>\r\n  <v-list v-if=\"sections\" dense>\r\n    <v-list-group\r\n      v-for=\"section in sections\"\r\n      :key=\"section.id\"\r\n      v-model=\"section.active\"\r\n      :prepend-icon=\"section.icon\"\r\n      :append-icon=\"section.subsections ? '$vuetify.icons.expand' : ''\"\r\n      no-action\r\n    >\r\n      <template v-slot:activator>\r\n        <v-list-tile @click=\"onSectionClicked(section)\">\r\n          <v-list-tile-content>\r\n            <v-list-tile-title>{{ section.title }}</v-list-tile-title>\r\n          </v-list-tile-content>\r\n        </v-list-tile>\r\n      </template>\r\n\r\n      <v-list-tile\r\n        @click=\"onSectionClicked(subsection)\"\r\n        v-for=\"subsection in section.subsections\"\r\n        :key=\"subsection.id\"\r\n      >\r\n        <v-list-tile-content>\r\n          <v-list-tile-title>{{ subsection.title }}</v-list-tile-title>\r\n        </v-list-tile-content>\r\n        <v-list-tile-action>\r\n          <v-icon>{{ subsection.icon }}</v-icon>\r\n        </v-list-tile-action>\r\n      </v-list-tile>\r\n    </v-list-group>\r\n  </v-list>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { Component, Prop, INavigationSection } from \"sitewhere-ide-common\";\r\nimport Vue from \"vue\";\r\n\r\n@Component({})\r\nexport default class Navigation extends Vue {\r\n  @Prop() readonly sections!: INavigationSection[];\r\n\r\n  /** Called when a section is clicked */\r\n  onSectionClicked(section: INavigationSection) {\r\n    this.$emit(\"sectionSelected\", section);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.list__tile__action {\r\n  min-width: 30px;\r\n}\r\n.list__tile__title {\r\n  font-size: 16px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$t = "data-v-7dcd91c0";
+    const __vue_scope_id__$t = "data-v-615d28ce";
     /* module identifier */
     const __vue_module_identifier__$t = undefined;
     /* functional template */
@@ -5841,7 +5821,7 @@
     
 
     
-    var Navigation = normalizeComponent_1(
+    var Navigation$1 = normalizeComponent_1(
       { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
       __vue_inject_styles__$t,
       __vue_script__$t,
@@ -6119,7 +6099,7 @@
     Vue.component("sw-header-branding-panel", HeaderBrandingPanel$1);
     Vue.component("sw-in-app-footer", InAppFooter$1);
     Vue.component("sw-in-app-system-bar", InAppSystemBar$1);
-    Vue.component("sw-navigation", Navigation);
+    Vue.component("sw-navigation", Navigation$1);
     Vue.component("sw-navigation-action-button", NavigationActionButton$1);
     Vue.component("sw-navigation-header-fields", NavigationHeaderFields$1);
     Vue.component("sw-navigation-header-left", NavigationHeaderLeft$1);
@@ -6153,7 +6133,7 @@
   exports.ListTab = ListTab$1;
   exports.LoadingOverlay = LoadingOverlay$1;
   exports.MetadataPanel = MetadataPanel$1;
-  exports.Navigation = Navigation;
+  exports.Navigation = Navigation$1;
   exports.NavigationActionButton = NavigationActionButton$1;
   exports.NavigationHeaderFields = NavigationHeaderFields$1;
   exports.NavigationHeaderLeft = NavigationHeaderLeft$1;

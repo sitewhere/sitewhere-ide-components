@@ -32,32 +32,19 @@
   </v-list>
 </template>
 
-<script>
-import { isAuthForAll } from "../common/Utils";
+<script lang="ts">
+import { Component, Prop, INavigationSection } from "sitewhere-ide-common";
+import Vue from "vue";
 
-export default {
-  data: () => ({
-    sites: null,
-    drawerEdit: true
-  }),
+@Component({})
+export default class Navigation extends Vue {
+  @Prop() readonly sections!: INavigationSection[];
 
-  props: ["sections"],
-
-  methods: {
-    // Determines whether user is authorized for section.
-    isAuthForSection: function(section) {
-      if (section.requireAll) {
-        return isAuthForAll(this, section.requireAll);
-      }
-      return true;
-    },
-
-    onSectionClicked: function(section) {
-      console.log("Section clicked", section);
-      this.$emit("sectionSelected", section);
-    }
+  /** Called when a section is clicked */
+  onSectionClicked(section: INavigationSection) {
+    this.$emit("sectionSelected", section);
   }
-};
+}
 </script>
 
 <style scoped>
