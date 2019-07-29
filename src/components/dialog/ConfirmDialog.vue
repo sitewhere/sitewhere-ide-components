@@ -4,13 +4,6 @@
       <v-toolbar dense flat card dark color="primary">
         <v-toolbar-title>{{title}}</v-toolbar-title>
       </v-toolbar>
-      <v-alert
-        class="ma-0"
-        error
-        v-bind:value="true"
-        style="width: 100%"
-        v-if="error"
-      >{{ error.message }}</v-alert>
       <v-card-text>
         <slot>
           <div>Your content goes here!</div>
@@ -18,62 +11,41 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn class="grey--text darken-1" flat="flat" @click.native="onCancelClicked">Cancel</v-btn>
-        <v-btn class="blue--text darken-1" flat="flat" @click.native="onActionClicked">{{ text }}</v-btn>
+        <v-btn outline color="primary" @click="onCancelClicked">Cancel</v-btn>
+        <v-btn color="primary" @click="onActionConfirmed">{{ buttonText || 'Ok' }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    visible: false,
-    error: null
-  }),
+<script lang="ts">
+import { Component, Prop } from "sitewhere-ide-common";
+import Vue from "vue";
 
-  props: ["title", "width", "buttonText"],
+@Component({})
+export default class ConfirmDialog extends Vue {
+  @Prop() readonly title!: string;
+  @Prop() readonly width!: number;
+  @Prop() readonly buttonText!: string;
 
-  computed: {
-    // Use fallback for button text.
-    text: function() {
-      return this.buttonText ? this.buttonText : "Ok";
-    }
-  },
+  visible: boolean = false;
+  error: any = null;
 
-  methods: {
-    // Called to open the dialog.
-    openDialog: function() {
-      this.$data.visible = true;
-    },
-
-    // Called to open the dialog.
-    closeDialog: function() {
-      this.$data.visible = false;
-    },
-
-    // Called to show an error message.
-    showError: function(error) {
-      this.$data.error = error;
-    },
-
-    // Called after action button is clicked.
-    onActionClicked: function(e) {
-      this.$emit("action");
-    },
-
-    // Called after cancel button is clicked.
-    onCancelClicked: function(e) {
-      this.$data.visible = false;
-    }
+  /** Called to open the dialog */
+  open() {
+    this.visible = true;
   }
-};
-</script>
 
-<style scoped>
-.confirm-dialog {
-  padding: 10px;
-  font-size: 26px;
-  width: 100%;
+  /** Called when action button is clicked */
+  onActionConfirmed() {
+    this.$emit("confirmed");
+    this.visible = false;
+  }
+
+  /** Called after cancel button is clicked */
+  onCancelClicked(e: any) {
+    this.$emit("cancelled");
+    this.visible = false;
+  }
 }
-</style>
+</script>

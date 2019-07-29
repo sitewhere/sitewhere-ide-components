@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.39
+  * SiteWhere IDE Components v0.0.40
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -2943,79 +2943,48 @@
       undefined
     );
 
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-
-  var script$7 = {
-    data: () => ({
-      visible: false,
-      error: null
-    }),
-
-    props: ["title", "width", "buttonText"],
-
-    computed: {
-      // Use fallback for button text.
-      text: function() {
-        return this.buttonText ? this.buttonText : "Ok";
+  var ConfirmDialog = /** @class */ (function (_super) {
+      __extends(ConfirmDialog, _super);
+      function ConfirmDialog() {
+          var _this = _super !== null && _super.apply(this, arguments) || this;
+          _this.visible = false;
+          _this.error = null;
+          return _this;
       }
-    },
-
-    methods: {
-      // Called to open the dialog.
-      openDialog: function() {
-        this.$data.visible = true;
-      },
-
-      // Called to open the dialog.
-      closeDialog: function() {
-        this.$data.visible = false;
-      },
-
-      // Called to show an error message.
-      showError: function(error) {
-        this.$data.error = error;
-      },
-
-      // Called after action button is clicked.
-      onActionClicked: function(e) {
-        this.$emit("action");
-      },
-
-      // Called after cancel button is clicked.
-      onCancelClicked: function(e) {
-        this.$data.visible = false;
-      }
-    }
-  };
+      /** Called to open the dialog */
+      ConfirmDialog.prototype.open = function () {
+          this.visible = true;
+      };
+      /** Called when action button is clicked */
+      ConfirmDialog.prototype.onActionConfirmed = function () {
+          this.$emit("confirmed");
+          this.visible = false;
+      };
+      /** Called after cancel button is clicked */
+      ConfirmDialog.prototype.onCancelClicked = function (e) {
+          this.$emit("cancelled");
+          this.visible = false;
+      };
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ConfirmDialog.prototype, "title", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Number)
+      ], ConfirmDialog.prototype, "width", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ConfirmDialog.prototype, "buttonText", void 0);
+      ConfirmDialog = __decorate([
+          sitewhereIdeCommon.Component({})
+      ], ConfirmDialog);
+      return ConfirmDialog;
+  }(Vue));
 
   /* script */
-  const __vue_script__$c = script$7;
+  const __vue_script__$c = ConfirmDialog;
 
   /* template */
   var __vue_render__$c = function() {
@@ -3053,18 +3022,6 @@
               1
             ),
             _vm._v(" "),
-            _vm.error
-              ? _c(
-                  "v-alert",
-                  {
-                    staticClass: "ma-0",
-                    staticStyle: { width: "100%" },
-                    attrs: { error: "", value: true }
-                  },
-                  [_vm._v(_vm._s(_vm.error.message))]
-                )
-              : _vm._e(),
-            _vm._v(" "),
             _c(
               "v-card-text",
               [
@@ -3083,13 +3040,8 @@
                 _c(
                   "v-btn",
                   {
-                    staticClass: "grey--text darken-1",
-                    attrs: { flat: "flat" },
-                    nativeOn: {
-                      click: function($event) {
-                        return _vm.onCancelClicked($event)
-                      }
-                    }
+                    attrs: { outline: "", color: "primary" },
+                    on: { click: _vm.onCancelClicked }
                   },
                   [_vm._v("Cancel")]
                 ),
@@ -3097,15 +3049,10 @@
                 _c(
                   "v-btn",
                   {
-                    staticClass: "blue--text darken-1",
-                    attrs: { flat: "flat" },
-                    nativeOn: {
-                      click: function($event) {
-                        return _vm.onActionClicked($event)
-                      }
-                    }
+                    attrs: { color: "primary" },
+                    on: { click: _vm.onActionConfirmed }
                   },
-                  [_vm._v(_vm._s(_vm.text))]
+                  [_vm._v(_vm._s(_vm.buttonText || "Ok"))]
                 )
               ],
               1
@@ -3121,29 +3068,27 @@
   __vue_render__$c._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$c = function (inject) {
-      if (!inject) return
-      inject("data-v-153c90a8_0", { source: "\n.confirm-dialog[data-v-153c90a8] {\r\n  padding: 10px;\r\n  font-size: 26px;\r\n  width: 100%;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\dialog\\ConfirmDialog.vue"],"names":[],"mappings":";AAyEA;EACA,aAAA;EACA,eAAA;EACA,WAAA;AACA","file":"ConfirmDialog.vue","sourcesContent":["<template>\r\n  <v-dialog v-model=\"visible\" persistent :width=\"width\">\r\n    <v-card>\r\n      <v-toolbar dense flat card dark color=\"primary\">\r\n        <v-toolbar-title>{{title}}</v-toolbar-title>\r\n      </v-toolbar>\r\n      <v-alert\r\n        class=\"ma-0\"\r\n        error\r\n        v-bind:value=\"true\"\r\n        style=\"width: 100%\"\r\n        v-if=\"error\"\r\n      >{{ error.message }}</v-alert>\r\n      <v-card-text>\r\n        <slot>\r\n          <div>Your content goes here!</div>\r\n        </slot>\r\n      </v-card-text>\r\n      <v-card-actions>\r\n        <v-spacer></v-spacer>\r\n        <v-btn class=\"grey--text darken-1\" flat=\"flat\" @click.native=\"onCancelClicked\">Cancel</v-btn>\r\n        <v-btn class=\"blue--text darken-1\" flat=\"flat\" @click.native=\"onActionClicked\">{{ text }}</v-btn>\r\n      </v-card-actions>\r\n    </v-card>\r\n  </v-dialog>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data: () => ({\r\n    visible: false,\r\n    error: null\r\n  }),\r\n\r\n  props: [\"title\", \"width\", \"buttonText\"],\r\n\r\n  computed: {\r\n    // Use fallback for button text.\r\n    text: function() {\r\n      return this.buttonText ? this.buttonText : \"Ok\";\r\n    }\r\n  },\r\n\r\n  methods: {\r\n    // Called to open the dialog.\r\n    openDialog: function() {\r\n      this.$data.visible = true;\r\n    },\r\n\r\n    // Called to open the dialog.\r\n    closeDialog: function() {\r\n      this.$data.visible = false;\r\n    },\r\n\r\n    // Called to show an error message.\r\n    showError: function(error) {\r\n      this.$data.error = error;\r\n    },\r\n\r\n    // Called after action button is clicked.\r\n    onActionClicked: function(e) {\r\n      this.$emit(\"action\");\r\n    },\r\n\r\n    // Called after cancel button is clicked.\r\n    onCancelClicked: function(e) {\r\n      this.$data.visible = false;\r\n    }\r\n  }\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.confirm-dialog {\r\n  padding: 10px;\r\n  font-size: 26px;\r\n  width: 100%;\r\n}\r\n</style>\r\n"]}, media: undefined });
-
-    };
+    const __vue_inject_styles__$c = undefined;
     /* scoped */
-    const __vue_scope_id__$c = "data-v-153c90a8";
+    const __vue_scope_id__$c = undefined;
     /* module identifier */
     const __vue_module_identifier__$c = undefined;
     /* functional template */
     const __vue_is_functional_template__$c = false;
+    /* style inject */
+    
     /* style inject SSR */
     
 
     
-    var ConfirmDialog = normalizeComponent_1(
+    var ConfirmDialog$1 = normalizeComponent_1(
       { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
       __vue_inject_styles__$c,
       __vue_script__$c,
       __vue_scope_id__$c,
       __vue_is_functional_template__$c,
       __vue_module_identifier__$c,
-      browser,
+      undefined,
       undefined
     );
 
@@ -6080,7 +6025,7 @@
 
     // Register dialog components.
     Vue.component("sw-base-dialog", BaseDialog$1);
-    Vue.component("sw-confirm-dialog", ConfirmDialog);
+    Vue.component("sw-confirm-dialog", ConfirmDialog$1);
     Vue.component("sw-delete-dialog", DeleteDialog$1);
     Vue.component("sw-metadata-panel", MetadataPanel$1);
 
@@ -6111,7 +6056,7 @@
   exports.ClipboardCopyField = ClipboardCopyField;
   exports.ColorInputField = ColorInputField$1;
   exports.ColorPicker = ColorPicker$1;
-  exports.ConfirmDialog = ConfirmDialog;
+  exports.ConfirmDialog = ConfirmDialog$1;
   exports.ContentTab = ContentTab$1;
   exports.DataEntryPanel = DataEntryPanel$1;
   exports.DataTableTab = DataTableTab$1;
