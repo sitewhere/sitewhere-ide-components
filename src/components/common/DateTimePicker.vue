@@ -85,6 +85,9 @@ export default class DateTimePicker extends Vue {
             .padStart(2, "0");
         this.date = moment(updated).format("YYYY-MM-DD");
       }
+    } else {
+      this.date = null;
+      this.time = "12:00";
     }
   }
 

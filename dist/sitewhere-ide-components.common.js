@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.41
+  * SiteWhere IDE Components v0.0.42
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -661,6 +661,10 @@ var DateTimePicker = /** @class */ (function (_super) {
                             .padStart(2, "0");
                 this.date = moment(updated).format("YYYY-MM-DD");
             }
+        }
+        else {
+            this.date = null;
+            this.time = "12:00";
         }
     };
     DateTimePicker.prototype.onDateUpdated = function (updated) {
