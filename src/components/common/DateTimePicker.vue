@@ -21,7 +21,7 @@
         <v-date-picker v-model="date" @input="datemenu = false"></v-date-picker>
       </v-menu>
     </v-flex>
-    <v-flex xs4>
+    <v-flex xs4 v-if="date">
       <v-menu
         ref="menu"
         v-model="timemenu"

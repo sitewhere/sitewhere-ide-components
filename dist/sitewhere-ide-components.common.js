@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.42
+  * SiteWhere IDE Components v0.0.43
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -808,93 +808,100 @@ var __vue_render__$3 = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs4: "" } },
-        [
-          _c(
-            "v-menu",
-            {
-              ref: "menu",
-              attrs: {
-                "close-on-content-click": false,
-                "return-value": _vm.time,
-                transition: "scale-transition",
-                "offset-y": "",
-                "full-width": ""
-              },
-              on: {
-                "update:returnValue": function($event) {
-                  _vm.time = $event;
-                },
-                "update:return-value": function($event) {
-                  _vm.time = $event;
-                }
-              },
-              scopedSlots: _vm._u([
-                {
-                  key: "activator",
-                  fn: function(ref) {
-                    var on = ref.on;
-                    return [
-                      _c(
-                        "v-text-field",
-                        _vm._g(
-                          {
-                            attrs: {
-                              label: " ",
-                              placeholder: " ",
-                              "prepend-icon": "access_time",
-                              readonly: ""
-                            },
-                            model: {
-                              value: _vm.time,
-                              callback: function($$v) {
-                                _vm.time = $$v;
-                              },
-                              expression: "time"
-                            }
-                          },
-                          on
-                        )
-                      )
-                    ]
-                  }
-                }
-              ]),
-              model: {
-                value: _vm.timemenu,
-                callback: function($$v) {
-                  _vm.timemenu = $$v;
-                },
-                expression: "timemenu"
-              }
-            },
+      _vm.date
+        ? _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
             [
-              _vm._v(" "),
-              _vm.timemenu
-                ? _c("v-time-picker", {
-                    attrs: { "full-width": "" },
-                    on: {
-                      "click:minute": function($event) {
-                        return _vm.$refs.menu.save(_vm.time)
-                      }
+              _c(
+                "v-menu",
+                {
+                  ref: "menu",
+                  attrs: {
+                    "close-on-content-click": false,
+                    "return-value": _vm.time,
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "full-width": ""
+                  },
+                  on: {
+                    "update:returnValue": function($event) {
+                      _vm.time = $event;
                     },
-                    model: {
-                      value: _vm.time,
-                      callback: function($$v) {
-                        _vm.time = $$v;
-                      },
-                      expression: "time"
+                    "update:return-value": function($event) {
+                      _vm.time = $event;
                     }
-                  })
-                : _vm._e()
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "activator",
+                        fn: function(ref) {
+                          var on = ref.on;
+                          return [
+                            _c(
+                              "v-text-field",
+                              _vm._g(
+                                {
+                                  attrs: {
+                                    label: " ",
+                                    placeholder: " ",
+                                    "prepend-icon": "access_time",
+                                    readonly: ""
+                                  },
+                                  model: {
+                                    value: _vm.time,
+                                    callback: function($$v) {
+                                      _vm.time = $$v;
+                                    },
+                                    expression: "time"
+                                  }
+                                },
+                                on
+                              )
+                            )
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    4181482063
+                  ),
+                  model: {
+                    value: _vm.timemenu,
+                    callback: function($$v) {
+                      _vm.timemenu = $$v;
+                    },
+                    expression: "timemenu"
+                  }
+                },
+                [
+                  _vm._v(" "),
+                  _vm.timemenu
+                    ? _c("v-time-picker", {
+                        attrs: { "full-width": "" },
+                        on: {
+                          "click:minute": function($event) {
+                            return _vm.$refs.menu.save(_vm.time)
+                          }
+                        },
+                        model: {
+                          value: _vm.time,
+                          callback: function($$v) {
+                            _vm.time = $$v;
+                          },
+                          expression: "time"
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
             ],
             1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ],
     1
   )
