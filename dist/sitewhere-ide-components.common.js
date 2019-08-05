@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.40
+  * SiteWhere IDE Components v0.0.41
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -12,8 +12,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var sitewhereIdeCommon = require('sitewhere-ide-common');
 var Vue = _interopDefault(require('vue'));
 var vueColor = require('vue-color');
-var FlatPickr = _interopDefault(require('vue-flatpickr-component'));
-require('moment');
+var moment = _interopDefault(require('moment'));
 var Electron = _interopDefault(require('electron'));
 
 //
@@ -636,46 +635,90 @@ __vue_render__$2._withStripped = true;
     undefined
   );
 
-//
-
-var script$1 = {
-  data: () => ({
-    date: null,
-    formattedValue: null,
-    menu: null,
-    dateTimeConfig: {
-      wrap: false,
-      enableTime: true,
-      altFormat: "Y-m-d H:iK",
-      altInput: true,
-      dateFormat: "Y-m-d H:i:S"
+var DateTimePicker = /** @class */ (function (_super) {
+    __extends(DateTimePicker, _super);
+    function DateTimePicker() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.date = null;
+        _this.time = "12:00";
+        _this.datemenu = false;
+        _this.timemenu = false;
+        return _this;
     }
-  }),
-
-  components: {
-    FlatPickr
-  },
-
-  props: ["value", "label"],
-
-  watch: {
-    value: function(value) {
-      this.$data.date = value;
-    },
-    date: function(value) {
-      this.$emit("input", value);
-    }
-  },
-
-  methods: {
-    onClear: function() {
-      this.$data.date = null;
-    }
-  }
-};
+    DateTimePicker.prototype.onValueUpdated = function (updated) {
+        if (updated) {
+            var datetime = this.parseIso8601(updated);
+            if (datetime) {
+                this.time =
+                    datetime
+                        .getHours()
+                        .toString()
+                        .padStart(2, "0") +
+                        ":" +
+                        datetime
+                            .getMinutes()
+                            .toString()
+                            .padStart(2, "0");
+                this.date = moment(updated).format("YYYY-MM-DD");
+            }
+        }
+    };
+    DateTimePicker.prototype.onDateUpdated = function (updated) {
+        if (updated) {
+            var value = moment(updated).toDate();
+            var parts = this.time.split(":");
+            var hour = parseInt(parts[0]);
+            var minute = parseInt(parts[1]);
+            value.setHours(hour, minute);
+            this.$emit("input", value);
+        }
+    };
+    DateTimePicker.prototype.onTimeUpdated = function (updated) {
+        if (this.date) {
+            this.onDateUpdated(this.date);
+        }
+    };
+    /** Parse date in ISO8601 format */
+    DateTimePicker.prototype.parseIso8601 = function (value) {
+        if (!value) {
+            return null;
+        }
+        return moment(value).toDate();
+    };
+    __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", Date)
+    ], DateTimePicker.prototype, "value", void 0);
+    __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", String)
+    ], DateTimePicker.prototype, "label", void 0);
+    __decorate([
+        sitewhereIdeCommon.Watch("value"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String]),
+        __metadata("design:returntype", void 0)
+    ], DateTimePicker.prototype, "onValueUpdated", null);
+    __decorate([
+        sitewhereIdeCommon.Watch("date"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String]),
+        __metadata("design:returntype", void 0)
+    ], DateTimePicker.prototype, "onDateUpdated", null);
+    __decorate([
+        sitewhereIdeCommon.Watch("time"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String]),
+        __metadata("design:returntype", void 0)
+    ], DateTimePicker.prototype, "onTimeUpdated", null);
+    DateTimePicker = __decorate([
+        sitewhereIdeCommon.Component({})
+    ], DateTimePicker);
+    return DateTimePicker;
+}(Vue));
 
 /* script */
-const __vue_script__$3 = script$1;
+const __vue_script__$3 = DateTimePicker;
 
 /* template */
 var __vue_render__$3 = function() {
@@ -683,48 +726,169 @@ var __vue_render__$3 = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c(
-    "div",
-    { staticClass: "date-time-picker mt-3 mb-4" },
+    "v-layout",
+    { attrs: { row: "", wrap: "" } },
     [
-      _c("v-icon", { staticClass: "mr-3 ml-1", attrs: { fa: "" } }, [
-        _vm._v("calendar")
-      ]),
-      _vm._v(" "),
       _c(
-        "span",
-        { staticClass: "date-input" },
+        "v-flex",
+        { attrs: { xs8: "" } },
         [
-          _c("flat-pickr", {
-            attrs: {
-              placeholder: _vm.label,
-              config: _vm.dateTimeConfig,
-              required: true,
-              name: "date"
-            },
-            model: {
-              value: _vm.date,
-              callback: function($$v) {
-                _vm.date = $$v;
+          _c(
+            "v-menu",
+            {
+              attrs: {
+                "close-on-content-click": false,
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": ""
               },
-              expression: "date"
-            }
-          })
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on;
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              label: _vm.label,
+                              placeholder: " ",
+                              "prepend-icon": "event",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.date,
+                              callback: function($$v) {
+                                _vm.date = $$v;
+                              },
+                              expression: "date"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.datemenu,
+                callback: function($$v) {
+                  _vm.datemenu = $$v;
+                },
+                expression: "datemenu"
+              }
+            },
+            [
+              _vm._v(" "),
+              _c("v-date-picker", {
+                on: {
+                  input: function($event) {
+                    _vm.datemenu = false;
+                  }
+                },
+                model: {
+                  value: _vm.date,
+                  callback: function($$v) {
+                    _vm.date = $$v;
+                  },
+                  expression: "date"
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       ),
       _vm._v(" "),
       _c(
-        "v-btn",
-        {
-          staticClass: "delete-icon ma-0",
-          attrs: { icon: "", small: "", flat: "" },
-          nativeOn: {
-            click: function($event) {
-              return _vm.onClear($event)
-            }
-          }
-        },
-        [_c("v-icon", { attrs: { fa: "" } }, [_vm._v("remove")])],
+        "v-flex",
+        { attrs: { xs4: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "menu",
+              attrs: {
+                "close-on-content-click": false,
+                "return-value": _vm.time,
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": ""
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  _vm.time = $event;
+                },
+                "update:return-value": function($event) {
+                  _vm.time = $event;
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on;
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              label: " ",
+                              placeholder: " ",
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.time,
+                              callback: function($$v) {
+                                _vm.time = $$v;
+                              },
+                              expression: "time"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.timemenu,
+                callback: function($$v) {
+                  _vm.timemenu = $$v;
+                },
+                expression: "timemenu"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.timemenu
+                ? _c("v-time-picker", {
+                    attrs: { "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.menu.save(_vm.time)
+                      }
+                    },
+                    model: {
+                      value: _vm.time,
+                      callback: function($$v) {
+                        _vm.time = $$v;
+                      },
+                      expression: "time"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
         1
       )
     ],
@@ -735,29 +899,27 @@ var __vue_staticRenderFns__$3 = [];
 __vue_render__$3._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$3 = function (inject) {
-    if (!inject) return
-    inject("data-v-03a23ee8_0", { source: "\n.date-input[data-v-03a23ee8] {\r\n  color: #333;\r\n  font-size: 16px;\r\n  border-bottom: 1px solid #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\DateTimePicker.vue"],"names":[],"mappings":";AA2DA;EACA,WAAA;EACA,eAAA;EACA,6BAAA;AACA","file":"DateTimePicker.vue","sourcesContent":["<template>\r\n  <div class=\"date-time-picker mt-3 mb-4\">\r\n    <v-icon fa class=\"mr-3 ml-1\">calendar</v-icon>\r\n    <span class=\"date-input\">\r\n      <flat-pickr\r\n        v-model=\"date\"\r\n        :placeholder=\"label\"\r\n        :config=\"dateTimeConfig\"\r\n        :required=\"true\"\r\n        name=\"date\"\r\n      ></flat-pickr>\r\n    </span>\r\n    <v-btn icon small flat class=\"delete-icon ma-0\" @click.native=\"onClear\">\r\n      <v-icon fa>remove</v-icon>\r\n    </v-btn>\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nimport FlatPickr from \"vue-flatpickr-component\";\r\n\r\nexport default {\r\n  data: () => ({\r\n    date: null,\r\n    formattedValue: null,\r\n    menu: null,\r\n    dateTimeConfig: {\r\n      wrap: false,\r\n      enableTime: true,\r\n      altFormat: \"Y-m-d H:iK\",\r\n      altInput: true,\r\n      dateFormat: \"Y-m-d H:i:S\"\r\n    }\r\n  }),\r\n\r\n  components: {\r\n    FlatPickr\r\n  },\r\n\r\n  props: [\"value\", \"label\"],\r\n\r\n  watch: {\r\n    value: function(value) {\r\n      this.$data.date = value;\r\n    },\r\n    date: function(value) {\r\n      this.$emit(\"input\", value);\r\n    }\r\n  },\r\n\r\n  methods: {\r\n    onClear: function() {\r\n      this.$data.date = null;\r\n    }\r\n  }\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.date-input {\r\n  color: #333;\r\n  font-size: 16px;\r\n  border-bottom: 1px solid #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
-
-  };
+  const __vue_inject_styles__$3 = undefined;
   /* scoped */
-  const __vue_scope_id__$3 = "data-v-03a23ee8";
+  const __vue_scope_id__$3 = undefined;
   /* module identifier */
   const __vue_module_identifier__$3 = undefined;
   /* functional template */
   const __vue_is_functional_template__$3 = false;
+  /* style inject */
+  
   /* style inject SSR */
   
 
   
-  var DateTimePicker = normalizeComponent_1(
+  var DateTimePicker$1 = normalizeComponent_1(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
     __vue_scope_id__$3,
     __vue_is_functional_template__$3,
     __vue_module_identifier__$3,
-    browser,
+    undefined,
     undefined
   );
 
@@ -769,7 +931,7 @@ __vue_render__$3._withStripped = true;
 //
 //
 
-var script$2 = {
+var script$1 = {
   data: () => ({
     errorDisplayed: false
   }),
@@ -807,7 +969,7 @@ var script$2 = {
 };
 
 /* script */
-const __vue_script__$4 = script$2;
+const __vue_script__$4 = script$1;
 
 /* template */
 var __vue_render__$4 = function() {
@@ -897,7 +1059,7 @@ __vue_render__$4._withStripped = true;
 //
 //
 
-var script$3 = {
+var script$2 = {
   data: () => ({}),
 
   props: ["label", "icon"],
@@ -911,7 +1073,7 @@ var script$3 = {
 };
 
 /* script */
-const __vue_script__$5 = script$3;
+const __vue_script__$5 = script$2;
 
 /* template */
 var __vue_render__$5 = function() {
@@ -994,7 +1156,7 @@ __vue_render__$5._withStripped = true;
 //
 //
 
-var script$4 = {
+var script$3 = {
   data: () => ({}),
 
   props: ["label"],
@@ -1003,7 +1165,7 @@ var script$4 = {
 };
 
 /* script */
-const __vue_script__$6 = script$4;
+const __vue_script__$6 = script$3;
 
 /* template */
 var __vue_render__$6 = function() {
@@ -1093,7 +1255,7 @@ __vue_render__$6._withStripped = true;
 //
 //
 
-var script$5 = {
+var script$4 = {
   computed: {
     // Compute style of logo.
     ddStyle: function() {
@@ -2268,7 +2430,7 @@ var script$5 = {
 };
 
 /* script */
-const __vue_script__$7 = script$5;
+const __vue_script__$7 = script$4;
 
 /* template */
 var __vue_render__$7 = function() {
@@ -2521,7 +2683,7 @@ function routeTo(component, url) {
 
 //
 
-var script$6 = {
+var script$5 = {
   data: () => ({}),
 
   props: ["label", "url", "text"],
@@ -2539,7 +2701,7 @@ var script$6 = {
 };
 
 /* script */
-const __vue_script__$9 = script$6;
+const __vue_script__$9 = script$5;
 
 /* template */
 var __vue_render__$9 = function() {
@@ -6017,7 +6179,7 @@ function SiteWhere(Vue) {
   Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
   Vue.component("sw-color-input-field", ColorInputField$1);
   Vue.component("sw-color-picker", ColorPicker$1);
-  Vue.component("sw-date-time-picker", DateTimePicker);
+  Vue.component("sw-date-time-picker", DateTimePicker$1);
   Vue.component("sw-error-banner", ErrorBanner);
   Vue.component("sw-fab", FloatingActionButton);
   Vue.component("sw-header-field", HeaderField);
@@ -6063,7 +6225,7 @@ exports.ConfirmDialog = ConfirmDialog$1;
 exports.ContentTab = ContentTab$1;
 exports.DataEntryPanel = DataEntryPanel$1;
 exports.DataTableTab = DataTableTab$1;
-exports.DateTimePicker = DateTimePicker;
+exports.DateTimePicker = DateTimePicker$1;
 exports.DeleteDialog = DeleteDialog$1;
 exports.DetailPage = DetailPage$1;
 exports.ErrorBanner = ErrorBanner;

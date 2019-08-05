@@ -1,65 +1,118 @@
 <template>
-  <div class="date-time-picker mt-3 mb-4">
-    <v-icon fa class="mr-3 ml-1">calendar</v-icon>
-    <span class="date-input">
-      <flat-pickr
-        v-model="date"
-        :placeholder="label"
-        :config="dateTimeConfig"
-        :required="true"
-        name="date"
-      ></flat-pickr>
-    </span>
-    <v-btn icon small flat class="delete-icon ma-0" @click.native="onClear">
-      <v-icon fa>remove</v-icon>
-    </v-btn>
-  </div>
+  <v-layout row wrap>
+    <v-flex xs8>
+      <v-menu
+        v-model="datemenu"
+        :close-on-content-click="false"
+        transition="scale-transition"
+        offset-y
+        full-width
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            :label="label"
+            placeholder=" "
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          />
+        </template>
+        <v-date-picker v-model="date" @input="datemenu = false"></v-date-picker>
+      </v-menu>
+    </v-flex>
+    <v-flex xs4>
+      <v-menu
+        ref="menu"
+        v-model="timemenu"
+        :close-on-content-click="false"
+        :return-value.sync="time"
+        transition="scale-transition"
+        offset-y
+        full-width
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="time"
+            label=" "
+            placeholder=" "
+            prepend-icon="access_time"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-time-picker
+          v-if="timemenu"
+          v-model="time"
+          full-width
+          @click:minute="$refs.menu.save(time)"
+        ></v-time-picker>
+      </v-menu>
+    </v-flex>
+  </v-layout>
 </template>
 
-<script>
-import FlatPickr from "vue-flatpickr-component";
+<script lang="ts">
+import { Component, Prop, Watch } from "sitewhere-ide-common";
+import Vue from "vue";
 
-export default {
-  data: () => ({
-    date: null,
-    formattedValue: null,
-    menu: null,
-    dateTimeConfig: {
-      wrap: false,
-      enableTime: true,
-      altFormat: "Y-m-d H:iK",
-      altInput: true,
-      dateFormat: "Y-m-d H:i:S"
-    }
-  }),
+import moment from "moment";
 
-  components: {
-    FlatPickr
-  },
+@Component({})
+export default class DateTimePicker extends Vue {
+  @Prop() readonly value!: Date;
+  @Prop() readonly label!: string;
 
-  props: ["value", "label"],
+  date: string | null = null;
+  time: string = "12:00";
+  datemenu: boolean = false;
+  timemenu: boolean = false;
 
-  watch: {
-    value: function(value) {
-      this.$data.date = value;
-    },
-    date: function(value) {
-      this.$emit("input", value);
-    }
-  },
-
-  methods: {
-    onClear: function() {
-      this.$data.date = null;
+  @Watch("value")
+  onValueUpdated(updated: string) {
+    if (updated) {
+      let datetime: Date | null = this.parseIso8601(updated);
+      if (datetime) {
+        this.time =
+          datetime
+            .getHours()
+            .toString()
+            .padStart(2, "0") +
+          ":" +
+          datetime
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+        this.date = moment(updated).format("YYYY-MM-DD");
+      }
     }
   }
-};
-</script>
 
-<style scoped>
-.date-input {
-  color: #333;
-  font-size: 16px;
-  border-bottom: 1px solid #999;
+  @Watch("date")
+  onDateUpdated(updated: string) {
+    if (updated) {
+      let value: Date = moment(updated).toDate();
+      let parts: string[] = this.time.split(":");
+      let hour = parseInt(parts[0]);
+      let minute = parseInt(parts[1]);
+      value.setHours(hour, minute);
+      this.$emit("input", value);
+    }
+  }
+
+  @Watch("time")
+  onTimeUpdated(updated: string) {
+    if (this.date) {
+      this.onDateUpdated(this.date);
+    }
+  }
+
+  /** Parse date in ISO8601 format */
+  parseIso8601(value: string) {
+    if (!value) {
+      return null;
+    }
+    return moment(value).toDate();
+  }
 }
-</style>
+</script>
