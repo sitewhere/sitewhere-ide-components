@@ -1,7 +1,7 @@
 <template>
   <v-footer app>
     <div class="footer-content">
-      <span>Footer content goes here..</span>
+      <slot/>
     </div>
   </v-footer>
 </template>

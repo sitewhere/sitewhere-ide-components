@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.43
+  * SiteWhere IDE Components v0.0.44
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -5635,9 +5635,7 @@ var __vue_render__$r = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("v-footer", { attrs: { app: "" } }, [
-    _c("div", { staticClass: "footer-content" }, [
-      _c("span", [_vm._v("Footer content goes here..")])
-    ])
+    _c("div", { staticClass: "footer-content" }, [_vm._t("default")], 2)
   ])
 };
 var __vue_staticRenderFns__$r = [];
@@ -5646,11 +5644,11 @@ __vue_render__$r._withStripped = true;
   /* style */
   const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-b556a29e_0", { source: "\n.footer-content[data-v-b556a29e] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <span>Footer content goes here..</span>\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-4078e95f_0", { source: "\n.footer-content[data-v-4078e95f] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <slot/>\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = "data-v-b556a29e";
+  const __vue_scope_id__$r = "data-v-4078e95f";
   /* module identifier */
   const __vue_module_identifier__$r = undefined;
   /* functional template */
