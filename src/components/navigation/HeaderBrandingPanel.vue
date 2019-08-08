@@ -4,7 +4,6 @@
     <span v-else-if="icon" class="header-icon">
       <font-awesome-icon class="grey--text" :icon="icon" size="7x" />
     </span>
-    <span v-else>No Branding</span>
   </navigation-header-left>
 </template>
 
@@ -64,5 +63,6 @@ export default class HeaderBrandingPanel extends Vue {
   left: 0px;
   bottom: 0px;
   right: 0px;
+  padding: 50px;
 }
 </style>
