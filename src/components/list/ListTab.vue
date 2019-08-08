@@ -5,7 +5,7 @@
         <slot name="filters" />
       </div>
       <div class="list-content">
-        <slot v-if="loaded" />
+        <slot v-if="hasResults" />
         <slot name="noresults" v-else-if="noResults" />
       </div>
       <div class="list-footer">
@@ -38,9 +38,14 @@ export default class ListTab extends Vue {
   @Prop() readonly loaded!: boolean;
   @Prop() readonly results!: { numResults: number; results: {}[] };
 
-  /** Detect no results */
+  /** Detect whether loaded with results */
+  get hasResults() {
+    return this.loaded && this.results && this.results.numResults > 0;
+  }
+
+  /** Detect whether loaded with no results */
   get noResults() {
-    return this.loaded && this.results.numResults === 0;
+    return this.loaded && this.results && this.results.numResults === 0;
   }
 
   /** Update paging values and run query */
