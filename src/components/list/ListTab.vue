@@ -2,17 +2,18 @@
   <v-tab-item :key="tabkey">
     <div class="flex-rows">
       <div class="list-filters">
-        <slot name="filters"/>
+        <slot name="filters" />
       </div>
       <div class="list-content">
-        <slot v-if="loaded"/>
+        <slot v-if="loaded" />
+        <slot name="noresults" v-else-if="noResults" />
       </div>
       <div class="list-footer">
-        <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes"/>
+        <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes" />
       </div>
     </div>
-    <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage"/>
-    <slot name="dialogs"></slot>
+    <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
+    <slot name="dialogs" />
   </v-tab-item>
 </template>
 
@@ -36,6 +37,11 @@ export default class ListTab extends Vue {
   @Prop() readonly loadingMessage!: string;
   @Prop() readonly loaded!: boolean;
   @Prop() readonly results!: { numResults: number; results: {}[] };
+
+  /** Detect no results */
+  get noResults() {
+    return this.loaded && this.results.numResults === 0;
+  }
 
   /** Update paging values and run query */
   onPagingUpdated(paging: IPaging) {
