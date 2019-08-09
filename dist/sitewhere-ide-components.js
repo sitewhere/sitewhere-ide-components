@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v0.0.50
+  * SiteWhere IDE Components v2.1.0
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
