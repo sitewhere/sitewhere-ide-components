@@ -17,64 +17,31 @@
           </v-btn-toggle>
         </v-flex>
         <v-flex xs4>
-          <v-tooltip top>
-            <v-btn
-              :disabled="!previousEnabled"
-              icon
-              light
-              class="ml-0 mr-0"
-              @click="onFirstPage"
-              slot="activator"
-            >
-              <font-awesome-icon class="grey--text text--darken-1" icon="fast-backward" size="lg"/>
-            </v-btn>
-            <span>First Page</span>
-          </v-tooltip>
-          <v-tooltip top>
-            <v-btn
-              :disabled="!previousEnabled"
-              icon
-              light
-              class="ml-0 mr-0"
-              @click="onPreviousPage"
-              slot="activator"
-            >
-              <font-awesome-icon class="grey--text text--darken-1" icon="backward" size="lg"/>
-            </v-btn>
-            <span>Previous Page</span>
-          </v-tooltip>
-          <v-tooltip top>
-            <v-btn icon light class="ml-0 mr-0" @click="onRefresh" slot="activator">
-              <font-awesome-icon class="grey--text text--darken-1" icon="sync" size="lg"/>
-            </v-btn>
-            <span>Refresh</span>
-          </v-tooltip>
-          <v-tooltip top>
-            <v-btn
-              :disabled="!nextEnabled"
-              icon
-              light
-              class="ml-0 mr-0"
-              @click="onNextPage"
-              slot="activator"
-            >
-              <font-awesome-icon class="grey--text text--darken-1" icon="forward" size="lg"/>
-            </v-btn>
-            <span>Next Page</span>
-          </v-tooltip>
-          <v-tooltip top>
-            <v-btn
-              :disabled="!nextEnabled"
-              icon
-              light
-              class="ml-0 mr-0"
-              @click="onLastPage"
-              slot="activator"
-            >
-              <font-awesome-icon class="grey--text text--darken-1" icon="fast-forward" size="lg"/>
-            </v-btn>
-            <span>Last Page</span>
-          </v-tooltip>
+          <pager-button
+            :disabled="!previousEnabled"
+            @click="onFirstPage"
+            icon="fast-backward"
+            text="First Page"
+          />
+          <pager-button
+            :disabled="!previousEnabled"
+            @click="onPreviousPage"
+            icon="backward"
+            text="Previous Page"
+          />
+          <pager-button @click="onRefresh" icon="sync" text="Refresh" />
+          <pager-button
+            :disabled="!nextEnabled"
+            @click="onNextPage"
+            icon="forward"
+            text="Next Page"
+          />
+          <pager-button
+            :disabled="!nextEnabled"
+            @click="onLastPage"
+            icon="fast-forward"
+            text="Last Page"
+          />
         </v-flex>
         <v-flex xs3>
           <v-subheader class="ma-0 pt-0 right">{{ description }}</v-subheader>
@@ -87,6 +54,8 @@
 <script lang="ts">
 import Vue from "vue";
 
+import PagerButton from "./PagerButton.vue";
+
 import {
   Component,
   Prop,
@@ -95,7 +64,11 @@ import {
   IPageSizes
 } from "sitewhere-ide-common";
 
-@Component
+@Component({
+  components: {
+    PagerButton
+  }
+})
 export default class Pager extends Vue {
   @Prop() readonly results!: { numResults: number; results: {}[] };
   @Prop() readonly pageSizes!: IPageSizes;
