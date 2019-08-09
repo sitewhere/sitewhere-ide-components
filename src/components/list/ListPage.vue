@@ -43,16 +43,16 @@ export default class ListPage extends Vue {
   @Prop() readonly loadingMessage!: string;
   @Prop() readonly pageSizes!: IPageSizes;
   @Prop() readonly loaded!: boolean;
-  @Prop() readonly results!: {}[];
+  @Prop() readonly results!: { numResults: number; results: {}[] };
 
   /** Detect whether loaded with results */
   get hasResults() {
-    return this.loaded && this.results && this.results.length > 0;
+    return this.loaded && this.results && this.results.numResults > 0;
   }
 
   /** Detect whether loaded with no results */
   get noResults() {
-    return this.loaded && this.results && this.results.length === 0;
+    return this.loaded && this.results && this.results.numResults === 0;
   }
 
   /** Update paging values and run query */
