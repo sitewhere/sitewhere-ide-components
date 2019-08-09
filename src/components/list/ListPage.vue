@@ -6,7 +6,8 @@
           <slot name="filters" />
         </div>
         <div class="list-content">
-          <slot />
+          <slot v-if="hasResults" />
+          <slot name="noresults" v-else-if="noResults" />
         </div>
       </div>
     </template>
@@ -43,6 +44,16 @@ export default class ListPage extends Vue {
   @Prop() readonly pageSizes!: IPageSizes;
   @Prop() readonly loaded!: boolean;
   @Prop() readonly results!: {}[];
+
+  /** Detect whether loaded with results */
+  get hasResults() {
+    return this.loaded && this.results && this.results.length > 0;
+  }
+
+  /** Detect whether loaded with no results */
+  get noResults() {
+    return this.loaded && this.results && this.results.length === 0;
+  }
 
   /** Update paging values and run query */
   onPagingUpdated(paging: IPaging) {
