@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v2.1.0
+  * SiteWhere IDE Components v2.1.1
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -3048,7 +3048,9 @@
               )
             ]),
             _vm._v(" "),
-            _c("v-divider", { staticClass: "mt-2 mb-2" }),
+            !_vm.hideButtons
+              ? _c("v-divider", { staticClass: "mt-2 mb-2" })
+              : _vm._e(),
             _vm._v(" "),
             !_vm.hideButtons
               ? _c(
@@ -3092,11 +3094,11 @@
     /* style */
     const __vue_inject_styles__$b = function (inject) {
       if (!inject) return
-      inject("data-v-52b511bf_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
+      inject("data-v-f9425d18_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$b = "data-v-52b511bf";
+    const __vue_scope_id__$b = "data-v-f9425d18";
     /* module identifier */
     const __vue_module_identifier__$b = undefined;
     /* functional template */

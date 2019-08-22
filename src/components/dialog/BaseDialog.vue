@@ -19,7 +19,7 @@
           <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
         </div>
       </v-card-text>
-      <v-divider class="mt-2 mb-2" />
+      <v-divider v-if="!hideButtons" class="mt-2 mb-2" />
       <v-card-actions v-if="!hideButtons">
         <v-spacer></v-spacer>
         <v-btn outline color="primary" @click="onCancelClicked">{{cancelLabel}}</v-btn>
