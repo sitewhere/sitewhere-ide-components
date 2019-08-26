@@ -1,6 +1,6 @@
 {
   "name": "sitewhere-ide-components",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Common Vue.js components used in building SiteWhere IDEs",
   "main": "dist/sitewhere-ide-components.common.js",
   "typings": "types/sitewhere.d.ts",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@types/vue-color": "^2.4.2",
     "moment": "^2.24.0",
-    "sitewhere-ide-common": "^2.1.0",
+    "sitewhere-ide-common": "^2.1.1",
     "vue-color": "^2.7.0"
   },
   "devDependencies": {
