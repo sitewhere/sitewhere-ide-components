@@ -51,7 +51,11 @@ function genConfig(opts) {
       ],
       plugins: [
         nodeResolve(),
-        commonjs(),
+        commonjs({
+          namedExports: {
+            "node_modules/vuelidate/lib/validators/index.js": ["required"]
+          }
+        }),
         typescript({
           clean: true,
           tsconfigDefaults: {

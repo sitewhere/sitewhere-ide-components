@@ -7,7 +7,7 @@
 <script>
 import HeaderField from "./HeaderField.vue";
 
-import { routeTo } from "../common/Utils";
+import { routeTo } from "../common/Utils.ts";
 
 export default {
   data: () => ({}),

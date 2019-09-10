@@ -10,6 +10,12 @@ import IconSelector from "./common/IconSelector.vue";
 import ImageZoomOnHover from "./common/ImageZoomOnHover.vue";
 import LinkedHeaderField from "./common/LinkedHeaderField.vue";
 import LoadingOverlay from "./common/LoadingOverlay.vue";
+import DialogForm from "./common/form/DialogForm.vue";
+import FormDateTimePicker from "./common/form/FormDateTimePicker.vue";
+import FormSelect from "./common/form/FormSelect.vue";
+import FormSelectCondensed from "./common/form/FormSelectCondensed.vue";
+import FormText from "./common/form/FormText.vue";
+import FormTextArea from "./common/form/FormTextArea.vue";
 
 // Dialog components.
 import BaseDialog from "./dialog/BaseDialog.vue";
@@ -23,6 +29,10 @@ import ListLayout from "./list/ListLayout.vue";
 import ListPage from "./list/ListPage.vue";
 import ListTab from "./list/ListTab.vue";
 import Pager from "./list/Pager.vue";
+
+// Login components.
+import RemotesDialog from "./login/RemotesDialog.vue";
+import RemotesDropdown from "./login/RemotesDropdown.vue";
 
 // Navigation components.
 import ContentTab from "./navigation/ContentTab.vue";
@@ -53,6 +63,12 @@ function SiteWhere(Vue) {
   Vue.component("sw-image-zoom-on-hover", ImageZoomOnHover);
   Vue.component("sw-linked-header-field", LinkedHeaderField);
   Vue.component("sw-loading-overlay", LoadingOverlay);
+  Vue.component("sw-dialog-form", DialogForm);
+  Vue.component("sw-form-date-time-picker", FormDateTimePicker);
+  Vue.component("sw-form-select", FormSelect);
+  Vue.component("sw-form-select-condensed", FormSelectCondensed);
+  Vue.component("sw-form-text", FormText);
+  Vue.component("sw-form-text-area", FormTextArea);
 
   // Register dialog components.
   Vue.component("sw-base-dialog", BaseDialog);
@@ -66,6 +82,10 @@ function SiteWhere(Vue) {
   Vue.component("sw-list-page", ListPage);
   Vue.component("sw-list-tab", ListTab);
   Vue.component("sw-pager", Pager);
+
+  // Register login components.
+  Vue.component("sw-remotes-dialog", RemotesDialog);
+  Vue.component("sw-remotes-dropdown", RemotesDropdown);
 
   // Register navigation components.
   Vue.component("sw-content-tab", ContentTab);
@@ -95,7 +115,13 @@ export {
   IconSelector,
   ImageZoomOnHover,
   LinkedHeaderField,
-  LoadingOverlay
+  LoadingOverlay,
+  DialogForm,
+  FormDateTimePicker,
+  FormSelect,
+  FormSelectCondensed,
+  FormText,
+  FormTextArea
 };
 
 // Export dialog components.
@@ -103,6 +129,9 @@ export { BaseDialog, ConfirmDialog, DeleteDialog, MetadataPanel };
 
 // Export list components.
 export { ListEntry, ListLayout, ListPage, ListTab, Pager };
+
+// Export login components.
+export { RemotesDialog, RemotesDropdown };
 
 // Export navigation components.
 export {
