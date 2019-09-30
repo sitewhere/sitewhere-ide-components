@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v2.1.3
+  * SiteWhere IDE Components v2.1.4
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -638,6 +638,88 @@
       undefined
     );
 
+  var CondensedToolbar = /** @class */ (function (_super) {
+      __extends(CondensedToolbar, _super);
+      function CondensedToolbar() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], CondensedToolbar.prototype, "title", void 0);
+      CondensedToolbar = __decorate([
+          sitewhereIdeCommon.Component({})
+      ], CondensedToolbar);
+      return CondensedToolbar;
+  }(Vue));
+
+  /* script */
+  const __vue_script__$3 = CondensedToolbar;
+
+  /* template */
+  var __vue_render__$3 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "v-toolbar",
+      {
+        staticClass: "tb",
+        attrs: {
+          flat: "",
+          dark: "",
+          dense: "",
+          card: "",
+          color: "primary",
+          height: "38"
+        }
+      },
+      [
+        _vm._t("icon"),
+        _vm._v(" "),
+        _c("v-toolbar-title", { staticClass: "white--text body-2 ml-2" }, [
+          _vm._v(_vm._s(_vm.title))
+        ]),
+        _vm._v(" "),
+        _vm._t("left"),
+        _vm._v(" "),
+        _c("v-spacer"),
+        _vm._v(" "),
+        _vm._t("default")
+      ],
+      2
+    )
+  };
+  var __vue_staticRenderFns__$3 = [];
+  __vue_render__$3._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$3 = function (inject) {
+      if (!inject) return
+      inject("data-v-b1b24538_0", { source: "\n.tb[data-v-b1b24538] .v-toolbar__content {\r\n  padding: 0 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\CondensedToolbar.vue"],"names":[],"mappings":";AAqBA;EACA,eAAA;AACA","file":"CondensedToolbar.vue","sourcesContent":["<template>\r\n  <v-toolbar flat dark dense card color=\"primary\" class=\"tb\" height=\"38\">\r\n    <slot name=\"icon\" />\r\n    <v-toolbar-title class=\"white--text body-2 ml-2\">{{ title }}</v-toolbar-title>\r\n    <slot name=\"left\" />\r\n    <v-spacer></v-spacer>\r\n    <slot />\r\n  </v-toolbar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class CondensedToolbar extends Vue {\r\n  @Prop() readonly title!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.tb >>> .v-toolbar__content {\r\n  padding: 0 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+
+    };
+    /* scoped */
+    const __vue_scope_id__$3 = "data-v-b1b24538";
+    /* module identifier */
+    const __vue_module_identifier__$3 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$3 = false;
+    /* style inject SSR */
+    
+
+    
+    var CondensedToolbar$1 = normalizeComponent_1(
+      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
+      browser,
+      undefined
+    );
+
   var DateTimePicker = /** @class */ (function (_super) {
       __extends(DateTimePicker, _super);
       function DateTimePicker() {
@@ -725,10 +807,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$3 = DateTimePicker;
+  const __vue_script__$4 = DateTimePicker;
 
   /* template */
-  var __vue_render__$3 = function() {
+  var __vue_render__$4 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -909,17 +991,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$3 = [];
-  __vue_render__$3._withStripped = true;
+  var __vue_staticRenderFns__$4 = [];
+  __vue_render__$4._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$3 = undefined;
+    const __vue_inject_styles__$4 = undefined;
     /* scoped */
-    const __vue_scope_id__$3 = undefined;
+    const __vue_scope_id__$4 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$3 = undefined;
+    const __vue_module_identifier__$4 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$3 = false;
+    const __vue_is_functional_template__$4 = false;
     /* style inject */
     
     /* style inject SSR */
@@ -927,12 +1009,12 @@
 
     
     var DateTimePicker$1 = normalizeComponent_1(
-      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-      __vue_inject_styles__$3,
-      __vue_script__$3,
-      __vue_scope_id__$3,
-      __vue_is_functional_template__$3,
-      __vue_module_identifier__$3,
+      { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+      __vue_inject_styles__$4,
+      __vue_script__$4,
+      __vue_scope_id__$4,
+      __vue_is_functional_template__$4,
+      __vue_module_identifier__$4,
       undefined,
       undefined
     );
@@ -983,10 +1065,10 @@
   };
 
   /* script */
-  const __vue_script__$4 = script$1;
+  const __vue_script__$5 = script$1;
 
   /* template */
-  var __vue_render__$4 = function() {
+  var __vue_render__$5 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1023,32 +1105,32 @@
         )
       : _vm._e()
   };
-  var __vue_staticRenderFns__$4 = [];
-  __vue_render__$4._withStripped = true;
+  var __vue_staticRenderFns__$5 = [];
+  __vue_render__$5._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$4 = function (inject) {
+    const __vue_inject_styles__$5 = function (inject) {
       if (!inject) return
       inject("data-v-6e3d2d05_0", { source: "\n.error-banner[data-v-6e3d2d05] {\r\n  z-index: 2000;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\ErrorBanner.vue"],"names":[],"mappings":";AA+CA;EACA,aAAA;AACA","file":"ErrorBanner.vue","sourcesContent":["<template>\r\n  <v-snackbar class=\"error-banner\" v-if=\"error\" :timeout=\"5000\" error v-model=\"errorDisplayed\">\r\n    {{ errorMessage }}\r\n    <v-btn dark flat @click.native=\"errorDisplayed = false\">Close</v-btn>\r\n  </v-snackbar>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data: () => ({\r\n    errorDisplayed: false\r\n  }),\r\n\r\n  props: [\"error\"],\r\n\r\n  watch: {\r\n    error: function(value) {\r\n      if (value) {\r\n        if (this.error.response && this.error.response.status == 503) {\r\n          this.$data.errorDisplayed = false;\r\n        } else if (this.error.response || this.error.message) {\r\n          this.$data.errorDisplayed = true;\r\n        }\r\n      }\r\n    }\r\n  },\r\n\r\n  computed: {\r\n    errorMessage: function() {\r\n      if (!this.error) {\r\n        return \"\";\r\n      } else if (this.error.response && this.error.response.headers) {\r\n        if (this.error.response.headers[\"x-sitewhere-error\"]) {\r\n          return this.error.response.headers[\"x-sitewhere-error\"];\r\n        } else if (this.error.response.status === 403) {\r\n          return \"Server Authentication Failed\";\r\n        }\r\n      }\r\n      return this.error.message;\r\n    }\r\n  },\r\n\r\n  methods: {}\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.error-banner {\r\n  z-index: 2000;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$4 = "data-v-6e3d2d05";
+    const __vue_scope_id__$5 = "data-v-6e3d2d05";
     /* module identifier */
-    const __vue_module_identifier__$4 = undefined;
+    const __vue_module_identifier__$5 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$4 = false;
+    const __vue_is_functional_template__$5 = false;
     /* style inject SSR */
     
 
     
     var ErrorBanner = normalizeComponent_1(
-      { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-      __vue_inject_styles__$4,
-      __vue_script__$4,
-      __vue_scope_id__$4,
-      __vue_is_functional_template__$4,
-      __vue_module_identifier__$4,
+      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+      __vue_inject_styles__$5,
+      __vue_script__$5,
+      __vue_scope_id__$5,
+      __vue_is_functional_template__$5,
+      __vue_module_identifier__$5,
       browser,
       undefined
     );
@@ -1087,10 +1169,10 @@
   };
 
   /* script */
-  const __vue_script__$5 = script$2;
+  const __vue_script__$6 = script$2;
 
   /* template */
-  var __vue_render__$5 = function() {
+  var __vue_render__$6 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1128,32 +1210,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$5 = [];
-  __vue_render__$5._withStripped = true;
+  var __vue_staticRenderFns__$6 = [];
+  __vue_render__$6._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$5 = function (inject) {
+    const __vue_inject_styles__$6 = function (inject) {
       if (!inject) return
       inject("data-v-73a38ecb_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FloatingActionButton.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$5 = "data-v-73a38ecb";
+    const __vue_scope_id__$6 = "data-v-73a38ecb";
     /* module identifier */
-    const __vue_module_identifier__$5 = undefined;
+    const __vue_module_identifier__$6 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$5 = false;
+    const __vue_is_functional_template__$6 = false;
     /* style inject SSR */
     
 
     
     var FloatingActionButton = normalizeComponent_1(
-      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
-      __vue_inject_styles__$5,
-      __vue_script__$5,
-      __vue_scope_id__$5,
-      __vue_is_functional_template__$5,
-      __vue_module_identifier__$5,
+      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+      __vue_inject_styles__$6,
+      __vue_script__$6,
+      __vue_scope_id__$6,
+      __vue_is_functional_template__$6,
+      __vue_module_identifier__$6,
       browser,
       undefined
     );
@@ -1179,10 +1261,10 @@
   };
 
   /* script */
-  const __vue_script__$6 = script$3;
+  const __vue_script__$7 = script$3;
 
   /* template */
-  var __vue_render__$6 = function() {
+  var __vue_render__$7 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1206,32 +1288,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$6 = [];
-  __vue_render__$6._withStripped = true;
+  var __vue_staticRenderFns__$7 = [];
+  __vue_render__$7._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$6 = function (inject) {
+    const __vue_inject_styles__$7 = function (inject) {
       if (!inject) return
       inject("data-v-e7901184_0", { source: "\n.field[data-v-e7901184] {\r\n  text-overflow: ellipsis;\r\n  white-space: nowrap;\r\n  overflow: hidden;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\HeaderField.vue"],"names":[],"mappings":";AAsBA;EACA,uBAAA;EACA,mBAAA;EACA,gBAAA;AACA","file":"HeaderField.vue","sourcesContent":["<template>\r\n  <v-layout row wrap class=\"mb-1\">\r\n    <v-flex xs4 class=\"text-xs-right subheading pr-4\">\r\n      <strong>{{ label }}</strong>:\r\n    </v-flex>\r\n    <v-flex class=\"field\" xs8>\r\n      <slot></slot>\r\n    </v-flex>\r\n  </v-layout>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data: () => ({}),\r\n\r\n  props: [\"label\"],\r\n\r\n  methods: {}\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.field {\r\n  text-overflow: ellipsis;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$6 = "data-v-e7901184";
+    const __vue_scope_id__$7 = "data-v-e7901184";
     /* module identifier */
-    const __vue_module_identifier__$6 = undefined;
+    const __vue_module_identifier__$7 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$6 = false;
+    const __vue_is_functional_template__$7 = false;
     /* style inject SSR */
     
 
     
     var HeaderField = normalizeComponent_1(
-      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
-      __vue_inject_styles__$6,
-      __vue_script__$6,
-      __vue_scope_id__$6,
-      __vue_is_functional_template__$6,
-      __vue_module_identifier__$6,
+      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+      __vue_inject_styles__$7,
+      __vue_script__$7,
+      __vue_scope_id__$7,
+      __vue_is_functional_template__$7,
+      __vue_module_identifier__$7,
       browser,
       undefined
     );
@@ -2444,10 +2526,10 @@
   };
 
   /* script */
-  const __vue_script__$7 = script$4;
+  const __vue_script__$8 = script$4;
 
   /* template */
-  var __vue_render__$7 = function() {
+  var __vue_render__$8 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2552,32 +2634,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$7 = [];
-  __vue_render__$7._withStripped = true;
+  var __vue_staticRenderFns__$8 = [];
+  __vue_render__$8._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$7 = function (inject) {
+    const __vue_inject_styles__$8 = function (inject) {
       if (!inject) return
       inject("data-v-98884e52_0", { source: "\n.faicon[data-v-98884e52] {\r\n  min-height: 30px;\r\n  text-align: center;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\IconSelector.vue"],"names":[],"mappings":";AAyrCA;EACA,gBAAA;EACA,kBAAA;AACA","file":"IconSelector.vue","sourcesContent":["<template>\r\n  <v-menu offset-y lazy>\r\n    <span slot=\"activator\">\r\n      <v-container fluid class=\"pa-0\">\r\n        <v-layout row wrap>\r\n          <v-flex xs12>\r\n            <v-text-field label=\"Icon\" placeholder=\" \" v-model=\"icon\" prepend-icon=\"image\"/>\r\n          </v-flex>\r\n        </v-layout>\r\n      </v-container>\r\n    </span>\r\n    <v-card>\r\n      <v-container :style=\"ddStyle\" fluid grid-list-sm>\r\n        <v-layout row wrap>\r\n          <v-flex class=\"faicon\" xs1 v-for=\"(icon) in iconsSolid\" :key=\"icon\">\r\n            <v-tooltip left>\r\n              <font-awesome-icon\r\n                class=\"faicon text--grey\"\r\n                :icon=\"icon\"\r\n                size=\"lg\"\r\n                @click=\"onIconSelected(icon)\"\r\n                slot=\"activator\"\r\n              />\r\n              <span>{{ icon }}</span>\r\n            </v-tooltip>\r\n          </v-flex>\r\n        </v-layout>\r\n      </v-container>\r\n    </v-card>\r\n  </v-menu>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  computed: {\r\n    // Compute style of logo.\r\n    ddStyle: function() {\r\n      return {\r\n        width: \"500px\",\r\n        \"max-height\": \"400px\",\r\n        \"overflow-y\": \"scroll\"\r\n      };\r\n    },\r\n    icon: function() {\r\n      return this.value;\r\n    }\r\n  },\r\n\r\n  props: [\"value\"],\r\n\r\n  methods: {\r\n    // Called when icon is selected.\r\n    onIconSelected: function(e) {\r\n      this.$data.selectedIcon = e;\r\n      this.$emit(\"input\", e);\r\n    }\r\n  },\r\n\r\n  data: () => ({\r\n    active: null,\r\n    selectedIcon: null,\r\n    iconsSolid: [\r\n      \"address-book\",\r\n      \"address-card\",\r\n      \"adjust\",\r\n      \"air-freshener\",\r\n      \"align-center\",\r\n      \"align-justify\",\r\n      \"align-left\",\r\n      \"align-right\",\r\n      \"allergies\",\r\n      \"ambulance\",\r\n      \"american-sign-language-interpreting\",\r\n      \"anchor\",\r\n      \"angle-double-down\",\r\n      \"angle-double-left\",\r\n      \"angle-double-right\",\r\n      \"angle-double-up\",\r\n      \"angle-down\",\r\n      \"angle-left\",\r\n      \"angle-right\",\r\n      \"angle-up\",\r\n      \"angry\",\r\n      \"apple-alt\",\r\n      \"archive\",\r\n      \"archway\",\r\n      \"arrow-alt-circle-down\",\r\n      \"arrow-alt-circle-left\",\r\n      \"arrow-alt-circle-right\",\r\n      \"arrow-alt-circle-up\",\r\n      \"arrow-circle-down\",\r\n      \"arrow-circle-left\",\r\n      \"arrow-circle-right\",\r\n      \"arrow-circle-up\",\r\n      \"arrow-down\",\r\n      \"arrow-left\",\r\n      \"arrow-right\",\r\n      \"arrow-up\",\r\n      \"arrows-alt\",\r\n      \"arrows-alt-h\",\r\n      \"arrows-alt-v\",\r\n      \"assistive-listening-systems\",\r\n      \"asterisk\",\r\n      \"at\",\r\n      \"atlas\",\r\n      \"atom\",\r\n      \"audio-description\",\r\n      \"award\",\r\n      \"backspace\",\r\n      \"backward\",\r\n      \"balance-scale\",\r\n      \"ban\",\r\n      \"band-aid\",\r\n      \"barcode\",\r\n      \"bars\",\r\n      \"baseball-ball\",\r\n      \"basketball-ball\",\r\n      \"bath\",\r\n      \"battery-empty\",\r\n      \"battery-full\",\r\n      \"battery-half\",\r\n      \"battery-quarter\",\r\n      \"battery-three-quarters\",\r\n      \"bed\",\r\n      \"beer\",\r\n      \"bell\",\r\n      \"bell-slash\",\r\n      \"bezier-curve\",\r\n      \"bicycle\",\r\n      \"binoculars\",\r\n      \"birthday-cake\",\r\n      \"blender\",\r\n      \"blind\",\r\n      \"bold\",\r\n      \"bolt\",\r\n      \"bomb\",\r\n      \"bone\",\r\n      \"bong\",\r\n      \"book\",\r\n      \"book-open\",\r\n      \"book-reader\",\r\n      \"bookmark\",\r\n      \"bowling-ball\",\r\n      \"box\",\r\n      \"box-open\",\r\n      \"boxes\",\r\n      \"braille\",\r\n      \"brain\",\r\n      \"briefcase\",\r\n      \"briefcase-medical\",\r\n      \"broadcast-tower\",\r\n      \"broom\",\r\n      \"brush\",\r\n      \"bug\",\r\n      \"building\",\r\n      \"bullhorn\",\r\n      \"bullseye\",\r\n      \"burn\",\r\n      \"bus\",\r\n      \"bus-alt\",\r\n      \"calculator\",\r\n      \"calendar\",\r\n      \"calendar-alt\",\r\n      \"calendar-check\",\r\n      \"calendar-minus\",\r\n      \"calendar-plus\",\r\n      \"calendar-times\",\r\n      \"camera\",\r\n      \"camera-retro\",\r\n      \"cannabis\",\r\n      \"capsules\",\r\n      \"car\",\r\n      \"car-alt\",\r\n      \"car-battery\",\r\n      \"car-crash\",\r\n      \"car-side\",\r\n      \"caret-down\",\r\n      \"caret-left\",\r\n      \"caret-right\",\r\n      \"caret-square-down\",\r\n      \"caret-square-left\",\r\n      \"caret-square-right\",\r\n      \"caret-square-up\",\r\n      \"caret-up\",\r\n      \"cart-arrow-down\",\r\n      \"cart-plus\",\r\n      \"certificate\",\r\n      \"chalkboard\",\r\n      \"chalkboard-teacher\",\r\n      \"charging-station\",\r\n      \"chart-area\",\r\n      \"chart-bar\",\r\n      \"chart-line\",\r\n      \"chart-pie\",\r\n      \"check\",\r\n      \"check-circle\",\r\n      \"check-double\",\r\n      \"check-square\",\r\n      \"chess\",\r\n      \"chess-bishop\",\r\n      \"chess-board\",\r\n      \"chess-king\",\r\n      \"chess-knight\",\r\n      \"chess-pawn\",\r\n      \"chess-queen\",\r\n      \"chess-rook\",\r\n      \"chevron-circle-down\",\r\n      \"chevron-circle-left\",\r\n      \"chevron-circle-right\",\r\n      \"chevron-circle-up\",\r\n      \"chevron-down\",\r\n      \"chevron-left\",\r\n      \"chevron-right\",\r\n      \"chevron-up\",\r\n      \"child\",\r\n      \"church\",\r\n      \"circle\",\r\n      \"circle-notch\",\r\n      \"clipboard\",\r\n      \"clipboard-check\",\r\n      \"clipboard-list\",\r\n      \"clock\",\r\n      \"clone\",\r\n      \"closed-captioning\",\r\n      \"cloud\",\r\n      \"cloud-download-alt\",\r\n      \"cloud-upload-alt\",\r\n      \"cocktail\",\r\n      \"code\",\r\n      \"code-branch\",\r\n      \"coffee\",\r\n      \"cog\",\r\n      \"cogs\",\r\n      \"coins\",\r\n      \"columns\",\r\n      \"comment\",\r\n      \"comment-alt\",\r\n      \"comment-dots\",\r\n      \"comment-slash\",\r\n      \"comments\",\r\n      \"compact-disc\",\r\n      \"compass\",\r\n      \"compress\",\r\n      \"concierge-bell\",\r\n      \"cookie\",\r\n      \"cookie-bite\",\r\n      \"copy\",\r\n      \"copyright\",\r\n      \"couch\",\r\n      \"credit-card\",\r\n      \"crop\",\r\n      \"crop-alt\",\r\n      \"crosshairs\",\r\n      \"crow\",\r\n      \"crown\",\r\n      \"cube\",\r\n      \"cubes\",\r\n      \"cut\",\r\n      \"database\",\r\n      \"deaf\",\r\n      \"desktop\",\r\n      \"diagnoses\",\r\n      \"dice\",\r\n      \"dice-five\",\r\n      \"dice-four\",\r\n      \"dice-one\",\r\n      \"dice-six\",\r\n      \"dice-three\",\r\n      \"dice-two\",\r\n      \"digital-tachograph\",\r\n      \"directions\",\r\n      \"divide\",\r\n      \"dizzy\",\r\n      \"dna\",\r\n      \"dollar-sign\",\r\n      \"dolly\",\r\n      \"dolly-flatbed\",\r\n      \"donate\",\r\n      \"door-closed\",\r\n      \"door-open\",\r\n      \"dot-circle\",\r\n      \"dove\",\r\n      \"download\",\r\n      \"drafting-compass\",\r\n      \"draw-polygon\",\r\n      \"drum\",\r\n      \"drum-steelpan\",\r\n      \"dumbbell\",\r\n      \"edit\",\r\n      \"eject\",\r\n      \"ellipsis-h\",\r\n      \"ellipsis-v\",\r\n      \"envelope\",\r\n      \"envelope-open\",\r\n      \"envelope-square\",\r\n      \"equals\",\r\n      \"eraser\",\r\n      \"euro-sign\",\r\n      \"exchange-alt\",\r\n      \"exclamation\",\r\n      \"exclamation-circle\",\r\n      \"exclamation-triangle\",\r\n      \"expand\",\r\n      \"expand-arrows-alt\",\r\n      \"external-link-alt\",\r\n      \"external-link-square-alt\",\r\n      \"eye\",\r\n      \"eye-dropper\",\r\n      \"eye-slash\",\r\n      \"fast-backward\",\r\n      \"fast-forward\",\r\n      \"fax\",\r\n      \"feather\",\r\n      \"feather-alt\",\r\n      \"female\",\r\n      \"fighter-jet\",\r\n      \"file\",\r\n      \"file-alt\",\r\n      \"file-archive\",\r\n      \"file-audio\",\r\n      \"file-code\",\r\n      \"file-contract\",\r\n      \"file-download\",\r\n      \"file-excel\",\r\n      \"file-export\",\r\n      \"file-image\",\r\n      \"file-import\",\r\n      \"file-invoice\",\r\n      \"file-invoice-dollar\",\r\n      \"file-medical\",\r\n      \"file-medical-alt\",\r\n      \"file-pdf\",\r\n      \"file-powerpoint\",\r\n      \"file-prescription\",\r\n      \"file-signature\",\r\n      \"file-upload\",\r\n      \"file-video\",\r\n      \"file-word\",\r\n      \"fill\",\r\n      \"fill-drip\",\r\n      \"film\",\r\n      \"filter\",\r\n      \"fingerprint\",\r\n      \"fire\",\r\n      \"fire-extinguisher\",\r\n      \"first-aid\",\r\n      \"fish\",\r\n      \"flag\",\r\n      \"flag-checkered\",\r\n      \"flask\",\r\n      \"flushed\",\r\n      \"folder\",\r\n      \"folder-open\",\r\n      \"font\",\r\n      \"football-ball\",\r\n      \"forward\",\r\n      \"frog\",\r\n      \"frown\",\r\n      \"frown-open\",\r\n      \"futbol\",\r\n      \"gamepad\",\r\n      \"gas-pump\",\r\n      \"gavel\",\r\n      \"gem\",\r\n      \"genderless\",\r\n      \"gift\",\r\n      \"glass-martini\",\r\n      \"glass-martini-alt\",\r\n      \"glasses\",\r\n      \"globe\",\r\n      \"globe-africa\",\r\n      \"globe-americas\",\r\n      \"globe-asia\",\r\n      \"golf-ball\",\r\n      \"graduation-cap\",\r\n      \"greater-than\",\r\n      \"greater-than-equal\",\r\n      \"grimace\",\r\n      \"grin\",\r\n      \"grin-alt\",\r\n      \"grin-beam\",\r\n      \"grin-beam-sweat\",\r\n      \"grin-hearts\",\r\n      \"grin-squint\",\r\n      \"grin-squint-tears\",\r\n      \"grin-stars\",\r\n      \"grin-tears\",\r\n      \"grin-tongue\",\r\n      \"grin-tongue-squint\",\r\n      \"grin-tongue-wink\",\r\n      \"grin-wink\",\r\n      \"grip-horizontal\",\r\n      \"grip-vertical\",\r\n      \"h-square\",\r\n      \"hand-holding\",\r\n      \"hand-holding-heart\",\r\n      \"hand-holding-usd\",\r\n      \"hand-lizard\",\r\n      \"hand-paper\",\r\n      \"hand-peace\",\r\n      \"hand-point-down\",\r\n      \"hand-point-left\",\r\n      \"hand-point-right\",\r\n      \"hand-point-up\",\r\n      \"hand-pointer\",\r\n      \"hand-rock\",\r\n      \"hand-scissors\",\r\n      \"hand-spock\",\r\n      \"hands\",\r\n      \"hands-helping\",\r\n      \"handshake\",\r\n      \"hashtag\",\r\n      \"hdd\",\r\n      \"heading\",\r\n      \"headphones\",\r\n      \"headphones-alt\",\r\n      \"helicopter\",\r\n      \"highlighter\",\r\n      \"history\",\r\n      \"hockey-puck\",\r\n      \"home\",\r\n      \"hospital\",\r\n      \"hospital-alt\",\r\n      \"hospital-symbol\",\r\n      \"hot-tub\",\r\n      \"hotel\",\r\n      \"hourglass\",\r\n      \"hourglass-end\",\r\n      \"hourglass-half\",\r\n      \"hourglass-start\",\r\n      \"i-cursor\",\r\n      \"id-badge\",\r\n      \"id-card\",\r\n      \"id-card-alt\",\r\n      \"image\",\r\n      \"images\",\r\n      \"inbox\",\r\n      \"indent\",\r\n      \"industry\",\r\n      \"infinity\",\r\n      \"info\",\r\n      \"info-circle\",\r\n      \"italic\",\r\n      \"joint\",\r\n      \"key\",\r\n      \"keyboard\",\r\n      \"kiss\",\r\n      \"kiss-beam\",\r\n      \"kiss-wink-heart\",\r\n      \"kiwi-bird\",\r\n      \"language\",\r\n      \"laptop\",\r\n      \"laptop-code\",\r\n      \"laugh\",\r\n      \"laugh-beam\",\r\n      \"laugh-squint\",\r\n      \"laugh-wink\",\r\n      \"layer-group\",\r\n      \"leaf\",\r\n      \"lemon\",\r\n      \"less-than\",\r\n      \"less-than-equal\",\r\n      \"level-down-alt\",\r\n      \"level-up-alt\",\r\n      \"life-ring\",\r\n      \"lightbulb\",\r\n      \"link\",\r\n      \"lira-sign\",\r\n      \"list\",\r\n      \"list-alt\",\r\n      \"list-ol\",\r\n      \"list-ul\",\r\n      \"location-arrow\",\r\n      \"lock\",\r\n      \"lock-open\",\r\n      \"long-arrow-alt-down\",\r\n      \"long-arrow-alt-left\",\r\n      \"long-arrow-alt-right\",\r\n      \"long-arrow-alt-up\",\r\n      \"low-vision\",\r\n      \"luggage-cart\",\r\n      \"magic\",\r\n      \"magnet\",\r\n      \"male\",\r\n      \"map\",\r\n      \"map-marked\",\r\n      \"map-marked-alt\",\r\n      \"map-marker\",\r\n      \"map-marker-alt\",\r\n      \"map-pin\",\r\n      \"map-signs\",\r\n      \"marker\",\r\n      \"mars\",\r\n      \"mars-double\",\r\n      \"mars-stroke\",\r\n      \"mars-stroke-h\",\r\n      \"mars-stroke-v\",\r\n      \"medal\",\r\n      \"medkit\",\r\n      \"meh\",\r\n      \"meh-blank\",\r\n      \"meh-rolling-eyes\",\r\n      \"memory\",\r\n      \"mercury\",\r\n      \"microchip\",\r\n      \"microphone\",\r\n      \"microphone-alt\",\r\n      \"microphone-alt-slash\",\r\n      \"microphone-slash\",\r\n      \"microscope\",\r\n      \"minus\",\r\n      \"minus-circle\",\r\n      \"minus-square\",\r\n      \"mobile\",\r\n      \"mobile-alt\",\r\n      \"money-bill\",\r\n      \"money-bill-alt\",\r\n      \"money-bill-wave\",\r\n      \"money-bill-wave-alt\",\r\n      \"money-check\",\r\n      \"money-check-alt\",\r\n      \"monument\",\r\n      \"moon\",\r\n      \"mortar-pestle\",\r\n      \"motorcycle\",\r\n      \"mouse-pointer\",\r\n      \"music\",\r\n      \"neuter\",\r\n      \"newspaper\",\r\n      \"not-equal\",\r\n      \"notes-medical\",\r\n      \"object-group\",\r\n      \"object-ungroup\",\r\n      \"oil-can\",\r\n      \"outdent\",\r\n      \"paint-brush\",\r\n      \"paint-roller\",\r\n      \"palette\",\r\n      \"pallet\",\r\n      \"paper-plane\",\r\n      \"paperclip\",\r\n      \"parachute-box\",\r\n      \"paragraph\",\r\n      \"parking\",\r\n      \"passport\",\r\n      \"paste\",\r\n      \"pause\",\r\n      \"pause-circle\",\r\n      \"paw\",\r\n      \"pen\",\r\n      \"pen-alt\",\r\n      \"pen-fancy\",\r\n      \"pen-nib\",\r\n      \"pen-square\",\r\n      \"pencil-alt\",\r\n      \"pencil-ruler\",\r\n      \"people-carry\",\r\n      \"percent\",\r\n      \"percentage\",\r\n      \"phone\",\r\n      \"phone-slash\",\r\n      \"phone-square\",\r\n      \"phone-volume\",\r\n      \"piggy-bank\",\r\n      \"pills\",\r\n      \"plane\",\r\n      \"plane-arrival\",\r\n      \"plane-departure\",\r\n      \"play\",\r\n      \"play-circle\",\r\n      \"plug\",\r\n      \"plus\",\r\n      \"plus-circle\",\r\n      \"plus-square\",\r\n      \"podcast\",\r\n      \"poo\",\r\n      \"portrait\",\r\n      \"pound-sign\",\r\n      \"power-off\",\r\n      \"prescription\",\r\n      \"prescription-bottle\",\r\n      \"prescription-bottle-alt\",\r\n      \"print\",\r\n      \"procedures\",\r\n      \"project-diagram\",\r\n      \"puzzle-piece\",\r\n      \"qrcode\",\r\n      \"question\",\r\n      \"question-circle\",\r\n      \"quidditch\",\r\n      \"quote-left\",\r\n      \"quote-right\",\r\n      \"random\",\r\n      \"receipt\",\r\n      \"recycle\",\r\n      \"redo\",\r\n      \"redo-alt\",\r\n      \"registered\",\r\n      \"reply\",\r\n      \"reply-all\",\r\n      \"retweet\",\r\n      \"ribbon\",\r\n      \"road\",\r\n      \"robot\",\r\n      \"rocket\",\r\n      \"route\",\r\n      \"rss\",\r\n      \"rss-square\",\r\n      \"ruble-sign\",\r\n      \"ruler\",\r\n      \"ruler-combined\",\r\n      \"ruler-horizontal\",\r\n      \"ruler-vertical\",\r\n      \"rupee-sign\",\r\n      \"sad-cry\",\r\n      \"sad-tear\",\r\n      \"save\",\r\n      \"school\",\r\n      \"screwdriver\",\r\n      \"search\",\r\n      \"search-minus\",\r\n      \"search-plus\",\r\n      \"seedling\",\r\n      \"server\",\r\n      \"shapes\",\r\n      \"share\",\r\n      \"share-alt\",\r\n      \"share-alt-square\",\r\n      \"share-square\",\r\n      \"shekel-sign\",\r\n      \"shield-alt\",\r\n      \"ship\",\r\n      \"shipping-fast\",\r\n      \"shoe-prints\",\r\n      \"shopping-bag\",\r\n      \"shopping-basket\",\r\n      \"shopping-cart\",\r\n      \"shower\",\r\n      \"shuttle-van\",\r\n      \"sign\",\r\n      \"sign-in-alt\",\r\n      \"sign-language\",\r\n      \"sign-out-alt\",\r\n      \"signal\",\r\n      \"signature\",\r\n      \"sitemap\",\r\n      \"skull\",\r\n      \"sliders-h\",\r\n      \"smile\",\r\n      \"smile-beam\",\r\n      \"smile-wink\",\r\n      \"smoking\",\r\n      \"smoking-ban\",\r\n      \"snowflake\",\r\n      \"solar-panel\",\r\n      \"sort\",\r\n      \"sort-alpha-down\",\r\n      \"sort-alpha-up\",\r\n      \"sort-amount-down\",\r\n      \"sort-amount-up\",\r\n      \"sort-down\",\r\n      \"sort-numeric-down\",\r\n      \"sort-numeric-up\",\r\n      \"sort-up\",\r\n      \"spa\",\r\n      \"space-shuttle\",\r\n      \"spinner\",\r\n      \"splotch\",\r\n      \"spray-can\",\r\n      \"square\",\r\n      \"square-full\",\r\n      \"stamp\",\r\n      \"star\",\r\n      \"star-half\",\r\n      \"star-half-alt\",\r\n      \"star-of-life\",\r\n      \"step-backward\",\r\n      \"step-forward\",\r\n      \"stethoscope\",\r\n      \"sticky-note\",\r\n      \"stop\",\r\n      \"stop-circle\",\r\n      \"stopwatch\",\r\n      \"store\",\r\n      \"store-alt\",\r\n      \"stream\",\r\n      \"street-view\",\r\n      \"strikethrough\",\r\n      \"stroopwafel\",\r\n      \"subscript\",\r\n      \"subway\",\r\n      \"suitcase\",\r\n      \"suitcase-rolling\",\r\n      \"sun\",\r\n      \"superscript\",\r\n      \"surprise\",\r\n      \"swatchbook\",\r\n      \"swimmer\",\r\n      \"swimming-pool\",\r\n      \"sync\",\r\n      \"sync-alt\",\r\n      \"syringe\",\r\n      \"table\",\r\n      \"table-tennis\",\r\n      \"tablet\",\r\n      \"tablet-alt\",\r\n      \"tablets\",\r\n      \"tachometer-alt\",\r\n      \"tag\",\r\n      \"tags\",\r\n      \"tape\",\r\n      \"tasks\",\r\n      \"taxi\",\r\n      \"teeth\",\r\n      \"teeth-open\",\r\n      \"terminal\",\r\n      \"text-height\",\r\n      \"text-width\",\r\n      \"th\",\r\n      \"th-large\",\r\n      \"th-list\",\r\n      \"theater-masks\",\r\n      \"thermometer\",\r\n      \"thermometer-empty\",\r\n      \"thermometer-full\",\r\n      \"thermometer-half\",\r\n      \"thermometer-quarter\",\r\n      \"thermometer-three-quarters\",\r\n      \"thumbs-down\",\r\n      \"thumbs-up\",\r\n      \"thumbtack\",\r\n      \"ticket-alt\",\r\n      \"times\",\r\n      \"times-circle\",\r\n      \"tint\",\r\n      \"tint-slash\",\r\n      \"tired\",\r\n      \"toggle-off\",\r\n      \"toggle-on\",\r\n      \"toolbox\",\r\n      \"tooth\",\r\n      \"trademark\",\r\n      \"traffic-light\",\r\n      \"train\",\r\n      \"transgender\",\r\n      \"transgender-alt\",\r\n      \"trash\",\r\n      \"trash-alt\",\r\n      \"tree\",\r\n      \"trophy\",\r\n      \"truck\",\r\n      \"truck-loading\",\r\n      \"truck-monster\",\r\n      \"truck-moving\",\r\n      \"truck-pickup\",\r\n      \"tshirt\",\r\n      \"tty\",\r\n      \"tv\",\r\n      \"umbrella\",\r\n      \"umbrella-beach\",\r\n      \"underline\",\r\n      \"undo\",\r\n      \"undo-alt\",\r\n      \"universal-access\",\r\n      \"university\",\r\n      \"unlink\",\r\n      \"unlock\",\r\n      \"unlock-alt\",\r\n      \"upload\",\r\n      \"user\",\r\n      \"user-alt\",\r\n      \"user-alt-slash\",\r\n      \"user-astronaut\",\r\n      \"user-check\",\r\n      \"user-circle\",\r\n      \"user-clock\",\r\n      \"user-cog\",\r\n      \"user-edit\",\r\n      \"user-friends\",\r\n      \"user-graduate\",\r\n      \"user-lock\",\r\n      \"user-md\",\r\n      \"user-minus\",\r\n      \"user-ninja\",\r\n      \"user-plus\",\r\n      \"user-secret\",\r\n      \"user-shield\",\r\n      \"user-slash\",\r\n      \"user-tag\",\r\n      \"user-tie\",\r\n      \"user-times\",\r\n      \"users\",\r\n      \"users-cog\",\r\n      \"utensil-spoon\",\r\n      \"utensils\",\r\n      \"vector-square\",\r\n      \"venus\",\r\n      \"venus-double\",\r\n      \"venus-mars\",\r\n      \"vial\",\r\n      \"vials\",\r\n      \"video\",\r\n      \"video-slash\",\r\n      \"volleyball-ball\",\r\n      \"volume-down\",\r\n      \"volume-off\",\r\n      \"volume-up\",\r\n      \"walking\",\r\n      \"wallet\",\r\n      \"warehouse\",\r\n      \"weight\",\r\n      \"weight-hanging\",\r\n      \"wheelchair\",\r\n      \"wifi\",\r\n      \"window-close\",\r\n      \"window-maximize\",\r\n      \"window-minimize\",\r\n      \"window-restore\",\r\n      \"wine-glass\",\r\n      \"wine-glass-alt\",\r\n      \"won-sign\",\r\n      \"wrench\",\r\n      \"x-ray\",\r\n      \"yen-sign\"\r\n    ],\r\n    iconsBrand: [\r\n      \"500px\",\r\n      \"accessible-icon\",\r\n      \"accusoft\",\r\n      \"adn\",\r\n      \"adversal\",\r\n      \"affiliatetheme\",\r\n      \"algolia\",\r\n      \"amazon\",\r\n      \"amazon-pay\",\r\n      \"amilia\",\r\n      \"android\",\r\n      \"angellist\",\r\n      \"angrycreative\",\r\n      \"angular\",\r\n      \"app-store\",\r\n      \"app-store-ios\",\r\n      \"apper\",\r\n      \"apple\",\r\n      \"apple-pay\",\r\n      \"asymmetrik\",\r\n      \"audible\",\r\n      \"autoprefixer\",\r\n      \"avianex\",\r\n      \"aviato\",\r\n      \"aws\",\r\n      \"bandcamp\",\r\n      \"behance\",\r\n      \"behance-square\",\r\n      \"bimobject\",\r\n      \"bitbucket\",\r\n      \"bitcoin\",\r\n      \"bity\",\r\n      \"black-tie\",\r\n      \"blackberry\",\r\n      \"blogger\",\r\n      \"blogger-b\",\r\n      \"bluetooth\",\r\n      \"bluetooth-b\",\r\n      \"btc\",\r\n      \"buromobelexperte\",\r\n      \"buysellads\",\r\n      \"cc-amazon-pay\",\r\n      \"cc-amex\",\r\n      \"cc-apple-pay\",\r\n      \"cc-diners-club\",\r\n      \"cc-discover\",\r\n      \"cc-jcb\",\r\n      \"cc-mastercard\",\r\n      \"cc-paypal\",\r\n      \"cc-stripe\",\r\n      \"cc-visa\",\r\n      \"centercode\",\r\n      \"chrome\",\r\n      \"cloudscale\",\r\n      \"cloudsmith\",\r\n      \"cloudversify\",\r\n      \"vcodepen\",\r\n      \"codiepie\",\r\n      \"connectdevelop\",\r\n      \"contao\",\r\n      \"cpanel\",\r\n      \"creative-commons\",\r\n      \"creative-commons-by\",\r\n      \"creative-commons-nc\",\r\n      \"creative-commons-nc-eu\",\r\n      \"creative-commons-nc-jp\",\r\n      \"creative-commons-nd\",\r\n      \"creative-commons-pd\",\r\n      \"creative-commons-pd-alt\",\r\n      \"creative-commons-remix\",\r\n      \"creative-commons-sa\",\r\n      \"creative-commons-sampling\",\r\n      \"creative-commons-sampling-plus\",\r\n      \"creative-commons-share\",\r\n      \"css3\",\r\n      \"css3-alt\",\r\n      \"cuttlefish\",\r\n      \"d-and-d\",\r\n      \"dashcube\",\r\n      \"delicious\",\r\n      \"deploydog\",\r\n      \"deskpro\",\r\n      \"deviantart\",\r\n      \"digg\",\r\n      \"digital-ocean\",\r\n      \"discord\",\r\n      \"discourse\",\r\n      \"dochub\",\r\n      \"docker\",\r\n      \"draft2digital\",\r\n      \"dribbble\",\r\n      \"dribbble-square\",\r\n      \"dropbox\",\r\n      \"drupal\",\r\n      \"dyalog\",\r\n      \"earlybirds\",\r\n      \"ebay\",\r\n      \"edge\",\r\n      \"elementor\",\r\n      \"ello\",\r\n      \"ember\",\r\n      \"empire\",\r\n      \"envira\",\r\n      \"erlang\",\r\n      \"ethereum\",\r\n      \"etsy\",\r\n      \"expeditedssl\",\r\n      \"facebook\",\r\n      \"facebook-f\",\r\n      \"facebook-messenger\",\r\n      \"facebook-square\",\r\n      \"firefox\",\r\n      \"first-order\",\r\n      \"first-order-alt\",\r\n      \"firstdraft\",\r\n      \"flickr\",\r\n      \"flipboard\",\r\n      \"fly\",\r\n      \"font-awesome\",\r\n      \"font-awesome-alt\",\r\n      \"font-awesome-flag\",\r\n      \"fonticons\",\r\n      \"fonticons-fi\",\r\n      \"fort-awesome\",\r\n      \"fort-awesome-alt\",\r\n      \"forumbee\",\r\n      \"foursquare\",\r\n      \"free-code-camp\",\r\n      \"freebsd\",\r\n      \"fulcrum\",\r\n      \"galactic-republic\",\r\n      \"galactic-senate\",\r\n      \"get-pocket\",\r\n      \"gg\",\r\n      \"gg-circle\",\r\n      \"git\",\r\n      \"git-square\",\r\n      \"github\",\r\n      \"github-alt\",\r\n      \"github-square\",\r\n      \"gitkraken\",\r\n      \"gitlab\",\r\n      \"gitter\",\r\n      \"glide\",\r\n      \"glide-g\",\r\n      \"gofore\",\r\n      \"goodreads\",\r\n      \"goodreads-g\",\r\n      \"google\",\r\n      \"google-drive\",\r\n      \"google-play\",\r\n      \"google-plus\",\r\n      \"google-plus-g\",\r\n      \"google-plus-square\",\r\n      \"google-wallet\",\r\n      \"gratipay\",\r\n      \"grav\",\r\n      \"gripfire\",\r\n      \"grunt\",\r\n      \"gulp\",\r\n      \"hacker-news\",\r\n      \"hacker-news-square\",\r\n      \"hackerrank\",\r\n      \"hips\",\r\n      \"hire-a-helper\",\r\n      \"hooli\",\r\n      \"hornbill\",\r\n      \"hotjar\",\r\n      \"houzz\",\r\n      \"html5\",\r\n      \"hubspot\",\r\n      \"imdb\",\r\n      \"instagram\",\r\n      \"internet-explorer\",\r\n      \"ioxhost\",\r\n      \"itunes\",\r\n      \"itunes-note\",\r\n      \"java\",\r\n      \"jedi-order\",\r\n      \"jenkins\",\r\n      \"joget\",\r\n      \"joomla\",\r\n      \"js\",\r\n      \"js-square\",\r\n      \"jsfiddle\",\r\n      \"kaggle\",\r\n      \"keybase\",\r\n      \"keycdn\",\r\n      \"kickstarter\",\r\n      \"kickstarter-k\",\r\n      \"korvue\",\r\n      \"laravel\",\r\n      \"lastfm\",\r\n      \"lastfm-square\",\r\n      \"leanpub\",\r\n      \"less\",\r\n      \"line\",\r\n      \"linkedin\",\r\n      \"linkedin-in\",\r\n      \"linode\",\r\n      \"linux\",\r\n      \"lyft\",\r\n      \"magento\",\r\n      \"mailchimp\",\r\n      \"mandalorian\",\r\n      \"markdown\",\r\n      \"mastodon\",\r\n      \"maxcdn\",\r\n      \"medapps\",\r\n      \"medium\",\r\n      \"medium-m\",\r\n      \"medrt\",\r\n      \"meetup\",\r\n      \"megaport\",\r\n      \"microsoft\",\r\n      \"mix\",\r\n      \"mixcloud\",\r\n      \"mizuni\",\r\n      \"modx\",\r\n      \"monero\",\r\n      \"napster\",\r\n      \"neos\",\r\n      \"nimblr\",\r\n      \"nintendo-switch\",\r\n      \"node\",\r\n      \"node-js\",\r\n      \"npm\",\r\n      \"ns8\",\r\n      \"nutritionix\",\r\n      \"odnoklassniki\",\r\n      \"odnoklassniki-square\",\r\n      \"old-republic\",\r\n      \"opencart\",\r\n      \"openid\",\r\n      \"opera\",\r\n      \"optin-monster\",\r\n      \"osi\",\r\n      \"page4\",\r\n      \"pagelines\",\r\n      \"palfed\",\r\n      \"patreon\",\r\n      \"paypal\",\r\n      \"periscope\",\r\n      \"phabricator\",\r\n      \"phoenix-framework\",\r\n      \"phoenix-squadron\",\r\n      \"php\",\r\n      \"pied-piper\",\r\n      \"pied-piper-alt\",\r\n      \"pied-piper-hat\",\r\n      \"pied-piper-pp\",\r\n      \"pinterest\",\r\n      \"pinterest-p\",\r\n      \"pinterest-square\",\r\n      \"playstation\",\r\n      \"product-hunt\",\r\n      \"pushed\",\r\n      \"python\",\r\n      \"qq\",\r\n      \"quinscape\",\r\n      \"quora\",\r\n      \"r-project\",\r\n      \"ravelry\",\r\n      \"react\",\r\n      \"readme\",\r\n      \"rebel\",\r\n      \"red-river\",\r\n      \"reddit\",\r\n      \"reddit-alien\",\r\n      \"reddit-square\",\r\n      \"rendact\",\r\n      \"renren\",\r\n      \"replyd\",\r\n      \"researchgate\",\r\n      \"resolving\",\r\n      \"rev\",\r\n      \"rocketchat\",\r\n      \"rockrms\",\r\n      \"safari\",\r\n      \"sass\",\r\n      \"schlix\",\r\n      \"scribd\",\r\n      \"searchengin\",\r\n      \"sellcast\",\r\n      \"sellsy\",\r\n      \"servicestack\",\r\n      \"shirtsinbulk\",\r\n      \"shopware\",\r\n      \"simplybuilt\",\r\n      \"sistrix\",\r\n      \"sith\",\r\n      \"skyatlas\",\r\n      \"skype\",\r\n      \"slack\",\r\n      \"slack-hash\",\r\n      \"slideshare\",\r\n      \"snapchat\",\r\n      \"snapchat-ghost\",\r\n      \"snapchat-square\",\r\n      \"soundcloud\",\r\n      \"speakap\",\r\n      \"spotify\",\r\n      \"squarespace\",\r\n      \"stack-exchange\",\r\n      \"stack-overflow\",\r\n      \"staylinked\",\r\n      \"steam\",\r\n      \"steam-square\",\r\n      \"steam-symbol\",\r\n      \"sticker-mule\",\r\n      \"strava\",\r\n      \"stripe\",\r\n      \"stripe-s\",\r\n      \"studiovinari\",\r\n      \"stumbleupon\",\r\n      \"stumbleupon-circle\",\r\n      \"superpowers\",\r\n      \"supple\",\r\n      \"telegram\",\r\n      \"telegram-plane\",\r\n      \"tencent-weibo\",\r\n      \"themeco\",\r\n      \"themeisle\",\r\n      \"trade-federation\",\r\n      \"trello\",\r\n      \"tripadvisor\",\r\n      \"tumblr\",\r\n      \"tumblr-square\",\r\n      \"twitch\",\r\n      \"twitter\",\r\n      \"twitter-square\",\r\n      \"typo3\",\r\n      \"uber\",\r\n      \"uikit\",\r\n      \"uniregistry\",\r\n      \"untappd\",\r\n      \"usb\",\r\n      \"ussunnah\",\r\n      \"vaadin\",\r\n      \"viacoin\",\r\n      \"viadeo\",\r\n      \"viadeo-square\",\r\n      \"viber\",\r\n      \"vimeo\",\r\n      \"vimeo-square\",\r\n      \"vimeo-v\",\r\n      \"vine\",\r\n      \"vk\",\r\n      \"vnv\",\r\n      \"vuejs\",\r\n      \"weebly\",\r\n      \"weibo\",\r\n      \"weixin\",\r\n      \"whatsapp\",\r\n      \"whatsapp-square\",\r\n      \"whmcs\",\r\n      \"wikipedia-w\",\r\n      \"windows\",\r\n      \"wix\",\r\n      \"wolf-pack-battalion\",\r\n      \"wordpress\",\r\n      \"wordpress-simple\",\r\n      \"wpbeginner\",\r\n      \"wpexplorer\",\r\n      \"wpforms\",\r\n      \"xbox\",\r\n      \"xing\",\r\n      \"xing-square\",\r\n      \"y-combinator\",\r\n      \"yahoo\",\r\n      \"yandex\",\r\n      \"yandex-international\",\r\n      \"yelp\",\r\n      \"yoast\",\r\n      \"youtube\",\r\n      \"youtube-square\",\r\n      \"zhihu\"\r\n    ]\r\n  })\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.faicon {\r\n  min-height: 30px;\r\n  text-align: center;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$7 = "data-v-98884e52";
+    const __vue_scope_id__$8 = "data-v-98884e52";
     /* module identifier */
-    const __vue_module_identifier__$7 = undefined;
+    const __vue_module_identifier__$8 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$7 = false;
+    const __vue_is_functional_template__$8 = false;
     /* style inject SSR */
     
 
     
     var IconSelector = normalizeComponent_1(
-      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-      __vue_inject_styles__$7,
-      __vue_script__$7,
-      __vue_scope_id__$7,
-      __vue_is_functional_template__$7,
-      __vue_module_identifier__$7,
+      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+      __vue_inject_styles__$8,
+      __vue_script__$8,
+      __vue_scope_id__$8,
+      __vue_is_functional_template__$8,
+      __vue_module_identifier__$8,
       browser,
       undefined
     );
@@ -2614,10 +2696,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$8 = ImageZoomOnHover;
+  const __vue_script__$9 = ImageZoomOnHover;
 
   /* template */
-  var __vue_render__$8 = function() {
+  var __vue_render__$9 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2625,32 +2707,32 @@
       _c("div", { staticClass: "zoomed", style: _vm.imageStyle })
     ])
   };
-  var __vue_staticRenderFns__$8 = [];
-  __vue_render__$8._withStripped = true;
+  var __vue_staticRenderFns__$9 = [];
+  __vue_render__$9._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$8 = function (inject) {
+    const __vue_inject_styles__$9 = function (inject) {
       if (!inject) return
       inject("data-v-4ce995a9_0", { source: "\n.zoomer[data-v-4ce995a9] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  margin: 10px;\n}\n.zoomed[data-v-4ce995a9] {\r\n  transition: all 0.5s ease;\n}\n.zoomed[data-v-4ce995a9]:hover {\r\n  transform: scale(1.05);\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\ImageZoomOnHover.vue"],"names":[],"mappings":";AA8BA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,YAAA;AACA;AACA;EACA,yBAAA;AACA;AACA;EACA,sBAAA;AACA","file":"ImageZoomOnHover.vue","sourcesContent":["<template>\r\n  <div class=\"zoomer\">\r\n    <div class=\"zoomed\" :style=\"imageStyle\" />\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class ImageZoomOnHover extends Vue {\r\n  @Prop() readonly imageUrl!: string;\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-position\": \"center\",\r\n      transition: \"all 0.5s ease\",\r\n      height: \"100%\",\r\n      width: \"100%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.zoomer {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  margin: 10px;\r\n}\r\n.zoomed {\r\n  transition: all 0.5s ease;\r\n}\r\n.zoomed:hover {\r\n  transform: scale(1.05);\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$8 = "data-v-4ce995a9";
+    const __vue_scope_id__$9 = "data-v-4ce995a9";
     /* module identifier */
-    const __vue_module_identifier__$8 = undefined;
+    const __vue_module_identifier__$9 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$8 = false;
+    const __vue_is_functional_template__$9 = false;
     /* style inject SSR */
     
 
     
     var ImageZoomOnHover$1 = normalizeComponent_1(
-      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-      __vue_inject_styles__$8,
-      __vue_script__$8,
-      __vue_scope_id__$8,
-      __vue_is_functional_template__$8,
-      __vue_module_identifier__$8,
+      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+      __vue_inject_styles__$9,
+      __vue_script__$9,
+      __vue_scope_id__$9,
+      __vue_is_functional_template__$9,
+      __vue_module_identifier__$9,
       browser,
       undefined
     );
@@ -2687,10 +2769,10 @@
   };
 
   /* script */
-  const __vue_script__$9 = script$5;
+  const __vue_script__$a = script$5;
 
   /* template */
-  var __vue_render__$9 = function() {
+  var __vue_render__$a = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2705,32 +2787,32 @@
       )
     ])
   };
-  var __vue_staticRenderFns__$9 = [];
-  __vue_render__$9._withStripped = true;
+  var __vue_staticRenderFns__$a = [];
+  __vue_render__$a._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$9 = function (inject) {
+    const __vue_inject_styles__$a = function (inject) {
       if (!inject) return
       inject("data-v-ff72be10_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"LinkedHeaderField.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$9 = "data-v-ff72be10";
+    const __vue_scope_id__$a = "data-v-ff72be10";
     /* module identifier */
-    const __vue_module_identifier__$9 = undefined;
+    const __vue_module_identifier__$a = undefined;
     /* functional template */
-    const __vue_is_functional_template__$9 = false;
+    const __vue_is_functional_template__$a = false;
     /* style inject SSR */
     
 
     
     var LinkedHeaderField = normalizeComponent_1(
-      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-      __vue_inject_styles__$9,
-      __vue_script__$9,
-      __vue_scope_id__$9,
-      __vue_is_functional_template__$9,
-      __vue_module_identifier__$9,
+      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+      __vue_inject_styles__$a,
+      __vue_script__$a,
+      __vue_scope_id__$a,
+      __vue_is_functional_template__$a,
+      __vue_module_identifier__$a,
       browser,
       undefined
     );
@@ -2751,10 +2833,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$a = LoadingOverlay;
+  const __vue_script__$b = LoadingOverlay;
 
   /* template */
-  var __vue_render__$a = function() {
+  var __vue_render__$b = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2810,32 +2892,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$a = [];
-  __vue_render__$a._withStripped = true;
+  var __vue_staticRenderFns__$b = [];
+  __vue_render__$b._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$a = function (inject) {
+    const __vue_inject_styles__$b = function (inject) {
       if (!inject) return
       inject("data-v-07c26cc4_0", { source: "\n.overlay[data-v-07c26cc4] {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\LoadingOverlay.vue"],"names":[],"mappings":";AA6BA;EACA,kBAAA;EACA,MAAA;EACA,SAAA;EACA,OAAA;EACA,QAAA;AACA","file":"LoadingOverlay.vue","sourcesContent":["<template>\r\n  <div class=\"overlay\">\r\n    <v-container fill-height>\r\n      <v-layout align-center justify-center column fill-height>\r\n        <v-flex xs5/>\r\n        <v-flex xs1>\r\n          <v-progress-circular size=\"65\" color=\"#666\" class=\"mb-4\" :indeterminate=\"true\"/>\r\n        </v-flex>\r\n        <v-flex xs1>\r\n          <div class=\"subheading\" style=\"color: #666;\">{{ loadingMessage || 'Loading ...' }}</div>\r\n        </v-flex>\r\n        <v-flex xs5/>\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport Vue from \"vue\";\r\n\r\n@Component({})\r\nexport default class LoadingOverlay extends Vue {\r\n  @Prop() readonly loadingMessage!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$a = "data-v-07c26cc4";
+    const __vue_scope_id__$b = "data-v-07c26cc4";
     /* module identifier */
-    const __vue_module_identifier__$a = undefined;
+    const __vue_module_identifier__$b = undefined;
     /* functional template */
-    const __vue_is_functional_template__$a = false;
+    const __vue_is_functional_template__$b = false;
     /* style inject SSR */
     
 
     
     var LoadingOverlay$1 = normalizeComponent_1(
-      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-      __vue_inject_styles__$a,
-      __vue_script__$a,
-      __vue_scope_id__$a,
-      __vue_is_functional_template__$a,
-      __vue_module_identifier__$a,
+      { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+      __vue_inject_styles__$b,
+      __vue_script__$b,
+      __vue_scope_id__$b,
+      __vue_is_functional_template__$b,
+      __vue_module_identifier__$b,
       browser,
       undefined
     );
@@ -2852,10 +2934,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$b = DialogForm;
+  const __vue_script__$c = DialogForm;
 
   /* template */
-  var __vue_render__$b = function() {
+  var __vue_render__$c = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2873,17 +2955,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$b = [];
-  __vue_render__$b._withStripped = true;
+  var __vue_staticRenderFns__$c = [];
+  __vue_render__$c._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$b = undefined;
+    const __vue_inject_styles__$c = undefined;
     /* scoped */
-    const __vue_scope_id__$b = undefined;
+    const __vue_scope_id__$c = undefined;
     /* module identifier */
-    const __vue_module_identifier__$b = undefined;
+    const __vue_module_identifier__$c = undefined;
     /* functional template */
-    const __vue_is_functional_template__$b = false;
+    const __vue_is_functional_template__$c = false;
     /* style inject */
     
     /* style inject SSR */
@@ -2891,12 +2973,12 @@
 
     
     var DialogForm$1 = normalizeComponent_1(
-      { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-      __vue_inject_styles__$b,
-      __vue_script__$b,
-      __vue_scope_id__$b,
-      __vue_is_functional_template__$b,
-      __vue_module_identifier__$b,
+      { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+      __vue_inject_styles__$c,
+      __vue_script__$c,
+      __vue_scope_id__$c,
+      __vue_is_functional_template__$c,
+      __vue_module_identifier__$c,
       undefined,
       undefined
     );
@@ -2947,10 +3029,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$c = FormDateTimePicker;
+  const __vue_script__$d = FormDateTimePicker;
 
   /* template */
-  var __vue_render__$c = function() {
+  var __vue_render__$d = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2974,17 +3056,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$c = [];
-  __vue_render__$c._withStripped = true;
+  var __vue_staticRenderFns__$d = [];
+  __vue_render__$d._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$c = undefined;
+    const __vue_inject_styles__$d = undefined;
     /* scoped */
-    const __vue_scope_id__$c = undefined;
+    const __vue_scope_id__$d = undefined;
     /* module identifier */
-    const __vue_module_identifier__$c = undefined;
+    const __vue_module_identifier__$d = undefined;
     /* functional template */
-    const __vue_is_functional_template__$c = false;
+    const __vue_is_functional_template__$d = false;
     /* style inject */
     
     /* style inject SSR */
@@ -2992,12 +3074,12 @@
 
     
     var FormDateTimePicker$1 = normalizeComponent_1(
-      { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-      __vue_inject_styles__$c,
-      __vue_script__$c,
-      __vue_scope_id__$c,
-      __vue_is_functional_template__$c,
-      __vue_module_identifier__$c,
+      { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+      __vue_inject_styles__$d,
+      __vue_script__$d,
+      __vue_scope_id__$d,
+      __vue_is_functional_template__$d,
+      __vue_module_identifier__$d,
       undefined,
       undefined
     );
@@ -3067,10 +3149,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$d = FormSelect;
+  const __vue_script__$e = FormSelect;
 
   /* template */
-  var __vue_render__$d = function() {
+  var __vue_render__$e = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3106,32 +3188,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$d = [];
-  __vue_render__$d._withStripped = true;
+  var __vue_staticRenderFns__$e = [];
+  __vue_render__$e._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$d = function (inject) {
+    const __vue_inject_styles__$e = function (inject) {
       if (!inject) return
       inject("data-v-2725668a_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormSelect.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$d = "data-v-2725668a";
+    const __vue_scope_id__$e = "data-v-2725668a";
     /* module identifier */
-    const __vue_module_identifier__$d = undefined;
+    const __vue_module_identifier__$e = undefined;
     /* functional template */
-    const __vue_is_functional_template__$d = false;
+    const __vue_is_functional_template__$e = false;
     /* style inject SSR */
     
 
     
     var FormSelect$1 = normalizeComponent_1(
-      { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-      __vue_inject_styles__$d,
-      __vue_script__$d,
-      __vue_scope_id__$d,
-      __vue_is_functional_template__$d,
-      __vue_module_identifier__$d,
+      { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+      __vue_inject_styles__$e,
+      __vue_script__$e,
+      __vue_scope_id__$e,
+      __vue_is_functional_template__$e,
+      __vue_module_identifier__$e,
       browser,
       undefined
     );
@@ -3201,10 +3283,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$e = FormSelect$2;
+  const __vue_script__$f = FormSelect$2;
 
   /* template */
-  var __vue_render__$e = function() {
+  var __vue_render__$f = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3237,32 +3319,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$e = [];
-  __vue_render__$e._withStripped = true;
+  var __vue_staticRenderFns__$f = [];
+  __vue_render__$f._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$e = function (inject) {
+    const __vue_inject_styles__$f = function (inject) {
       if (!inject) return
       inject("data-v-3eefd107_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormSelectCondensed.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$e = "data-v-3eefd107";
+    const __vue_scope_id__$f = "data-v-3eefd107";
     /* module identifier */
-    const __vue_module_identifier__$e = undefined;
+    const __vue_module_identifier__$f = undefined;
     /* functional template */
-    const __vue_is_functional_template__$e = false;
+    const __vue_is_functional_template__$f = false;
     /* style inject SSR */
     
 
     
     var FormSelectCondensed = normalizeComponent_1(
-      { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-      __vue_inject_styles__$e,
-      __vue_script__$e,
-      __vue_scope_id__$e,
-      __vue_is_functional_template__$e,
-      __vue_module_identifier__$e,
+      { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+      __vue_inject_styles__$f,
+      __vue_script__$f,
+      __vue_scope_id__$f,
+      __vue_is_functional_template__$f,
+      __vue_module_identifier__$f,
       browser,
       undefined
     );
@@ -3313,10 +3395,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$f = FormText;
+  const __vue_script__$g = FormText;
 
   /* template */
-  var __vue_render__$f = function() {
+  var __vue_render__$g = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3348,32 +3430,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$f = [];
-  __vue_render__$f._withStripped = true;
+  var __vue_staticRenderFns__$g = [];
+  __vue_render__$g._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$f = function (inject) {
+    const __vue_inject_styles__$g = function (inject) {
       if (!inject) return
       inject("data-v-47ddd8e5_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormText.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$f = "data-v-47ddd8e5";
+    const __vue_scope_id__$g = "data-v-47ddd8e5";
     /* module identifier */
-    const __vue_module_identifier__$f = undefined;
+    const __vue_module_identifier__$g = undefined;
     /* functional template */
-    const __vue_is_functional_template__$f = false;
+    const __vue_is_functional_template__$g = false;
     /* style inject SSR */
     
 
     
     var FormText$1 = normalizeComponent_1(
-      { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-      __vue_inject_styles__$f,
-      __vue_script__$f,
-      __vue_scope_id__$f,
-      __vue_is_functional_template__$f,
-      __vue_module_identifier__$f,
+      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+      __vue_inject_styles__$g,
+      __vue_script__$g,
+      __vue_scope_id__$g,
+      __vue_is_functional_template__$g,
+      __vue_module_identifier__$g,
       browser,
       undefined
     );
@@ -3420,10 +3502,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$g = FormText$2;
+  const __vue_script__$h = FormText$2;
 
   /* template */
-  var __vue_render__$g = function() {
+  var __vue_render__$h = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3454,32 +3536,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$g = [];
-  __vue_render__$g._withStripped = true;
+  var __vue_staticRenderFns__$h = [];
+  __vue_render__$h._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$g = function (inject) {
+    const __vue_inject_styles__$h = function (inject) {
       if (!inject) return
       inject("data-v-333dc9c8_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormTextArea.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$g = "data-v-333dc9c8";
+    const __vue_scope_id__$h = "data-v-333dc9c8";
     /* module identifier */
-    const __vue_module_identifier__$g = undefined;
+    const __vue_module_identifier__$h = undefined;
     /* functional template */
-    const __vue_is_functional_template__$g = false;
+    const __vue_is_functional_template__$h = false;
     /* style inject SSR */
     
 
     
     var FormTextArea = normalizeComponent_1(
-      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-      __vue_inject_styles__$g,
-      __vue_script__$g,
-      __vue_scope_id__$g,
-      __vue_is_functional_template__$g,
-      __vue_module_identifier__$g,
+      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+      __vue_inject_styles__$h,
+      __vue_script__$h,
+      __vue_scope_id__$h,
+      __vue_is_functional_template__$h,
+      __vue_module_identifier__$h,
       browser,
       undefined
     );
@@ -3583,10 +3665,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$h = BaseDialog;
+  const __vue_script__$i = BaseDialog;
 
   /* template */
-  var __vue_render__$h = function() {
+  var __vue_render__$i = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3709,32 +3791,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$h = [];
-  __vue_render__$h._withStripped = true;
+  var __vue_staticRenderFns__$i = [];
+  __vue_render__$i._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$h = function (inject) {
+    const __vue_inject_styles__$i = function (inject) {
       if (!inject) return
       inject("data-v-f9425d18_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$h = "data-v-f9425d18";
+    const __vue_scope_id__$i = "data-v-f9425d18";
     /* module identifier */
-    const __vue_module_identifier__$h = undefined;
+    const __vue_module_identifier__$i = undefined;
     /* functional template */
-    const __vue_is_functional_template__$h = false;
+    const __vue_is_functional_template__$i = false;
     /* style inject SSR */
     
 
     
     var BaseDialog$1 = normalizeComponent_1(
-      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-      __vue_inject_styles__$h,
-      __vue_script__$h,
-      __vue_scope_id__$h,
-      __vue_is_functional_template__$h,
-      __vue_module_identifier__$h,
+      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+      __vue_inject_styles__$i,
+      __vue_script__$i,
+      __vue_scope_id__$i,
+      __vue_is_functional_template__$i,
+      __vue_module_identifier__$i,
       browser,
       undefined
     );
@@ -3780,10 +3862,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$i = ConfirmDialog;
+  const __vue_script__$j = ConfirmDialog;
 
   /* template */
-  var __vue_render__$i = function() {
+  var __vue_render__$j = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3860,17 +3942,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$i = [];
-  __vue_render__$i._withStripped = true;
+  var __vue_staticRenderFns__$j = [];
+  __vue_render__$j._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$i = undefined;
+    const __vue_inject_styles__$j = undefined;
     /* scoped */
-    const __vue_scope_id__$i = undefined;
+    const __vue_scope_id__$j = undefined;
     /* module identifier */
-    const __vue_module_identifier__$i = undefined;
+    const __vue_module_identifier__$j = undefined;
     /* functional template */
-    const __vue_is_functional_template__$i = false;
+    const __vue_is_functional_template__$j = false;
     /* style inject */
     
     /* style inject SSR */
@@ -3878,12 +3960,12 @@
 
     
     var ConfirmDialog$1 = normalizeComponent_1(
-      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-      __vue_inject_styles__$i,
-      __vue_script__$i,
-      __vue_scope_id__$i,
-      __vue_is_functional_template__$i,
-      __vue_module_identifier__$i,
+      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+      __vue_inject_styles__$j,
+      __vue_script__$j,
+      __vue_scope_id__$j,
+      __vue_is_functional_template__$j,
+      __vue_module_identifier__$j,
       undefined,
       undefined
     );
@@ -3928,10 +4010,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$j = DeleteDialog;
+  const __vue_script__$k = DeleteDialog;
 
   /* template */
-  var __vue_render__$j = function() {
+  var __vue_render__$k = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4022,32 +4104,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$j = [];
-  __vue_render__$j._withStripped = true;
+  var __vue_staticRenderFns__$k = [];
+  __vue_render__$k._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$j = function (inject) {
+    const __vue_inject_styles__$k = function (inject) {
       if (!inject) return
       inject("data-v-5453c202_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DeleteDialog.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$j = "data-v-5453c202";
+    const __vue_scope_id__$k = "data-v-5453c202";
     /* module identifier */
-    const __vue_module_identifier__$j = undefined;
+    const __vue_module_identifier__$k = undefined;
     /* functional template */
-    const __vue_is_functional_template__$j = false;
+    const __vue_is_functional_template__$k = false;
     /* style inject SSR */
     
 
     
     var DeleteDialog$1 = normalizeComponent_1(
-      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-      __vue_inject_styles__$j,
-      __vue_script__$j,
-      __vue_scope_id__$j,
-      __vue_is_functional_template__$j,
-      __vue_module_identifier__$j,
+      { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+      __vue_inject_styles__$k,
+      __vue_script__$k,
+      __vue_scope_id__$k,
+      __vue_is_functional_template__$k,
+      __vue_module_identifier__$k,
       browser,
       undefined
     );
@@ -4243,10 +4325,10 @@
   }(sitewhereIdeCommon.DialogSection));
 
   /* script */
-  const __vue_script__$k = MetadataPanel;
+  const __vue_script__$l = MetadataPanel;
 
   /* template */
-  var __vue_render__$k = function() {
+  var __vue_render__$l = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4455,32 +4537,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$k = [];
-  __vue_render__$k._withStripped = true;
+  var __vue_staticRenderFns__$l = [];
+  __vue_render__$l._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$k = function (inject) {
+    const __vue_inject_styles__$l = function (inject) {
       if (!inject) return
       inject("data-v-1bf1f529_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"MetadataPanel.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$k = "data-v-1bf1f529";
+    const __vue_scope_id__$l = "data-v-1bf1f529";
     /* module identifier */
-    const __vue_module_identifier__$k = undefined;
+    const __vue_module_identifier__$l = undefined;
     /* functional template */
-    const __vue_is_functional_template__$k = false;
+    const __vue_is_functional_template__$l = false;
     /* style inject SSR */
     
 
     
     var MetadataPanel$1 = normalizeComponent_1(
-      { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-      __vue_inject_styles__$k,
-      __vue_script__$k,
-      __vue_scope_id__$k,
-      __vue_is_functional_template__$k,
-      __vue_module_identifier__$k,
+      { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+      __vue_inject_styles__$l,
+      __vue_script__$l,
+      __vue_scope_id__$l,
+      __vue_is_functional_template__$l,
+      __vue_module_identifier__$l,
       browser,
       undefined
     );
@@ -4497,10 +4579,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$l = ListEntry;
+  const __vue_script__$m = ListEntry;
 
   /* template */
-  var __vue_render__$l = function() {
+  var __vue_render__$m = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4511,32 +4593,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$l = [];
-  __vue_render__$l._withStripped = true;
+  var __vue_staticRenderFns__$m = [];
+  __vue_render__$m._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$l = function (inject) {
+    const __vue_inject_styles__$m = function (inject) {
       if (!inject) return
       inject("data-v-2ee7dd54_0", { source: "\n.list-entry[data-v-2ee7dd54] {\r\n  border: 1px solid #ddd;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListEntry.vue"],"names":[],"mappings":";AAeA;EACA,sBAAA;AACA","file":"ListEntry.vue","sourcesContent":["<template>\r\n  <v-card class=\"list-entry\" flat hover>\r\n    <slot/>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component\r\nexport default class ListEntry extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.list-entry {\r\n  border: 1px solid #ddd;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$l = "data-v-2ee7dd54";
+    const __vue_scope_id__$m = "data-v-2ee7dd54";
     /* module identifier */
-    const __vue_module_identifier__$l = undefined;
+    const __vue_module_identifier__$m = undefined;
     /* functional template */
-    const __vue_is_functional_template__$l = false;
+    const __vue_is_functional_template__$m = false;
     /* style inject SSR */
     
 
     
     var ListEntry$1 = normalizeComponent_1(
-      { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-      __vue_inject_styles__$l,
-      __vue_script__$l,
-      __vue_scope_id__$l,
-      __vue_is_functional_template__$l,
-      __vue_module_identifier__$l,
+      { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+      __vue_inject_styles__$m,
+      __vue_script__$m,
+      __vue_scope_id__$m,
+      __vue_is_functional_template__$m,
+      __vue_module_identifier__$m,
       browser,
       undefined
     );
@@ -4553,10 +4635,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$m = ListLayout;
+  const __vue_script__$n = ListLayout;
 
   /* template */
-  var __vue_render__$m = function() {
+  var __vue_render__$n = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4577,32 +4659,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$m = [];
-  __vue_render__$m._withStripped = true;
+  var __vue_staticRenderFns__$n = [];
+  __vue_render__$n._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$m = function (inject) {
+    const __vue_inject_styles__$n = function (inject) {
       if (!inject) return
       inject("data-v-15fab996_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ListLayout.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$m = "data-v-15fab996";
+    const __vue_scope_id__$n = "data-v-15fab996";
     /* module identifier */
-    const __vue_module_identifier__$m = undefined;
+    const __vue_module_identifier__$n = undefined;
     /* functional template */
-    const __vue_is_functional_template__$m = false;
+    const __vue_is_functional_template__$n = false;
     /* style inject SSR */
     
 
     
     var ListLayout$1 = normalizeComponent_1(
-      { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-      __vue_inject_styles__$m,
-      __vue_script__$m,
-      __vue_scope_id__$m,
-      __vue_is_functional_template__$m,
-      __vue_module_identifier__$m,
+      { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+      __vue_inject_styles__$n,
+      __vue_script__$n,
+      __vue_scope_id__$n,
+      __vue_is_functional_template__$n,
+      __vue_module_identifier__$n,
       browser,
       undefined
     );
@@ -4639,10 +4721,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$n = NavigationPage;
+  const __vue_script__$o = NavigationPage;
 
   /* template */
-  var __vue_render__$n = function() {
+  var __vue_render__$o = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4689,32 +4771,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$n = [];
-  __vue_render__$n._withStripped = true;
+  var __vue_staticRenderFns__$o = [];
+  __vue_render__$o._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$n = function (inject) {
+    const __vue_inject_styles__$o = function (inject) {
       if (!inject) return
       inject("data-v-380c53f4_0", { source: "\n.flex-rows[data-v-380c53f4] {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.toolbar[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\n}\n.header[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\n}\n.content[data-v-380c53f4] {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\n}\n.footer[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationPage.vue"],"names":[],"mappings":";AA0CA;EACA,aAAA;EACA,sBAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;EACA,WAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA","file":"NavigationPage.vue","sourcesContent":["<template>\r\n  <v-card class=\"flex-rows\" flat fill-height>\r\n    <v-toolbar class=\"elevation-1 toolbar\" dense>\r\n      <v-icon>{{ icon }}</v-icon>\r\n      <v-toolbar-title class=\"ml-2 subheading\">{{ title }}</v-toolbar-title>\r\n      <v-spacer></v-spacer>\r\n      <slot name=\"actions\"/>\r\n    </v-toolbar>\r\n    <div class=\"header\">\r\n      <slot name=\"header\"/>\r\n    </div>\r\n    <div class=\"content\">\r\n      <slot v-if=\"loaded\" name=\"content\"/>\r\n    </div>\r\n    <div class=\"footer\">\r\n      <slot name=\"footer\"/>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\"/>\r\n    <slot name=\"dialogs\"/>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class NavigationPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.toolbar {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\r\n}\r\n.header {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n.content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\r\n}\r\n.footer {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$n = "data-v-380c53f4";
+    const __vue_scope_id__$o = "data-v-380c53f4";
     /* module identifier */
-    const __vue_module_identifier__$n = undefined;
+    const __vue_module_identifier__$o = undefined;
     /* functional template */
-    const __vue_is_functional_template__$n = false;
+    const __vue_is_functional_template__$o = false;
     /* style inject SSR */
     
 
     
     var NavigationPage$1 = normalizeComponent_1(
-      { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
-      __vue_inject_styles__$n,
-      __vue_script__$n,
-      __vue_scope_id__$n,
-      __vue_is_functional_template__$n,
-      __vue_module_identifier__$n,
+      { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+      __vue_inject_styles__$o,
+      __vue_script__$o,
+      __vue_scope_id__$o,
+      __vue_is_functional_template__$o,
+      __vue_module_identifier__$o,
       browser,
       undefined
     );
@@ -4746,10 +4828,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$o = Pager;
+  const __vue_script__$p = Pager;
 
   /* template */
-  var __vue_render__$o = function() {
+  var __vue_render__$p = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4779,17 +4861,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$o = [];
-  __vue_render__$o._withStripped = true;
+  var __vue_staticRenderFns__$p = [];
+  __vue_render__$p._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$o = undefined;
+    const __vue_inject_styles__$p = undefined;
     /* scoped */
-    const __vue_scope_id__$o = undefined;
+    const __vue_scope_id__$p = undefined;
     /* module identifier */
-    const __vue_module_identifier__$o = undefined;
+    const __vue_module_identifier__$p = undefined;
     /* functional template */
-    const __vue_is_functional_template__$o = false;
+    const __vue_is_functional_template__$p = false;
     /* style inject */
     
     /* style inject SSR */
@@ -4797,12 +4879,12 @@
 
     
     var PagerButton = normalizeComponent_1(
-      { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
-      __vue_inject_styles__$o,
-      __vue_script__$o,
-      __vue_scope_id__$o,
-      __vue_is_functional_template__$o,
-      __vue_module_identifier__$o,
+      { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+      __vue_inject_styles__$p,
+      __vue_script__$p,
+      __vue_scope_id__$p,
+      __vue_is_functional_template__$p,
+      __vue_module_identifier__$p,
       undefined,
       undefined
     );
@@ -4976,10 +5058,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$p = Pager$1;
+  const __vue_script__$q = Pager$1;
 
   /* template */
-  var __vue_render__$p = function() {
+  var __vue_render__$q = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5110,32 +5192,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$p = [];
-  __vue_render__$p._withStripped = true;
+  var __vue_staticRenderFns__$q = [];
+  __vue_render__$q._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$p = function (inject) {
+    const __vue_inject_styles__$q = function (inject) {
       if (!inject) return
       inject("data-v-0683e798_0", { source: "\n.pager[data-v-0683e798] {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\Pager.vue"],"names":[],"mappings":";AA4MA;EACA,WAAA;EACA,sBAAA;EACA,0BAAA;AACA","file":"Pager.vue","sourcesContent":["<template>\r\n  <div class=\"pager\">\r\n    <slot v-if=\"results && results.numResults === 0\" name=\"noresults\"></slot>\r\n    <v-container class=\"ma-0 pa-0\">\r\n      <v-layout row wrap>\r\n        <v-flex xs2>\r\n          <v-subheader class=\"ma-0 pt-0 pr-0\">Rows per page</v-subheader>\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-btn-toggle v-model=\"pageSize\" class=\"mt-1\">\r\n            <v-btn\r\n              flat\r\n              :value=\"entry.value\"\r\n              v-for=\"entry in pageSizesWithDefaults\"\r\n              :key=\"entry.value\"\r\n            >{{ entry.text }}</v-btn>\r\n          </v-btn-toggle>\r\n        </v-flex>\r\n        <v-flex xs4>\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onFirstPage\"\r\n            icon=\"fast-backward\"\r\n            text=\"First Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onPreviousPage\"\r\n            icon=\"backward\"\r\n            text=\"Previous Page\"\r\n          />\r\n          <pager-button @click=\"onRefresh\" icon=\"sync\" text=\"Refresh\" />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onNextPage\"\r\n            icon=\"forward\"\r\n            text=\"Next Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onLastPage\"\r\n            icon=\"fast-forward\"\r\n            text=\"Last Page\"\r\n          />\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-subheader class=\"ma-0 pt-0 right\">{{ description }}</v-subheader>\r\n        </v-flex>\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport PagerButton from \"./PagerButton.vue\";\r\n\r\nimport {\r\n  Component,\r\n  Prop,\r\n  Watch,\r\n  IPaging,\r\n  IPageSizes\r\n} from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    PagerButton\r\n  }\r\n})\r\nexport default class Pager extends Vue {\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n\r\n  page: number = 1;\r\n  pageSize: number | null = null;\r\n  defaultResults: { numResults: number; results: {}[] } = {\r\n    numResults: 0,\r\n    results: []\r\n  };\r\n  defaultPageSizes: IPageSizes = [\r\n    {\r\n      text: \"10\",\r\n      value: 10\r\n    },\r\n    {\r\n      text: \"25\",\r\n      value: 25\r\n    },\r\n    {\r\n      text: \"50\",\r\n      value: 50\r\n    }\r\n  ];\r\n\r\n  created() {\r\n    if (!this.pageSize) {\r\n      this.pageSize = this.pageSizesWithDefaults[0].value;\r\n    }\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Refresh results on page size updated.\r\n  @Watch(\"pageSize\") onPageSizeUpdated(val: number, oldVal: number) {\r\n    this.page = 1;\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Results with defaults fallback.\r\n  get resultsWithDefaults(): { numResults: number; results: {}[] } {\r\n    return this.results || this.defaultResults;\r\n  }\r\n\r\n  // Total record count.\r\n  get total(): number {\r\n    return this.resultsWithDefaults.numResults;\r\n  }\r\n\r\n  // Description.\r\n  get description(): string {\r\n    let size = this.pageSize || 0;\r\n    let total = this.total;\r\n    let page = this.page;\r\n    var first = size * (page - 1) + 1;\r\n    var last = Math.min(total, first + size - 1);\r\n    return \"\" + first + \"-\" + last + \" of \" + total;\r\n  }\r\n\r\n  // Calculate number of pages.\r\n  get pageCount() {\r\n    var results = this.resultsWithDefaults;\r\n    var total = results.numResults;\r\n    var size = this.pageSize || 0;\r\n    var mod = total % size;\r\n    var count = (total / size) | 0;\r\n    count += mod > 0 ? 1 : 0;\r\n    return count;\r\n  }\r\n\r\n  // Get list of available page sizes with fallback defaults.\r\n  get pageSizesWithDefaults(): { text: string; value: number }[] {\r\n    return this.pageSizes || this.defaultPageSizes;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get previousEnabled(): boolean {\r\n    return this.page > 1;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get nextEnabled(): boolean {\r\n    return this.page < this.pageCount;\r\n  }\r\n\r\n  // Called to move to first page.\r\n  onFirstPage() {\r\n    if (this.page !== 1) {\r\n      this.page = 1;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to previous page.\r\n  onPreviousPage() {\r\n    if (this.page > 1) {\r\n      this.page--;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to refresh data.\r\n  onRefresh() {\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Called to move to next page.\r\n  onNextPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page++;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to last page.\r\n  onLastPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page = this.pageCount;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called when paging values are updated.\r\n  onPagingUpdated() {\r\n    var paging: IPaging = {\r\n      pageNumber: this.page,\r\n      pageSize: this.pageSize || 0\r\n    };\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.pager {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$p = "data-v-0683e798";
+    const __vue_scope_id__$q = "data-v-0683e798";
     /* module identifier */
-    const __vue_module_identifier__$p = undefined;
+    const __vue_module_identifier__$q = undefined;
     /* functional template */
-    const __vue_is_functional_template__$p = false;
+    const __vue_is_functional_template__$q = false;
     /* style inject SSR */
     
 
     
     var Pager$2 = normalizeComponent_1(
-      { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
-      __vue_inject_styles__$p,
-      __vue_script__$p,
-      __vue_scope_id__$p,
-      __vue_is_functional_template__$p,
-      __vue_module_identifier__$p,
+      { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
+      __vue_inject_styles__$q,
+      __vue_script__$q,
+      __vue_scope_id__$q,
+      __vue_is_functional_template__$q,
+      __vue_module_identifier__$q,
       browser,
       undefined
     );
@@ -5201,10 +5283,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$q = ListPage;
+  const __vue_script__$r = ListPage;
 
   /* template */
-  var __vue_render__$q = function() {
+  var __vue_render__$r = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5257,32 +5339,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$q = [];
-  __vue_render__$q._withStripped = true;
+  var __vue_staticRenderFns__$r = [];
+  __vue_render__$r._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$q = function (inject) {
+    const __vue_inject_styles__$r = function (inject) {
       if (!inject) return
       inject("data-v-ed9eeb56_0", { source: "\n.flex-rows[data-v-ed9eeb56] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-ed9eeb56] {\r\n  flex: 0;\n}\n.list-content[data-v-ed9eeb56] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListPage.vue"],"names":[],"mappings":";AAiEA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA","file":"ListPage.vue","sourcesContent":["<template>\r\n  <navigation-page :icon=\"icon\" :title=\"title\" :loadingMessage=\"loadingMessage\" :loaded=\"loaded\">\r\n    <template slot=\"content\">\r\n      <div class=\"flex-rows\">\r\n        <div class=\"list-filters\">\r\n          <slot name=\"filters\" />\r\n        </div>\r\n        <div class=\"list-content\">\r\n          <slot v-if=\"hasResults\" />\r\n          <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n        </div>\r\n      </div>\r\n    </template>\r\n    <template slot=\"footer\">\r\n      <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\nimport Pager from \"../list/Pager.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage,\r\n    Pager\r\n  }\r\n})\r\nexport default class ListPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$q = "data-v-ed9eeb56";
+    const __vue_scope_id__$r = "data-v-ed9eeb56";
     /* module identifier */
-    const __vue_module_identifier__$q = undefined;
+    const __vue_module_identifier__$r = undefined;
     /* functional template */
-    const __vue_is_functional_template__$q = false;
+    const __vue_is_functional_template__$r = false;
     /* style inject SSR */
     
 
     
     var ListPage$1 = normalizeComponent_1(
-      { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
-      __vue_inject_styles__$q,
-      __vue_script__$q,
-      __vue_scope_id__$q,
-      __vue_is_functional_template__$q,
-      __vue_module_identifier__$q,
+      { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
+      __vue_inject_styles__$r,
+      __vue_script__$r,
+      __vue_scope_id__$r,
+      __vue_is_functional_template__$r,
+      __vue_module_identifier__$r,
       browser,
       undefined
     );
@@ -5344,10 +5426,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$r = ListTab;
+  const __vue_script__$s = ListTab;
 
   /* template */
-  var __vue_render__$r = function() {
+  var __vue_render__$s = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5395,32 +5477,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$r = [];
-  __vue_render__$r._withStripped = true;
+  var __vue_staticRenderFns__$s = [];
+  __vue_render__$s._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$r = function (inject) {
+    const __vue_inject_styles__$s = function (inject) {
       if (!inject) return
       inject("data-v-59846156_0", { source: "\n.flex-rows[data-v-59846156] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-59846156] {\r\n  flex: 0;\n}\n.list-content[data-v-59846156] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.list-footer[data-v-59846156] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListTab.vue"],"names":[],"mappings":";AA0DA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ListTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"list-filters\">\r\n        <slot name=\"filters\" />\r\n      </div>\r\n      <div class=\"list-content\">\r\n        <slot v-if=\"hasResults\" />\r\n        <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n      </div>\r\n      <div class=\"list-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n    <slot name=\"dialogs\" />\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport Pager from \"./Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ListTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.list-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$r = "data-v-59846156";
+    const __vue_scope_id__$s = "data-v-59846156";
     /* module identifier */
-    const __vue_module_identifier__$r = undefined;
+    const __vue_module_identifier__$s = undefined;
     /* functional template */
-    const __vue_is_functional_template__$r = false;
+    const __vue_is_functional_template__$s = false;
     /* style inject SSR */
     
 
     
     var ListTab$1 = normalizeComponent_1(
-      { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
-      __vue_inject_styles__$r,
-      __vue_script__$r,
-      __vue_scope_id__$r,
-      __vue_is_functional_template__$r,
-      __vue_module_identifier__$r,
+      { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
+      __vue_inject_styles__$s,
+      __vue_script__$s,
+      __vue_scope_id__$s,
+      __vue_is_functional_template__$s,
+      __vue_module_identifier__$s,
       browser,
       undefined
     );
@@ -5566,10 +5648,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$s = RemoteConnectionsList;
+  const __vue_script__$t = RemoteConnectionsList;
 
   /* template */
-  var __vue_render__$s = function() {
+  var __vue_render__$t = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5767,17 +5849,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$s = [];
-  __vue_render__$s._withStripped = true;
+  var __vue_staticRenderFns__$t = [];
+  __vue_render__$t._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$s = undefined;
+    const __vue_inject_styles__$t = undefined;
     /* scoped */
-    const __vue_scope_id__$s = undefined;
+    const __vue_scope_id__$t = undefined;
     /* module identifier */
-    const __vue_module_identifier__$s = undefined;
+    const __vue_module_identifier__$t = undefined;
     /* functional template */
-    const __vue_is_functional_template__$s = false;
+    const __vue_is_functional_template__$t = false;
     /* style inject */
     
     /* style inject SSR */
@@ -5785,12 +5867,12 @@
 
     
     var RemoteConnectionsList$1 = normalizeComponent_1(
-      { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
-      __vue_inject_styles__$s,
-      __vue_script__$s,
-      __vue_scope_id__$s,
-      __vue_is_functional_template__$s,
-      __vue_module_identifier__$s,
+      { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
+      __vue_inject_styles__$t,
+      __vue_script__$t,
+      __vue_scope_id__$t,
+      __vue_is_functional_template__$t,
+      __vue_module_identifier__$t,
       undefined,
       undefined
     );
@@ -6792,10 +6874,10 @@
   }(sitewhereIdeCommon.DialogSection));
 
   /* script */
-  const __vue_script__$t = RemoteConnectionDetails;
+  const __vue_script__$u = RemoteConnectionDetails;
 
   /* template */
-  var __vue_render__$t = function() {
+  var __vue_render__$u = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -6942,17 +7024,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$t = [];
-  __vue_render__$t._withStripped = true;
+  var __vue_staticRenderFns__$u = [];
+  __vue_render__$u._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$t = undefined;
+    const __vue_inject_styles__$u = undefined;
     /* scoped */
-    const __vue_scope_id__$t = undefined;
+    const __vue_scope_id__$u = undefined;
     /* module identifier */
-    const __vue_module_identifier__$t = undefined;
+    const __vue_module_identifier__$u = undefined;
     /* functional template */
-    const __vue_is_functional_template__$t = false;
+    const __vue_is_functional_template__$u = false;
     /* style inject */
     
     /* style inject SSR */
@@ -6960,12 +7042,12 @@
 
     
     var RemoteConnectionDetails$1 = normalizeComponent_1(
-      { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
-      __vue_inject_styles__$t,
-      __vue_script__$t,
-      __vue_scope_id__$t,
-      __vue_is_functional_template__$t,
-      __vue_module_identifier__$t,
+      { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
+      __vue_inject_styles__$u,
+      __vue_script__$u,
+      __vue_scope_id__$u,
+      __vue_is_functional_template__$u,
+      __vue_module_identifier__$u,
       undefined,
       undefined
     );
@@ -7021,10 +7103,10 @@
   }(sitewhereIdeCommon.DialogComponent));
 
   /* script */
-  const __vue_script__$u = RemotesDialog;
+  const __vue_script__$v = RemotesDialog;
 
   /* template */
-  var __vue_render__$u = function() {
+  var __vue_render__$v = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7070,17 +7152,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$u = [];
-  __vue_render__$u._withStripped = true;
+  var __vue_staticRenderFns__$v = [];
+  __vue_render__$v._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$u = undefined;
+    const __vue_inject_styles__$v = undefined;
     /* scoped */
-    const __vue_scope_id__$u = undefined;
+    const __vue_scope_id__$v = undefined;
     /* module identifier */
-    const __vue_module_identifier__$u = undefined;
+    const __vue_module_identifier__$v = undefined;
     /* functional template */
-    const __vue_is_functional_template__$u = false;
+    const __vue_is_functional_template__$v = false;
     /* style inject */
     
     /* style inject SSR */
@@ -7088,12 +7170,12 @@
 
     
     var RemotesDialog$1 = normalizeComponent_1(
-      { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
-      __vue_inject_styles__$u,
-      __vue_script__$u,
-      __vue_scope_id__$u,
-      __vue_is_functional_template__$u,
-      __vue_module_identifier__$u,
+      { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
+      __vue_inject_styles__$v,
+      __vue_script__$v,
+      __vue_scope_id__$v,
+      __vue_is_functional_template__$v,
+      __vue_module_identifier__$v,
       undefined,
       undefined
     );
@@ -7151,10 +7233,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$v = RemotesDropdown;
+  const __vue_script__$w = RemotesDropdown;
 
   /* template */
-  var __vue_render__$v = function() {
+  var __vue_render__$w = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7193,17 +7275,17 @@
       }
     })
   };
-  var __vue_staticRenderFns__$v = [];
-  __vue_render__$v._withStripped = true;
+  var __vue_staticRenderFns__$w = [];
+  __vue_render__$w._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$v = undefined;
+    const __vue_inject_styles__$w = undefined;
     /* scoped */
-    const __vue_scope_id__$v = undefined;
+    const __vue_scope_id__$w = undefined;
     /* module identifier */
-    const __vue_module_identifier__$v = undefined;
+    const __vue_module_identifier__$w = undefined;
     /* functional template */
-    const __vue_is_functional_template__$v = false;
+    const __vue_is_functional_template__$w = false;
     /* style inject */
     
     /* style inject SSR */
@@ -7211,12 +7293,12 @@
 
     
     var RemotesDropdown$1 = normalizeComponent_1(
-      { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
-      __vue_inject_styles__$v,
-      __vue_script__$v,
-      __vue_scope_id__$v,
-      __vue_is_functional_template__$v,
-      __vue_module_identifier__$v,
+      { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
+      __vue_inject_styles__$w,
+      __vue_script__$w,
+      __vue_scope_id__$w,
+      __vue_is_functional_template__$w,
+      __vue_module_identifier__$w,
       undefined,
       undefined
     );
@@ -7245,10 +7327,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$w = ContentTab;
+  const __vue_script__$x = ContentTab;
 
   /* template */
-  var __vue_render__$w = function() {
+  var __vue_render__$x = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7296,32 +7378,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$w = [];
-  __vue_render__$w._withStripped = true;
+  var __vue_staticRenderFns__$x = [];
+  __vue_render__$x._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$w = function (inject) {
+    const __vue_inject_styles__$x = function (inject) {
       if (!inject) return
       inject("data-v-c80e0034_0", { source: "\n.flex-rows[data-v-c80e0034] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-c80e0034] {\r\n  flex: 0;\n}\n.tab-content[data-v-c80e0034] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-c80e0034] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\ContentTab.vue"],"names":[],"mappings":";AAoCA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ContentTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\"/>\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <slot v-if=\"loaded\"/>\r\n        <v-card v-else>\r\n          <v-card-text>\r\n            <span class=\"title\">{{ loadingMessage || 'Loading ...' }}</span>\r\n            <v-progress-circular :indeterminate=\"true\"/>\r\n          </v-card-text>\r\n        </v-card>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <slot name=\"footer\"/>\r\n      </div>\r\n    </div>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class ContentTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$w = "data-v-c80e0034";
+    const __vue_scope_id__$x = "data-v-c80e0034";
     /* module identifier */
-    const __vue_module_identifier__$w = undefined;
+    const __vue_module_identifier__$x = undefined;
     /* functional template */
-    const __vue_is_functional_template__$w = false;
+    const __vue_is_functional_template__$x = false;
     /* style inject SSR */
     
 
     
     var ContentTab$1 = normalizeComponent_1(
-      { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
-      __vue_inject_styles__$w,
-      __vue_script__$w,
-      __vue_scope_id__$w,
-      __vue_is_functional_template__$w,
-      __vue_module_identifier__$w,
+      { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
+      __vue_inject_styles__$x,
+      __vue_script__$x,
+      __vue_scope_id__$x,
+      __vue_is_functional_template__$x,
+      __vue_module_identifier__$x,
       browser,
       undefined
     );
@@ -7589,10 +7671,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$x = DataEntryPanel;
+  const __vue_script__$y = DataEntryPanel;
 
   /* template */
-  var __vue_render__$x = function() {
+  var __vue_render__$y = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7603,32 +7685,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$x = [];
-  __vue_render__$x._withStripped = true;
+  var __vue_staticRenderFns__$y = [];
+  __vue_render__$y._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$x = function (inject) {
+    const __vue_inject_styles__$y = function (inject) {
       if (!inject) return
       inject("data-v-f33dfbec_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DataEntryPanel.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$x = "data-v-f33dfbec";
+    const __vue_scope_id__$y = "data-v-f33dfbec";
     /* module identifier */
-    const __vue_module_identifier__$x = undefined;
+    const __vue_module_identifier__$y = undefined;
     /* functional template */
-    const __vue_is_functional_template__$x = false;
+    const __vue_is_functional_template__$y = false;
     /* style inject SSR */
     
 
     
     var DataEntryPanel$1 = normalizeComponent_1(
-      { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
-      __vue_inject_styles__$x,
-      __vue_script__$x,
-      __vue_scope_id__$x,
-      __vue_is_functional_template__$x,
-      __vue_module_identifier__$x,
+      { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
+      __vue_inject_styles__$y,
+      __vue_script__$y,
+      __vue_scope_id__$y,
+      __vue_is_functional_template__$y,
+      __vue_module_identifier__$y,
       browser,
       undefined
     );
@@ -7698,10 +7780,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$y = DataTableTab;
+  const __vue_script__$z = DataTableTab;
 
   /* template */
-  var __vue_render__$y = function() {
+  var __vue_render__$z = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7781,32 +7863,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$y = [];
-  __vue_render__$y._withStripped = true;
+  var __vue_staticRenderFns__$z = [];
+  __vue_render__$z._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$y = function (inject) {
+    const __vue_inject_styles__$z = function (inject) {
       if (!inject) return
       inject("data-v-1a035a38_0", { source: "\n.flex-rows[data-v-1a035a38] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-1a035a38] {\r\n  flex: 0;\n}\n.tab-content[data-v-1a035a38] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-1a035a38] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DataTableTab.vue"],"names":[],"mappings":";AA0EA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"DataTableTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\"/>\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <v-layout row wrap>\r\n          <v-flex xs12>\r\n            <v-data-table\r\n              :headers=\"headers\"\r\n              :items=\"matches\"\r\n              :hide-actions=\"true\"\r\n              :no-data-text=\"noDataText\"\r\n              :style=\"tableStyle\"\r\n            >\r\n              <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\">\r\n                <slot :name=\"slot\" v-bind=\"scope\"/>\r\n              </template>\r\n            </v-data-table>\r\n          </v-flex>\r\n        </v-layout>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\"/>\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\"/>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport Pager from \"../list/Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { IPaging, IPageSizes, ITableHeaders } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class DataTableTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly headers!: ITableHeaders;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly noDataText!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Get current matches */\r\n  get matches(): {}[] {\r\n    return this.results ? this.results.results : [];\r\n  }\r\n\r\n  /** Dims results when loading */\r\n  get tableStyle(): {} {\r\n    return { opacity: this.loaded ? 1.0 : 0.3 };\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$y = "data-v-1a035a38";
+    const __vue_scope_id__$z = "data-v-1a035a38";
     /* module identifier */
-    const __vue_module_identifier__$y = undefined;
+    const __vue_module_identifier__$z = undefined;
     /* functional template */
-    const __vue_is_functional_template__$y = false;
+    const __vue_is_functional_template__$z = false;
     /* style inject SSR */
     
 
     
     var DataTableTab$1 = normalizeComponent_1(
-      { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
-      __vue_inject_styles__$y,
-      __vue_script__$y,
-      __vue_scope_id__$y,
-      __vue_is_functional_template__$y,
-      __vue_module_identifier__$y,
+      { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
+      __vue_inject_styles__$z,
+      __vue_script__$z,
+      __vue_scope_id__$z,
+      __vue_is_functional_template__$z,
+      __vue_module_identifier__$z,
       browser,
       undefined
     );
@@ -7849,10 +7931,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$z = DetailPage;
+  const __vue_script__$A = DetailPage;
 
   /* template */
-  var __vue_render__$z = function() {
+  var __vue_render__$A = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7919,32 +8001,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$z = [];
-  __vue_render__$z._withStripped = true;
+  var __vue_staticRenderFns__$A = [];
+  __vue_render__$A._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$z = function (inject) {
+    const __vue_inject_styles__$A = function (inject) {
       if (!inject) return
       inject("data-v-2470e10a_0", { source: "\n.flex-rows[data-v-2470e10a] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tabs-row[data-v-2470e10a] {\r\n  flex: 0;\n}\n.tab-items-row[data-v-2470e10a] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\n.tab-items-row[data-v-2470e10a] .v-window__container,\r\n.tab-items-row[data-v-2470e10a] .v-window-item {\r\n  height: 100%;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DetailPage.vue"],"names":[],"mappings":";AA+CA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA;AACA;;EAEA,YAAA;AACA","file":"DetailPage.vue","sourcesContent":["<template>\r\n  <navigation-page :icon=\"icon\" :title=\"title\" :loadingMessage=\"loadingMessage\" :loaded=\"loaded\">\r\n    <template slot=\"header\">\r\n      <slot name=\"header\"/>\r\n    </template>\r\n    <template v-if=\"record\" slot=\"content\">\r\n      <div class=\"flex-rows\">\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\"/>\r\n        </v-tabs>\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\"/>\r\n        </v-tabs-items>\r\n      </div>\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\"/>\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\"/>\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage\r\n  }\r\n})\r\nexport default class DetailPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly record!: {};\r\n\r\n  active: string | null = null;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tabs-row {\r\n  flex: 0;\r\n}\r\n.tab-items-row {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n.tab-items-row >>> .v-window__container,\r\n.tab-items-row >>> .v-window-item {\r\n  height: 100%;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$z = "data-v-2470e10a";
+    const __vue_scope_id__$A = "data-v-2470e10a";
     /* module identifier */
-    const __vue_module_identifier__$z = undefined;
+    const __vue_module_identifier__$A = undefined;
     /* functional template */
-    const __vue_is_functional_template__$z = false;
+    const __vue_is_functional_template__$A = false;
     /* style inject SSR */
     
 
     
     var DetailPage$1 = normalizeComponent_1(
-      { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
-      __vue_inject_styles__$z,
-      __vue_script__$z,
-      __vue_scope_id__$z,
-      __vue_is_functional_template__$z,
-      __vue_module_identifier__$z,
+      { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
+      __vue_inject_styles__$A,
+      __vue_script__$A,
+      __vue_scope_id__$A,
+      __vue_is_functional_template__$A,
+      __vue_module_identifier__$A,
       browser,
       undefined
     );
@@ -7961,10 +8043,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$A = NavigationHeaderLeft;
+  const __vue_script__$B = NavigationHeaderLeft;
 
   /* template */
-  var __vue_render__$A = function() {
+  var __vue_render__$B = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -7982,32 +8064,32 @@
       2
     )
   };
-  var __vue_staticRenderFns__$A = [];
-  __vue_render__$A._withStripped = true;
+  var __vue_staticRenderFns__$B = [];
+  __vue_render__$B._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$A = function (inject) {
+    const __vue_inject_styles__$B = function (inject) {
       if (!inject) return
       inject("data-v-f78ad04a_0", { source: "\n.right-overlay[data-v-f78ad04a] {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderLeft.vue"],"names":[],"mappings":";AAkBA;EACA,kBAAA;EACA,QAAA;EACA,MAAA;AACA","file":"NavigationHeaderLeft.vue","sourcesContent":["<template>\r\n  <v-card flat style=\"position: relative; height: 100%\">\r\n    <slot />\r\n    <div class=\"right-overlay\">\r\n      <slot name=\"right-overlay\" />\r\n    </div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderLeft extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.right-overlay {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$A = "data-v-f78ad04a";
+    const __vue_scope_id__$B = "data-v-f78ad04a";
     /* module identifier */
-    const __vue_module_identifier__$A = undefined;
+    const __vue_module_identifier__$B = undefined;
     /* functional template */
-    const __vue_is_functional_template__$A = false;
+    const __vue_is_functional_template__$B = false;
     /* style inject SSR */
     
 
     
     var NavigationHeaderLeft$1 = normalizeComponent_1(
-      { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
-      __vue_inject_styles__$A,
-      __vue_script__$A,
-      __vue_scope_id__$A,
-      __vue_is_functional_template__$A,
-      __vue_module_identifier__$A,
+      { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
+      __vue_inject_styles__$B,
+      __vue_script__$B,
+      __vue_scope_id__$B,
+      __vue_is_functional_template__$B,
+      __vue_module_identifier__$B,
       browser,
       undefined
     );
@@ -8063,10 +8145,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$B = HeaderBrandingPanel;
+  const __vue_script__$C = HeaderBrandingPanel;
 
   /* template */
-  var __vue_render__$B = function() {
+  var __vue_render__$C = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8092,32 +8174,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$B = [];
-  __vue_render__$B._withStripped = true;
+  var __vue_staticRenderFns__$C = [];
+  __vue_render__$C._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$B = function (inject) {
+    const __vue_inject_styles__$C = function (inject) {
       if (!inject) return
       inject("data-v-e160ddbc_0", { source: "\n.header-image[data-v-e160ddbc] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-e160ddbc] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAmDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,aAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <image-zoom-on-hover v-if=\"imageUrl\" :imageUrl=\"imageUrl\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\nimport ImageZoomOnHover from \"../common/ImageZoomOnHover.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft,\r\n    ImageZoomOnHover\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$B = "data-v-e160ddbc";
+    const __vue_scope_id__$C = "data-v-e160ddbc";
     /* module identifier */
-    const __vue_module_identifier__$B = undefined;
+    const __vue_module_identifier__$C = undefined;
     /* functional template */
-    const __vue_is_functional_template__$B = false;
+    const __vue_is_functional_template__$C = false;
     /* style inject SSR */
     
 
     
     var HeaderBrandingPanel$1 = normalizeComponent_1(
-      { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
-      __vue_inject_styles__$B,
-      __vue_script__$B,
-      __vue_scope_id__$B,
-      __vue_is_functional_template__$B,
-      __vue_module_identifier__$B,
+      { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
+      __vue_inject_styles__$C,
+      __vue_script__$C,
+      __vue_scope_id__$C,
+      __vue_is_functional_template__$C,
+      __vue_module_identifier__$C,
       browser,
       undefined
     );
@@ -8134,10 +8216,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$C = InAppFooter;
+  const __vue_script__$D = InAppFooter;
 
   /* template */
-  var __vue_render__$C = function() {
+  var __vue_render__$D = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8145,32 +8227,32 @@
       _c("div", { staticClass: "footer-content" }, [_vm._t("default")], 2)
     ])
   };
-  var __vue_staticRenderFns__$C = [];
-  __vue_render__$C._withStripped = true;
+  var __vue_staticRenderFns__$D = [];
+  __vue_render__$D._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$C = function (inject) {
+    const __vue_inject_styles__$D = function (inject) {
       if (!inject) return
       inject("data-v-4078e95f_0", { source: "\n.footer-content[data-v-4078e95f] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <slot/>\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$C = "data-v-4078e95f";
+    const __vue_scope_id__$D = "data-v-4078e95f";
     /* module identifier */
-    const __vue_module_identifier__$C = undefined;
+    const __vue_module_identifier__$D = undefined;
     /* functional template */
-    const __vue_is_functional_template__$C = false;
+    const __vue_is_functional_template__$D = false;
     /* style inject SSR */
     
 
     
     var InAppFooter$1 = normalizeComponent_1(
-      { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
-      __vue_inject_styles__$C,
-      __vue_script__$C,
-      __vue_scope_id__$C,
-      __vue_is_functional_template__$C,
-      __vue_module_identifier__$C,
+      { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
+      __vue_inject_styles__$D,
+      __vue_script__$D,
+      __vue_scope_id__$D,
+      __vue_is_functional_template__$D,
+      __vue_module_identifier__$D,
       browser,
       undefined
     );
@@ -8202,10 +8284,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$D = InAppSystemBar;
+  const __vue_script__$E = InAppSystemBar;
 
   /* template */
-  var __vue_render__$D = function() {
+  var __vue_render__$E = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8270,32 +8352,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$D = [];
-  __vue_render__$D._withStripped = true;
+  var __vue_staticRenderFns__$E = [];
+  __vue_render__$E._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$D = function (inject) {
+    const __vue_inject_styles__$E = function (inject) {
       if (!inject) return
       inject("data-v-660b8b92_0", { source: "\n.title-bar-button[data-v-660b8b92] {\r\n  -webkit-app-region: no-drag;\n}\n.system-bar-title[data-v-660b8b92] {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppSystemBar.vue"],"names":[],"mappings":";AAiDA;EACA,2BAAA;AACA;AACA;EACA,WAAA;EACA,iBAAA;EACA,kBAAA;AACA","file":"InAppSystemBar.vue","sourcesContent":["<template>\r\n  <v-system-bar color=\"#444\" class=\"title-bar\">\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"openWebTools\">\r\n      <v-icon color=\"white\">menu</v-icon>\r\n    </v-btn>\r\n    <span class=\"system-bar-title\">{{ title }}</span>\r\n    <v-spacer></v-spacer>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"minWindow\">\r\n      <v-icon color=\"white\">remove</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"maxWindow\">\r\n      <v-icon color=\"white\">check_box_outline_blank</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"closeWindow\">\r\n      <v-icon color=\"white\">close</v-icon>\r\n    </v-btn>\r\n  </v-system-bar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\nimport Electron from \"electron\";\r\n\r\n@Component({})\r\nexport default class InAppSystemBar extends Vue {\r\n  title: string = Electron.remote.getCurrentWindow().getTitle();\r\n\r\n  openWebTools() {\r\n    Electron.remote.getCurrentWebContents().openDevTools();\r\n  }\r\n\r\n  minWindow() {\r\n    Electron.remote.getCurrentWindow().minimize();\r\n  }\r\n\r\n  maxWindow() {\r\n    Electron.remote.getCurrentWindow().maximize();\r\n  }\r\n\r\n  closeWindow() {\r\n    Electron.remote.getCurrentWindow().close();\r\n    Electron.app.quit();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.title-bar-button {\r\n  -webkit-app-region: no-drag;\r\n}\r\n.system-bar-title {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$D = "data-v-660b8b92";
+    const __vue_scope_id__$E = "data-v-660b8b92";
     /* module identifier */
-    const __vue_module_identifier__$D = undefined;
+    const __vue_module_identifier__$E = undefined;
     /* functional template */
-    const __vue_is_functional_template__$D = false;
+    const __vue_is_functional_template__$E = false;
     /* style inject SSR */
     
 
     
     var InAppSystemBar$1 = normalizeComponent_1(
-      { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
-      __vue_inject_styles__$D,
-      __vue_script__$D,
-      __vue_scope_id__$D,
-      __vue_is_functional_template__$D,
-      __vue_module_identifier__$D,
+      { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
+      __vue_inject_styles__$E,
+      __vue_script__$E,
+      __vue_scope_id__$E,
+      __vue_is_functional_template__$E,
+      __vue_module_identifier__$E,
       browser,
       undefined
     );
@@ -8320,10 +8402,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$E = Navigation;
+  const __vue_script__$F = Navigation;
 
   /* template */
-  var __vue_render__$E = function() {
+  var __vue_render__$F = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8428,32 +8510,32 @@
         )
       : _vm._e()
   };
-  var __vue_staticRenderFns__$E = [];
-  __vue_render__$E._withStripped = true;
+  var __vue_staticRenderFns__$F = [];
+  __vue_render__$F._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$E = function (inject) {
+    const __vue_inject_styles__$F = function (inject) {
       if (!inject) return
       inject("data-v-615d28ce_0", { source: "\n.list__tile__action[data-v-615d28ce] {\r\n  min-width: 30px;\n}\n.list__tile__title[data-v-615d28ce] {\r\n  font-size: 16px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\Navigation.vue"],"names":[],"mappings":";AAkDA;EACA,eAAA;AACA;AACA;EACA,eAAA;AACA","file":"Navigation.vue","sourcesContent":["<template>\r\n  <v-list v-if=\"sections\" dense>\r\n    <v-list-group\r\n      v-for=\"section in sections\"\r\n      :key=\"section.id\"\r\n      v-model=\"section.active\"\r\n      :prepend-icon=\"section.icon\"\r\n      :append-icon=\"section.subsections ? '$vuetify.icons.expand' : ''\"\r\n      no-action\r\n    >\r\n      <template v-slot:activator>\r\n        <v-list-tile @click=\"onSectionClicked(section)\">\r\n          <v-list-tile-content>\r\n            <v-list-tile-title>{{ section.title }}</v-list-tile-title>\r\n          </v-list-tile-content>\r\n        </v-list-tile>\r\n      </template>\r\n\r\n      <v-list-tile\r\n        @click=\"onSectionClicked(subsection)\"\r\n        v-for=\"subsection in section.subsections\"\r\n        :key=\"subsection.id\"\r\n      >\r\n        <v-list-tile-content>\r\n          <v-list-tile-title>{{ subsection.title }}</v-list-tile-title>\r\n        </v-list-tile-content>\r\n        <v-list-tile-action>\r\n          <v-icon>{{ subsection.icon }}</v-icon>\r\n        </v-list-tile-action>\r\n      </v-list-tile>\r\n    </v-list-group>\r\n  </v-list>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { Component, Prop, INavigationSection } from \"sitewhere-ide-common\";\r\nimport Vue from \"vue\";\r\n\r\n@Component({})\r\nexport default class Navigation extends Vue {\r\n  @Prop() readonly sections!: INavigationSection[];\r\n\r\n  /** Called when a section is clicked */\r\n  onSectionClicked(section: INavigationSection) {\r\n    this.$emit(\"sectionSelected\", section);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.list__tile__action {\r\n  min-width: 30px;\r\n}\r\n.list__tile__title {\r\n  font-size: 16px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$E = "data-v-615d28ce";
+    const __vue_scope_id__$F = "data-v-615d28ce";
     /* module identifier */
-    const __vue_module_identifier__$E = undefined;
+    const __vue_module_identifier__$F = undefined;
     /* functional template */
-    const __vue_is_functional_template__$E = false;
+    const __vue_is_functional_template__$F = false;
     /* style inject SSR */
     
 
     
     var Navigation$1 = normalizeComponent_1(
-      { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
-      __vue_inject_styles__$E,
-      __vue_script__$E,
-      __vue_scope_id__$E,
-      __vue_is_functional_template__$E,
-      __vue_module_identifier__$E,
+      { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
+      __vue_inject_styles__$F,
+      __vue_script__$F,
+      __vue_scope_id__$F,
+      __vue_is_functional_template__$F,
+      __vue_module_identifier__$F,
       browser,
       undefined
     );
@@ -8485,10 +8567,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$F = NavigationActionButton;
+  const __vue_script__$G = NavigationActionButton;
 
   /* template */
-  var __vue_render__$F = function() {
+  var __vue_render__$G = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8519,32 +8601,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$F = [];
-  __vue_render__$F._withStripped = true;
+  var __vue_staticRenderFns__$G = [];
+  __vue_render__$G._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$F = function (inject) {
+    const __vue_inject_styles__$G = function (inject) {
       if (!inject) return
       inject("data-v-4588e05d_0", { source: "\n.navbutton[data-v-4588e05d] {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-4588e05d]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AAoCA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon\r\n      v-if=\"material\"\r\n      class=\"ma-0 ml-1 navbutton\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    >{{ icon }}</v-icon>\r\n    <font-awesome-icon\r\n      v-else\r\n      class=\"ma-1 navbutton\"\r\n      :icon=\"icon\"\r\n      @click=\"onAction\"\r\n      slot=\"activator\"\r\n    />\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 22px;\r\n  padding-left: 6px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$F = "data-v-4588e05d";
+    const __vue_scope_id__$G = "data-v-4588e05d";
     /* module identifier */
-    const __vue_module_identifier__$F = undefined;
+    const __vue_module_identifier__$G = undefined;
     /* functional template */
-    const __vue_is_functional_template__$F = false;
+    const __vue_is_functional_template__$G = false;
     /* style inject SSR */
     
 
     
     var NavigationActionButton$1 = normalizeComponent_1(
-      { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
-      __vue_inject_styles__$F,
-      __vue_script__$F,
-      __vue_scope_id__$F,
-      __vue_is_functional_template__$F,
-      __vue_module_identifier__$F,
+      { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
+      __vue_inject_styles__$G,
+      __vue_script__$G,
+      __vue_scope_id__$G,
+      __vue_is_functional_template__$G,
+      __vue_module_identifier__$G,
       browser,
       undefined
     );
@@ -8561,10 +8643,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$G = NavigationHeaderFields;
+  const __vue_script__$H = NavigationHeaderFields;
 
   /* template */
-  var __vue_render__$G = function() {
+  var __vue_render__$H = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8575,17 +8657,17 @@
       2
     )
   };
-  var __vue_staticRenderFns__$G = [];
-  __vue_render__$G._withStripped = true;
+  var __vue_staticRenderFns__$H = [];
+  __vue_render__$H._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$G = undefined;
+    const __vue_inject_styles__$H = undefined;
     /* scoped */
-    const __vue_scope_id__$G = undefined;
+    const __vue_scope_id__$H = undefined;
     /* module identifier */
-    const __vue_module_identifier__$G = undefined;
+    const __vue_module_identifier__$H = undefined;
     /* functional template */
-    const __vue_is_functional_template__$G = false;
+    const __vue_is_functional_template__$H = false;
     /* style inject */
     
     /* style inject SSR */
@@ -8593,12 +8675,12 @@
 
     
     var NavigationHeaderFields$1 = normalizeComponent_1(
-      { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
-      __vue_inject_styles__$G,
-      __vue_script__$G,
-      __vue_scope_id__$G,
-      __vue_is_functional_template__$G,
-      __vue_module_identifier__$G,
+      { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
+      __vue_inject_styles__$H,
+      __vue_script__$H,
+      __vue_scope_id__$H,
+      __vue_is_functional_template__$H,
+      __vue_module_identifier__$H,
       undefined,
       undefined
     );
@@ -8629,10 +8711,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$H = NavigationHeaderPanel;
+  const __vue_script__$I = NavigationHeaderPanel;
 
   /* template */
-  var __vue_render__$H = function() {
+  var __vue_render__$I = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8657,32 +8739,32 @@
       1
     )
   };
-  var __vue_staticRenderFns__$H = [];
-  __vue_render__$H._withStripped = true;
+  var __vue_staticRenderFns__$I = [];
+  __vue_render__$I._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$H = function (inject) {
+    const __vue_inject_styles__$I = function (inject) {
       if (!inject) return
       inject("data-v-6b0c2a59_0", { source: "\n.header-panel[data-v-6b0c2a59] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-left[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-right[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-content[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\n}\n.options-menu[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AAqCA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span class=\"header-left\">\r\n        <slot name=\"left\" />\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\" />\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\" />\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\" />\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-left {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$H = "data-v-6b0c2a59";
+    const __vue_scope_id__$I = "data-v-6b0c2a59";
     /* module identifier */
-    const __vue_module_identifier__$H = undefined;
+    const __vue_module_identifier__$I = undefined;
     /* functional template */
-    const __vue_is_functional_template__$H = false;
+    const __vue_is_functional_template__$I = false;
     /* style inject SSR */
     
 
     
     var NavigationHeaderPanel$1 = normalizeComponent_1(
-      { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
-      __vue_inject_styles__$H,
-      __vue_script__$H,
-      __vue_scope_id__$H,
-      __vue_is_functional_template__$H,
-      __vue_module_identifier__$H,
+      { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
+      __vue_inject_styles__$I,
+      __vue_script__$I,
+      __vue_scope_id__$I,
+      __vue_is_functional_template__$I,
+      __vue_module_identifier__$I,
       browser,
       undefined
     );
@@ -8695,6 +8777,7 @@
     Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
     Vue.component("sw-color-input-field", ColorInputField$1);
     Vue.component("sw-color-picker", ColorPicker$1);
+    Vue.component("sw-condensed-toolbar", CondensedToolbar$1);
     Vue.component("sw-date-time-picker", DateTimePicker$1);
     Vue.component("sw-error-banner", ErrorBanner);
     Vue.component("sw-fab", FloatingActionButton);
@@ -8703,6 +8786,8 @@
     Vue.component("sw-image-zoom-on-hover", ImageZoomOnHover$1);
     Vue.component("sw-linked-header-field", LinkedHeaderField);
     Vue.component("sw-loading-overlay", LoadingOverlay$1);
+
+    // Register common form components.
     Vue.component("sw-dialog-form", DialogForm$1);
     Vue.component("sw-form-date-time-picker", FormDateTimePicker$1);
     Vue.component("sw-form-select", FormSelect$1);
@@ -8747,6 +8832,7 @@
   exports.ClipboardCopyField = ClipboardCopyField;
   exports.ColorInputField = ColorInputField$1;
   exports.ColorPicker = ColorPicker$1;
+  exports.CondensedToolbar = CondensedToolbar$1;
   exports.ConfirmDialog = ConfirmDialog$1;
   exports.ContentTab = ContentTab$1;
   exports.DataEntryPanel = DataEntryPanel$1;
