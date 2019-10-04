@@ -2,19 +2,16 @@
   <v-tab-item :key="tabkey">
     <div class="flex-rows">
       <div class="tab-header">
-        <slot name="header"/>
+        <slot name="header" />
       </div>
       <div class="tab-content">
-        <slot v-if="loaded"/>
-        <v-card v-else>
-          <v-card-text>
-            <span class="title">{{ loadingMessage || 'Loading ...' }}</span>
-            <v-progress-circular :indeterminate="true"/>
-          </v-card-text>
+        <slot v-if="loaded" />
+        <v-card style="height: 100%" v-else>
+          <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
         </v-card>
       </div>
       <div class="tab-footer">
-        <slot name="footer"/>
+        <slot name="footer" />
       </div>
     </div>
     <slot name="dialogs"></slot>
@@ -25,7 +22,13 @@
 import Vue from "vue";
 import { Component, Prop } from "sitewhere-ide-common";
 
-@Component({})
+import LoadingOverlay from "../common/LoadingOverlay.vue";
+
+@Component({
+  components: {
+    LoadingOverlay
+  }
+})
 export default class ContentTab extends Vue {
   @Prop() readonly tabkey!: string;
   @Prop() readonly loadingMessage!: string;

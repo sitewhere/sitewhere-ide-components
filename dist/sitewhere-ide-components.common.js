@@ -1,5 +1,5 @@
 /**
-  * SiteWhere IDE Components v2.1.4
+  * SiteWhere IDE Components v2.1.5
   * (c) 2019 SiteWhere LLC
   * @license CPAL-1.0
   */
@@ -7323,7 +7323,11 @@ var ContentTab = /** @class */ (function (_super) {
         __metadata("design:type", Boolean)
     ], ContentTab.prototype, "loaded", void 0);
     ContentTab = __decorate([
-        sitewhereIdeCommon.Component({})
+        sitewhereIdeCommon.Component({
+            components: {
+                LoadingOverlay: LoadingOverlay$1
+            }
+        })
     ], ContentTab);
     return ContentTab;
 }(Vue));
@@ -7351,20 +7355,13 @@ var __vue_render__$x = function() {
               ? _vm._t("default")
               : _c(
                   "v-card",
+                  { staticStyle: { height: "100%" } },
                   [
-                    _c(
-                      "v-card-text",
-                      [
-                        _c("span", { staticClass: "title" }, [
-                          _vm._v(_vm._s(_vm.loadingMessage || "Loading ..."))
-                        ]),
-                        _vm._v(" "),
-                        _c("v-progress-circular", {
-                          attrs: { indeterminate: true }
+                    !_vm.loaded
+                      ? _c("loading-overlay", {
+                          attrs: { loadingMessage: _vm.loadingMessage }
                         })
-                      ],
-                      1
-                    )
+                      : _vm._e()
                   ],
                   1
                 )
@@ -7386,11 +7383,11 @@ __vue_render__$x._withStripped = true;
   /* style */
   const __vue_inject_styles__$x = function (inject) {
     if (!inject) return
-    inject("data-v-c80e0034_0", { source: "\n.flex-rows[data-v-c80e0034] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-c80e0034] {\r\n  flex: 0;\n}\n.tab-content[data-v-c80e0034] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-c80e0034] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\ContentTab.vue"],"names":[],"mappings":";AAoCA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ContentTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\"/>\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <slot v-if=\"loaded\"/>\r\n        <v-card v-else>\r\n          <v-card-text>\r\n            <span class=\"title\">{{ loadingMessage || 'Loading ...' }}</span>\r\n            <v-progress-circular :indeterminate=\"true\"/>\r\n          </v-card-text>\r\n        </v-card>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <slot name=\"footer\"/>\r\n      </div>\r\n    </div>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class ContentTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-7a290b74_0", { source: "\n.flex-rows[data-v-7a290b74] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-7a290b74] {\r\n  flex: 0;\n}\n.tab-content[data-v-7a290b74] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-7a290b74] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\ContentTab.vue"],"names":[],"mappings":";AAuCA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ContentTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\" />\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <slot v-if=\"loaded\" />\r\n        <v-card style=\"height: 100%\" v-else>\r\n          <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n        </v-card>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <slot name=\"footer\" />\r\n      </div>\r\n    </div>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ContentTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$x = "data-v-c80e0034";
+  const __vue_scope_id__$x = "data-v-7a290b74";
   /* module identifier */
   const __vue_module_identifier__$x = undefined;
   /* functional template */
