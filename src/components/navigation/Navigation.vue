@@ -47,11 +47,4 @@ export default class Navigation extends Vue {
 }
 </script>
 
-<style scoped>
-.list__tile__action {
-  min-width: 30px;
-}
-.list__tile__title {
-  font-size: 16px;
-}
-</style>
+<style scoped></style>

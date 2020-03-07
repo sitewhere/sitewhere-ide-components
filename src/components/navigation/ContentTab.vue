@@ -47,7 +47,7 @@ export default class ContentTab extends Vue {
 }
 .tab-content {
   flex: 1;
-  background-color: #eee;
+  background-color: #fff;
   overflow-y: auto;
 }
 .tab-footer {

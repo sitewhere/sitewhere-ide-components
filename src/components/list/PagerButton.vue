@@ -8,9 +8,9 @@
       @click="onButtonClicked"
       slot="activator"
     >
-      <font-awesome-icon :icon="icon" size="lg" />
+      <v-icon>{{ icon }}</v-icon>
     </v-btn>
-    <span>{{text}}</span>
+    <span>{{ text }}</span>
   </v-tooltip>
 </template>
 

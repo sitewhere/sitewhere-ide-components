@@ -8,18 +8,28 @@
         :no-data-text="noDataMessage"
       >
         <template slot="items" slot-scope="props">
-          <td
-            width="250px"
-            :title="props.item.name"
-          >{{ (props.item.name.length > 25) ? props.item.name.substring(0, 25) + "..." : props.item.name }}</td>
-          <td
-            width="370px"
-            :title="props.item.value"
-          >{{ (props.item.value.length > 50) ? props.item.value.substring(0, 50) + "..." : props.item.value }}</td>
+          <td width="250px" :title="props.item.name">
+            {{
+              props.item.name.length > 25
+                ? props.item.name.substring(0, 25) + "..."
+                : props.item.name
+            }}
+          </td>
+          <td width="370px" :title="props.item.value">
+            {{
+              props.item.value.length > 50
+                ? props.item.value.substring(0, 50) + "..."
+                : props.item.value
+            }}
+          </td>
           <td v-if="!readOnly" width="20px">
             <v-tooltip left>
-              <v-btn icon @click="onDeleteItem(props.item.name)" slot="activator">
-                <font-awesome-icon class="grey--text" icon="trash" size="lg"/>
+              <v-btn
+                icon
+                @click="onDeleteItem(props.item.name)"
+                slot="activator"
+              >
+                <v-icon class="grey--text">fa-trash</v-icon>
               </v-btn>
               <span>Delete Item</span>
             </v-tooltip>
@@ -27,20 +37,39 @@
         </template>
       </v-data-table>
     </v-card-text>
-    <v-alert error :value="true" class="ma-0" style="width: 100%" v-if="error">{{error}}</v-alert>
+    <v-alert
+      error
+      :value="true"
+      class="ma-0"
+      style="width: 100%"
+      v-if="error"
+      >{{ error }}</v-alert
+    >
     <div v-if="!readOnly">
       <v-container fluid>
         <v-layout row>
           <v-flex xs5 class="pr-3">
-            <v-text-field light label="Name" placeholder=" " v-model="newItemName"/>
+            <v-text-field
+              light
+              label="Name"
+              placeholder=" "
+              v-model="newItemName"
+            />
           </v-flex>
           <v-flex xs6>
-            <v-text-field light label="Value" placeholder=" " v-model="newItemValue"/>
+            <v-text-field
+              light
+              label="Value"
+              placeholder=" "
+              v-model="newItemValue"
+            />
           </v-flex>
           <v-flex xs1 class="pt-3">
             <v-tooltip left>
               <v-btn icon @click="onAddItem" slot="activator">
-                <font-awesome-icon class="blue--text text--darken-2" icon="plus-circle" size="2x"/>
+                <v-icon class="blue--text text--darken-2"
+                  >fa-plus-circle</v-icon
+                >
               </v-btn>
               <span>Add Item</span>
             </v-tooltip>
@@ -184,5 +213,4 @@ export default class MetadataPanel extends DialogSection {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

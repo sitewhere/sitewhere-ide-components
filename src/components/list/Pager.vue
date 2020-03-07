@@ -13,33 +13,34 @@
               :value="entry.value"
               v-for="entry in pageSizesWithDefaults"
               :key="entry.value"
-            >{{ entry.text }}</v-btn>
+              >{{ entry.text }}</v-btn
+            >
           </v-btn-toggle>
         </v-flex>
         <v-flex xs4>
           <pager-button
             :disabled="!previousEnabled"
             @click="onFirstPage"
-            icon="fast-backward"
+            icon="fa-fast-backward"
             text="First Page"
           />
           <pager-button
             :disabled="!previousEnabled"
             @click="onPreviousPage"
-            icon="backward"
+            icon="fa-backward"
             text="Previous Page"
           />
-          <pager-button @click="onRefresh" icon="sync" text="Refresh" />
+          <pager-button @click="onRefresh" icon="fa-sync" text="Refresh" />
           <pager-button
             :disabled="!nextEnabled"
             @click="onNextPage"
-            icon="forward"
+            icon="fa-forward"
             text="Next Page"
           />
           <pager-button
             :disabled="!nextEnabled"
             @click="onLastPage"
-            icon="fast-forward"
+            icon="fa-fast-forward"
             text="Last Page"
           />
         </v-flex>
