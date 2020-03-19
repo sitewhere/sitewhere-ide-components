@@ -12,6 +12,18 @@ import ImageZoomOnHover from "./common/ImageZoomOnHover.vue";
 import LinkedHeaderField from "./common/LinkedHeaderField.vue";
 import LoadingOverlay from "./common/LoadingOverlay.vue";
 
+// Configuration components.
+import ContentDeleteIcon from "./configuration/ContentDeleteIcon.vue";
+import ContentField from "./configuration/ContentField.vue";
+import ContentLink from "./configuration/ContentLink.vue";
+import ContentSection from "./configuration/ContentSection.vue";
+import ContentWarning from "./configuration/ContentWarning.vue";
+import DatatableLink from "./configuration/DatatableLink.vue";
+import DatatableSection from "./configuration/DatatableSection.vue";
+import NewElementChooser from "./configuration/NewElementChooser.vue";
+import NewElementEntry from "./configuration/NewElementEntry.vue";
+import PageHeader from "./configuration/PageHeader.vue";
+
 import DialogForm from "./common/form/DialogForm.vue";
 import FormDateTimePicker from "./common/form/FormDateTimePicker.vue";
 import FormSelect from "./common/form/FormSelect.vue";
@@ -66,6 +78,18 @@ function SiteWhere(Vue) {
   Vue.component("sw-image-zoom-on-hover", ImageZoomOnHover);
   Vue.component("sw-linked-header-field", LinkedHeaderField);
   Vue.component("sw-loading-overlay", LoadingOverlay);
+
+  // Register configuration components.
+  Vue.component("sw-content-delete-icon", ContentDeleteIcon);
+  Vue.component("sw-content-field", ContentField);
+  Vue.component("sw-content-link", ContentLink);
+  Vue.component("sw-content-section", ContentSection);
+  Vue.component("sw-content-warning", ContentWarning);
+  Vue.component("sw-datatable-link", DatatableLink);
+  Vue.component("sw-datatable-section", DatatableSection);
+  Vue.component("sw-new-element-chooser", NewElementChooser);
+  Vue.component("sw-new-element-entry", NewElementEntry);
+  Vue.component("sw-page-header", PageHeader);
 
   // Register common form components.
   Vue.component("sw-dialog-form", DialogForm);
@@ -128,6 +152,20 @@ export {
   FormSelectCondensed,
   FormText,
   FormTextArea
+};
+
+// Export configuration components.
+export {
+  ContentDeleteIcon,
+  ContentField,
+  ContentLink,
+  ContentSection,
+  ContentWarning,
+  DatatableLink,
+  DatatableSection,
+  NewElementChooser,
+  NewElementEntry,
+  PageHeader
 };
 
 // Export dialog components.

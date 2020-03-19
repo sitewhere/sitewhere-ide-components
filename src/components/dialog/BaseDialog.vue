@@ -1,13 +1,14 @@
 <template>
   <v-dialog v-model="visible" :lazy="lazy" persistent :width="width">
     <v-card>
-      <v-toolbar dense flat card dark class="mb-0" color="primary">
-        <v-toolbar-title>
-          <v-icon class="mr-1">{{ icon }}</v-icon>
-          {{title}}
-        </v-toolbar-title>
-      </v-toolbar>
-      <error-banner :error="error"></error-banner>
+      <v-card class="pa-2 white--text" color="primary">
+        <v-icon class="mr-1" small dark>{{ icon }}</v-icon>
+        <span class="subheading">{{ title }}</span>
+      </v-card>
+      <slot name="error">
+        <error-banner :error="error"></error-banner>
+      </slot>
+      <slot name="header" />
 
       <v-card-text class="pa-0">
         <div style="position: relative;">
@@ -19,16 +20,19 @@
           <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
         </div>
       </v-card-text>
-      <v-divider v-if="!hideButtons" class="mt-2 mb-2" />
+      <v-divider v-if="!hideButtons" class="mb-2" />
       <v-card-actions v-if="!hideButtons">
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">{{cancelLabel}}</v-btn>
+        <v-btn outline color="primary" @click="onCancelClicked">{{
+          cancelLabel
+        }}</v-btn>
         <v-btn
           color="primary"
           v-if="!hideCreate"
           :disabled="invalid"
           @click="onCreateClicked"
-        >{{createLabel}}</v-btn>
+          >{{ createLabel }}</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -91,5 +95,4 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
