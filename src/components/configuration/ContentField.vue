@@ -3,7 +3,7 @@
     <span style="display: inline-block; width: 180px; font-weight: 700">{{
       name
     }}</span>
-    <span style="display: inline-block; width: 400px;">{{ value }}</span>
+    <span style="display: inline-block; width: 400px;">{{ displayValue }}</span>
   </v-card>
 </template>
 
@@ -18,6 +18,11 @@ export default class ContentField extends Vue {
   @Prop() readonly name!: string;
   @Prop() readonly value!: string;
   @Prop() readonly alt!: boolean;
+  @Prop() readonly password!: boolean;
+
+  get displayValue(): string {
+    return this.password ? "***" : this.value;
+  }
 }
 </script>
 

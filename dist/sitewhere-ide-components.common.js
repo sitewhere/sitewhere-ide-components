@@ -3033,6 +3033,13 @@ var ContentField = /** @class */ (function (_super) {
     function ContentField() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Object.defineProperty(ContentField.prototype, "displayValue", {
+        get: function () {
+            return this.password ? "***" : this.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         sitewhereIdeCommon.Prop(),
         __metadata("design:type", String)
@@ -3045,6 +3052,10 @@ var ContentField = /** @class */ (function (_super) {
         sitewhereIdeCommon.Prop(),
         __metadata("design:type", Boolean)
     ], ContentField.prototype, "alt", void 0);
+    __decorate([
+        sitewhereIdeCommon.Prop(),
+        __metadata("design:type", Boolean)
+    ], ContentField.prototype, "password", void 0);
     ContentField = __decorate([
         sitewhereIdeCommon.Component({
             components: {}
@@ -3081,7 +3092,7 @@ var __vue_render__$d = function() {
       ),
       _vm._v(" "),
       _c("span", { staticStyle: { display: "inline-block", width: "400px" } }, [
-        _vm._v(_vm._s(_vm.value))
+        _vm._v(_vm._s(_vm.displayValue))
       ])
     ]
   )
@@ -3092,11 +3103,11 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
-    inject("data-v-4c3b239f_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentField.vue"}, media: undefined });
+    inject("data-v-5aa88e48_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$d = "data-v-4c3b239f";
+  const __vue_scope_id__$d = "data-v-5aa88e48";
   /* module identifier */
   const __vue_module_identifier__$d = undefined;
   /* functional template */
