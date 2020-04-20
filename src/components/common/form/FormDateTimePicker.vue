@@ -13,7 +13,11 @@ import { Component, Prop } from "sitewhere-ide-common";
 
 import DateTimePicker from "../DateTimePicker.vue";
 
-@Component({})
+@Component({
+  components: {
+    DateTimePicker
+  }
+})
 export default class FormDateTimePicker extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;

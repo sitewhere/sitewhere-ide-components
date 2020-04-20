@@ -1,9 +1,6 @@
 <template>
   <v-card flat>
-    <div class="mb-3">
-      <v-icon style="width: 25px;" small>{{ icon }}</v-icon
-      >{{ title }}:
-    </div>
+    <content-header :title="title" :icon="icon" :fa="fa" />
     <v-card flat style="margin-left: 25px;" :width="width">
       <v-data-table
         class="datatable"
@@ -26,11 +23,14 @@
 import Vue from "vue";
 import { Component, Prop } from "sitewhere-ide-common";
 
+import ContentHeader from "./ContentHeader.vue";
+
 @Component({
-  components: {}
+  components: { ContentHeader },
 })
 export default class Section extends Vue {
   @Prop() readonly icon!: string;
+  @Prop() readonly fa!: boolean;
   @Prop() readonly title!: string;
   @Prop() readonly help!: string;
   @Prop() readonly headers!: any[];

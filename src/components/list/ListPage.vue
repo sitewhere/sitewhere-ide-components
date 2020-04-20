@@ -1,5 +1,10 @@
 <template>
-  <navigation-page :icon="icon" :title="title" :loadingMessage="loadingMessage" :loaded="loaded">
+  <navigation-page
+    :icon="icon"
+    :title="title"
+    :loadingMessage="loadingMessage"
+    :loaded="loaded"
+  >
     <template slot="content">
       <div class="flex-rows">
         <div class="list-filters">
@@ -12,7 +17,11 @@
       </div>
     </template>
     <template slot="footer">
-      <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes" />
+      <pager
+        :results="results"
+        @pagingUpdated="onPagingUpdated"
+        :pageSizes="pageSizes"
+      />
     </template>
     <template slot="actions">
       <slot name="actions" />
@@ -34,8 +43,8 @@ import { Component, Prop, IPaging, IPageSizes } from "sitewhere-ide-common";
 @Component({
   components: {
     NavigationPage,
-    Pager
-  }
+    Pager,
+  },
 })
 export default class ListPage extends Vue {
   @Prop() readonly icon!: string;
@@ -73,7 +82,6 @@ export default class ListPage extends Vue {
 }
 .list-content {
   flex: 1;
-  background-color: #eee;
   overflow-y: auto;
 }
 </style>

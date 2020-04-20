@@ -6,7 +6,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('sitewhere-ide-common'), require('vue'), require('vue-color'), require('moment'), require('electron')) :
   typeof define === 'function' && define.amd ? define(['exports', 'sitewhere-ide-common', 'vue', 'vue-color', 'moment', 'electron'], factory) :
-  (global = global || self, factory(global.SiteWhereIdeComponents = {}, global.sitewhereIdeCommon, global.Vue, global.vueColor, global.moment, global.Electron));
+  (global = global || self, factory(global.SiteWhereIdeComponents = {}, global.SiteWhereIdeCommon, global.Vue, global.vueColor, global.moment, global.Electron));
 }(this, (function (exports, sitewhereIdeCommon, Vue, vueColor, moment, Electron) { 'use strict';
 
   Vue = Vue && Object.prototype.hasOwnProperty.call(Vue, 'default') ? Vue['default'] : Vue;
@@ -334,6 +334,44 @@
 
   function __metadata(metadataKey, metadataValue) {
       if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+  }
+
+  function __awaiter(thisArg, _arguments, P, generator) {
+      function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+      return new (P || (P = Promise))(function (resolve, reject) {
+          function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+          function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+          function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+          step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+  }
+
+  function __generator(thisArg, body) {
+      var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+      return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+      function verb(n) { return function (v) { return step([n, v]); }; }
+      function step(op) {
+          if (f) throw new TypeError("Generator is already executing.");
+          while (_) try {
+              if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+              if (y = 0, t) op = [op[0] & 2, t.value];
+              switch (op[0]) {
+                  case 0: case 1: t = op; break;
+                  case 4: _.label++; return { value: op[1], done: false };
+                  case 5: _.label++; y = op[1]; op = [0]; continue;
+                  case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                  default:
+                      if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                      if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                      if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                      if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                      if (t[2]) _.ops.pop();
+                      _.trys.pop(); continue;
+              }
+              op = body.call(thisArg, _);
+          } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+          if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+      }
   }
 
   var ColorInputField = /** @class */ (function (_super) {
@@ -3209,33 +3247,40 @@
       undefined
     );
 
-  var Section = /** @class */ (function (_super) {
-      __extends(Section, _super);
-      function Section() {
+  var ContentHeader = /** @class */ (function (_super) {
+      __extends(ContentHeader, _super);
+      function ContentHeader() {
           return _super !== null && _super.apply(this, arguments) || this;
       }
+      Object.defineProperty(ContentHeader.prototype, "iconClass", {
+          get: function () {
+              return this.fa ? "icon-fa" : "icon-non-fa";
+          },
+          enumerable: true,
+          configurable: true
+      });
       __decorate([
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
-      ], Section.prototype, "icon", void 0);
+      ], ContentHeader.prototype, "title", void 0);
       __decorate([
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
-      ], Section.prototype, "title", void 0);
+      ], ContentHeader.prototype, "icon", void 0);
       __decorate([
           sitewhereIdeCommon.Prop(),
-          __metadata("design:type", String)
-      ], Section.prototype, "help", void 0);
-      Section = __decorate([
+          __metadata("design:type", Boolean)
+      ], ContentHeader.prototype, "fa", void 0);
+      ContentHeader = __decorate([
           sitewhereIdeCommon.Component({
-              components: {}
+              components: {},
           })
-      ], Section);
-      return Section;
+      ], ContentHeader);
+      return ContentHeader;
   }(Vue));
 
   /* script */
-  const __vue_script__$f = Section;
+  const __vue_script__$f = ContentHeader;
 
   /* template */
   var __vue_render__$f = function() {
@@ -3244,30 +3289,12 @@
     var _c = _vm._self._c || _h;
     return _c(
       "v-card",
-      { staticStyle: { display: "relative" }, attrs: { flat: "" } },
+      { staticClass: "mb-3", attrs: { flat: "" } },
       [
-        _c(
-          "div",
-          { staticClass: "mb-3" },
-          [
-            _c(
-              "v-icon",
-              { staticStyle: { width: "25px" }, attrs: { small: "" } },
-              [_vm._v(_vm._s(_vm.icon))]
-            ),
-            _vm._v(_vm._s(_vm.title) + ":\n  ")
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "v-card",
-          { staticStyle: { "margin-left": "25px" }, attrs: { flat: "" } },
-          [_vm._t("default")],
-          2
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "overlay" }, [_vm._t("overlay")], 2)
+        _c("v-icon", { class: _vm.iconClass }, [_vm._v(_vm._s(_vm.icon))]),
+        _c("span", { staticClass: "subheading" }, [
+          _vm._v(_vm._s(_vm.title) + ":")
+        ])
       ],
       1
     )
@@ -3278,11 +3305,11 @@
     /* style */
     const __vue_inject_styles__$f = function (inject) {
       if (!inject) return
-      inject("data-v-2c479f94_0", { source: "\n.overlay[data-v-2c479f94] {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentSection.vue"],"names":[],"mappings":";AA4BA;EACA,kBAAA;EACA,SAAA;EACA,QAAA;EACA,MAAA;EACA,SAAA;AACA","file":"ContentSection.vue","sourcesContent":["<template>\r\n  <v-card style=\"display: relative;\" flat>\r\n    <div class=\"mb-3\">\r\n      <v-icon style=\"width: 25px;\" small>{{ icon }}</v-icon\r\n      >{{ title }}:\r\n    </div>\r\n    <v-card flat style=\"margin-left: 25px;\">\r\n      <slot />\r\n    </v-card>\r\n    <div class=\"overlay\"><slot name=\"overlay\" /></div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+      inject("data-v-41dd6e29_0", { source: "\n.icon-fa[data-v-41dd6e29] {\r\n  font-size: 13px !important;\r\n  width: 25px;\n}\n.icon-non-fa[data-v-41dd6e29] {\r\n  font-size: 16px !important;\r\n  width: 25px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentHeader.vue"],"names":[],"mappings":";AA0BA;EACA,0BAAA;EACA,WAAA;AACA;AACA;EACA,0BAAA;EACA,WAAA;AACA","file":"ContentHeader.vue","sourcesContent":["<template>\r\n  <v-card flat class=\"mb-3\">\r\n    <v-icon :class=\"iconClass\">{{ icon }}</v-icon\r\n    ><span class=\"subheading\">{{ title }}:</span>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {},\r\n})\r\nexport default class ContentHeader extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n\r\n  get iconClass(): string {\r\n    return this.fa ? \"icon-fa\" : \"icon-non-fa\";\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.icon-fa {\r\n  font-size: 13px !important;\r\n  width: 25px;\r\n}\r\n.icon-non-fa {\r\n  font-size: 16px !important;\r\n  width: 25px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$f = "data-v-2c479f94";
+    const __vue_scope_id__$f = "data-v-41dd6e29";
     /* module identifier */
     const __vue_module_identifier__$f = undefined;
     /* functional template */
@@ -3300,6 +3327,97 @@
       __vue_scope_id__$f,
       __vue_is_functional_template__$f,
       __vue_module_identifier__$f,
+      false,
+      createInjector,
+      undefined,
+      undefined
+    );
+
+  var Section = /** @class */ (function (_super) {
+      __extends(Section, _super);
+      function Section() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], Section.prototype, "icon", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Boolean)
+      ], Section.prototype, "fa", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], Section.prototype, "title", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], Section.prototype, "help", void 0);
+      Section = __decorate([
+          sitewhereIdeCommon.Component({
+              components: { ContentHeader: __vue_component__$f },
+          })
+      ], Section);
+      return Section;
+  }(Vue));
+
+  /* script */
+  const __vue_script__$g = Section;
+
+  /* template */
+  var __vue_render__$g = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "v-card",
+      { staticStyle: { display: "relative" }, attrs: { flat: "" } },
+      [
+        _c("content-header", {
+          attrs: { title: _vm.title, icon: _vm.icon, fa: _vm.fa }
+        }),
+        _vm._v(" "),
+        _c(
+          "v-card",
+          { staticStyle: { "margin-left": "25px" }, attrs: { flat: "" } },
+          [_vm._t("default")],
+          2
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "overlay" }, [_vm._t("overlay")], 2)
+      ],
+      1
+    )
+  };
+  var __vue_staticRenderFns__$g = [];
+  __vue_render__$g._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$g = function (inject) {
+      if (!inject) return
+      inject("data-v-49dc2152_0", { source: "\n.overlay[data-v-49dc2152] {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentSection.vue"],"names":[],"mappings":";AA4BA;EACA,kBAAA;EACA,SAAA;EACA,QAAA;EACA,MAAA;EACA,SAAA;AACA","file":"ContentSection.vue","sourcesContent":["<template>\r\n  <v-card style=\"display: relative;\" flat>\r\n    <content-header :title=\"title\" :icon=\"icon\" :fa=\"fa\" />\r\n    <v-card flat style=\"margin-left: 25px;\">\r\n      <slot />\r\n    </v-card>\r\n    <div class=\"overlay\"><slot name=\"overlay\" /></div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport ContentHeader from \"./ContentHeader.vue\";\r\n\r\n@Component({\r\n  components: { ContentHeader },\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+
+    };
+    /* scoped */
+    const __vue_scope_id__$g = "data-v-49dc2152";
+    /* module identifier */
+    const __vue_module_identifier__$g = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$g = false;
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$g = normalizeComponent(
+      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+      __vue_inject_styles__$g,
+      __vue_script__$g,
+      __vue_scope_id__$g,
+      __vue_is_functional_template__$g,
+      __vue_module_identifier__$g,
       false,
       createInjector,
       undefined,
@@ -3324,10 +3442,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$g = ContentWarning;
+  const __vue_script__$h = ContentWarning;
 
   /* template */
-  var __vue_render__$g = function() {
+  var __vue_render__$h = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3347,34 +3465,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$g = [];
-  __vue_render__$g._withStripped = true;
+  var __vue_staticRenderFns__$h = [];
+  __vue_render__$h._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$g = function (inject) {
+    const __vue_inject_styles__$h = function (inject) {
       if (!inject) return
       inject("data-v-37a8de66_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentWarning.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$g = "data-v-37a8de66";
+    const __vue_scope_id__$h = "data-v-37a8de66";
     /* module identifier */
-    const __vue_module_identifier__$g = undefined;
+    const __vue_module_identifier__$h = undefined;
     /* functional template */
-    const __vue_is_functional_template__$g = false;
+    const __vue_is_functional_template__$h = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$g = normalizeComponent(
-      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-      __vue_inject_styles__$g,
-      __vue_script__$g,
-      __vue_scope_id__$g,
-      __vue_is_functional_template__$g,
-      __vue_module_identifier__$g,
+    const __vue_component__$h = normalizeComponent(
+      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+      __vue_inject_styles__$h,
+      __vue_script__$h,
+      __vue_scope_id__$h,
+      __vue_is_functional_template__$h,
+      __vue_module_identifier__$h,
       false,
       createInjector,
       undefined,
@@ -3402,10 +3520,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$h = DatatableLink;
+  const __vue_script__$i = DatatableLink;
 
   /* template */
-  var __vue_render__$h = function() {
+  var __vue_render__$i = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3420,34 +3538,34 @@
       [_c("a", { staticClass: "clink" }, [_vm._v(_vm._s(_vm.text))])]
     )
   };
-  var __vue_staticRenderFns__$h = [];
-  __vue_render__$h._withStripped = true;
+  var __vue_staticRenderFns__$i = [];
+  __vue_render__$i._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$h = function (inject) {
+    const __vue_inject_styles__$i = function (inject) {
       if (!inject) return
       inject("data-v-4c9b9bd6_0", { source: "\n.clink[data-v-4c9b9bd6] {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n  text-decoration: underline;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableLink.vue"],"names":[],"mappings":";AA4BA;EACA,cAAA;EACA,eAAA;EACA,0BAAA;AACA","file":"DatatableLink.vue","sourcesContent":["<template>\r\n  <v-card\r\n    style=\"background-color: transparent;\"\r\n    @click=\"onLinkClicked\"\r\n    flat\r\n    class=\"caption\"\r\n  >\r\n    <a class=\"clink\">{{ text }}</a>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class DatatableLink extends Vue {\r\n  @Prop() readonly text!: string;\r\n\r\n  onLinkClicked() {\r\n    this.$emit(\"linkClicked\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.clink {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n  text-decoration: underline;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$h = "data-v-4c9b9bd6";
+    const __vue_scope_id__$i = "data-v-4c9b9bd6";
     /* module identifier */
-    const __vue_module_identifier__$h = undefined;
+    const __vue_module_identifier__$i = undefined;
     /* functional template */
-    const __vue_is_functional_template__$h = false;
+    const __vue_is_functional_template__$i = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$h = normalizeComponent(
-      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-      __vue_inject_styles__$h,
-      __vue_script__$h,
-      __vue_scope_id__$h,
-      __vue_is_functional_template__$h,
-      __vue_module_identifier__$h,
+    const __vue_component__$i = normalizeComponent(
+      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+      __vue_inject_styles__$i,
+      __vue_script__$i,
+      __vue_scope_id__$i,
+      __vue_is_functional_template__$i,
+      __vue_module_identifier__$i,
       false,
       createInjector,
       undefined,
@@ -3463,6 +3581,10 @@
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
       ], Section.prototype, "icon", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Boolean)
+      ], Section.prototype, "fa", void 0);
       __decorate([
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
@@ -3485,17 +3607,17 @@
       ], Section.prototype, "width", void 0);
       Section = __decorate([
           sitewhereIdeCommon.Component({
-              components: {}
+              components: { ContentHeader: __vue_component__$f },
           })
       ], Section);
       return Section;
   }(Vue));
 
   /* script */
-  const __vue_script__$i = Section$1;
+  const __vue_script__$j = Section$1;
 
   /* template */
-  var __vue_render__$i = function() {
+  var __vue_render__$j = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3503,19 +3625,9 @@
       "v-card",
       { attrs: { flat: "" } },
       [
-        _c(
-          "div",
-          { staticClass: "mb-3" },
-          [
-            _c(
-              "v-icon",
-              { staticStyle: { width: "25px" }, attrs: { small: "" } },
-              [_vm._v(_vm._s(_vm.icon))]
-            ),
-            _vm._v(_vm._s(_vm.title) + ":\n  ")
-          ],
-          1
-        ),
+        _c("content-header", {
+          attrs: { title: _vm.title, icon: _vm.icon, fa: _vm.fa }
+        }),
         _vm._v(" "),
         _c(
           "v-card",
@@ -3558,34 +3670,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$i = [];
-  __vue_render__$i._withStripped = true;
+  var __vue_staticRenderFns__$j = [];
+  __vue_render__$j._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$i = function (inject) {
+    const __vue_inject_styles__$j = function (inject) {
       if (!inject) return
-      inject("data-v-6d2e480e_0", { source: "\n.datatable[data-v-6d2e480e] tr {\r\n  height: 30px;\n}\n.datatable[data-v-6d2e480e] th {\r\n  padding: 3px !important;\n}\n.datatable[data-v-6d2e480e] td {\r\n  padding: 3px !important;\r\n  height: 30px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableSection.vue"],"names":[],"mappings":";AA0CA;EACA,YAAA;AACA;AACA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;AACA","file":"DatatableSection.vue","sourcesContent":["<template>\r\n  <v-card flat>\r\n    <div class=\"mb-3\">\r\n      <v-icon style=\"width: 25px;\" small>{{ icon }}</v-icon\r\n      >{{ title }}:\r\n    </div>\r\n    <v-card flat style=\"margin-left: 25px;\" :width=\"width\">\r\n      <v-data-table\r\n        class=\"datatable\"\r\n        dense\r\n        :headers=\"headers\"\r\n        :items=\"items\"\r\n        hide-actions\r\n      >\r\n        <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\"\r\n          ><slot :name=\"slot\" v-bind=\"scope\"\r\n        /></template>\r\n      </v-data-table>\r\n      <slot name=\"datatable-footer\" />\r\n      <slot name=\"datatable-dialogs\" />\r\n    </v-card>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n  @Prop() readonly headers!: any[];\r\n  @Prop() readonly items!: any[];\r\n  @Prop() readonly width!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.datatable >>> tr {\r\n  height: 30px;\r\n}\r\n.datatable >>> th {\r\n  padding: 3px !important;\r\n}\r\n.datatable >>> td {\r\n  padding: 3px !important;\r\n  height: 30px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+      inject("data-v-4ee1ec56_0", { source: "\n.datatable[data-v-4ee1ec56] tr {\r\n  height: 30px;\n}\n.datatable[data-v-4ee1ec56] th {\r\n  padding: 3px !important;\n}\n.datatable[data-v-4ee1ec56] td {\r\n  padding: 3px !important;\r\n  height: 30px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableSection.vue"],"names":[],"mappings":";AA0CA;EACA,YAAA;AACA;AACA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;AACA","file":"DatatableSection.vue","sourcesContent":["<template>\r\n  <v-card flat>\r\n    <content-header :title=\"title\" :icon=\"icon\" :fa=\"fa\" />\r\n    <v-card flat style=\"margin-left: 25px;\" :width=\"width\">\r\n      <v-data-table\r\n        class=\"datatable\"\r\n        dense\r\n        :headers=\"headers\"\r\n        :items=\"items\"\r\n        hide-actions\r\n      >\r\n        <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\"\r\n          ><slot :name=\"slot\" v-bind=\"scope\"\r\n        /></template>\r\n      </v-data-table>\r\n      <slot name=\"datatable-footer\" />\r\n      <slot name=\"datatable-dialogs\" />\r\n    </v-card>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport ContentHeader from \"./ContentHeader.vue\";\r\n\r\n@Component({\r\n  components: { ContentHeader },\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n  @Prop() readonly headers!: any[];\r\n  @Prop() readonly items!: any[];\r\n  @Prop() readonly width!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.datatable >>> tr {\r\n  height: 30px;\r\n}\r\n.datatable >>> th {\r\n  padding: 3px !important;\r\n}\r\n.datatable >>> td {\r\n  padding: 3px !important;\r\n  height: 30px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$i = "data-v-6d2e480e";
+    const __vue_scope_id__$j = "data-v-4ee1ec56";
     /* module identifier */
-    const __vue_module_identifier__$i = undefined;
+    const __vue_module_identifier__$j = undefined;
     /* functional template */
-    const __vue_is_functional_template__$i = false;
+    const __vue_is_functional_template__$j = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$i = normalizeComponent(
-      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-      __vue_inject_styles__$i,
-      __vue_script__$i,
-      __vue_scope_id__$i,
-      __vue_is_functional_template__$i,
-      __vue_module_identifier__$i,
+    const __vue_component__$j = normalizeComponent(
+      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+      __vue_inject_styles__$j,
+      __vue_script__$j,
+      __vue_scope_id__$j,
+      __vue_is_functional_template__$j,
+      __vue_module_identifier__$j,
       false,
       createInjector,
       undefined,
@@ -3691,10 +3803,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$j = BaseDialog;
+  const __vue_script__$k = BaseDialog;
 
   /* template */
-  var __vue_render__$j = function() {
+  var __vue_render__$k = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3811,34 +3923,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$j = [];
-  __vue_render__$j._withStripped = true;
+  var __vue_staticRenderFns__$k = [];
+  __vue_render__$k._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$j = function (inject) {
+    const __vue_inject_styles__$k = function (inject) {
       if (!inject) return
       inject("data-v-59e81aa4_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$j = "data-v-59e81aa4";
+    const __vue_scope_id__$k = "data-v-59e81aa4";
     /* module identifier */
-    const __vue_module_identifier__$j = undefined;
+    const __vue_module_identifier__$k = undefined;
     /* functional template */
-    const __vue_is_functional_template__$j = false;
+    const __vue_is_functional_template__$k = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$j = normalizeComponent(
-      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-      __vue_inject_styles__$j,
-      __vue_script__$j,
-      __vue_scope_id__$j,
-      __vue_is_functional_template__$j,
-      __vue_module_identifier__$j,
+    const __vue_component__$k = normalizeComponent(
+      { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+      __vue_inject_styles__$k,
+      __vue_script__$k,
+      __vue_scope_id__$k,
+      __vue_is_functional_template__$k,
+      __vue_module_identifier__$k,
       false,
       createInjector,
       undefined,
@@ -3874,17 +3986,17 @@
       ], NewElementChooser.prototype, "width", void 0);
       NewElementChooser = __decorate([
           sitewhereIdeCommon.Component({
-              components: { BaseDialog: __vue_component__$j }
+              components: { BaseDialog: __vue_component__$k }
           })
       ], NewElementChooser);
       return NewElementChooser;
   }(Vue));
 
   /* script */
-  const __vue_script__$k = NewElementChooser;
+  const __vue_script__$l = NewElementChooser;
 
   /* template */
-  var __vue_render__$k = function() {
+  var __vue_render__$l = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -3915,34 +4027,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$k = [];
-  __vue_render__$k._withStripped = true;
+  var __vue_staticRenderFns__$l = [];
+  __vue_render__$l._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$k = function (inject) {
+    const __vue_inject_styles__$l = function (inject) {
       if (!inject) return
       inject("data-v-44387fee_0", { source: "\n.scroll-chooser[data-v-44387fee] {\r\n  max-height: 300px;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\NewElementChooser.vue"],"names":[],"mappings":";AAsDA;EACA,iBAAA;EACA,gBAAA;AACA","file":"NewElementChooser.vue","sourcesContent":["<template>\r\n  <base-dialog\r\n    ref=\"dialog\"\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :width=\"width\"\r\n    :loaded=\"true\"\r\n    :visible=\"dialogVisible\"\r\n    :tabbed=\"false\"\r\n    :hideCreate=\"true\"\r\n    cancelLabel=\"Cancel\"\r\n    @cancelClicked=\"closeDialog\"\r\n  >\r\n    <v-card class=\"scroll-chooser\" flat>\r\n      <slot />\r\n    </v-card>\r\n  </base-dialog>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop, Refs } from \"sitewhere-ide-common\";\r\nimport { ITabbedComponent } from \"sitewhere-ide-common\";\r\n\r\nimport BaseDialog from \"../dialog/BaseDialog.vue\";\r\n\r\n@Component({\r\n  components: { BaseDialog }\r\n})\r\nexport default class NewElementChooser extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly width!: number;\r\n\r\n  dialogVisible: boolean = false;\r\n\r\n  /** References */\r\n  $refs!: Refs<{\r\n    dialog: ITabbedComponent;\r\n  }>;\r\n\r\n  /** Open dialog */\r\n  openDialog(): void {\r\n    this.dialogVisible = true;\r\n  }\r\n\r\n  /** Close dialog */\r\n  closeDialog(): void {\r\n    this.dialogVisible = false;\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.scroll-chooser {\r\n  max-height: 300px;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$k = "data-v-44387fee";
+    const __vue_scope_id__$l = "data-v-44387fee";
     /* module identifier */
-    const __vue_module_identifier__$k = undefined;
+    const __vue_module_identifier__$l = undefined;
     /* functional template */
-    const __vue_is_functional_template__$k = false;
+    const __vue_is_functional_template__$l = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$k = normalizeComponent(
-      { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-      __vue_inject_styles__$k,
-      __vue_script__$k,
-      __vue_scope_id__$k,
-      __vue_is_functional_template__$k,
-      __vue_module_identifier__$k,
+    const __vue_component__$l = normalizeComponent(
+      { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+      __vue_inject_styles__$l,
+      __vue_script__$l,
+      __vue_scope_id__$l,
+      __vue_is_functional_template__$l,
+      __vue_module_identifier__$l,
       false,
       createInjector,
       undefined,
@@ -3975,10 +4087,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$l = NewElementChooser$1;
+  const __vue_script__$m = NewElementChooser$1;
 
   /* template */
-  var __vue_render__$l = function() {
+  var __vue_render__$m = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4009,34 +4121,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$l = [];
-  __vue_render__$l._withStripped = true;
+  var __vue_staticRenderFns__$m = [];
+  __vue_render__$m._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$l = function (inject) {
+    const __vue_inject_styles__$m = function (inject) {
       if (!inject) return
       inject("data-v-6f59a340_0", { source: "\n.elm-entry[data-v-6f59a340] {\r\n  cursor: pointer;\r\n  border-left: 5px solid transparent;\n}\n.elm-entry[data-v-6f59a340]:hover {\r\n  border-left: 5px solid #ccc;\r\n  background-color: #eee;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\NewElementEntry.vue"],"names":[],"mappings":";AA+BA;EACA,eAAA;EACA,kCAAA;AACA;AACA;EACA,2BAAA;EACA,sBAAA;AACA","file":"NewElementEntry.vue","sourcesContent":["<template>\r\n  <div>\r\n    <v-card flat>\r\n      <v-card-text class=\"elm-entry\" @click=\"onElementClicked\">\r\n        <v-icon small class=\"mr-2\">{{ icon }}</v-icon\r\n        ><slot\r\n      /></v-card-text>\r\n    </v-card>\r\n    <v-divider />\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class NewElementChooser extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly itemId!: string;\r\n\r\n  /** Called when the element is clicked */\r\n  onElementClicked(): void {\r\n    this.$emit(\"chosen\", this.itemId);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.elm-entry {\r\n  cursor: pointer;\r\n  border-left: 5px solid transparent;\r\n}\r\n.elm-entry:hover {\r\n  border-left: 5px solid #ccc;\r\n  background-color: #eee;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$l = "data-v-6f59a340";
+    const __vue_scope_id__$m = "data-v-6f59a340";
     /* module identifier */
-    const __vue_module_identifier__$l = undefined;
+    const __vue_module_identifier__$m = undefined;
     /* functional template */
-    const __vue_is_functional_template__$l = false;
+    const __vue_is_functional_template__$m = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$l = normalizeComponent(
-      { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-      __vue_inject_styles__$l,
-      __vue_script__$l,
-      __vue_scope_id__$l,
-      __vue_is_functional_template__$l,
-      __vue_module_identifier__$l,
+    const __vue_component__$m = normalizeComponent(
+      { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+      __vue_inject_styles__$m,
+      __vue_script__$m,
+      __vue_scope_id__$m,
+      __vue_is_functional_template__$m,
+      __vue_module_identifier__$m,
       false,
       createInjector,
       undefined,
@@ -4061,10 +4173,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$m = PageHeader;
+  const __vue_script__$n = PageHeader;
 
   /* template */
-  var __vue_render__$m = function() {
+  var __vue_render__$n = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4078,34 +4190,34 @@
       [_vm._v(_vm._s(_vm.text))]
     )
   };
-  var __vue_staticRenderFns__$m = [];
-  __vue_render__$m._withStripped = true;
+  var __vue_staticRenderFns__$n = [];
+  __vue_render__$n._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$m = function (inject) {
+    const __vue_inject_styles__$n = function (inject) {
       if (!inject) return
       inject("data-v-3f8202af_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"PageHeader.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$m = "data-v-3f8202af";
+    const __vue_scope_id__$n = "data-v-3f8202af";
     /* module identifier */
-    const __vue_module_identifier__$m = undefined;
+    const __vue_module_identifier__$n = undefined;
     /* functional template */
-    const __vue_is_functional_template__$m = false;
+    const __vue_is_functional_template__$n = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$m = normalizeComponent(
-      { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-      __vue_inject_styles__$m,
-      __vue_script__$m,
-      __vue_scope_id__$m,
-      __vue_is_functional_template__$m,
-      __vue_module_identifier__$m,
+    const __vue_component__$n = normalizeComponent(
+      { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+      __vue_inject_styles__$n,
+      __vue_script__$n,
+      __vue_scope_id__$n,
+      __vue_is_functional_template__$n,
+      __vue_module_identifier__$n,
       false,
       createInjector,
       undefined,
@@ -4124,10 +4236,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$n = DialogForm;
+  const __vue_script__$o = DialogForm;
 
   /* template */
-  var __vue_render__$n = function() {
+  var __vue_render__$o = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4145,17 +4257,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$n = [];
-  __vue_render__$n._withStripped = true;
+  var __vue_staticRenderFns__$o = [];
+  __vue_render__$o._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$n = undefined;
+    const __vue_inject_styles__$o = undefined;
     /* scoped */
-    const __vue_scope_id__$n = undefined;
+    const __vue_scope_id__$o = undefined;
     /* module identifier */
-    const __vue_module_identifier__$n = undefined;
+    const __vue_module_identifier__$o = undefined;
     /* functional template */
-    const __vue_is_functional_template__$n = false;
+    const __vue_is_functional_template__$o = false;
     /* style inject */
     
     /* style inject SSR */
@@ -4164,13 +4276,13 @@
     
 
     
-    const __vue_component__$n = normalizeComponent(
-      { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
-      __vue_inject_styles__$n,
-      __vue_script__$n,
-      __vue_scope_id__$n,
-      __vue_is_functional_template__$n,
-      __vue_module_identifier__$n,
+    const __vue_component__$o = normalizeComponent(
+      { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+      __vue_inject_styles__$o,
+      __vue_script__$o,
+      __vue_scope_id__$o,
+      __vue_is_functional_template__$o,
+      __vue_module_identifier__$o,
       false,
       undefined,
       undefined,
@@ -4217,16 +4329,20 @@
           __metadata("design:type", String)
       ], FormDateTimePicker.prototype, "type", void 0);
       FormDateTimePicker = __decorate([
-          sitewhereIdeCommon.Component({})
+          sitewhereIdeCommon.Component({
+              components: {
+                  DateTimePicker: __vue_component__$4
+              }
+          })
       ], FormDateTimePicker);
       return FormDateTimePicker;
   }(Vue));
 
   /* script */
-  const __vue_script__$o = FormDateTimePicker;
+  const __vue_script__$p = FormDateTimePicker;
 
   /* template */
-  var __vue_render__$o = function() {
+  var __vue_render__$p = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4250,17 +4366,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$o = [];
-  __vue_render__$o._withStripped = true;
+  var __vue_staticRenderFns__$p = [];
+  __vue_render__$p._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$o = undefined;
+    const __vue_inject_styles__$p = undefined;
     /* scoped */
-    const __vue_scope_id__$o = undefined;
+    const __vue_scope_id__$p = undefined;
     /* module identifier */
-    const __vue_module_identifier__$o = undefined;
+    const __vue_module_identifier__$p = undefined;
     /* functional template */
-    const __vue_is_functional_template__$o = false;
+    const __vue_is_functional_template__$p = false;
     /* style inject */
     
     /* style inject SSR */
@@ -4269,13 +4385,13 @@
     
 
     
-    const __vue_component__$o = normalizeComponent(
-      { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
-      __vue_inject_styles__$o,
-      __vue_script__$o,
-      __vue_scope_id__$o,
-      __vue_is_functional_template__$o,
-      __vue_module_identifier__$o,
+    const __vue_component__$p = normalizeComponent(
+      { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+      __vue_inject_styles__$p,
+      __vue_script__$p,
+      __vue_scope_id__$p,
+      __vue_is_functional_template__$p,
+      __vue_module_identifier__$p,
       false,
       undefined,
       undefined,
@@ -4347,10 +4463,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$p = FormSelect;
+  const __vue_script__$q = FormSelect;
 
   /* template */
-  var __vue_render__$p = function() {
+  var __vue_render__$q = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4359,6 +4475,7 @@
       { staticClass: "mb-3" },
       [
         _c("v-select", {
+          staticClass: "text-field-input",
           attrs: {
             required: _vm.required,
             title: _vm.title,
@@ -4369,6 +4486,8 @@
             "item-value": _vm.itemValue,
             chips: _vm.chips,
             "prepend-icon": _vm.icon,
+            "menu-props": { closeOnContentClick: true },
+            "hide-details": true,
             placeholder: " "
           },
           on: { change: _vm.onSelectionChanged },
@@ -4386,34 +4505,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$p = [];
-  __vue_render__$p._withStripped = true;
+  var __vue_staticRenderFns__$q = [];
+  __vue_render__$q._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$p = function (inject) {
+    const __vue_inject_styles__$q = function (inject) {
       if (!inject) return
-      inject("data-v-2725668a_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormSelect.vue"}, media: undefined });
+      inject("data-v-0882046e_0", { source: "\n.text-field-input[data-v-0882046e] i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\FormSelect.vue"],"names":[],"mappings":";AAyDA;EACA,eAAA;EACA,WAAA;AACA","file":"FormSelect.vue","sourcesContent":["<template>\r\n  <div class=\"mb-3\">\r\n    <v-select\r\n      class=\"text-field-input\"\r\n      :required=\"required\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :items=\"items\"\r\n      v-model=\"wrapped\"\r\n      :multiple=\"multiple\"\r\n      :item-text=\"itemText\"\r\n      :item-value=\"itemValue\"\r\n      :chips=\"chips\"\r\n      :prepend-icon=\"icon\"\r\n      :menu-props=\"{ closeOnContentClick: true }\"\r\n      :hide-details=\"true\"\r\n      placeholder=\" \"\r\n      @change=\"onSelectionChanged\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class FormSelect extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly items!: {}[];\r\n  @Prop() readonly required!: boolean;\r\n  @Prop() readonly value!: string;\r\n  @Prop() readonly itemText!: string;\r\n  @Prop() readonly itemValue!: string;\r\n  @Prop() readonly multiple!: boolean;\r\n  @Prop() readonly chips!: boolean;\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  onSelectionChanged(selection: any) {\r\n    this.$emit(\"change\", selection);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$p = "data-v-2725668a";
+    const __vue_scope_id__$q = "data-v-0882046e";
     /* module identifier */
-    const __vue_module_identifier__$p = undefined;
+    const __vue_module_identifier__$q = undefined;
     /* functional template */
-    const __vue_is_functional_template__$p = false;
+    const __vue_is_functional_template__$q = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$p = normalizeComponent(
-      { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
-      __vue_inject_styles__$p,
-      __vue_script__$p,
-      __vue_scope_id__$p,
-      __vue_is_functional_template__$p,
-      __vue_module_identifier__$p,
+    const __vue_component__$q = normalizeComponent(
+      { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
+      __vue_inject_styles__$q,
+      __vue_script__$q,
+      __vue_scope_id__$q,
+      __vue_is_functional_template__$q,
+      __vue_module_identifier__$q,
       false,
       createInjector,
       undefined,
@@ -4485,10 +4604,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$q = FormSelect$1;
+  const __vue_script__$r = FormSelect$1;
 
   /* template */
-  var __vue_render__$q = function() {
+  var __vue_render__$r = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4521,34 +4640,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$q = [];
-  __vue_render__$q._withStripped = true;
+  var __vue_staticRenderFns__$r = [];
+  __vue_render__$r._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$q = function (inject) {
+    const __vue_inject_styles__$r = function (inject) {
       if (!inject) return
       inject("data-v-3eefd107_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormSelectCondensed.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$q = "data-v-3eefd107";
+    const __vue_scope_id__$r = "data-v-3eefd107";
     /* module identifier */
-    const __vue_module_identifier__$q = undefined;
+    const __vue_module_identifier__$r = undefined;
     /* functional template */
-    const __vue_is_functional_template__$q = false;
+    const __vue_is_functional_template__$r = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$q = normalizeComponent(
-      { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
-      __vue_inject_styles__$q,
-      __vue_script__$q,
-      __vue_scope_id__$q,
-      __vue_is_functional_template__$q,
-      __vue_module_identifier__$q,
+    const __vue_component__$r = normalizeComponent(
+      { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
+      __vue_inject_styles__$r,
+      __vue_script__$r,
+      __vue_scope_id__$r,
+      __vue_is_functional_template__$r,
+      __vue_module_identifier__$r,
       false,
       createInjector,
       undefined,
@@ -4570,6 +4689,10 @@
           enumerable: true,
           configurable: true
       });
+      /** Focus the wrapped input */
+      FormText.prototype.focus = function () {
+          this.$refs.field.focus();
+      };
       __decorate([
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
@@ -4594,6 +4717,18 @@
           sitewhereIdeCommon.Prop(),
           __metadata("design:type", String)
       ], FormText.prototype, "type", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Boolean)
+      ], FormText.prototype, "readonly", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Boolean)
+      ], FormText.prototype, "dense", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", Boolean)
+      ], FormText.prototype, "autofocus", void 0);
       FormText = __decorate([
           sitewhereIdeCommon.Component({})
       ], FormText);
@@ -4601,18 +4736,20 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$r = FormText;
+  const __vue_script__$s = FormText;
 
   /* template */
-  var __vue_render__$r = function() {
+  var __vue_render__$s = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c(
       "div",
-      { staticClass: "mb-3" },
+      { class: !_vm.dense ? "mb-3" : "" },
       [
         _c("v-text-field", {
+          ref: "field",
+          staticClass: "text-field-input",
           attrs: {
             required: _vm.required,
             title: _vm.title,
@@ -4620,7 +4757,9 @@
             type: _vm.type,
             placeholder: " ",
             "hide-details": "",
-            "prepend-icon": _vm.icon
+            "prepend-icon": _vm.icon,
+            disabled: _vm.readonly,
+            autofocus: _vm.autofocus
           },
           model: {
             value: _vm.wrapped,
@@ -4636,34 +4775,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$r = [];
-  __vue_render__$r._withStripped = true;
+  var __vue_staticRenderFns__$s = [];
+  __vue_render__$s._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$r = function (inject) {
+    const __vue_inject_styles__$s = function (inject) {
       if (!inject) return
-      inject("data-v-47ddd8e5_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormText.vue"}, media: undefined });
+      inject("data-v-9a6194a8_0", { source: "\n.text-field-input[data-v-9a6194a8] i.v-icon {\r\n  font-size: 16px;\r\n  color: #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\FormText.vue"],"names":[],"mappings":";AA2DA;EACA,eAAA;EACA,WAAA;AACA","file":"FormText.vue","sourcesContent":["<template>\r\n  <div :class=\"!dense ? 'mb-3' : ''\">\r\n    <v-text-field\r\n      ref=\"field\"\r\n      class=\"text-field-input\"\r\n      :required=\"required\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :type=\"type\"\r\n      placeholder=\" \"\r\n      v-model=\"wrapped\"\r\n      hide-details\r\n      :prepend-icon=\"icon\"\r\n      :disabled=\"readonly\"\r\n      :autofocus=\"autofocus\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop, Refs } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class FormText extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly required!: boolean;\r\n  @Prop() readonly value!: string;\r\n  @Prop() readonly type!: string;\r\n  @Prop() readonly readonly!: boolean;\r\n  @Prop() readonly dense!: boolean;\r\n  @Prop() readonly autofocus!: boolean;\r\n\r\n  // References.\r\n  $refs!: Refs<{\r\n    field: any;\r\n  }>;\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  /** Focus the wrapped input */\r\n  focus(): void {\r\n    this.$refs.field.focus();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$r = "data-v-47ddd8e5";
+    const __vue_scope_id__$s = "data-v-9a6194a8";
     /* module identifier */
-    const __vue_module_identifier__$r = undefined;
+    const __vue_module_identifier__$s = undefined;
     /* functional template */
-    const __vue_is_functional_template__$r = false;
+    const __vue_is_functional_template__$s = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$r = normalizeComponent(
-      { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
-      __vue_inject_styles__$r,
-      __vue_script__$r,
-      __vue_scope_id__$r,
-      __vue_is_functional_template__$r,
-      __vue_module_identifier__$r,
+    const __vue_component__$s = normalizeComponent(
+      { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
+      __vue_inject_styles__$s,
+      __vue_script__$s,
+      __vue_scope_id__$s,
+      __vue_is_functional_template__$s,
+      __vue_module_identifier__$s,
       false,
       createInjector,
       undefined,
@@ -4712,10 +4851,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$s = FormText$1;
+  const __vue_script__$t = FormText$1;
 
   /* template */
-  var __vue_render__$s = function() {
+  var __vue_render__$t = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4746,34 +4885,189 @@
       1
     )
   };
-  var __vue_staticRenderFns__$s = [];
-  __vue_render__$s._withStripped = true;
+  var __vue_staticRenderFns__$t = [];
+  __vue_render__$t._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$s = function (inject) {
+    const __vue_inject_styles__$t = function (inject) {
       if (!inject) return
-      inject("data-v-333dc9c8_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormTextArea.vue"}, media: undefined });
+      inject("data-v-8074332e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormTextArea.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$s = "data-v-333dc9c8";
+    const __vue_scope_id__$t = "data-v-8074332e";
     /* module identifier */
-    const __vue_module_identifier__$s = undefined;
+    const __vue_module_identifier__$t = undefined;
     /* functional template */
-    const __vue_is_functional_template__$s = false;
+    const __vue_is_functional_template__$t = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$s = normalizeComponent(
-      { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
-      __vue_inject_styles__$s,
-      __vue_script__$s,
-      __vue_scope_id__$s,
-      __vue_is_functional_template__$s,
-      __vue_module_identifier__$s,
+    const __vue_component__$t = normalizeComponent(
+      { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
+      __vue_inject_styles__$t,
+      __vue_script__$t,
+      __vue_scope_id__$t,
+      __vue_is_functional_template__$t,
+      __vue_module_identifier__$t,
+      false,
+      createInjector,
+      undefined,
+      undefined
+    );
+
+  var ScriptChooser = /** @class */ (function (_super) {
+      __extends(ScriptChooser, _super);
+      function ScriptChooser() {
+          var _this = _super !== null && _super.apply(this, arguments) || this;
+          _this.items = [];
+          return _this;
+      }
+      Object.defineProperty(ScriptChooser.prototype, "wrapped", {
+          get: function () {
+              return this.value;
+          },
+          set: function (updated) {
+              this.$emit("input", updated);
+          },
+          enumerable: true,
+          configurable: true
+      });
+      /** Perform reset on initial create */
+      ScriptChooser.prototype.created = function () {
+          this.reset();
+      };
+      /** Reload list of scripts for functional area */
+      ScriptChooser.prototype.reset = function () {
+          return __awaiter(this, void 0, void 0, function () {
+              var response, err_1;
+              return __generator(this, function (_a) {
+                  switch (_a.label) {
+                      case 0:
+                          _a.trys.push([0, 2, , 3]);
+                          return [4 /*yield*/, sitewhereIdeCommon.listTenantScriptsForCategory(this.$store, this.functionalArea, this.tenantId, this.category)];
+                      case 1:
+                          response = _a.sent();
+                          this.items = response.data;
+                          return [3 /*break*/, 3];
+                      case 2:
+                          err_1 = _a.sent();
+                          sitewhereIdeCommon.showError(this, err_1);
+                          return [3 /*break*/, 3];
+                      case 3: return [2 /*return*/];
+                  }
+              });
+          });
+      };
+      ScriptChooser.prototype.onSelectionChanged = function (selection) {
+          this.$emit("change", selection);
+      };
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "tenantId", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "functionalArea", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "category", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "title", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "label", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "icon", void 0);
+      __decorate([
+          sitewhereIdeCommon.Prop(),
+          __metadata("design:type", String)
+      ], ScriptChooser.prototype, "value", void 0);
+      ScriptChooser = __decorate([
+          sitewhereIdeCommon.Component({})
+      ], ScriptChooser);
+      return ScriptChooser;
+  }(Vue));
+
+  /* script */
+  const __vue_script__$u = ScriptChooser;
+
+  /* template */
+  var __vue_render__$u = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "div",
+      { staticClass: "mb-3" },
+      [
+        _c("v-select", {
+          staticClass: "text-field-input",
+          attrs: {
+            required: true,
+            title: _vm.title,
+            label: _vm.label,
+            items: _vm.items,
+            "item-text": "name",
+            "item-value": "id",
+            "prepend-icon": _vm.icon,
+            "menu-props": { closeOnContentClick: true },
+            "hide-details": true,
+            placeholder: " "
+          },
+          on: { change: _vm.onSelectionChanged },
+          model: {
+            value: _vm.wrapped,
+            callback: function($$v) {
+              _vm.wrapped = $$v;
+            },
+            expression: "wrapped"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "verror" }, [_vm._t("default")], 2)
+      ],
+      1
+    )
+  };
+  var __vue_staticRenderFns__$u = [];
+  __vue_render__$u._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$u = function (inject) {
+      if (!inject) return
+      inject("data-v-a4640536_0", { source: "\n.text-field-input[data-v-a4640536] i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\ScriptChooser.vue"],"names":[],"mappings":";AAkFA;EACA,eAAA;EACA,WAAA;AACA","file":"ScriptChooser.vue","sourcesContent":["<template>\r\n  <div class=\"mb-3\">\r\n    <v-select\r\n      class=\"text-field-input\"\r\n      :required=\"true\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :items=\"items\"\r\n      v-model=\"wrapped\"\r\n      item-text=\"name\"\r\n      item-value=\"id\"\r\n      :prepend-icon=\"icon\"\r\n      :menu-props=\"{ closeOnContentClick: true }\"\r\n      :hide-details=\"true\"\r\n      placeholder=\" \"\r\n      @change=\"onSelectionChanged\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport {\r\n  Component,\r\n  Prop,\r\n  listTenantScriptsForCategory\r\n} from \"sitewhere-ide-common\";\r\n\r\nimport { AxiosResponse } from \"axios\";\r\nimport { IScriptMetadata } from \"sitewhere-rest-api\";\r\nimport { showError } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class ScriptChooser extends Vue {\r\n  @Prop() readonly tenantId!: string;\r\n  @Prop() readonly functionalArea!: string;\r\n  @Prop() readonly category!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly value!: string;\r\n\r\n  items: IScriptMetadata[] = [];\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  /** Perform reset on initial create */\r\n  created() {\r\n    this.reset();\r\n  }\r\n\r\n  /** Reload list of scripts for functional area */\r\n  async reset() {\r\n    try {\r\n      let response: AxiosResponse<IScriptMetadata[]> = await listTenantScriptsForCategory(\r\n        this.$store,\r\n        this.functionalArea,\r\n        this.tenantId,\r\n        this.category\r\n      );\r\n      this.items = response.data;\r\n    } catch (err) {\r\n      showError(this, err);\r\n    }\r\n  }\r\n\r\n  onSelectionChanged(selection: any) {\r\n    this.$emit(\"change\", selection);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+
+    };
+    /* scoped */
+    const __vue_scope_id__$u = "data-v-a4640536";
+    /* module identifier */
+    const __vue_module_identifier__$u = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$u = false;
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$u = normalizeComponent(
+      { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
+      __vue_inject_styles__$u,
+      __vue_script__$u,
+      __vue_scope_id__$u,
+      __vue_is_functional_template__$u,
+      __vue_module_identifier__$u,
       false,
       createInjector,
       undefined,
@@ -4821,10 +5115,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$t = ConfirmDialog;
+  const __vue_script__$v = ConfirmDialog;
 
   /* template */
-  var __vue_render__$t = function() {
+  var __vue_render__$v = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -4901,17 +5195,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$t = [];
-  __vue_render__$t._withStripped = true;
+  var __vue_staticRenderFns__$v = [];
+  __vue_render__$v._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$t = undefined;
+    const __vue_inject_styles__$v = undefined;
     /* scoped */
-    const __vue_scope_id__$t = undefined;
+    const __vue_scope_id__$v = undefined;
     /* module identifier */
-    const __vue_module_identifier__$t = undefined;
+    const __vue_module_identifier__$v = undefined;
     /* functional template */
-    const __vue_is_functional_template__$t = false;
+    const __vue_is_functional_template__$v = false;
     /* style inject */
     
     /* style inject SSR */
@@ -4920,13 +5214,13 @@
     
 
     
-    const __vue_component__$t = normalizeComponent(
-      { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
-      __vue_inject_styles__$t,
-      __vue_script__$t,
-      __vue_scope_id__$t,
-      __vue_is_functional_template__$t,
-      __vue_module_identifier__$t,
+    const __vue_component__$v = normalizeComponent(
+      { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
+      __vue_inject_styles__$v,
+      __vue_script__$v,
+      __vue_scope_id__$v,
+      __vue_is_functional_template__$v,
+      __vue_module_identifier__$v,
       false,
       undefined,
       undefined,
@@ -4973,10 +5267,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$u = DeleteDialog;
+  const __vue_script__$w = DeleteDialog;
 
   /* template */
-  var __vue_render__$u = function() {
+  var __vue_render__$w = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5067,36 +5361,100 @@
       1
     )
   };
-  var __vue_staticRenderFns__$u = [];
-  __vue_render__$u._withStripped = true;
+  var __vue_staticRenderFns__$w = [];
+  __vue_render__$w._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$u = function (inject) {
+    const __vue_inject_styles__$w = function (inject) {
       if (!inject) return
       inject("data-v-5453c202_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DeleteDialog.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$u = "data-v-5453c202";
+    const __vue_scope_id__$w = "data-v-5453c202";
     /* module identifier */
-    const __vue_module_identifier__$u = undefined;
+    const __vue_module_identifier__$w = undefined;
     /* functional template */
-    const __vue_is_functional_template__$u = false;
+    const __vue_is_functional_template__$w = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$u = normalizeComponent(
-      { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
-      __vue_inject_styles__$u,
-      __vue_script__$u,
-      __vue_scope_id__$u,
-      __vue_is_functional_template__$u,
-      __vue_module_identifier__$u,
+    const __vue_component__$w = normalizeComponent(
+      { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
+      __vue_inject_styles__$w,
+      __vue_script__$w,
+      __vue_scope_id__$w,
+      __vue_is_functional_template__$w,
+      __vue_module_identifier__$w,
       false,
       createInjector,
+      undefined,
+      undefined
+    );
+
+  var DialogHeader = /** @class */ (function (_super) {
+      __extends(DialogHeader, _super);
+      function DialogHeader() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      DialogHeader = __decorate([
+          sitewhereIdeCommon.Component({})
+      ], DialogHeader);
+      return DialogHeader;
+  }(Vue));
+
+  /* script */
+  const __vue_script__$x = DialogHeader;
+
+  /* template */
+  var __vue_render__$x = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "v-card",
+      {
+        staticStyle: {
+          "background-color": "#f5f5f5",
+          "border-bottom": "1px solid #eee"
+        },
+        attrs: { flat: "" }
+      },
+      [_vm._t("default")],
+      2
+    )
+  };
+  var __vue_staticRenderFns__$x = [];
+  __vue_render__$x._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$x = undefined;
+    /* scoped */
+    const __vue_scope_id__$x = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$x = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$x = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$x = normalizeComponent(
+      { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
+      __vue_inject_styles__$x,
+      __vue_script__$x,
+      __vue_scope_id__$x,
+      __vue_is_functional_template__$x,
+      __vue_module_identifier__$x,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -5292,10 +5650,10 @@
   }(sitewhereIdeCommon.DialogSection));
 
   /* script */
-  const __vue_script__$v = MetadataPanel;
+  const __vue_script__$y = MetadataPanel;
 
   /* template */
-  var __vue_render__$v = function() {
+  var __vue_render__$y = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5512,34 +5870,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$v = [];
-  __vue_render__$v._withStripped = true;
+  var __vue_staticRenderFns__$y = [];
+  __vue_render__$y._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$v = function (inject) {
+    const __vue_inject_styles__$y = function (inject) {
       if (!inject) return
       inject("data-v-496fb60c_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"MetadataPanel.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$v = "data-v-496fb60c";
+    const __vue_scope_id__$y = "data-v-496fb60c";
     /* module identifier */
-    const __vue_module_identifier__$v = undefined;
+    const __vue_module_identifier__$y = undefined;
     /* functional template */
-    const __vue_is_functional_template__$v = false;
+    const __vue_is_functional_template__$y = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$v = normalizeComponent(
-      { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
-      __vue_inject_styles__$v,
-      __vue_script__$v,
-      __vue_scope_id__$v,
-      __vue_is_functional_template__$v,
-      __vue_module_identifier__$v,
+    const __vue_component__$y = normalizeComponent(
+      { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
+      __vue_inject_styles__$y,
+      __vue_script__$y,
+      __vue_scope_id__$y,
+      __vue_is_functional_template__$y,
+      __vue_module_identifier__$y,
       false,
       createInjector,
       undefined,
@@ -5558,10 +5916,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$w = ListEntry;
+  const __vue_script__$z = ListEntry;
 
   /* template */
-  var __vue_render__$w = function() {
+  var __vue_render__$z = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5572,34 +5930,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$w = [];
-  __vue_render__$w._withStripped = true;
+  var __vue_staticRenderFns__$z = [];
+  __vue_render__$z._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$w = function (inject) {
+    const __vue_inject_styles__$z = function (inject) {
       if (!inject) return
-      inject("data-v-2ee7dd54_0", { source: "\n.list-entry[data-v-2ee7dd54] {\r\n  border: 1px solid #ddd;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListEntry.vue"],"names":[],"mappings":";AAeA;EACA,sBAAA;AACA","file":"ListEntry.vue","sourcesContent":["<template>\r\n  <v-card class=\"list-entry\" flat hover>\r\n    <slot/>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component\r\nexport default class ListEntry extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.list-entry {\r\n  border: 1px solid #ddd;\r\n}\r\n</style>\r\n"]}, media: undefined });
+      inject("data-v-16a2b23b_0", { source: "\n.list-entry[data-v-16a2b23b] {\r\n  border: 1px solid #eee;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListEntry.vue"],"names":[],"mappings":";AAeA;EACA,sBAAA;AACA","file":"ListEntry.vue","sourcesContent":["<template>\r\n  <v-card class=\"list-entry\" flat hover>\r\n    <slot />\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component\r\nexport default class ListEntry extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.list-entry {\r\n  border: 1px solid #eee;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$w = "data-v-2ee7dd54";
+    const __vue_scope_id__$z = "data-v-16a2b23b";
     /* module identifier */
-    const __vue_module_identifier__$w = undefined;
+    const __vue_module_identifier__$z = undefined;
     /* functional template */
-    const __vue_is_functional_template__$w = false;
+    const __vue_is_functional_template__$z = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$w = normalizeComponent(
-      { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
-      __vue_inject_styles__$w,
-      __vue_script__$w,
-      __vue_scope_id__$w,
-      __vue_is_functional_template__$w,
-      __vue_module_identifier__$w,
+    const __vue_component__$z = normalizeComponent(
+      { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
+      __vue_inject_styles__$z,
+      __vue_script__$z,
+      __vue_scope_id__$z,
+      __vue_is_functional_template__$z,
+      __vue_module_identifier__$z,
       false,
       createInjector,
       undefined,
@@ -5618,10 +5976,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$x = ListLayout;
+  const __vue_script__$A = ListLayout;
 
   /* template */
-  var __vue_render__$x = function() {
+  var __vue_render__$A = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5642,34 +6000,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$x = [];
-  __vue_render__$x._withStripped = true;
+  var __vue_staticRenderFns__$A = [];
+  __vue_render__$A._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$x = function (inject) {
+    const __vue_inject_styles__$A = function (inject) {
       if (!inject) return
       inject("data-v-15fab996_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ListLayout.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$x = "data-v-15fab996";
+    const __vue_scope_id__$A = "data-v-15fab996";
     /* module identifier */
-    const __vue_module_identifier__$x = undefined;
+    const __vue_module_identifier__$A = undefined;
     /* functional template */
-    const __vue_is_functional_template__$x = false;
+    const __vue_is_functional_template__$A = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$x = normalizeComponent(
-      { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
-      __vue_inject_styles__$x,
-      __vue_script__$x,
-      __vue_scope_id__$x,
-      __vue_is_functional_template__$x,
-      __vue_module_identifier__$x,
+    const __vue_component__$A = normalizeComponent(
+      { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
+      __vue_inject_styles__$A,
+      __vue_script__$A,
+      __vue_scope_id__$A,
+      __vue_is_functional_template__$A,
+      __vue_module_identifier__$A,
       false,
       createInjector,
       undefined,
@@ -5708,10 +6066,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$y = NavigationPage;
+  const __vue_script__$B = NavigationPage;
 
   /* template */
-  var __vue_render__$y = function() {
+  var __vue_render__$B = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5758,34 +6116,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$y = [];
-  __vue_render__$y._withStripped = true;
+  var __vue_staticRenderFns__$B = [];
+  __vue_render__$B._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$y = function (inject) {
+    const __vue_inject_styles__$B = function (inject) {
       if (!inject) return
       inject("data-v-380c53f4_0", { source: "\n.flex-rows[data-v-380c53f4] {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.toolbar[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\n}\n.header[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\n}\n.content[data-v-380c53f4] {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\n}\n.footer[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationPage.vue"],"names":[],"mappings":";AA0CA;EACA,aAAA;EACA,sBAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;EACA,WAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA","file":"NavigationPage.vue","sourcesContent":["<template>\r\n  <v-card class=\"flex-rows\" flat fill-height>\r\n    <v-toolbar class=\"elevation-1 toolbar\" dense>\r\n      <v-icon>{{ icon }}</v-icon>\r\n      <v-toolbar-title class=\"ml-2 subheading\">{{ title }}</v-toolbar-title>\r\n      <v-spacer></v-spacer>\r\n      <slot name=\"actions\"/>\r\n    </v-toolbar>\r\n    <div class=\"header\">\r\n      <slot name=\"header\"/>\r\n    </div>\r\n    <div class=\"content\">\r\n      <slot v-if=\"loaded\" name=\"content\"/>\r\n    </div>\r\n    <div class=\"footer\">\r\n      <slot name=\"footer\"/>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\"/>\r\n    <slot name=\"dialogs\"/>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class NavigationPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.toolbar {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\r\n}\r\n.header {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n.content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\r\n}\r\n.footer {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$y = "data-v-380c53f4";
+    const __vue_scope_id__$B = "data-v-380c53f4";
     /* module identifier */
-    const __vue_module_identifier__$y = undefined;
+    const __vue_module_identifier__$B = undefined;
     /* functional template */
-    const __vue_is_functional_template__$y = false;
+    const __vue_is_functional_template__$B = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$y = normalizeComponent(
-      { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
-      __vue_inject_styles__$y,
-      __vue_script__$y,
-      __vue_scope_id__$y,
-      __vue_is_functional_template__$y,
-      __vue_module_identifier__$y,
+    const __vue_component__$B = normalizeComponent(
+      { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
+      __vue_inject_styles__$B,
+      __vue_script__$B,
+      __vue_scope_id__$B,
+      __vue_is_functional_template__$B,
+      __vue_module_identifier__$B,
       false,
       createInjector,
       undefined,
@@ -5819,10 +6177,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$z = Pager;
+  const __vue_script__$C = Pager;
 
   /* template */
-  var __vue_render__$z = function() {
+  var __vue_render__$C = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -5852,17 +6210,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$z = [];
-  __vue_render__$z._withStripped = true;
+  var __vue_staticRenderFns__$C = [];
+  __vue_render__$C._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$z = undefined;
+    const __vue_inject_styles__$C = undefined;
     /* scoped */
-    const __vue_scope_id__$z = undefined;
+    const __vue_scope_id__$C = undefined;
     /* module identifier */
-    const __vue_module_identifier__$z = undefined;
+    const __vue_module_identifier__$C = undefined;
     /* functional template */
-    const __vue_is_functional_template__$z = false;
+    const __vue_is_functional_template__$C = false;
     /* style inject */
     
     /* style inject SSR */
@@ -5871,13 +6229,13 @@
     
 
     
-    const __vue_component__$z = normalizeComponent(
-      { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
-      __vue_inject_styles__$z,
-      __vue_script__$z,
-      __vue_scope_id__$z,
-      __vue_is_functional_template__$z,
-      __vue_module_identifier__$z,
+    const __vue_component__$C = normalizeComponent(
+      { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
+      __vue_inject_styles__$C,
+      __vue_script__$C,
+      __vue_scope_id__$C,
+      __vue_is_functional_template__$C,
+      __vue_module_identifier__$C,
       false,
       undefined,
       undefined,
@@ -6045,7 +6403,7 @@
       Pager = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  PagerButton: __vue_component__$z
+                  PagerButton: __vue_component__$C
               }
           })
       ], Pager);
@@ -6053,10 +6411,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$A = Pager$1;
+  const __vue_script__$D = Pager$1;
 
   /* template */
-  var __vue_render__$A = function() {
+  var __vue_render__$D = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -6187,34 +6545,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$A = [];
-  __vue_render__$A._withStripped = true;
+  var __vue_staticRenderFns__$D = [];
+  __vue_render__$D._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$A = function (inject) {
+    const __vue_inject_styles__$D = function (inject) {
       if (!inject) return
       inject("data-v-794ac787_0", { source: "\n.pager[data-v-794ac787] {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\Pager.vue"],"names":[],"mappings":";AA6MA;EACA,WAAA;EACA,sBAAA;EACA,0BAAA;AACA","file":"Pager.vue","sourcesContent":["<template>\r\n  <div class=\"pager\">\r\n    <slot v-if=\"results && results.numResults === 0\" name=\"noresults\"></slot>\r\n    <v-container class=\"ma-0 pa-0\">\r\n      <v-layout row wrap>\r\n        <v-flex xs2>\r\n          <v-subheader class=\"ma-0 pt-0 pr-0\">Rows per page</v-subheader>\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-btn-toggle v-model=\"pageSize\" class=\"mt-1\">\r\n            <v-btn\r\n              flat\r\n              :value=\"entry.value\"\r\n              v-for=\"entry in pageSizesWithDefaults\"\r\n              :key=\"entry.value\"\r\n              >{{ entry.text }}</v-btn\r\n            >\r\n          </v-btn-toggle>\r\n        </v-flex>\r\n        <v-flex xs4>\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onFirstPage\"\r\n            icon=\"fa-fast-backward\"\r\n            text=\"First Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onPreviousPage\"\r\n            icon=\"fa-backward\"\r\n            text=\"Previous Page\"\r\n          />\r\n          <pager-button @click=\"onRefresh\" icon=\"fa-sync\" text=\"Refresh\" />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onNextPage\"\r\n            icon=\"fa-forward\"\r\n            text=\"Next Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onLastPage\"\r\n            icon=\"fa-fast-forward\"\r\n            text=\"Last Page\"\r\n          />\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-subheader class=\"ma-0 pt-0 right\">{{ description }}</v-subheader>\r\n        </v-flex>\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport PagerButton from \"./PagerButton.vue\";\r\n\r\nimport {\r\n  Component,\r\n  Prop,\r\n  Watch,\r\n  IPaging,\r\n  IPageSizes\r\n} from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    PagerButton\r\n  }\r\n})\r\nexport default class Pager extends Vue {\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n\r\n  page: number = 1;\r\n  pageSize: number | null = null;\r\n  defaultResults: { numResults: number; results: {}[] } = {\r\n    numResults: 0,\r\n    results: []\r\n  };\r\n  defaultPageSizes: IPageSizes = [\r\n    {\r\n      text: \"10\",\r\n      value: 10\r\n    },\r\n    {\r\n      text: \"25\",\r\n      value: 25\r\n    },\r\n    {\r\n      text: \"50\",\r\n      value: 50\r\n    }\r\n  ];\r\n\r\n  created() {\r\n    if (!this.pageSize) {\r\n      this.pageSize = this.pageSizesWithDefaults[0].value;\r\n    }\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Refresh results on page size updated.\r\n  @Watch(\"pageSize\") onPageSizeUpdated(val: number, oldVal: number) {\r\n    this.page = 1;\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Results with defaults fallback.\r\n  get resultsWithDefaults(): { numResults: number; results: {}[] } {\r\n    return this.results || this.defaultResults;\r\n  }\r\n\r\n  // Total record count.\r\n  get total(): number {\r\n    return this.resultsWithDefaults.numResults;\r\n  }\r\n\r\n  // Description.\r\n  get description(): string {\r\n    let size = this.pageSize || 0;\r\n    let total = this.total;\r\n    let page = this.page;\r\n    var first = size * (page - 1) + 1;\r\n    var last = Math.min(total, first + size - 1);\r\n    return \"\" + first + \"-\" + last + \" of \" + total;\r\n  }\r\n\r\n  // Calculate number of pages.\r\n  get pageCount() {\r\n    var results = this.resultsWithDefaults;\r\n    var total = results.numResults;\r\n    var size = this.pageSize || 0;\r\n    var mod = total % size;\r\n    var count = (total / size) | 0;\r\n    count += mod > 0 ? 1 : 0;\r\n    return count;\r\n  }\r\n\r\n  // Get list of available page sizes with fallback defaults.\r\n  get pageSizesWithDefaults(): { text: string; value: number }[] {\r\n    return this.pageSizes || this.defaultPageSizes;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get previousEnabled(): boolean {\r\n    return this.page > 1;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get nextEnabled(): boolean {\r\n    return this.page < this.pageCount;\r\n  }\r\n\r\n  // Called to move to first page.\r\n  onFirstPage() {\r\n    if (this.page !== 1) {\r\n      this.page = 1;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to previous page.\r\n  onPreviousPage() {\r\n    if (this.page > 1) {\r\n      this.page--;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to refresh data.\r\n  onRefresh() {\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Called to move to next page.\r\n  onNextPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page++;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to last page.\r\n  onLastPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page = this.pageCount;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called when paging values are updated.\r\n  onPagingUpdated() {\r\n    var paging: IPaging = {\r\n      pageNumber: this.page,\r\n      pageSize: this.pageSize || 0\r\n    };\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.pager {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$A = "data-v-794ac787";
+    const __vue_scope_id__$D = "data-v-794ac787";
     /* module identifier */
-    const __vue_module_identifier__$A = undefined;
+    const __vue_module_identifier__$D = undefined;
     /* functional template */
-    const __vue_is_functional_template__$A = false;
+    const __vue_is_functional_template__$D = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$A = normalizeComponent(
-      { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
-      __vue_inject_styles__$A,
-      __vue_script__$A,
-      __vue_scope_id__$A,
-      __vue_is_functional_template__$A,
-      __vue_module_identifier__$A,
+    const __vue_component__$D = normalizeComponent(
+      { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
+      __vue_inject_styles__$D,
+      __vue_script__$D,
+      __vue_scope_id__$D,
+      __vue_is_functional_template__$D,
+      __vue_module_identifier__$D,
       false,
       createInjector,
       undefined,
@@ -6273,19 +6631,19 @@
       ListPage = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  NavigationPage: __vue_component__$y,
-                  Pager: __vue_component__$A
-              }
+                  NavigationPage: __vue_component__$B,
+                  Pager: __vue_component__$D,
+              },
           })
       ], ListPage);
       return ListPage;
   }(Vue));
 
   /* script */
-  const __vue_script__$B = ListPage;
+  const __vue_script__$E = ListPage;
 
   /* template */
-  var __vue_render__$B = function() {
+  var __vue_render__$E = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -6338,34 +6696,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$B = [];
-  __vue_render__$B._withStripped = true;
+  var __vue_staticRenderFns__$E = [];
+  __vue_render__$E._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$B = function (inject) {
+    const __vue_inject_styles__$E = function (inject) {
       if (!inject) return
-      inject("data-v-ed9eeb56_0", { source: "\n.flex-rows[data-v-ed9eeb56] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-ed9eeb56] {\r\n  flex: 0;\n}\n.list-content[data-v-ed9eeb56] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListPage.vue"],"names":[],"mappings":";AAiEA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA","file":"ListPage.vue","sourcesContent":["<template>\r\n  <navigation-page :icon=\"icon\" :title=\"title\" :loadingMessage=\"loadingMessage\" :loaded=\"loaded\">\r\n    <template slot=\"content\">\r\n      <div class=\"flex-rows\">\r\n        <div class=\"list-filters\">\r\n          <slot name=\"filters\" />\r\n        </div>\r\n        <div class=\"list-content\">\r\n          <slot v-if=\"hasResults\" />\r\n          <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n        </div>\r\n      </div>\r\n    </template>\r\n    <template slot=\"footer\">\r\n      <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\nimport Pager from \"../list/Pager.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage,\r\n    Pager\r\n  }\r\n})\r\nexport default class ListPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
+      inject("data-v-a76cdcf0_0", { source: "\n.flex-rows[data-v-a76cdcf0] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-a76cdcf0] {\r\n  flex: 0;\n}\n.list-content[data-v-a76cdcf0] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListPage.vue"],"names":[],"mappings":";AA0EA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA","file":"ListPage.vue","sourcesContent":["<template>\r\n  <navigation-page\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :loadingMessage=\"loadingMessage\"\r\n    :loaded=\"loaded\"\r\n  >\r\n    <template slot=\"content\">\r\n      <div class=\"flex-rows\">\r\n        <div class=\"list-filters\">\r\n          <slot name=\"filters\" />\r\n        </div>\r\n        <div class=\"list-content\">\r\n          <slot v-if=\"hasResults\" />\r\n          <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n        </div>\r\n      </div>\r\n    </template>\r\n    <template slot=\"footer\">\r\n      <pager\r\n        :results=\"results\"\r\n        @pagingUpdated=\"onPagingUpdated\"\r\n        :pageSizes=\"pageSizes\"\r\n      />\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\nimport Pager from \"../list/Pager.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage,\r\n    Pager,\r\n  },\r\n})\r\nexport default class ListPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$B = "data-v-ed9eeb56";
+    const __vue_scope_id__$E = "data-v-a76cdcf0";
     /* module identifier */
-    const __vue_module_identifier__$B = undefined;
+    const __vue_module_identifier__$E = undefined;
     /* functional template */
-    const __vue_is_functional_template__$B = false;
+    const __vue_is_functional_template__$E = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$B = normalizeComponent(
-      { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
-      __vue_inject_styles__$B,
-      __vue_script__$B,
-      __vue_scope_id__$B,
-      __vue_is_functional_template__$B,
-      __vue_module_identifier__$B,
+    const __vue_component__$E = normalizeComponent(
+      { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
+      __vue_inject_styles__$E,
+      __vue_script__$E,
+      __vue_scope_id__$E,
+      __vue_is_functional_template__$E,
+      __vue_module_identifier__$E,
       false,
       createInjector,
       undefined,
@@ -6420,7 +6778,7 @@
       ListTab = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  Pager: __vue_component__$A,
+                  Pager: __vue_component__$D,
                   LoadingOverlay: __vue_component__$b
               }
           })
@@ -6429,10 +6787,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$C = ListTab;
+  const __vue_script__$F = ListTab;
 
   /* template */
-  var __vue_render__$C = function() {
+  var __vue_render__$F = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -6480,47 +6838,39 @@
       2
     )
   };
-  var __vue_staticRenderFns__$C = [];
-  __vue_render__$C._withStripped = true;
+  var __vue_staticRenderFns__$F = [];
+  __vue_render__$F._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$C = function (inject) {
+    const __vue_inject_styles__$F = function (inject) {
       if (!inject) return
       inject("data-v-59846156_0", { source: "\n.flex-rows[data-v-59846156] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-59846156] {\r\n  flex: 0;\n}\n.list-content[data-v-59846156] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.list-footer[data-v-59846156] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListTab.vue"],"names":[],"mappings":";AA0DA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ListTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"list-filters\">\r\n        <slot name=\"filters\" />\r\n      </div>\r\n      <div class=\"list-content\">\r\n        <slot v-if=\"hasResults\" />\r\n        <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n      </div>\r\n      <div class=\"list-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n    <slot name=\"dialogs\" />\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport Pager from \"./Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ListTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.list-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$C = "data-v-59846156";
+    const __vue_scope_id__$F = "data-v-59846156";
     /* module identifier */
-    const __vue_module_identifier__$C = undefined;
+    const __vue_module_identifier__$F = undefined;
     /* functional template */
-    const __vue_is_functional_template__$C = false;
+    const __vue_is_functional_template__$F = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$C = normalizeComponent(
-      { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
-      __vue_inject_styles__$C,
-      __vue_script__$C,
-      __vue_scope_id__$C,
-      __vue_is_functional_template__$C,
-      __vue_module_identifier__$C,
+    const __vue_component__$F = normalizeComponent(
+      { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
+      __vue_inject_styles__$F,
+      __vue_script__$F,
+      __vue_scope_id__$F,
+      __vue_is_functional_template__$F,
+      __vue_module_identifier__$F,
       false,
       createInjector,
       undefined,
       undefined
     );
-
-  /**
-   * Enumeration of navigation icons.
-   */
-  var NavigationIcon;
-  (function (NavigationIcon) {
-      NavigationIcon["Remotes"] = "router";
-  })(NavigationIcon || (NavigationIcon = {}));
 
   var RemoteConnectionsList = /** @class */ (function (_super) {
       __extends(RemoteConnectionsList, _super);
@@ -6655,10 +7005,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$D = RemoteConnectionsList;
+  const __vue_script__$G = RemoteConnectionsList;
 
   /* template */
-  var __vue_render__$D = function() {
+  var __vue_render__$G = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -6856,17 +7206,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$D = [];
-  __vue_render__$D._withStripped = true;
+  var __vue_staticRenderFns__$G = [];
+  __vue_render__$G._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$D = undefined;
+    const __vue_inject_styles__$G = undefined;
     /* scoped */
-    const __vue_scope_id__$D = undefined;
+    const __vue_scope_id__$G = undefined;
     /* module identifier */
-    const __vue_module_identifier__$D = undefined;
+    const __vue_module_identifier__$G = undefined;
     /* functional template */
-    const __vue_is_functional_template__$D = false;
+    const __vue_is_functional_template__$G = false;
     /* style inject */
     
     /* style inject SSR */
@@ -6875,13 +7225,13 @@
     
 
     
-    const __vue_component__$D = normalizeComponent(
-      { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
-      __vue_inject_styles__$D,
-      __vue_script__$D,
-      __vue_scope_id__$D,
-      __vue_is_functional_template__$D,
-      __vue_module_identifier__$D,
+    const __vue_component__$G = normalizeComponent(
+      { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
+      __vue_inject_styles__$G,
+      __vue_script__$G,
+      __vue_scope_id__$G,
+      __vue_is_functional_template__$G,
+      __vue_module_identifier__$G,
       false,
       undefined,
       undefined,
@@ -7873,9 +8223,9 @@
       RemoteConnectionDetails = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  DialogForm: __vue_component__$n,
-                  FormText: __vue_component__$r,
-                  FormSelect: __vue_component__$p
+                  DialogForm: __vue_component__$o,
+                  FormText: __vue_component__$s,
+                  FormSelect: __vue_component__$q
               },
               validations: {
                   name: {
@@ -7897,10 +8247,10 @@
   }(sitewhereIdeCommon.DialogSection));
 
   /* script */
-  const __vue_script__$E = RemoteConnectionDetails;
+  const __vue_script__$H = RemoteConnectionDetails;
 
   /* template */
-  var __vue_render__$E = function() {
+  var __vue_render__$H = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8047,17 +8397,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$E = [];
-  __vue_render__$E._withStripped = true;
+  var __vue_staticRenderFns__$H = [];
+  __vue_render__$H._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$E = undefined;
+    const __vue_inject_styles__$H = undefined;
     /* scoped */
-    const __vue_scope_id__$E = undefined;
+    const __vue_scope_id__$H = undefined;
     /* module identifier */
-    const __vue_module_identifier__$E = undefined;
+    const __vue_module_identifier__$H = undefined;
     /* functional template */
-    const __vue_is_functional_template__$E = false;
+    const __vue_is_functional_template__$H = false;
     /* style inject */
     
     /* style inject SSR */
@@ -8066,13 +8416,13 @@
     
 
     
-    const __vue_component__$E = normalizeComponent(
-      { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
-      __vue_inject_styles__$E,
-      __vue_script__$E,
-      __vue_scope_id__$E,
-      __vue_is_functional_template__$E,
-      __vue_module_identifier__$E,
+    const __vue_component__$H = normalizeComponent(
+      { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
+      __vue_inject_styles__$H,
+      __vue_script__$H,
+      __vue_scope_id__$H,
+      __vue_is_functional_template__$H,
+      __vue_module_identifier__$H,
       false,
       undefined,
       undefined,
@@ -8089,7 +8439,7 @@
       Object.defineProperty(RemotesDialog.prototype, "icon", {
           /** Get icon for dialog */
           get: function () {
-              return NavigationIcon.Remotes;
+              return sitewhereIdeCommon.NavigationIcon.Remotes;
           },
           enumerable: true,
           configurable: true
@@ -8121,8 +8471,8 @@
       RemotesDialog = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  RemoteConnectionsList: __vue_component__$D,
-                  RemoteConnectionDetails: __vue_component__$E
+                  RemoteConnectionsList: __vue_component__$G,
+                  RemoteConnectionDetails: __vue_component__$H
               }
           })
       ], RemotesDialog);
@@ -8130,10 +8480,10 @@
   }(sitewhereIdeCommon.DialogComponent));
 
   /* script */
-  const __vue_script__$F = RemotesDialog;
+  const __vue_script__$I = RemotesDialog;
 
   /* template */
-  var __vue_render__$F = function() {
+  var __vue_render__$I = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8179,17 +8529,17 @@
       1
     )
   };
-  var __vue_staticRenderFns__$F = [];
-  __vue_render__$F._withStripped = true;
+  var __vue_staticRenderFns__$I = [];
+  __vue_render__$I._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$F = undefined;
+    const __vue_inject_styles__$I = undefined;
     /* scoped */
-    const __vue_scope_id__$F = undefined;
+    const __vue_scope_id__$I = undefined;
     /* module identifier */
-    const __vue_module_identifier__$F = undefined;
+    const __vue_module_identifier__$I = undefined;
     /* functional template */
-    const __vue_is_functional_template__$F = false;
+    const __vue_is_functional_template__$I = false;
     /* style inject */
     
     /* style inject SSR */
@@ -8198,13 +8548,13 @@
     
 
     
-    const __vue_component__$F = normalizeComponent(
-      { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
-      __vue_inject_styles__$F,
-      __vue_script__$F,
-      __vue_scope_id__$F,
-      __vue_is_functional_template__$F,
-      __vue_module_identifier__$F,
+    const __vue_component__$I = normalizeComponent(
+      { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
+      __vue_inject_styles__$I,
+      __vue_script__$I,
+      __vue_scope_id__$I,
+      __vue_is_functional_template__$I,
+      __vue_module_identifier__$I,
       false,
       undefined,
       undefined,
@@ -8264,10 +8614,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$G = RemotesDropdown;
+  const __vue_script__$J = RemotesDropdown;
 
   /* template */
-  var __vue_render__$G = function() {
+  var __vue_render__$J = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8306,17 +8656,17 @@
       }
     })
   };
-  var __vue_staticRenderFns__$G = [];
-  __vue_render__$G._withStripped = true;
+  var __vue_staticRenderFns__$J = [];
+  __vue_render__$J._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$G = undefined;
+    const __vue_inject_styles__$J = undefined;
     /* scoped */
-    const __vue_scope_id__$G = undefined;
+    const __vue_scope_id__$J = undefined;
     /* module identifier */
-    const __vue_module_identifier__$G = undefined;
+    const __vue_module_identifier__$J = undefined;
     /* functional template */
-    const __vue_is_functional_template__$G = false;
+    const __vue_is_functional_template__$J = false;
     /* style inject */
     
     /* style inject SSR */
@@ -8325,13 +8675,13 @@
     
 
     
-    const __vue_component__$G = normalizeComponent(
-      { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
-      __vue_inject_styles__$G,
-      __vue_script__$G,
-      __vue_scope_id__$G,
-      __vue_is_functional_template__$G,
-      __vue_module_identifier__$G,
+    const __vue_component__$J = normalizeComponent(
+      { render: __vue_render__$J, staticRenderFns: __vue_staticRenderFns__$J },
+      __vue_inject_styles__$J,
+      __vue_script__$J,
+      __vue_scope_id__$J,
+      __vue_is_functional_template__$J,
+      __vue_module_identifier__$J,
       false,
       undefined,
       undefined,
@@ -8366,10 +8716,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$H = ContentTab;
+  const __vue_script__$K = ContentTab;
 
   /* template */
-  var __vue_render__$H = function() {
+  var __vue_render__$K = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8410,34 +8760,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$H = [];
-  __vue_render__$H._withStripped = true;
+  var __vue_staticRenderFns__$K = [];
+  __vue_render__$K._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$H = function (inject) {
+    const __vue_inject_styles__$K = function (inject) {
       if (!inject) return
       inject("data-v-ece93276_0", { source: "\n.flex-rows[data-v-ece93276] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-ece93276] {\r\n  flex: 0;\n}\n.tab-content[data-v-ece93276] {\r\n  flex: 1;\r\n  background-color: #fff;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-ece93276] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\ContentTab.vue"],"names":[],"mappings":";AAuCA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ContentTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\" />\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <slot v-if=\"loaded\" />\r\n        <v-card style=\"height: 100%\" v-else>\r\n          <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n        </v-card>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <slot name=\"footer\" />\r\n      </div>\r\n    </div>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ContentTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #fff;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$H = "data-v-ece93276";
+    const __vue_scope_id__$K = "data-v-ece93276";
     /* module identifier */
-    const __vue_module_identifier__$H = undefined;
+    const __vue_module_identifier__$K = undefined;
     /* functional template */
-    const __vue_is_functional_template__$H = false;
+    const __vue_is_functional_template__$K = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$H = normalizeComponent(
-      { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
-      __vue_inject_styles__$H,
-      __vue_script__$H,
-      __vue_scope_id__$H,
-      __vue_is_functional_template__$H,
-      __vue_module_identifier__$H,
+    const __vue_component__$K = normalizeComponent(
+      { render: __vue_render__$K, staticRenderFns: __vue_staticRenderFns__$K },
+      __vue_inject_styles__$K,
+      __vue_script__$K,
+      __vue_scope_id__$K,
+      __vue_is_functional_template__$K,
+      __vue_module_identifier__$K,
       false,
       createInjector,
       undefined,
@@ -8751,10 +9101,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$I = DataEntryPanel;
+  const __vue_script__$L = DataEntryPanel;
 
   /* template */
-  var __vue_render__$I = function() {
+  var __vue_render__$L = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8765,34 +9115,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$I = [];
-  __vue_render__$I._withStripped = true;
+  var __vue_staticRenderFns__$L = [];
+  __vue_render__$L._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$I = function (inject) {
+    const __vue_inject_styles__$L = function (inject) {
       if (!inject) return
       inject("data-v-f33dfbec_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DataEntryPanel.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$I = "data-v-f33dfbec";
+    const __vue_scope_id__$L = "data-v-f33dfbec";
     /* module identifier */
-    const __vue_module_identifier__$I = undefined;
+    const __vue_module_identifier__$L = undefined;
     /* functional template */
-    const __vue_is_functional_template__$I = false;
+    const __vue_is_functional_template__$L = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$I = normalizeComponent(
-      { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
-      __vue_inject_styles__$I,
-      __vue_script__$I,
-      __vue_scope_id__$I,
-      __vue_is_functional_template__$I,
-      __vue_module_identifier__$I,
+    const __vue_component__$L = normalizeComponent(
+      { render: __vue_render__$L, staticRenderFns: __vue_staticRenderFns__$L },
+      __vue_inject_styles__$L,
+      __vue_script__$L,
+      __vue_scope_id__$L,
+      __vue_is_functional_template__$L,
+      __vue_module_identifier__$L,
       false,
       createInjector,
       undefined,
@@ -8855,7 +9205,7 @@
       DataTableTab = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  Pager: __vue_component__$A,
+                  Pager: __vue_component__$D,
                   LoadingOverlay: __vue_component__$b
               }
           })
@@ -8864,10 +9214,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$J = DataTableTab;
+  const __vue_script__$M = DataTableTab;
 
   /* template */
-  var __vue_render__$J = function() {
+  var __vue_render__$M = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -8947,34 +9297,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$J = [];
-  __vue_render__$J._withStripped = true;
+  var __vue_staticRenderFns__$M = [];
+  __vue_render__$M._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$J = function (inject) {
+    const __vue_inject_styles__$M = function (inject) {
       if (!inject) return
       inject("data-v-1a035a38_0", { source: "\n.flex-rows[data-v-1a035a38] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-1a035a38] {\r\n  flex: 0;\n}\n.tab-content[data-v-1a035a38] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-1a035a38] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DataTableTab.vue"],"names":[],"mappings":";AA0EA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"DataTableTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\"/>\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <v-layout row wrap>\r\n          <v-flex xs12>\r\n            <v-data-table\r\n              :headers=\"headers\"\r\n              :items=\"matches\"\r\n              :hide-actions=\"true\"\r\n              :no-data-text=\"noDataText\"\r\n              :style=\"tableStyle\"\r\n            >\r\n              <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\">\r\n                <slot :name=\"slot\" v-bind=\"scope\"/>\r\n              </template>\r\n            </v-data-table>\r\n          </v-flex>\r\n        </v-layout>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\"/>\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\"/>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport Pager from \"../list/Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { IPaging, IPageSizes, ITableHeaders } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class DataTableTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly headers!: ITableHeaders;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly noDataText!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Get current matches */\r\n  get matches(): {}[] {\r\n    return this.results ? this.results.results : [];\r\n  }\r\n\r\n  /** Dims results when loading */\r\n  get tableStyle(): {} {\r\n    return { opacity: this.loaded ? 1.0 : 0.3 };\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$J = "data-v-1a035a38";
+    const __vue_scope_id__$M = "data-v-1a035a38";
     /* module identifier */
-    const __vue_module_identifier__$J = undefined;
+    const __vue_module_identifier__$M = undefined;
     /* functional template */
-    const __vue_is_functional_template__$J = false;
+    const __vue_is_functional_template__$M = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$J = normalizeComponent(
-      { render: __vue_render__$J, staticRenderFns: __vue_staticRenderFns__$J },
-      __vue_inject_styles__$J,
-      __vue_script__$J,
-      __vue_scope_id__$J,
-      __vue_is_functional_template__$J,
-      __vue_module_identifier__$J,
+    const __vue_component__$M = normalizeComponent(
+      { render: __vue_render__$M, staticRenderFns: __vue_staticRenderFns__$M },
+      __vue_inject_styles__$M,
+      __vue_script__$M,
+      __vue_scope_id__$M,
+      __vue_is_functional_template__$M,
+      __vue_module_identifier__$M,
       false,
       createInjector,
       undefined,
@@ -9015,7 +9365,7 @@
       DetailPage = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  NavigationPage: __vue_component__$y
+                  NavigationPage: __vue_component__$B
               }
           })
       ], DetailPage);
@@ -9023,10 +9373,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$K = DetailPage;
+  const __vue_script__$N = DetailPage;
 
   /* template */
-  var __vue_render__$K = function() {
+  var __vue_render__$N = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9132,34 +9482,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$K = [];
-  __vue_render__$K._withStripped = true;
+  var __vue_staticRenderFns__$N = [];
+  __vue_render__$N._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$K = function (inject) {
+    const __vue_inject_styles__$N = function (inject) {
       if (!inject) return
       inject("data-v-46d4c89a_0", { source: "\n.flex-rows[data-v-46d4c89a] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tabs-row[data-v-46d4c89a] {\r\n  flex: 0;\n}\n.tab-items-row[data-v-46d4c89a] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\n.tab-items-row[data-v-46d4c89a] .v-window__container,\r\n.tab-items-row[data-v-46d4c89a] .v-window-item {\r\n  height: 100%;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DetailPage.vue"],"names":[],"mappings":";AA6DA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA;AACA;;EAEA,YAAA;AACA","file":"DetailPage.vue","sourcesContent":["<template>\r\n  <navigation-page\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :loadingMessage=\"loadingMessage\"\r\n    :loaded=\"loaded\"\r\n  >\r\n    <template slot=\"header\">\r\n      <slot name=\"header\" />\r\n    </template>\r\n    <template v-if=\"record\" slot=\"content\">\r\n      <div v-if=\"tabsOnBottom\" class=\"flex-rows\">\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\" />\r\n        </v-tabs-items>\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\" />\r\n        </v-tabs>\r\n      </div>\r\n      <div v-else class=\"flex-rows\">\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\" />\r\n        </v-tabs>\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\" />\r\n        </v-tabs-items>\r\n      </div>\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage\r\n  }\r\n})\r\nexport default class DetailPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly record!: {};\r\n  @Prop() readonly tabsOnBottom!: boolean;\r\n\r\n  active: string | null = null;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tabs-row {\r\n  flex: 0;\r\n}\r\n.tab-items-row {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n.tab-items-row >>> .v-window__container,\r\n.tab-items-row >>> .v-window-item {\r\n  height: 100%;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$K = "data-v-46d4c89a";
+    const __vue_scope_id__$N = "data-v-46d4c89a";
     /* module identifier */
-    const __vue_module_identifier__$K = undefined;
+    const __vue_module_identifier__$N = undefined;
     /* functional template */
-    const __vue_is_functional_template__$K = false;
+    const __vue_is_functional_template__$N = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$K = normalizeComponent(
-      { render: __vue_render__$K, staticRenderFns: __vue_staticRenderFns__$K },
-      __vue_inject_styles__$K,
-      __vue_script__$K,
-      __vue_scope_id__$K,
-      __vue_is_functional_template__$K,
-      __vue_module_identifier__$K,
+    const __vue_component__$N = normalizeComponent(
+      { render: __vue_render__$N, staticRenderFns: __vue_staticRenderFns__$N },
+      __vue_inject_styles__$N,
+      __vue_script__$N,
+      __vue_scope_id__$N,
+      __vue_is_functional_template__$N,
+      __vue_module_identifier__$N,
       false,
       createInjector,
       undefined,
@@ -9178,10 +9528,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$L = NavigationHeaderLeft;
+  const __vue_script__$O = NavigationHeaderLeft;
 
   /* template */
-  var __vue_render__$L = function() {
+  var __vue_render__$O = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9199,34 +9549,34 @@
       2
     )
   };
-  var __vue_staticRenderFns__$L = [];
-  __vue_render__$L._withStripped = true;
+  var __vue_staticRenderFns__$O = [];
+  __vue_render__$O._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$L = function (inject) {
+    const __vue_inject_styles__$O = function (inject) {
       if (!inject) return
       inject("data-v-f78ad04a_0", { source: "\n.right-overlay[data-v-f78ad04a] {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderLeft.vue"],"names":[],"mappings":";AAkBA;EACA,kBAAA;EACA,QAAA;EACA,MAAA;AACA","file":"NavigationHeaderLeft.vue","sourcesContent":["<template>\r\n  <v-card flat style=\"position: relative; height: 100%\">\r\n    <slot />\r\n    <div class=\"right-overlay\">\r\n      <slot name=\"right-overlay\" />\r\n    </div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderLeft extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.right-overlay {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$L = "data-v-f78ad04a";
+    const __vue_scope_id__$O = "data-v-f78ad04a";
     /* module identifier */
-    const __vue_module_identifier__$L = undefined;
+    const __vue_module_identifier__$O = undefined;
     /* functional template */
-    const __vue_is_functional_template__$L = false;
+    const __vue_is_functional_template__$O = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$L = normalizeComponent(
-      { render: __vue_render__$L, staticRenderFns: __vue_staticRenderFns__$L },
-      __vue_inject_styles__$L,
-      __vue_script__$L,
-      __vue_scope_id__$L,
-      __vue_is_functional_template__$L,
-      __vue_module_identifier__$L,
+    const __vue_component__$O = normalizeComponent(
+      { render: __vue_render__$O, staticRenderFns: __vue_staticRenderFns__$O },
+      __vue_inject_styles__$O,
+      __vue_script__$O,
+      __vue_scope_id__$O,
+      __vue_is_functional_template__$O,
+      __vue_module_identifier__$O,
       false,
       createInjector,
       undefined,
@@ -9275,7 +9625,7 @@
       HeaderBrandingPanel = __decorate([
           sitewhereIdeCommon.Component({
               components: {
-                  NavigationHeaderLeft: __vue_component__$L,
+                  NavigationHeaderLeft: __vue_component__$O,
                   ImageZoomOnHover: __vue_component__$9
               }
           })
@@ -9284,10 +9634,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$M = HeaderBrandingPanel;
+  const __vue_script__$P = HeaderBrandingPanel;
 
   /* template */
-  var __vue_render__$M = function() {
+  var __vue_render__$P = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9313,34 +9663,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$M = [];
-  __vue_render__$M._withStripped = true;
+  var __vue_staticRenderFns__$P = [];
+  __vue_render__$P._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$M = function (inject) {
+    const __vue_inject_styles__$P = function (inject) {
       if (!inject) return
       inject("data-v-e160ddbc_0", { source: "\n.header-image[data-v-e160ddbc] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-e160ddbc] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAmDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,aAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <image-zoom-on-hover v-if=\"imageUrl\" :imageUrl=\"imageUrl\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\nimport ImageZoomOnHover from \"../common/ImageZoomOnHover.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft,\r\n    ImageZoomOnHover\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$M = "data-v-e160ddbc";
+    const __vue_scope_id__$P = "data-v-e160ddbc";
     /* module identifier */
-    const __vue_module_identifier__$M = undefined;
+    const __vue_module_identifier__$P = undefined;
     /* functional template */
-    const __vue_is_functional_template__$M = false;
+    const __vue_is_functional_template__$P = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$M = normalizeComponent(
-      { render: __vue_render__$M, staticRenderFns: __vue_staticRenderFns__$M },
-      __vue_inject_styles__$M,
-      __vue_script__$M,
-      __vue_scope_id__$M,
-      __vue_is_functional_template__$M,
-      __vue_module_identifier__$M,
+    const __vue_component__$P = normalizeComponent(
+      { render: __vue_render__$P, staticRenderFns: __vue_staticRenderFns__$P },
+      __vue_inject_styles__$P,
+      __vue_script__$P,
+      __vue_scope_id__$P,
+      __vue_is_functional_template__$P,
+      __vue_module_identifier__$P,
       false,
       createInjector,
       undefined,
@@ -9359,10 +9709,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$N = InAppFooter;
+  const __vue_script__$Q = InAppFooter;
 
   /* template */
-  var __vue_render__$N = function() {
+  var __vue_render__$Q = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9370,34 +9720,34 @@
       _c("div", { staticClass: "footer-content" }, [_vm._t("default")], 2)
     ])
   };
-  var __vue_staticRenderFns__$N = [];
-  __vue_render__$N._withStripped = true;
+  var __vue_staticRenderFns__$Q = [];
+  __vue_render__$Q._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$N = function (inject) {
+    const __vue_inject_styles__$Q = function (inject) {
       if (!inject) return
       inject("data-v-4078e95f_0", { source: "\n.footer-content[data-v-4078e95f] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <slot/>\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$N = "data-v-4078e95f";
+    const __vue_scope_id__$Q = "data-v-4078e95f";
     /* module identifier */
-    const __vue_module_identifier__$N = undefined;
+    const __vue_module_identifier__$Q = undefined;
     /* functional template */
-    const __vue_is_functional_template__$N = false;
+    const __vue_is_functional_template__$Q = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$N = normalizeComponent(
-      { render: __vue_render__$N, staticRenderFns: __vue_staticRenderFns__$N },
-      __vue_inject_styles__$N,
-      __vue_script__$N,
-      __vue_scope_id__$N,
-      __vue_is_functional_template__$N,
-      __vue_module_identifier__$N,
+    const __vue_component__$Q = normalizeComponent(
+      { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
+      __vue_inject_styles__$Q,
+      __vue_script__$Q,
+      __vue_scope_id__$Q,
+      __vue_is_functional_template__$Q,
+      __vue_module_identifier__$Q,
       false,
       createInjector,
       undefined,
@@ -9431,10 +9781,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$O = InAppSystemBar;
+  const __vue_script__$R = InAppSystemBar;
 
   /* template */
-  var __vue_render__$O = function() {
+  var __vue_render__$R = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9499,34 +9849,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$O = [];
-  __vue_render__$O._withStripped = true;
+  var __vue_staticRenderFns__$R = [];
+  __vue_render__$R._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$O = function (inject) {
+    const __vue_inject_styles__$R = function (inject) {
       if (!inject) return
       inject("data-v-660b8b92_0", { source: "\n.title-bar-button[data-v-660b8b92] {\r\n  -webkit-app-region: no-drag;\n}\n.system-bar-title[data-v-660b8b92] {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppSystemBar.vue"],"names":[],"mappings":";AAiDA;EACA,2BAAA;AACA;AACA;EACA,WAAA;EACA,iBAAA;EACA,kBAAA;AACA","file":"InAppSystemBar.vue","sourcesContent":["<template>\r\n  <v-system-bar color=\"#444\" class=\"title-bar\">\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"openWebTools\">\r\n      <v-icon color=\"white\">menu</v-icon>\r\n    </v-btn>\r\n    <span class=\"system-bar-title\">{{ title }}</span>\r\n    <v-spacer></v-spacer>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"minWindow\">\r\n      <v-icon color=\"white\">remove</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"maxWindow\">\r\n      <v-icon color=\"white\">check_box_outline_blank</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"closeWindow\">\r\n      <v-icon color=\"white\">close</v-icon>\r\n    </v-btn>\r\n  </v-system-bar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\nimport Electron from \"electron\";\r\n\r\n@Component({})\r\nexport default class InAppSystemBar extends Vue {\r\n  title: string = Electron.remote.getCurrentWindow().getTitle();\r\n\r\n  openWebTools() {\r\n    Electron.remote.getCurrentWebContents().openDevTools();\r\n  }\r\n\r\n  minWindow() {\r\n    Electron.remote.getCurrentWindow().minimize();\r\n  }\r\n\r\n  maxWindow() {\r\n    Electron.remote.getCurrentWindow().maximize();\r\n  }\r\n\r\n  closeWindow() {\r\n    Electron.remote.getCurrentWindow().close();\r\n    Electron.app.quit();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.title-bar-button {\r\n  -webkit-app-region: no-drag;\r\n}\r\n.system-bar-title {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$O = "data-v-660b8b92";
+    const __vue_scope_id__$R = "data-v-660b8b92";
     /* module identifier */
-    const __vue_module_identifier__$O = undefined;
+    const __vue_module_identifier__$R = undefined;
     /* functional template */
-    const __vue_is_functional_template__$O = false;
+    const __vue_is_functional_template__$R = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$O = normalizeComponent(
-      { render: __vue_render__$O, staticRenderFns: __vue_staticRenderFns__$O },
-      __vue_inject_styles__$O,
-      __vue_script__$O,
-      __vue_scope_id__$O,
-      __vue_is_functional_template__$O,
-      __vue_module_identifier__$O,
+    const __vue_component__$R = normalizeComponent(
+      { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
+      __vue_inject_styles__$R,
+      __vue_script__$R,
+      __vue_scope_id__$R,
+      __vue_is_functional_template__$R,
+      __vue_module_identifier__$R,
       false,
       createInjector,
       undefined,
@@ -9553,10 +9903,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$P = Navigation;
+  const __vue_script__$S = Navigation;
 
   /* template */
-  var __vue_render__$P = function() {
+  var __vue_render__$S = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9661,34 +10011,34 @@
         )
       : _vm._e()
   };
-  var __vue_staticRenderFns__$P = [];
-  __vue_render__$P._withStripped = true;
+  var __vue_staticRenderFns__$S = [];
+  __vue_render__$S._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$P = function (inject) {
+    const __vue_inject_styles__$S = function (inject) {
       if (!inject) return
       inject("data-v-35f5af52_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"Navigation.vue"}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$P = "data-v-35f5af52";
+    const __vue_scope_id__$S = "data-v-35f5af52";
     /* module identifier */
-    const __vue_module_identifier__$P = undefined;
+    const __vue_module_identifier__$S = undefined;
     /* functional template */
-    const __vue_is_functional_template__$P = false;
+    const __vue_is_functional_template__$S = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$P = normalizeComponent(
-      { render: __vue_render__$P, staticRenderFns: __vue_staticRenderFns__$P },
-      __vue_inject_styles__$P,
-      __vue_script__$P,
-      __vue_scope_id__$P,
-      __vue_is_functional_template__$P,
-      __vue_module_identifier__$P,
+    const __vue_component__$S = normalizeComponent(
+      { render: __vue_render__$S, staticRenderFns: __vue_staticRenderFns__$S },
+      __vue_inject_styles__$S,
+      __vue_script__$S,
+      __vue_scope_id__$S,
+      __vue_is_functional_template__$S,
+      __vue_module_identifier__$S,
       false,
       createInjector,
       undefined,
@@ -9722,10 +10072,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$Q = NavigationActionButton;
+  const __vue_script__$T = NavigationActionButton;
 
   /* template */
-  var __vue_render__$Q = function() {
+  var __vue_render__$T = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9749,34 +10099,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$Q = [];
-  __vue_render__$Q._withStripped = true;
+  var __vue_staticRenderFns__$T = [];
+  __vue_render__$T._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$Q = function (inject) {
+    const __vue_inject_styles__$T = function (inject) {
       if (!inject) return
       inject("data-v-60febc63_0", { source: "\n.navbutton[data-v-60febc63] {\r\n  font-size: 16px;\r\n  padding-left: 8px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-60febc63]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA0BA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon class=\"ma-0 ml-1 navbutton\" @click=\"onAction\" slot=\"activator\">{{\r\n      icon\r\n    }}</v-icon>\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 16px;\r\n  padding-left: 8px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$Q = "data-v-60febc63";
+    const __vue_scope_id__$T = "data-v-60febc63";
     /* module identifier */
-    const __vue_module_identifier__$Q = undefined;
+    const __vue_module_identifier__$T = undefined;
     /* functional template */
-    const __vue_is_functional_template__$Q = false;
+    const __vue_is_functional_template__$T = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$Q = normalizeComponent(
-      { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
-      __vue_inject_styles__$Q,
-      __vue_script__$Q,
-      __vue_scope_id__$Q,
-      __vue_is_functional_template__$Q,
-      __vue_module_identifier__$Q,
+    const __vue_component__$T = normalizeComponent(
+      { render: __vue_render__$T, staticRenderFns: __vue_staticRenderFns__$T },
+      __vue_inject_styles__$T,
+      __vue_script__$T,
+      __vue_scope_id__$T,
+      __vue_is_functional_template__$T,
+      __vue_module_identifier__$T,
       false,
       createInjector,
       undefined,
@@ -9795,10 +10145,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$R = NavigationHeaderFields;
+  const __vue_script__$U = NavigationHeaderFields;
 
   /* template */
-  var __vue_render__$R = function() {
+  var __vue_render__$U = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9809,17 +10159,17 @@
       2
     )
   };
-  var __vue_staticRenderFns__$R = [];
-  __vue_render__$R._withStripped = true;
+  var __vue_staticRenderFns__$U = [];
+  __vue_render__$U._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$R = undefined;
+    const __vue_inject_styles__$U = undefined;
     /* scoped */
-    const __vue_scope_id__$R = undefined;
+    const __vue_scope_id__$U = undefined;
     /* module identifier */
-    const __vue_module_identifier__$R = undefined;
+    const __vue_module_identifier__$U = undefined;
     /* functional template */
-    const __vue_is_functional_template__$R = false;
+    const __vue_is_functional_template__$U = false;
     /* style inject */
     
     /* style inject SSR */
@@ -9828,13 +10178,13 @@
     
 
     
-    const __vue_component__$R = normalizeComponent(
-      { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
-      __vue_inject_styles__$R,
-      __vue_script__$R,
-      __vue_scope_id__$R,
-      __vue_is_functional_template__$R,
-      __vue_module_identifier__$R,
+    const __vue_component__$U = normalizeComponent(
+      { render: __vue_render__$U, staticRenderFns: __vue_staticRenderFns__$U },
+      __vue_inject_styles__$U,
+      __vue_script__$U,
+      __vue_scope_id__$U,
+      __vue_is_functional_template__$U,
+      __vue_module_identifier__$U,
       false,
       undefined,
       undefined,
@@ -9867,10 +10217,10 @@
   }(Vue));
 
   /* script */
-  const __vue_script__$S = NavigationHeaderPanel;
+  const __vue_script__$V = NavigationHeaderPanel;
 
   /* template */
-  var __vue_render__$S = function() {
+  var __vue_render__$V = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -9895,34 +10245,34 @@
       1
     )
   };
-  var __vue_staticRenderFns__$S = [];
-  __vue_render__$S._withStripped = true;
+  var __vue_staticRenderFns__$V = [];
+  __vue_render__$V._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$S = function (inject) {
+    const __vue_inject_styles__$V = function (inject) {
       if (!inject) return
       inject("data-v-6b0c2a59_0", { source: "\n.header-panel[data-v-6b0c2a59] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-left[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-right[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-content[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\n}\n.options-menu[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AAqCA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span class=\"header-left\">\r\n        <slot name=\"left\" />\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\" />\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\" />\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\" />\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-left {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$S = "data-v-6b0c2a59";
+    const __vue_scope_id__$V = "data-v-6b0c2a59";
     /* module identifier */
-    const __vue_module_identifier__$S = undefined;
+    const __vue_module_identifier__$V = undefined;
     /* functional template */
-    const __vue_is_functional_template__$S = false;
+    const __vue_is_functional_template__$V = false;
     /* style inject SSR */
     
     /* style inject shadow dom */
     
 
     
-    const __vue_component__$S = normalizeComponent(
-      { render: __vue_render__$S, staticRenderFns: __vue_staticRenderFns__$S },
-      __vue_inject_styles__$S,
-      __vue_script__$S,
-      __vue_scope_id__$S,
-      __vue_is_functional_template__$S,
-      __vue_module_identifier__$S,
+    const __vue_component__$V = normalizeComponent(
+      { render: __vue_render__$V, staticRenderFns: __vue_staticRenderFns__$V },
+      __vue_inject_styles__$V,
+      __vue_script__$V,
+      __vue_scope_id__$V,
+      __vue_is_functional_template__$V,
+      __vue_module_identifier__$V,
       false,
       createInjector,
       undefined,
@@ -9951,107 +10301,111 @@
     Vue.component("sw-content-delete-icon", __vue_component__$c);
     Vue.component("sw-content-field", __vue_component__$d);
     Vue.component("sw-content-link", __vue_component__$e);
-    Vue.component("sw-content-section", __vue_component__$f);
-    Vue.component("sw-content-warning", __vue_component__$g);
-    Vue.component("sw-datatable-link", __vue_component__$h);
-    Vue.component("sw-datatable-section", __vue_component__$i);
-    Vue.component("sw-new-element-chooser", __vue_component__$k);
-    Vue.component("sw-new-element-entry", __vue_component__$l);
-    Vue.component("sw-page-header", __vue_component__$m);
+    Vue.component("sw-content-section", __vue_component__$g);
+    Vue.component("sw-content-warning", __vue_component__$h);
+    Vue.component("sw-datatable-link", __vue_component__$i);
+    Vue.component("sw-datatable-section", __vue_component__$j);
+    Vue.component("sw-new-element-chooser", __vue_component__$l);
+    Vue.component("sw-new-element-entry", __vue_component__$m);
+    Vue.component("sw-page-header", __vue_component__$n);
 
     // Register common form components.
-    Vue.component("sw-dialog-form", __vue_component__$n);
-    Vue.component("sw-form-date-time-picker", __vue_component__$o);
-    Vue.component("sw-form-select", __vue_component__$p);
-    Vue.component("sw-form-select-condensed", __vue_component__$q);
-    Vue.component("sw-form-text", __vue_component__$r);
-    Vue.component("sw-form-text-area", __vue_component__$s);
+    Vue.component("sw-dialog-form", __vue_component__$o);
+    Vue.component("sw-form-date-time-picker", __vue_component__$p);
+    Vue.component("sw-form-select", __vue_component__$q);
+    Vue.component("sw-form-select-condensed", __vue_component__$r);
+    Vue.component("sw-form-text", __vue_component__$s);
+    Vue.component("sw-form-text-area", __vue_component__$t);
+    Vue.component("sw-script-chooser", __vue_component__$u);
 
     // Register dialog components.
-    Vue.component("sw-base-dialog", __vue_component__$j);
-    Vue.component("sw-confirm-dialog", __vue_component__$t);
-    Vue.component("sw-delete-dialog", __vue_component__$u);
-    Vue.component("sw-metadata-panel", __vue_component__$v);
+    Vue.component("sw-base-dialog", __vue_component__$k);
+    Vue.component("sw-confirm-dialog", __vue_component__$v);
+    Vue.component("sw-delete-dialog", __vue_component__$w);
+    Vue.component("sw-dialog-header", __vue_component__$x);
+    Vue.component("sw-metadata-panel", __vue_component__$y);
 
     // Register list components.
-    Vue.component("sw-list-entry", __vue_component__$w);
-    Vue.component("sw-list-layout", __vue_component__$x);
-    Vue.component("sw-list-page", __vue_component__$B);
-    Vue.component("sw-list-tab", __vue_component__$C);
-    Vue.component("sw-pager", __vue_component__$A);
+    Vue.component("sw-list-entry", __vue_component__$z);
+    Vue.component("sw-list-layout", __vue_component__$A);
+    Vue.component("sw-list-page", __vue_component__$E);
+    Vue.component("sw-list-tab", __vue_component__$F);
+    Vue.component("sw-pager", __vue_component__$D);
 
     // Register login components.
-    Vue.component("sw-remotes-dialog", __vue_component__$F);
-    Vue.component("sw-remotes-dropdown", __vue_component__$G);
+    Vue.component("sw-remotes-dialog", __vue_component__$I);
+    Vue.component("sw-remotes-dropdown", __vue_component__$J);
 
     // Register navigation components.
-    Vue.component("sw-content-tab", __vue_component__$H);
-    Vue.component("sw-data-entry-panel", __vue_component__$I);
-    Vue.component("sw-data-table-tab", __vue_component__$J);
-    Vue.component("sw-detail-page", __vue_component__$K);
-    Vue.component("sw-header-branding-panel", __vue_component__$M);
-    Vue.component("sw-in-app-footer", __vue_component__$N);
-    Vue.component("sw-in-app-system-bar", __vue_component__$O);
-    Vue.component("sw-navigation", __vue_component__$P);
-    Vue.component("sw-navigation-action-button", __vue_component__$Q);
-    Vue.component("sw-navigation-header-fields", __vue_component__$R);
-    Vue.component("sw-navigation-header-left", __vue_component__$L);
-    Vue.component("sw-navigation-header-panel", __vue_component__$S);
-    Vue.component("sw-navigation-page", __vue_component__$y);
+    Vue.component("sw-content-tab", __vue_component__$K);
+    Vue.component("sw-data-entry-panel", __vue_component__$L);
+    Vue.component("sw-data-table-tab", __vue_component__$M);
+    Vue.component("sw-detail-page", __vue_component__$N);
+    Vue.component("sw-header-branding-panel", __vue_component__$P);
+    Vue.component("sw-in-app-footer", __vue_component__$Q);
+    Vue.component("sw-in-app-system-bar", __vue_component__$R);
+    Vue.component("sw-navigation", __vue_component__$S);
+    Vue.component("sw-navigation-action-button", __vue_component__$T);
+    Vue.component("sw-navigation-header-fields", __vue_component__$U);
+    Vue.component("sw-navigation-header-left", __vue_component__$O);
+    Vue.component("sw-navigation-header-panel", __vue_component__$V);
+    Vue.component("sw-navigation-page", __vue_component__$B);
   }
 
-  exports.BaseDialog = __vue_component__$j;
+  exports.BaseDialog = __vue_component__$k;
   exports.ClipboardCopyField = __vue_component__;
   exports.ColorInputField = __vue_component__$1;
   exports.ColorPicker = __vue_component__$2;
   exports.CondensedToolbar = __vue_component__$3;
-  exports.ConfirmDialog = __vue_component__$t;
+  exports.ConfirmDialog = __vue_component__$v;
   exports.ContentDeleteIcon = __vue_component__$c;
   exports.ContentField = __vue_component__$d;
   exports.ContentLink = __vue_component__$e;
-  exports.ContentSection = __vue_component__$f;
-  exports.ContentTab = __vue_component__$H;
-  exports.ContentWarning = __vue_component__$g;
-  exports.DataEntryPanel = __vue_component__$I;
-  exports.DataTableTab = __vue_component__$J;
-  exports.DatatableLink = __vue_component__$h;
-  exports.DatatableSection = __vue_component__$i;
+  exports.ContentSection = __vue_component__$g;
+  exports.ContentTab = __vue_component__$K;
+  exports.ContentWarning = __vue_component__$h;
+  exports.DataEntryPanel = __vue_component__$L;
+  exports.DataTableTab = __vue_component__$M;
+  exports.DatatableLink = __vue_component__$i;
+  exports.DatatableSection = __vue_component__$j;
   exports.DateTimePicker = __vue_component__$4;
-  exports.DeleteDialog = __vue_component__$u;
-  exports.DetailPage = __vue_component__$K;
-  exports.DialogForm = __vue_component__$n;
+  exports.DeleteDialog = __vue_component__$w;
+  exports.DetailPage = __vue_component__$N;
+  exports.DialogForm = __vue_component__$o;
+  exports.DialogHeader = __vue_component__$x;
   exports.ErrorBanner = __vue_component__$5;
   exports.FloatingActionButton = __vue_component__$6;
-  exports.FormDateTimePicker = __vue_component__$o;
-  exports.FormSelect = __vue_component__$p;
-  exports.FormSelectCondensed = __vue_component__$q;
-  exports.FormText = __vue_component__$r;
-  exports.FormTextArea = __vue_component__$s;
-  exports.HeaderBrandingPanel = __vue_component__$M;
+  exports.FormDateTimePicker = __vue_component__$p;
+  exports.FormSelect = __vue_component__$q;
+  exports.FormSelectCondensed = __vue_component__$r;
+  exports.FormText = __vue_component__$s;
+  exports.FormTextArea = __vue_component__$t;
+  exports.HeaderBrandingPanel = __vue_component__$P;
   exports.HeaderField = __vue_component__$7;
   exports.IconSelector = __vue_component__$8;
   exports.ImageZoomOnHover = __vue_component__$9;
-  exports.InAppFooter = __vue_component__$N;
-  exports.InAppSystemBar = __vue_component__$O;
+  exports.InAppFooter = __vue_component__$Q;
+  exports.InAppSystemBar = __vue_component__$R;
   exports.LinkedHeaderField = __vue_component__$a;
-  exports.ListEntry = __vue_component__$w;
-  exports.ListLayout = __vue_component__$x;
-  exports.ListPage = __vue_component__$B;
-  exports.ListTab = __vue_component__$C;
+  exports.ListEntry = __vue_component__$z;
+  exports.ListLayout = __vue_component__$A;
+  exports.ListPage = __vue_component__$E;
+  exports.ListTab = __vue_component__$F;
   exports.LoadingOverlay = __vue_component__$b;
-  exports.MetadataPanel = __vue_component__$v;
-  exports.Navigation = __vue_component__$P;
-  exports.NavigationActionButton = __vue_component__$Q;
-  exports.NavigationHeaderFields = __vue_component__$R;
-  exports.NavigationHeaderLeft = __vue_component__$L;
-  exports.NavigationHeaderPanel = __vue_component__$S;
-  exports.NavigationPage = __vue_component__$y;
-  exports.NewElementChooser = __vue_component__$k;
-  exports.NewElementEntry = __vue_component__$l;
-  exports.PageHeader = __vue_component__$m;
-  exports.Pager = __vue_component__$A;
-  exports.RemotesDialog = __vue_component__$F;
-  exports.RemotesDropdown = __vue_component__$G;
+  exports.MetadataPanel = __vue_component__$y;
+  exports.Navigation = __vue_component__$S;
+  exports.NavigationActionButton = __vue_component__$T;
+  exports.NavigationHeaderFields = __vue_component__$U;
+  exports.NavigationHeaderLeft = __vue_component__$O;
+  exports.NavigationHeaderPanel = __vue_component__$V;
+  exports.NavigationPage = __vue_component__$B;
+  exports.NewElementChooser = __vue_component__$l;
+  exports.NewElementEntry = __vue_component__$m;
+  exports.PageHeader = __vue_component__$n;
+  exports.Pager = __vue_component__$D;
+  exports.RemotesDialog = __vue_component__$I;
+  exports.RemotesDropdown = __vue_component__$J;
+  exports.ScriptChooser = __vue_component__$u;
   exports.default = SiteWhere;
 
   Object.defineProperty(exports, '__esModule', { value: true });

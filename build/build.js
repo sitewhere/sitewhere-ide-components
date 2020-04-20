@@ -86,7 +86,8 @@ function genConfig(opts) {
       name: "SiteWhereIdeComponents",
       exports: "named",
       globals: {
-        vue: "Vue"
+        vue: "Vue",
+        "sitewhere-ide-common": "SiteWhereIdeCommon"
       }
     }
   };
@@ -144,9 +145,9 @@ function write(dest, code, zip) {
     function report(extra) {
       console.log(
         blue(path.relative(process.cwd(), dest)) +
-          " " +
-          getSize(code) +
-          (extra || "")
+        " " +
+        getSize(code) +
+        (extra || "")
       );
       resolve();
     }

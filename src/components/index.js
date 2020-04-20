@@ -30,11 +30,13 @@ import FormSelect from "./common/form/FormSelect.vue";
 import FormSelectCondensed from "./common/form/FormSelectCondensed.vue";
 import FormText from "./common/form/FormText.vue";
 import FormTextArea from "./common/form/FormTextArea.vue";
+import ScriptChooser from "./common/form/ScriptChooser.vue";
 
 // Dialog components.
 import BaseDialog from "./dialog/BaseDialog.vue";
 import ConfirmDialog from "./dialog/ConfirmDialog.vue";
 import DeleteDialog from "./dialog/DeleteDialog.vue";
+import DialogHeader from "./dialog/DialogHeader.vue";
 import MetadataPanel from "./dialog/MetadataPanel.vue";
 
 // List components.
@@ -98,11 +100,13 @@ function SiteWhere(Vue) {
   Vue.component("sw-form-select-condensed", FormSelectCondensed);
   Vue.component("sw-form-text", FormText);
   Vue.component("sw-form-text-area", FormTextArea);
+  Vue.component("sw-script-chooser", ScriptChooser);
 
   // Register dialog components.
   Vue.component("sw-base-dialog", BaseDialog);
   Vue.component("sw-confirm-dialog", ConfirmDialog);
   Vue.component("sw-delete-dialog", DeleteDialog);
+  Vue.component("sw-dialog-header", DialogHeader);
   Vue.component("sw-metadata-panel", MetadataPanel);
 
   // Register list components.
@@ -151,7 +155,8 @@ export {
   FormSelect,
   FormSelectCondensed,
   FormText,
-  FormTextArea
+  FormTextArea,
+  ScriptChooser
 };
 
 // Export configuration components.
@@ -169,7 +174,7 @@ export {
 };
 
 // Export dialog components.
-export { BaseDialog, ConfirmDialog, DeleteDialog, MetadataPanel };
+export { BaseDialog, ConfirmDialog, DeleteDialog, DialogHeader, MetadataPanel };
 
 // Export list components.
 export { ListEntry, ListLayout, ListPage, ListTab, Pager };

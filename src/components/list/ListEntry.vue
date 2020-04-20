@@ -1,6 +1,6 @@
 <template>
   <v-card class="list-entry" flat hover>
-    <slot/>
+    <slot />
   </v-card>
 </template>
 
@@ -14,6 +14,6 @@ export default class ListEntry extends Vue {}
 
 <style scoped>
 .list-entry {
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
 }
 </style>
