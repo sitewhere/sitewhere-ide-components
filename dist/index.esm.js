@@ -1,65 +1,98 @@
 /**
   * SiteWhere IDE Components v3.0.0-alpha.1
-  * (c) 2019 SiteWhere LLC
+  * (c) 2020 SiteWhere LLC
   * @license CPAL-1.0
   */
-'use strict';
+import SiteWhereIdeCommon, { showError, formatDate, handleError, listTenantScriptsForCategory, NavigationIcon } from 'sitewhere-ide-common';
+import Vue from 'vue';
+import { Prop, Component, Watch, Ref } from 'vue-property-decorator';
+import { Chrome, Sketch } from 'vue-color';
+import moment from 'moment';
+import Electron from 'electron';
 
-Object.defineProperty(exports, '__esModule', { value: true });
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
 
-var sitewhereIdeCommon = require('sitewhere-ide-common');
-var Vue = _interopDefault(require('vue'));
-var vueColor = require('vue-color');
-var moment = _interopDefault(require('moment'));
-var Electron = _interopDefault(require('electron'));
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
 
-var script = {
-  data: () => ({
-    showFieldCopied: false
-  }),
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
 
-  props: ["field", "message"],
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
 
-  methods: {
-    // Called after id is copied.
-    onFieldCopied: function(e) {
-      this.$data.showFieldCopied = true;
-    },
-
-    // Called if unable to copy id.
-    onFieldCopyFailed: function(e) {}
-  }
-};
+/**
+ * Base class for create dialogs.
+ */
+class CreateDialogComponent extends Vue {
+    /** Get wrapped dialog */
+    getDialog() {
+        throw new Error("Create dialog must implement getDialog().");
+    }
+    /** Open wrapped dialog */
+    open() {
+        this.getDialog().reset();
+        this.getDialog().openDialog();
+    }
+    /** Load dialog then open it */
+    loadAndOpen(payload) {
+        this.getDialog().reset();
+        this.getDialog().load(payload);
+        this.getDialog().openDialog();
+    }
+    /** Implemented in subclasses to save payload */
+    save(payload) {
+        throw new Error("Create dialog must implement save().");
+    }
+    /** Implemented in subclasses for after-save */
+    afterSave(payload) { }
+    /** Type guard to differentiate between responses */
+    isAxiosResponse(response) {
+        return response.data !== undefined;
+    }
+    /** Handle payload commit */
+    commit(payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let response = yield this.save(payload);
+                let created = this.isAxiosResponse(response)
+                    ? response.data
+                    : response;
+                this.afterSave(created);
+                this.$emit("created", created);
+                this.getDialog().closeDialog();
+            }
+            catch (err) {
+                showError(this, err);
+            }
+        });
+    }
+}
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
@@ -136,6 +169,681 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
     return script;
 }
 
+/* script */
+const __vue_script__ = CreateDialogComponent;
+
+/* template */
+var __vue_render__ = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__ = normalizeComponent(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for delete dialog components.
+ */
+let DeleteDialogComponent = class DeleteDialogComponent extends Vue {
+    constructor() {
+        super(...arguments);
+        this.record = null;
+        this.visible = false;
+        this.error = null;
+    }
+    /**
+     * Load object to be deleted.
+     * @param identifier
+     */
+    prepareLoad(identifier) {
+        throw new Error("Load not implemented in dialog.");
+    }
+    /** Type guard to differentiate between responses */
+    isAxiosResponse(response) {
+        return response.data !== undefined;
+    }
+    /** Called after record is loaded */
+    afterLoad(record) { }
+    /**
+     * Load data, then open dialog.
+     * @param identifier
+     */
+    open(identifier) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let response = yield this.prepareLoad(identifier);
+                this.record = this.isAxiosResponse(response) ? response.data : response;
+                this.visible = true;
+                this.afterLoad(this.record);
+            }
+            catch (err) {
+                showError(this, err);
+            }
+        });
+    }
+    /** Return method to delete record */
+    prepareDelete(record) {
+        throw new Error("Delete not implemented in dialog.");
+    }
+    /** Action invoked when delete is clicked */
+    delete() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.record) {
+                throw new Error("Unable to delete. Record is null.");
+            }
+            try {
+                let response = yield this.prepareDelete(this.record);
+                this.record = this.isAxiosResponse(response) ? response.data : response;
+                this.$emit("deleted", this.record);
+                this.closeDialog();
+            }
+            catch (err) {
+                showError(this, err);
+            }
+        });
+    }
+    /** Action invoked when cancel is clicked */
+    cancel() {
+        this.closeDialog();
+    }
+    /** Called to open the dialog */
+    closeDialog() {
+        this.visible = false;
+    }
+    /** Called to show an error message */
+    showError(error) {
+        this.error = error;
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DeleteDialogComponent.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Number)
+], DeleteDialogComponent.prototype, "width", void 0);
+DeleteDialogComponent = __decorate([
+    Component
+], DeleteDialogComponent);
+var script = DeleteDialogComponent;
+
+/* script */
+const __vue_script__$1 = script;
+
+/* template */
+var __vue_render__$1 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$1 = undefined;
+  /* scoped */
+  const __vue_scope_id__$1 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$1 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$1 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$1 = normalizeComponent(
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for components that display data for a single record
+ * based on SiteWhere REST services.
+ */
+let DetailComponent = class DetailComponent extends Vue {
+    constructor() {
+        super(...arguments);
+        this.token = null;
+        this.record = null;
+        this.loaded = false;
+    }
+    // Get parameter for route token.
+    getTokenParameter() {
+        return "token";
+    }
+    // Called on initial create.
+    created() {
+        this.display(this.$route.params[this.getTokenParameter()]);
+    }
+    // Called when component is reused.
+    beforeRouteUpdate(to, from, next) {
+        this.display(to.params.token);
+        next();
+    }
+    // Display record with the given token.
+    display(token) {
+        this.token = token;
+        this.refresh();
+    }
+    /** Return promise for loading record */
+    loadRecord(token) {
+        throw new Error("Implement loadRecord()");
+    }
+    // Refresh list contents.
+    refresh() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                this.loaded = false;
+                let promise = this.loadRecord(this.token);
+                let response = yield promise;
+                this.record = response.data;
+                this.afterRecordLoaded(this.record);
+            }
+            catch (err) {
+                showError(this, err);
+            }
+            this.loaded = true;
+        });
+    }
+    /** Called after record is loaded */
+    afterRecordLoaded(record) { }
+};
+DetailComponent = __decorate([
+    Component
+], DetailComponent);
+var script$1 = DetailComponent;
+
+/* script */
+const __vue_script__$2 = script$1;
+
+/* template */
+var __vue_render__$2 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$2 = [];
+__vue_render__$2._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$2 = undefined;
+  /* scoped */
+  const __vue_scope_id__$2 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$2 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$2 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$2 = normalizeComponent(
+    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+    __vue_inject_styles__$2,
+    __vue_script__$2,
+    __vue_scope_id__$2,
+    __vue_is_functional_template__$2,
+    __vue_module_identifier__$2,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for dialog components.
+ */
+let DialogComponent = class DialogComponent extends Vue {
+    constructor() {
+        super(...arguments);
+        this.dialogVisible = false;
+        this.error = null;
+    }
+    /** Reset dialog content */
+    reset() {
+        throw new Error("Reset not implemented in dialog.");
+    }
+    /** Load dialog from model */
+    load(model) {
+        throw new Error("Load not implemented in dialog.");
+    }
+    /** Called to open the dialog */
+    openDialog() {
+        this.dialogVisible = true;
+    }
+    /** Called to open the dialog */
+    closeDialog() {
+        this.dialogVisible = false;
+    }
+    /** Called to show an error message */
+    showError(error) {
+        this.error = error;
+    }
+    /** Action invoked when create is clicked */
+    onCreateClicked(e) { }
+    /** Action invoked when cancel is clicked */
+    onCancelClicked(e) {
+        this.closeDialog();
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DialogComponent.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Number)
+], DialogComponent.prototype, "width", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DialogComponent.prototype, "createLabel", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DialogComponent.prototype, "cancelLabel", void 0);
+__decorate([
+    Prop({ default: true }),
+    __metadata("design:type", Boolean)
+], DialogComponent.prototype, "loaded", void 0);
+DialogComponent = __decorate([
+    Component
+], DialogComponent);
+var script$2 = DialogComponent;
+
+/* script */
+const __vue_script__$3 = script$2;
+
+/* template */
+var __vue_render__$3 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$3 = [];
+__vue_render__$3._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$3 = undefined;
+  /* scoped */
+  const __vue_scope_id__$3 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$3 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$3 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$3 = normalizeComponent(
+    { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+    __vue_inject_styles__$3,
+    __vue_script__$3,
+    __vue_scope_id__$3,
+    __vue_is_functional_template__$3,
+    __vue_module_identifier__$3,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for dialog sections.
+ */
+let DialogSection = class DialogSection extends Vue {
+    /** Called on component create */
+    created() {
+        this.reset();
+    }
+    /** Reset section content */
+    reset() {
+        throw new Error("Reset not implemented in dialog section.");
+    }
+    /** Validate fields in the dialog section */
+    validate() {
+        return true;
+    }
+    /** Load form data from an object */
+    load(input) { }
+    /** Save form data to an object */
+    save() {
+        return {};
+    }
+};
+DialogSection = __decorate([
+    Component
+], DialogSection);
+var script$3 = DialogSection;
+
+/* script */
+const __vue_script__$4 = script$3;
+
+/* template */
+var __vue_render__$4 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$4 = undefined;
+  /* scoped */
+  const __vue_scope_id__$4 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$4 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$4 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$4 = normalizeComponent(
+    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4,
+    __vue_module_identifier__$4,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for edit dialogs.
+ */
+class EditDialogComponent extends Vue {
+    constructor() {
+        super(...arguments);
+        this.record = null;
+        this.loaded = false;
+    }
+    /** Get wrapped dialog */
+    getDialog() {
+        throw new Error("Edit dialog must implement getDialog().");
+    }
+    /**
+     * Prepare load for the given identifier.
+     * @param identifier
+     */
+    prepareLoad(identifier) {
+        throw new Error("Edit dialog must implement load().");
+    }
+    /** Type guard to differentiate between responses */
+    isAxiosResponse(response) {
+        return response.data !== undefined;
+    }
+    /**
+     * Load record for identifer and open dialog.
+     * @param identifier
+     */
+    open(identifier) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.getDialog().openDialog();
+            this.getDialog().reset();
+            this.loaded = false;
+            try {
+                let response = yield this.prepareLoad(identifier);
+                this.record = this.isAxiosResponse(response) ? response.data : response;
+                this.getDialog().load(this.record);
+            }
+            catch (err) {
+                showError(this, err);
+            }
+            this.loaded = true;
+        });
+    }
+    /** Implemented in subclasses to save payload */
+    prepareSave(original, updated) {
+        throw new Error("Edit dialog must implement save().");
+    }
+    /** Handle payload commit */
+    save(payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.record) {
+                throw new Error("Unable to update. Record is null.");
+            }
+            try {
+                let response = yield this.prepareSave(this.record, payload);
+                let updated = this.isAxiosResponse(response)
+                    ? response.data
+                    : response;
+                this.afterSave(updated);
+                this.$emit("updated", updated);
+                this.getDialog().closeDialog();
+            }
+            catch (err) {
+                showError(this, err);
+            }
+        });
+    }
+    /** Implemented in subclasses for after-save */
+    afterSave(payload) { }
+}
+
+/* script */
+const __vue_script__$5 = EditDialogComponent;
+
+/* template */
+var __vue_render__$5 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$5 = undefined;
+  /* scoped */
+  const __vue_scope_id__$5 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$5 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$5 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$5 = normalizeComponent(
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5,
+    __vue_module_identifier__$5,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for components that display header data for a
+ * SiteWhere entity.
+ */
+let HeaderComponent = class HeaderComponent extends Vue {
+    // Handle date formatting in a standard way.
+    formatDate(date) {
+        return formatDate(date);
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], HeaderComponent.prototype, "record", void 0);
+HeaderComponent = __decorate([
+    Component
+], HeaderComponent);
+var script$4 = HeaderComponent;
+
+/* script */
+const __vue_script__$6 = script$4;
+
+/* template */
+var __vue_render__$6 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$6 = undefined;
+  /* scoped */
+  const __vue_scope_id__$6 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$6 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$6 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$6 = normalizeComponent(
+    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+    __vue_inject_styles__$6,
+    __vue_script__$6,
+    __vue_scope_id__$6,
+    __vue_is_functional_template__$6,
+    __vue_module_identifier__$6,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+/**
+ * Base class for components that display lists based on
+ * SiteWhere REST services.
+ */
+let ListComponent = class ListComponent extends Vue {
+    constructor() {
+        super(...arguments);
+        this.results = null;
+        this.paging = null;
+        this.matches = [];
+        this.loaded = false;
+    }
+    /** Update paging values and run query */
+    onPagingUpdated(paging) {
+        this.paging = paging;
+        this.refresh();
+    }
+    /** Build search criteria for list */
+    buildSearchCriteria() {
+        throw new Error("Implement buildSearchCriteria()");
+    }
+    /** Build response format for list */
+    buildResponseFormat() {
+        throw new Error("Implement buildResponseFormat()");
+    }
+    /** Return promise for performing search */
+    performSearch(criteria, format) {
+        throw new Error("Implement performSearch()");
+    }
+    // Refresh list contents.
+    refresh() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let criteria = this.buildSearchCriteria();
+            let format = this.buildResponseFormat();
+            if (this.paging) {
+                criteria.pageNumber = this.paging.pageNumber;
+                criteria.pageSize = this.paging.pageSize;
+            }
+            try {
+                this.loaded = false;
+                let promise = this.performSearch(criteria, format);
+                let response = yield promise;
+                this.results = response.data;
+                this.matches = response.data.results;
+            }
+            catch (err) {
+                handleError(err);
+            }
+            this.loaded = true;
+        });
+    }
+};
+ListComponent = __decorate([
+    Component
+], ListComponent);
+var script$5 = ListComponent;
+
 const isOldIE = typeof navigator !== 'undefined' &&
     /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
 function createInjector(context) {
@@ -190,10 +898,100 @@ function addStyle(id, css) {
 }
 
 /* script */
-const __vue_script__ = script;
+const __vue_script__$7 = script$5;
 
 /* template */
-var __vue_render__ = function() {
+var __vue_render__$7 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2)
+};
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$7 = function (inject) {
+    if (!inject) return
+    inject("data-v-1f65c673_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ListComponent.vue"}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$7 = "data-v-1f65c673";
+  /* module identifier */
+  const __vue_module_identifier__$7 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$7 = false;
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$7 = normalizeComponent(
+    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+    __vue_inject_styles__$7,
+    __vue_script__$7,
+    __vue_scope_id__$7,
+    __vue_is_functional_template__$7,
+    __vue_module_identifier__$7,
+    false,
+    createInjector,
+    undefined,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$6 = {
+  data: () => ({
+    showFieldCopied: false
+  }),
+
+  props: ["field", "message"],
+
+  methods: {
+    // Called after id is copied.
+    onFieldCopied: function(e) {
+      this.$data.showFieldCopied = true;
+    },
+
+    // Called if unable to copy id.
+    onFieldCopyFailed: function(e) {}
+  }
+};
+
+/* script */
+const __vue_script__$8 = script$6;
+
+/* template */
+var __vue_render__$8 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -264,171 +1062,87 @@ var __vue_render__ = function() {
     1
   )
 };
-var __vue_staticRenderFns__ = [];
-__vue_render__._withStripped = true;
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__ = function (inject) {
+  const __vue_inject_styles__$8 = function (inject) {
     if (!inject) return
     inject("data-v-4e07dcce_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ClipboardCopyField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__ = "data-v-4e07dcce";
+  const __vue_scope_id__$8 = "data-v-4e07dcce";
   /* module identifier */
-  const __vue_module_identifier__ = undefined;
+  const __vue_module_identifier__$8 = undefined;
   /* functional template */
-  const __vue_is_functional_template__ = false;
+  const __vue_is_functional_template__$8 = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__ = normalizeComponent(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
+  const __vue_component__$8 = normalizeComponent(
+    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+    __vue_inject_styles__$8,
+    __vue_script__$8,
+    __vue_scope_id__$8,
+    __vue_is_functional_template__$8,
+    __vue_module_identifier__$8,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+let ColorInputField = class ColorInputField extends Vue {
+    constructor() {
+        super(...arguments);
+        this.menu = null;
+        this.updatedColor = null;
     }
-}
-
-var ColorInputField = /** @class */ (function (_super) {
-    __extends(ColorInputField, _super);
-    function ColorInputField() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.menu = null;
-        _this.updatedColor = null;
-        return _this;
-    }
-    ColorInputField.prototype.onValueChanged = function (val, oldVal) {
+    onValueChanged(val, oldVal) {
         this.updatedColor = val;
-    };
-    Object.defineProperty(ColorInputField.prototype, "valueOrDefault", {
-        get: function () {
-            return this.updatedColor || "#fff";
-        },
-        enumerable: true,
-        configurable: true
-    });
+    }
+    get valueOrDefault() {
+        return this.updatedColor || "#fff";
+    }
     /** Called when color is chosen */
-    ColorInputField.prototype.onColorChosen = function (val) {
+    onColorChosen(val) {
         this.updatedColor = val.hex;
         this.$emit("input", val.hex);
         this.$emit("opacityChanged", val.a);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ColorInputField.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ColorInputField.prototype, "text", void 0);
-    __decorate([
-        sitewhereIdeCommon.Watch("value"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String, String]),
-        __metadata("design:returntype", void 0)
-    ], ColorInputField.prototype, "onValueChanged", null);
-    ColorInputField = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                Chrome: vueColor.Chrome
-            }
-        })
-    ], ColorInputField);
-    return ColorInputField;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ColorInputField.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ColorInputField.prototype, "text", void 0);
+__decorate([
+    Watch("value"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], ColorInputField.prototype, "onValueChanged", null);
+ColorInputField = __decorate([
+    Component({
+        components: {
+            Chrome
+        }
+    })
+], ColorInputField);
+var script$7 = ColorInputField;
 
 /* script */
-const __vue_script__$1 = ColorInputField;
+const __vue_script__$9 = script$7;
 
 /* template */
-var __vue_render__$1 = function() {
+var __vue_render__$9 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -506,112 +1220,106 @@ var __vue_render__$1 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
+var __vue_staticRenderFns__$9 = [];
+__vue_render__$9._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$1 = function (inject) {
+  const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
-    inject("data-v-9f3288c4_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
+    inject("data-v-bff34f12_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ColorInputField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$1 = "data-v-9f3288c4";
+  const __vue_scope_id__$9 = "data-v-bff34f12";
   /* module identifier */
-  const __vue_module_identifier__$1 = undefined;
+  const __vue_module_identifier__$9 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$1 = false;
+  const __vue_is_functional_template__$9 = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$1 = normalizeComponent(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-    __vue_inject_styles__$1,
-    __vue_script__$1,
-    __vue_scope_id__$1,
-    __vue_is_functional_template__$1,
-    __vue_module_identifier__$1,
+  const __vue_component__$9 = normalizeComponent(
+    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+    __vue_inject_styles__$9,
+    __vue_script__$9,
+    __vue_scope_id__$9,
+    __vue_is_functional_template__$9,
+    __vue_module_identifier__$9,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ColorPicker = /** @class */ (function (_super) {
-    __extends(ColorPicker, _super);
-    function ColorPicker() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.menu = false;
-        _this.currentColor = null;
-        _this.currentOpacity = null;
-        return _this;
+let ColorPicker = class ColorPicker extends Vue {
+    constructor() {
+        super(...arguments);
+        this.menu = false;
+        this.currentColor = null;
+        this.currentOpacity = null;
     }
-    ColorPicker.prototype.onValueChanged = function (val) {
+    onValueChanged(val) {
         this.currentColor = val;
-    };
-    ColorPicker.prototype.onOpacityChanged = function (val) {
+    }
+    onOpacityChanged(val) {
         this.currentOpacity = val;
-    };
-    Object.defineProperty(ColorPicker.prototype, "pickerColor", {
-        /** Convert color into picker format */
-        get: function () {
-            return {
-                hex: this.currentColor,
-                a: this.opacity
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
+    }
+    /** Convert color into picker format */
+    get pickerColor() {
+        return {
+            hex: this.currentColor,
+            a: this.opacity
+        };
+    }
     /** Called when a color is chosen */
-    ColorPicker.prototype.onColorChosen = function (val) {
+    onColorChosen(val) {
         this.currentColor = val.hex;
         this.$emit("input", val.hex);
         this.currentOpacity = val.a;
         this.$emit("opacityChanged", val.a);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ColorPicker.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: 1 }),
-        __metadata("design:type", String)
-    ], ColorPicker.prototype, "opacity", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ColorPicker.prototype, "text", void 0);
-    __decorate([
-        sitewhereIdeCommon.Watch("value"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], ColorPicker.prototype, "onValueChanged", null);
-    __decorate([
-        sitewhereIdeCommon.Watch("opacity"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Number]),
-        __metadata("design:returntype", void 0)
-    ], ColorPicker.prototype, "onOpacityChanged", null);
-    ColorPicker = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                Picker: vueColor.Sketch
-            }
-        })
-    ], ColorPicker);
-    return ColorPicker;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ColorPicker.prototype, "value", void 0);
+__decorate([
+    Prop({ default: 1 }),
+    __metadata("design:type", String)
+], ColorPicker.prototype, "opacity", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ColorPicker.prototype, "text", void 0);
+__decorate([
+    Watch("value"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ColorPicker.prototype, "onValueChanged", null);
+__decorate([
+    Watch("opacity"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ColorPicker.prototype, "onOpacityChanged", null);
+ColorPicker = __decorate([
+    Component({
+        components: {
+            Picker: Sketch
+        }
+    })
+], ColorPicker);
+var script$8 = ColorPicker;
 
 /* script */
-const __vue_script__$2 = ColorPicker;
+const __vue_script__$a = script$8;
 
 /* template */
-var __vue_render__$2 = function() {
+var __vue_render__$a = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -646,17 +1354,17 @@ var __vue_render__$2 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$2 = [];
-__vue_render__$2._withStripped = true;
+var __vue_staticRenderFns__$a = [];
+__vue_render__$a._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$2 = undefined;
+  const __vue_inject_styles__$a = undefined;
   /* scoped */
-  const __vue_scope_id__$2 = undefined;
+  const __vue_scope_id__$a = undefined;
   /* module identifier */
-  const __vue_module_identifier__$2 = undefined;
+  const __vue_module_identifier__$a = undefined;
   /* functional template */
-  const __vue_is_functional_template__$2 = false;
+  const __vue_is_functional_template__$a = false;
   /* style inject */
   
   /* style inject SSR */
@@ -665,39 +1373,35 @@ __vue_render__$2._withStripped = true;
   
 
   
-  const __vue_component__$2 = normalizeComponent(
-    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
-    __vue_inject_styles__$2,
-    __vue_script__$2,
-    __vue_scope_id__$2,
-    __vue_is_functional_template__$2,
-    __vue_module_identifier__$2,
+  const __vue_component__$a = normalizeComponent(
+    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+    __vue_inject_styles__$a,
+    __vue_script__$a,
+    __vue_scope_id__$a,
+    __vue_is_functional_template__$a,
+    __vue_module_identifier__$a,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var CondensedToolbar = /** @class */ (function (_super) {
-    __extends(CondensedToolbar, _super);
-    function CondensedToolbar() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], CondensedToolbar.prototype, "title", void 0);
-    CondensedToolbar = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], CondensedToolbar);
-    return CondensedToolbar;
-}(Vue));
+let CondensedToolbar = class CondensedToolbar extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], CondensedToolbar.prototype, "title", void 0);
+CondensedToolbar = __decorate([
+    Component({})
+], CondensedToolbar);
+var script$9 = CondensedToolbar;
 
 /* script */
-const __vue_script__$3 = CondensedToolbar;
+const __vue_script__$b = script$9;
 
 /* template */
-var __vue_render__$3 = function() {
+var __vue_render__$b = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -730,53 +1434,51 @@ var __vue_render__$3 = function() {
     2
   )
 };
-var __vue_staticRenderFns__$3 = [];
-__vue_render__$3._withStripped = true;
+var __vue_staticRenderFns__$b = [];
+__vue_render__$b._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$3 = function (inject) {
+  const __vue_inject_styles__$b = function (inject) {
     if (!inject) return
-    inject("data-v-b1b24538_0", { source: "\n.tb[data-v-b1b24538] .v-toolbar__content {\r\n  padding: 0 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\CondensedToolbar.vue"],"names":[],"mappings":";AAqBA;EACA,eAAA;AACA","file":"CondensedToolbar.vue","sourcesContent":["<template>\r\n  <v-toolbar flat dark dense card color=\"primary\" class=\"tb\" height=\"38\">\r\n    <slot name=\"icon\" />\r\n    <v-toolbar-title class=\"white--text body-2 ml-2\">{{ title }}</v-toolbar-title>\r\n    <slot name=\"left\" />\r\n    <v-spacer></v-spacer>\r\n    <slot />\r\n  </v-toolbar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class CondensedToolbar extends Vue {\r\n  @Prop() readonly title!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.tb >>> .v-toolbar__content {\r\n  padding: 0 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-60cd4835_0", { source: "\n.tb[data-v-60cd4835] .v-toolbar__content {\r\n  padding: 0 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\CondensedToolbar.vue"],"names":[],"mappings":";AAqBA;EACA,eAAA;AACA","file":"CondensedToolbar.vue","sourcesContent":["<template>\r\n  <v-toolbar flat dark dense card color=\"primary\" class=\"tb\" height=\"38\">\r\n    <slot name=\"icon\" />\r\n    <v-toolbar-title class=\"white--text body-2 ml-2\">{{ title }}</v-toolbar-title>\r\n    <slot name=\"left\" />\r\n    <v-spacer></v-spacer>\r\n    <slot />\r\n  </v-toolbar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class CondensedToolbar extends Vue {\r\n  @Prop() readonly title!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.tb >>> .v-toolbar__content {\r\n  padding: 0 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$3 = "data-v-b1b24538";
+  const __vue_scope_id__$b = "data-v-60cd4835";
   /* module identifier */
-  const __vue_module_identifier__$3 = undefined;
+  const __vue_module_identifier__$b = undefined;
   /* functional template */
-  const __vue_is_functional_template__$3 = false;
+  const __vue_is_functional_template__$b = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$3 = normalizeComponent(
-    { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-    __vue_inject_styles__$3,
-    __vue_script__$3,
-    __vue_scope_id__$3,
-    __vue_is_functional_template__$3,
-    __vue_module_identifier__$3,
+  const __vue_component__$b = normalizeComponent(
+    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+    __vue_inject_styles__$b,
+    __vue_script__$b,
+    __vue_scope_id__$b,
+    __vue_is_functional_template__$b,
+    __vue_module_identifier__$b,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var DateTimePicker = /** @class */ (function (_super) {
-    __extends(DateTimePicker, _super);
-    function DateTimePicker() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.date = null;
-        _this.time = "12:00";
-        _this.datemenu = false;
-        _this.timemenu = false;
-        return _this;
+let DateTimePicker = class DateTimePicker extends Vue {
+    constructor() {
+        super(...arguments);
+        this.date = null;
+        this.time = "12:00";
+        this.datemenu = false;
+        this.timemenu = false;
     }
-    DateTimePicker.prototype.onValueUpdated = function (updated) {
+    onValueUpdated(updated) {
         if (updated) {
-            var datetime = this.parseIso8601(updated);
+            let datetime = this.parseIso8601(updated);
             if (datetime) {
                 this.time =
                     datetime
@@ -795,66 +1497,66 @@ var DateTimePicker = /** @class */ (function (_super) {
             this.date = null;
             this.time = "12:00";
         }
-    };
-    DateTimePicker.prototype.onDateUpdated = function (updated) {
+    }
+    onDateUpdated(updated) {
         if (updated) {
-            var value = moment(updated).toDate();
-            var parts = this.time.split(":");
-            var hour = parseInt(parts[0]);
-            var minute = parseInt(parts[1]);
+            let value = moment(updated).toDate();
+            let parts = this.time.split(":");
+            let hour = parseInt(parts[0]);
+            let minute = parseInt(parts[1]);
             value.setHours(hour, minute);
             this.$emit("input", value);
         }
-    };
-    DateTimePicker.prototype.onTimeUpdated = function (updated) {
+    }
+    onTimeUpdated(updated) {
         if (this.date) {
             this.onDateUpdated(this.date);
         }
-    };
+    }
     /** Parse date in ISO8601 format */
-    DateTimePicker.prototype.parseIso8601 = function (value) {
+    parseIso8601(value) {
         if (!value) {
             return null;
         }
         return moment(value).toDate();
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Date)
-    ], DateTimePicker.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DateTimePicker.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Watch("value"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], DateTimePicker.prototype, "onValueUpdated", null);
-    __decorate([
-        sitewhereIdeCommon.Watch("date"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], DateTimePicker.prototype, "onDateUpdated", null);
-    __decorate([
-        sitewhereIdeCommon.Watch("time"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], DateTimePicker.prototype, "onTimeUpdated", null);
-    DateTimePicker = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], DateTimePicker);
-    return DateTimePicker;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Date)
+], DateTimePicker.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DateTimePicker.prototype, "label", void 0);
+__decorate([
+    Watch("value"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], DateTimePicker.prototype, "onValueUpdated", null);
+__decorate([
+    Watch("date"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], DateTimePicker.prototype, "onDateUpdated", null);
+__decorate([
+    Watch("time"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], DateTimePicker.prototype, "onTimeUpdated", null);
+DateTimePicker = __decorate([
+    Component({})
+], DateTimePicker);
+var script$a = DateTimePicker;
 
 /* script */
-const __vue_script__$4 = DateTimePicker;
+const __vue_script__$c = script$a;
 
 /* template */
-var __vue_render__$4 = function() {
+var __vue_render__$c = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1035,17 +1737,17 @@ var __vue_render__$4 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
+var __vue_staticRenderFns__$c = [];
+__vue_render__$c._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$4 = undefined;
+  const __vue_inject_styles__$c = undefined;
   /* scoped */
-  const __vue_scope_id__$4 = undefined;
+  const __vue_scope_id__$c = undefined;
   /* module identifier */
-  const __vue_module_identifier__$4 = undefined;
+  const __vue_module_identifier__$c = undefined;
   /* functional template */
-  const __vue_is_functional_template__$4 = false;
+  const __vue_is_functional_template__$c = false;
   /* style inject */
   
   /* style inject SSR */
@@ -1054,13 +1756,13 @@ __vue_render__$4._withStripped = true;
   
 
   
-  const __vue_component__$4 = normalizeComponent(
-    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-    __vue_inject_styles__$4,
-    __vue_script__$4,
-    __vue_scope_id__$4,
-    __vue_is_functional_template__$4,
-    __vue_module_identifier__$4,
+  const __vue_component__$c = normalizeComponent(
+    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+    __vue_inject_styles__$c,
+    __vue_script__$c,
+    __vue_scope_id__$c,
+    __vue_is_functional_template__$c,
+    __vue_module_identifier__$c,
     false,
     undefined,
     undefined,
@@ -1075,7 +1777,7 @@ __vue_render__$4._withStripped = true;
 //
 //
 
-var script$1 = {
+var script$b = {
   data: () => ({
     errorDisplayed: false
   }),
@@ -1113,10 +1815,10 @@ var script$1 = {
 };
 
 /* script */
-const __vue_script__$5 = script$1;
+const __vue_script__$d = script$b;
 
 /* template */
-var __vue_render__$5 = function() {
+var __vue_render__$d = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1153,34 +1855,34 @@ var __vue_render__$5 = function() {
       )
     : _vm._e()
 };
-var __vue_staticRenderFns__$5 = [];
-__vue_render__$5._withStripped = true;
+var __vue_staticRenderFns__$d = [];
+__vue_render__$d._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$5 = function (inject) {
+  const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
     inject("data-v-6e3d2d05_0", { source: "\n.error-banner[data-v-6e3d2d05] {\r\n  z-index: 2000;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\ErrorBanner.vue"],"names":[],"mappings":";AA+CA;EACA,aAAA;AACA","file":"ErrorBanner.vue","sourcesContent":["<template>\r\n  <v-snackbar class=\"error-banner\" v-if=\"error\" :timeout=\"5000\" error v-model=\"errorDisplayed\">\r\n    {{ errorMessage }}\r\n    <v-btn dark flat @click.native=\"errorDisplayed = false\">Close</v-btn>\r\n  </v-snackbar>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data: () => ({\r\n    errorDisplayed: false\r\n  }),\r\n\r\n  props: [\"error\"],\r\n\r\n  watch: {\r\n    error: function(value) {\r\n      if (value) {\r\n        if (this.error.response && this.error.response.status == 503) {\r\n          this.$data.errorDisplayed = false;\r\n        } else if (this.error.response || this.error.message) {\r\n          this.$data.errorDisplayed = true;\r\n        }\r\n      }\r\n    }\r\n  },\r\n\r\n  computed: {\r\n    errorMessage: function() {\r\n      if (!this.error) {\r\n        return \"\";\r\n      } else if (this.error.response && this.error.response.headers) {\r\n        if (this.error.response.headers[\"x-sitewhere-error\"]) {\r\n          return this.error.response.headers[\"x-sitewhere-error\"];\r\n        } else if (this.error.response.status === 403) {\r\n          return \"Server Authentication Failed\";\r\n        }\r\n      }\r\n      return this.error.message;\r\n    }\r\n  },\r\n\r\n  methods: {}\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.error-banner {\r\n  z-index: 2000;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$5 = "data-v-6e3d2d05";
+  const __vue_scope_id__$d = "data-v-6e3d2d05";
   /* module identifier */
-  const __vue_module_identifier__$5 = undefined;
+  const __vue_module_identifier__$d = undefined;
   /* functional template */
-  const __vue_is_functional_template__$5 = false;
+  const __vue_is_functional_template__$d = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$5 = normalizeComponent(
-    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
-    __vue_inject_styles__$5,
-    __vue_script__$5,
-    __vue_scope_id__$5,
-    __vue_is_functional_template__$5,
-    __vue_module_identifier__$5,
+  const __vue_component__$d = normalizeComponent(
+    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+    __vue_inject_styles__$d,
+    __vue_script__$d,
+    __vue_scope_id__$d,
+    __vue_is_functional_template__$d,
+    __vue_module_identifier__$d,
     false,
     createInjector,
     undefined,
@@ -1207,7 +1909,7 @@ __vue_render__$5._withStripped = true;
 //
 //
 
-var script$2 = {
+var script$c = {
   data: () => ({}),
 
   props: ["label", "icon"],
@@ -1221,10 +1923,10 @@ var script$2 = {
 };
 
 /* script */
-const __vue_script__$6 = script$2;
+const __vue_script__$e = script$c;
 
 /* template */
-var __vue_render__$6 = function() {
+var __vue_render__$e = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1262,34 +1964,34 @@ var __vue_render__$6 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$e = [];
+__vue_render__$e._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$6 = function (inject) {
+  const __vue_inject_styles__$e = function (inject) {
     if (!inject) return
     inject("data-v-73a38ecb_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FloatingActionButton.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$6 = "data-v-73a38ecb";
+  const __vue_scope_id__$e = "data-v-73a38ecb";
   /* module identifier */
-  const __vue_module_identifier__$6 = undefined;
+  const __vue_module_identifier__$e = undefined;
   /* functional template */
-  const __vue_is_functional_template__$6 = false;
+  const __vue_is_functional_template__$e = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$6 = normalizeComponent(
-    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
-    __vue_inject_styles__$6,
-    __vue_script__$6,
-    __vue_scope_id__$6,
-    __vue_is_functional_template__$6,
-    __vue_module_identifier__$6,
+  const __vue_component__$e = normalizeComponent(
+    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+    __vue_inject_styles__$e,
+    __vue_script__$e,
+    __vue_scope_id__$e,
+    __vue_is_functional_template__$e,
+    __vue_module_identifier__$e,
     false,
     createInjector,
     undefined,
@@ -1308,7 +2010,7 @@ __vue_render__$6._withStripped = true;
 //
 //
 
-var script$3 = {
+var script$d = {
   data: () => ({}),
 
   props: ["label"],
@@ -1317,10 +2019,10 @@ var script$3 = {
 };
 
 /* script */
-const __vue_script__$7 = script$3;
+const __vue_script__$f = script$d;
 
 /* template */
-var __vue_render__$7 = function() {
+var __vue_render__$f = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1344,34 +2046,34 @@ var __vue_render__$7 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$f = [];
+__vue_render__$f._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$7 = function (inject) {
+  const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
     inject("data-v-e7901184_0", { source: "\n.field[data-v-e7901184] {\r\n  text-overflow: ellipsis;\r\n  white-space: nowrap;\r\n  overflow: hidden;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\HeaderField.vue"],"names":[],"mappings":";AAsBA;EACA,uBAAA;EACA,mBAAA;EACA,gBAAA;AACA","file":"HeaderField.vue","sourcesContent":["<template>\r\n  <v-layout row wrap class=\"mb-1\">\r\n    <v-flex xs4 class=\"text-xs-right subheading pr-4\">\r\n      <strong>{{ label }}</strong>:\r\n    </v-flex>\r\n    <v-flex class=\"field\" xs8>\r\n      <slot></slot>\r\n    </v-flex>\r\n  </v-layout>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data: () => ({}),\r\n\r\n  props: [\"label\"],\r\n\r\n  methods: {}\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.field {\r\n  text-overflow: ellipsis;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$7 = "data-v-e7901184";
+  const __vue_scope_id__$f = "data-v-e7901184";
   /* module identifier */
-  const __vue_module_identifier__$7 = undefined;
+  const __vue_module_identifier__$f = undefined;
   /* functional template */
-  const __vue_is_functional_template__$7 = false;
+  const __vue_is_functional_template__$f = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$7 = normalizeComponent(
-    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-    __vue_inject_styles__$7,
-    __vue_script__$7,
-    __vue_scope_id__$7,
-    __vue_is_functional_template__$7,
-    __vue_module_identifier__$7,
+  const __vue_component__$f = normalizeComponent(
+    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+    __vue_inject_styles__$f,
+    __vue_script__$f,
+    __vue_scope_id__$f,
+    __vue_is_functional_template__$f,
+    __vue_module_identifier__$f,
     false,
     createInjector,
     undefined,
@@ -1411,7 +2113,7 @@ __vue_render__$7._withStripped = true;
 //
 //
 
-var script$4 = {
+var script$e = {
   computed: {
     // Compute style of logo.
     ddStyle: function() {
@@ -2586,10 +3288,10 @@ var script$4 = {
 };
 
 /* script */
-const __vue_script__$8 = script$4;
+const __vue_script__$g = script$e;
 
 /* template */
-var __vue_render__$8 = function() {
+var __vue_render__$g = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -2694,76 +3396,68 @@ var __vue_render__$8 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
+var __vue_staticRenderFns__$g = [];
+__vue_render__$g._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$8 = function (inject) {
+  const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
     inject("data-v-98884e52_0", { source: "\n.faicon[data-v-98884e52] {\r\n  min-height: 30px;\r\n  text-align: center;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\IconSelector.vue"],"names":[],"mappings":";AAyrCA;EACA,gBAAA;EACA,kBAAA;AACA","file":"IconSelector.vue","sourcesContent":["<template>\r\n  <v-menu offset-y lazy>\r\n    <span slot=\"activator\">\r\n      <v-container fluid class=\"pa-0\">\r\n        <v-layout row wrap>\r\n          <v-flex xs12>\r\n            <v-text-field label=\"Icon\" placeholder=\" \" v-model=\"icon\" prepend-icon=\"image\"/>\r\n          </v-flex>\r\n        </v-layout>\r\n      </v-container>\r\n    </span>\r\n    <v-card>\r\n      <v-container :style=\"ddStyle\" fluid grid-list-sm>\r\n        <v-layout row wrap>\r\n          <v-flex class=\"faicon\" xs1 v-for=\"(icon) in iconsSolid\" :key=\"icon\">\r\n            <v-tooltip left>\r\n              <font-awesome-icon\r\n                class=\"faicon text--grey\"\r\n                :icon=\"icon\"\r\n                size=\"lg\"\r\n                @click=\"onIconSelected(icon)\"\r\n                slot=\"activator\"\r\n              />\r\n              <span>{{ icon }}</span>\r\n            </v-tooltip>\r\n          </v-flex>\r\n        </v-layout>\r\n      </v-container>\r\n    </v-card>\r\n  </v-menu>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  computed: {\r\n    // Compute style of logo.\r\n    ddStyle: function() {\r\n      return {\r\n        width: \"500px\",\r\n        \"max-height\": \"400px\",\r\n        \"overflow-y\": \"scroll\"\r\n      };\r\n    },\r\n    icon: function() {\r\n      return this.value;\r\n    }\r\n  },\r\n\r\n  props: [\"value\"],\r\n\r\n  methods: {\r\n    // Called when icon is selected.\r\n    onIconSelected: function(e) {\r\n      this.$data.selectedIcon = e;\r\n      this.$emit(\"input\", e);\r\n    }\r\n  },\r\n\r\n  data: () => ({\r\n    active: null,\r\n    selectedIcon: null,\r\n    iconsSolid: [\r\n      \"address-book\",\r\n      \"address-card\",\r\n      \"adjust\",\r\n      \"air-freshener\",\r\n      \"align-center\",\r\n      \"align-justify\",\r\n      \"align-left\",\r\n      \"align-right\",\r\n      \"allergies\",\r\n      \"ambulance\",\r\n      \"american-sign-language-interpreting\",\r\n      \"anchor\",\r\n      \"angle-double-down\",\r\n      \"angle-double-left\",\r\n      \"angle-double-right\",\r\n      \"angle-double-up\",\r\n      \"angle-down\",\r\n      \"angle-left\",\r\n      \"angle-right\",\r\n      \"angle-up\",\r\n      \"angry\",\r\n      \"apple-alt\",\r\n      \"archive\",\r\n      \"archway\",\r\n      \"arrow-alt-circle-down\",\r\n      \"arrow-alt-circle-left\",\r\n      \"arrow-alt-circle-right\",\r\n      \"arrow-alt-circle-up\",\r\n      \"arrow-circle-down\",\r\n      \"arrow-circle-left\",\r\n      \"arrow-circle-right\",\r\n      \"arrow-circle-up\",\r\n      \"arrow-down\",\r\n      \"arrow-left\",\r\n      \"arrow-right\",\r\n      \"arrow-up\",\r\n      \"arrows-alt\",\r\n      \"arrows-alt-h\",\r\n      \"arrows-alt-v\",\r\n      \"assistive-listening-systems\",\r\n      \"asterisk\",\r\n      \"at\",\r\n      \"atlas\",\r\n      \"atom\",\r\n      \"audio-description\",\r\n      \"award\",\r\n      \"backspace\",\r\n      \"backward\",\r\n      \"balance-scale\",\r\n      \"ban\",\r\n      \"band-aid\",\r\n      \"barcode\",\r\n      \"bars\",\r\n      \"baseball-ball\",\r\n      \"basketball-ball\",\r\n      \"bath\",\r\n      \"battery-empty\",\r\n      \"battery-full\",\r\n      \"battery-half\",\r\n      \"battery-quarter\",\r\n      \"battery-three-quarters\",\r\n      \"bed\",\r\n      \"beer\",\r\n      \"bell\",\r\n      \"bell-slash\",\r\n      \"bezier-curve\",\r\n      \"bicycle\",\r\n      \"binoculars\",\r\n      \"birthday-cake\",\r\n      \"blender\",\r\n      \"blind\",\r\n      \"bold\",\r\n      \"bolt\",\r\n      \"bomb\",\r\n      \"bone\",\r\n      \"bong\",\r\n      \"book\",\r\n      \"book-open\",\r\n      \"book-reader\",\r\n      \"bookmark\",\r\n      \"bowling-ball\",\r\n      \"box\",\r\n      \"box-open\",\r\n      \"boxes\",\r\n      \"braille\",\r\n      \"brain\",\r\n      \"briefcase\",\r\n      \"briefcase-medical\",\r\n      \"broadcast-tower\",\r\n      \"broom\",\r\n      \"brush\",\r\n      \"bug\",\r\n      \"building\",\r\n      \"bullhorn\",\r\n      \"bullseye\",\r\n      \"burn\",\r\n      \"bus\",\r\n      \"bus-alt\",\r\n      \"calculator\",\r\n      \"calendar\",\r\n      \"calendar-alt\",\r\n      \"calendar-check\",\r\n      \"calendar-minus\",\r\n      \"calendar-plus\",\r\n      \"calendar-times\",\r\n      \"camera\",\r\n      \"camera-retro\",\r\n      \"cannabis\",\r\n      \"capsules\",\r\n      \"car\",\r\n      \"car-alt\",\r\n      \"car-battery\",\r\n      \"car-crash\",\r\n      \"car-side\",\r\n      \"caret-down\",\r\n      \"caret-left\",\r\n      \"caret-right\",\r\n      \"caret-square-down\",\r\n      \"caret-square-left\",\r\n      \"caret-square-right\",\r\n      \"caret-square-up\",\r\n      \"caret-up\",\r\n      \"cart-arrow-down\",\r\n      \"cart-plus\",\r\n      \"certificate\",\r\n      \"chalkboard\",\r\n      \"chalkboard-teacher\",\r\n      \"charging-station\",\r\n      \"chart-area\",\r\n      \"chart-bar\",\r\n      \"chart-line\",\r\n      \"chart-pie\",\r\n      \"check\",\r\n      \"check-circle\",\r\n      \"check-double\",\r\n      \"check-square\",\r\n      \"chess\",\r\n      \"chess-bishop\",\r\n      \"chess-board\",\r\n      \"chess-king\",\r\n      \"chess-knight\",\r\n      \"chess-pawn\",\r\n      \"chess-queen\",\r\n      \"chess-rook\",\r\n      \"chevron-circle-down\",\r\n      \"chevron-circle-left\",\r\n      \"chevron-circle-right\",\r\n      \"chevron-circle-up\",\r\n      \"chevron-down\",\r\n      \"chevron-left\",\r\n      \"chevron-right\",\r\n      \"chevron-up\",\r\n      \"child\",\r\n      \"church\",\r\n      \"circle\",\r\n      \"circle-notch\",\r\n      \"clipboard\",\r\n      \"clipboard-check\",\r\n      \"clipboard-list\",\r\n      \"clock\",\r\n      \"clone\",\r\n      \"closed-captioning\",\r\n      \"cloud\",\r\n      \"cloud-download-alt\",\r\n      \"cloud-upload-alt\",\r\n      \"cocktail\",\r\n      \"code\",\r\n      \"code-branch\",\r\n      \"coffee\",\r\n      \"cog\",\r\n      \"cogs\",\r\n      \"coins\",\r\n      \"columns\",\r\n      \"comment\",\r\n      \"comment-alt\",\r\n      \"comment-dots\",\r\n      \"comment-slash\",\r\n      \"comments\",\r\n      \"compact-disc\",\r\n      \"compass\",\r\n      \"compress\",\r\n      \"concierge-bell\",\r\n      \"cookie\",\r\n      \"cookie-bite\",\r\n      \"copy\",\r\n      \"copyright\",\r\n      \"couch\",\r\n      \"credit-card\",\r\n      \"crop\",\r\n      \"crop-alt\",\r\n      \"crosshairs\",\r\n      \"crow\",\r\n      \"crown\",\r\n      \"cube\",\r\n      \"cubes\",\r\n      \"cut\",\r\n      \"database\",\r\n      \"deaf\",\r\n      \"desktop\",\r\n      \"diagnoses\",\r\n      \"dice\",\r\n      \"dice-five\",\r\n      \"dice-four\",\r\n      \"dice-one\",\r\n      \"dice-six\",\r\n      \"dice-three\",\r\n      \"dice-two\",\r\n      \"digital-tachograph\",\r\n      \"directions\",\r\n      \"divide\",\r\n      \"dizzy\",\r\n      \"dna\",\r\n      \"dollar-sign\",\r\n      \"dolly\",\r\n      \"dolly-flatbed\",\r\n      \"donate\",\r\n      \"door-closed\",\r\n      \"door-open\",\r\n      \"dot-circle\",\r\n      \"dove\",\r\n      \"download\",\r\n      \"drafting-compass\",\r\n      \"draw-polygon\",\r\n      \"drum\",\r\n      \"drum-steelpan\",\r\n      \"dumbbell\",\r\n      \"edit\",\r\n      \"eject\",\r\n      \"ellipsis-h\",\r\n      \"ellipsis-v\",\r\n      \"envelope\",\r\n      \"envelope-open\",\r\n      \"envelope-square\",\r\n      \"equals\",\r\n      \"eraser\",\r\n      \"euro-sign\",\r\n      \"exchange-alt\",\r\n      \"exclamation\",\r\n      \"exclamation-circle\",\r\n      \"exclamation-triangle\",\r\n      \"expand\",\r\n      \"expand-arrows-alt\",\r\n      \"external-link-alt\",\r\n      \"external-link-square-alt\",\r\n      \"eye\",\r\n      \"eye-dropper\",\r\n      \"eye-slash\",\r\n      \"fast-backward\",\r\n      \"fast-forward\",\r\n      \"fax\",\r\n      \"feather\",\r\n      \"feather-alt\",\r\n      \"female\",\r\n      \"fighter-jet\",\r\n      \"file\",\r\n      \"file-alt\",\r\n      \"file-archive\",\r\n      \"file-audio\",\r\n      \"file-code\",\r\n      \"file-contract\",\r\n      \"file-download\",\r\n      \"file-excel\",\r\n      \"file-export\",\r\n      \"file-image\",\r\n      \"file-import\",\r\n      \"file-invoice\",\r\n      \"file-invoice-dollar\",\r\n      \"file-medical\",\r\n      \"file-medical-alt\",\r\n      \"file-pdf\",\r\n      \"file-powerpoint\",\r\n      \"file-prescription\",\r\n      \"file-signature\",\r\n      \"file-upload\",\r\n      \"file-video\",\r\n      \"file-word\",\r\n      \"fill\",\r\n      \"fill-drip\",\r\n      \"film\",\r\n      \"filter\",\r\n      \"fingerprint\",\r\n      \"fire\",\r\n      \"fire-extinguisher\",\r\n      \"first-aid\",\r\n      \"fish\",\r\n      \"flag\",\r\n      \"flag-checkered\",\r\n      \"flask\",\r\n      \"flushed\",\r\n      \"folder\",\r\n      \"folder-open\",\r\n      \"font\",\r\n      \"football-ball\",\r\n      \"forward\",\r\n      \"frog\",\r\n      \"frown\",\r\n      \"frown-open\",\r\n      \"futbol\",\r\n      \"gamepad\",\r\n      \"gas-pump\",\r\n      \"gavel\",\r\n      \"gem\",\r\n      \"genderless\",\r\n      \"gift\",\r\n      \"glass-martini\",\r\n      \"glass-martini-alt\",\r\n      \"glasses\",\r\n      \"globe\",\r\n      \"globe-africa\",\r\n      \"globe-americas\",\r\n      \"globe-asia\",\r\n      \"golf-ball\",\r\n      \"graduation-cap\",\r\n      \"greater-than\",\r\n      \"greater-than-equal\",\r\n      \"grimace\",\r\n      \"grin\",\r\n      \"grin-alt\",\r\n      \"grin-beam\",\r\n      \"grin-beam-sweat\",\r\n      \"grin-hearts\",\r\n      \"grin-squint\",\r\n      \"grin-squint-tears\",\r\n      \"grin-stars\",\r\n      \"grin-tears\",\r\n      \"grin-tongue\",\r\n      \"grin-tongue-squint\",\r\n      \"grin-tongue-wink\",\r\n      \"grin-wink\",\r\n      \"grip-horizontal\",\r\n      \"grip-vertical\",\r\n      \"h-square\",\r\n      \"hand-holding\",\r\n      \"hand-holding-heart\",\r\n      \"hand-holding-usd\",\r\n      \"hand-lizard\",\r\n      \"hand-paper\",\r\n      \"hand-peace\",\r\n      \"hand-point-down\",\r\n      \"hand-point-left\",\r\n      \"hand-point-right\",\r\n      \"hand-point-up\",\r\n      \"hand-pointer\",\r\n      \"hand-rock\",\r\n      \"hand-scissors\",\r\n      \"hand-spock\",\r\n      \"hands\",\r\n      \"hands-helping\",\r\n      \"handshake\",\r\n      \"hashtag\",\r\n      \"hdd\",\r\n      \"heading\",\r\n      \"headphones\",\r\n      \"headphones-alt\",\r\n      \"helicopter\",\r\n      \"highlighter\",\r\n      \"history\",\r\n      \"hockey-puck\",\r\n      \"home\",\r\n      \"hospital\",\r\n      \"hospital-alt\",\r\n      \"hospital-symbol\",\r\n      \"hot-tub\",\r\n      \"hotel\",\r\n      \"hourglass\",\r\n      \"hourglass-end\",\r\n      \"hourglass-half\",\r\n      \"hourglass-start\",\r\n      \"i-cursor\",\r\n      \"id-badge\",\r\n      \"id-card\",\r\n      \"id-card-alt\",\r\n      \"image\",\r\n      \"images\",\r\n      \"inbox\",\r\n      \"indent\",\r\n      \"industry\",\r\n      \"infinity\",\r\n      \"info\",\r\n      \"info-circle\",\r\n      \"italic\",\r\n      \"joint\",\r\n      \"key\",\r\n      \"keyboard\",\r\n      \"kiss\",\r\n      \"kiss-beam\",\r\n      \"kiss-wink-heart\",\r\n      \"kiwi-bird\",\r\n      \"language\",\r\n      \"laptop\",\r\n      \"laptop-code\",\r\n      \"laugh\",\r\n      \"laugh-beam\",\r\n      \"laugh-squint\",\r\n      \"laugh-wink\",\r\n      \"layer-group\",\r\n      \"leaf\",\r\n      \"lemon\",\r\n      \"less-than\",\r\n      \"less-than-equal\",\r\n      \"level-down-alt\",\r\n      \"level-up-alt\",\r\n      \"life-ring\",\r\n      \"lightbulb\",\r\n      \"link\",\r\n      \"lira-sign\",\r\n      \"list\",\r\n      \"list-alt\",\r\n      \"list-ol\",\r\n      \"list-ul\",\r\n      \"location-arrow\",\r\n      \"lock\",\r\n      \"lock-open\",\r\n      \"long-arrow-alt-down\",\r\n      \"long-arrow-alt-left\",\r\n      \"long-arrow-alt-right\",\r\n      \"long-arrow-alt-up\",\r\n      \"low-vision\",\r\n      \"luggage-cart\",\r\n      \"magic\",\r\n      \"magnet\",\r\n      \"male\",\r\n      \"map\",\r\n      \"map-marked\",\r\n      \"map-marked-alt\",\r\n      \"map-marker\",\r\n      \"map-marker-alt\",\r\n      \"map-pin\",\r\n      \"map-signs\",\r\n      \"marker\",\r\n      \"mars\",\r\n      \"mars-double\",\r\n      \"mars-stroke\",\r\n      \"mars-stroke-h\",\r\n      \"mars-stroke-v\",\r\n      \"medal\",\r\n      \"medkit\",\r\n      \"meh\",\r\n      \"meh-blank\",\r\n      \"meh-rolling-eyes\",\r\n      \"memory\",\r\n      \"mercury\",\r\n      \"microchip\",\r\n      \"microphone\",\r\n      \"microphone-alt\",\r\n      \"microphone-alt-slash\",\r\n      \"microphone-slash\",\r\n      \"microscope\",\r\n      \"minus\",\r\n      \"minus-circle\",\r\n      \"minus-square\",\r\n      \"mobile\",\r\n      \"mobile-alt\",\r\n      \"money-bill\",\r\n      \"money-bill-alt\",\r\n      \"money-bill-wave\",\r\n      \"money-bill-wave-alt\",\r\n      \"money-check\",\r\n      \"money-check-alt\",\r\n      \"monument\",\r\n      \"moon\",\r\n      \"mortar-pestle\",\r\n      \"motorcycle\",\r\n      \"mouse-pointer\",\r\n      \"music\",\r\n      \"neuter\",\r\n      \"newspaper\",\r\n      \"not-equal\",\r\n      \"notes-medical\",\r\n      \"object-group\",\r\n      \"object-ungroup\",\r\n      \"oil-can\",\r\n      \"outdent\",\r\n      \"paint-brush\",\r\n      \"paint-roller\",\r\n      \"palette\",\r\n      \"pallet\",\r\n      \"paper-plane\",\r\n      \"paperclip\",\r\n      \"parachute-box\",\r\n      \"paragraph\",\r\n      \"parking\",\r\n      \"passport\",\r\n      \"paste\",\r\n      \"pause\",\r\n      \"pause-circle\",\r\n      \"paw\",\r\n      \"pen\",\r\n      \"pen-alt\",\r\n      \"pen-fancy\",\r\n      \"pen-nib\",\r\n      \"pen-square\",\r\n      \"pencil-alt\",\r\n      \"pencil-ruler\",\r\n      \"people-carry\",\r\n      \"percent\",\r\n      \"percentage\",\r\n      \"phone\",\r\n      \"phone-slash\",\r\n      \"phone-square\",\r\n      \"phone-volume\",\r\n      \"piggy-bank\",\r\n      \"pills\",\r\n      \"plane\",\r\n      \"plane-arrival\",\r\n      \"plane-departure\",\r\n      \"play\",\r\n      \"play-circle\",\r\n      \"plug\",\r\n      \"plus\",\r\n      \"plus-circle\",\r\n      \"plus-square\",\r\n      \"podcast\",\r\n      \"poo\",\r\n      \"portrait\",\r\n      \"pound-sign\",\r\n      \"power-off\",\r\n      \"prescription\",\r\n      \"prescription-bottle\",\r\n      \"prescription-bottle-alt\",\r\n      \"print\",\r\n      \"procedures\",\r\n      \"project-diagram\",\r\n      \"puzzle-piece\",\r\n      \"qrcode\",\r\n      \"question\",\r\n      \"question-circle\",\r\n      \"quidditch\",\r\n      \"quote-left\",\r\n      \"quote-right\",\r\n      \"random\",\r\n      \"receipt\",\r\n      \"recycle\",\r\n      \"redo\",\r\n      \"redo-alt\",\r\n      \"registered\",\r\n      \"reply\",\r\n      \"reply-all\",\r\n      \"retweet\",\r\n      \"ribbon\",\r\n      \"road\",\r\n      \"robot\",\r\n      \"rocket\",\r\n      \"route\",\r\n      \"rss\",\r\n      \"rss-square\",\r\n      \"ruble-sign\",\r\n      \"ruler\",\r\n      \"ruler-combined\",\r\n      \"ruler-horizontal\",\r\n      \"ruler-vertical\",\r\n      \"rupee-sign\",\r\n      \"sad-cry\",\r\n      \"sad-tear\",\r\n      \"save\",\r\n      \"school\",\r\n      \"screwdriver\",\r\n      \"search\",\r\n      \"search-minus\",\r\n      \"search-plus\",\r\n      \"seedling\",\r\n      \"server\",\r\n      \"shapes\",\r\n      \"share\",\r\n      \"share-alt\",\r\n      \"share-alt-square\",\r\n      \"share-square\",\r\n      \"shekel-sign\",\r\n      \"shield-alt\",\r\n      \"ship\",\r\n      \"shipping-fast\",\r\n      \"shoe-prints\",\r\n      \"shopping-bag\",\r\n      \"shopping-basket\",\r\n      \"shopping-cart\",\r\n      \"shower\",\r\n      \"shuttle-van\",\r\n      \"sign\",\r\n      \"sign-in-alt\",\r\n      \"sign-language\",\r\n      \"sign-out-alt\",\r\n      \"signal\",\r\n      \"signature\",\r\n      \"sitemap\",\r\n      \"skull\",\r\n      \"sliders-h\",\r\n      \"smile\",\r\n      \"smile-beam\",\r\n      \"smile-wink\",\r\n      \"smoking\",\r\n      \"smoking-ban\",\r\n      \"snowflake\",\r\n      \"solar-panel\",\r\n      \"sort\",\r\n      \"sort-alpha-down\",\r\n      \"sort-alpha-up\",\r\n      \"sort-amount-down\",\r\n      \"sort-amount-up\",\r\n      \"sort-down\",\r\n      \"sort-numeric-down\",\r\n      \"sort-numeric-up\",\r\n      \"sort-up\",\r\n      \"spa\",\r\n      \"space-shuttle\",\r\n      \"spinner\",\r\n      \"splotch\",\r\n      \"spray-can\",\r\n      \"square\",\r\n      \"square-full\",\r\n      \"stamp\",\r\n      \"star\",\r\n      \"star-half\",\r\n      \"star-half-alt\",\r\n      \"star-of-life\",\r\n      \"step-backward\",\r\n      \"step-forward\",\r\n      \"stethoscope\",\r\n      \"sticky-note\",\r\n      \"stop\",\r\n      \"stop-circle\",\r\n      \"stopwatch\",\r\n      \"store\",\r\n      \"store-alt\",\r\n      \"stream\",\r\n      \"street-view\",\r\n      \"strikethrough\",\r\n      \"stroopwafel\",\r\n      \"subscript\",\r\n      \"subway\",\r\n      \"suitcase\",\r\n      \"suitcase-rolling\",\r\n      \"sun\",\r\n      \"superscript\",\r\n      \"surprise\",\r\n      \"swatchbook\",\r\n      \"swimmer\",\r\n      \"swimming-pool\",\r\n      \"sync\",\r\n      \"sync-alt\",\r\n      \"syringe\",\r\n      \"table\",\r\n      \"table-tennis\",\r\n      \"tablet\",\r\n      \"tablet-alt\",\r\n      \"tablets\",\r\n      \"tachometer-alt\",\r\n      \"tag\",\r\n      \"tags\",\r\n      \"tape\",\r\n      \"tasks\",\r\n      \"taxi\",\r\n      \"teeth\",\r\n      \"teeth-open\",\r\n      \"terminal\",\r\n      \"text-height\",\r\n      \"text-width\",\r\n      \"th\",\r\n      \"th-large\",\r\n      \"th-list\",\r\n      \"theater-masks\",\r\n      \"thermometer\",\r\n      \"thermometer-empty\",\r\n      \"thermometer-full\",\r\n      \"thermometer-half\",\r\n      \"thermometer-quarter\",\r\n      \"thermometer-three-quarters\",\r\n      \"thumbs-down\",\r\n      \"thumbs-up\",\r\n      \"thumbtack\",\r\n      \"ticket-alt\",\r\n      \"times\",\r\n      \"times-circle\",\r\n      \"tint\",\r\n      \"tint-slash\",\r\n      \"tired\",\r\n      \"toggle-off\",\r\n      \"toggle-on\",\r\n      \"toolbox\",\r\n      \"tooth\",\r\n      \"trademark\",\r\n      \"traffic-light\",\r\n      \"train\",\r\n      \"transgender\",\r\n      \"transgender-alt\",\r\n      \"trash\",\r\n      \"trash-alt\",\r\n      \"tree\",\r\n      \"trophy\",\r\n      \"truck\",\r\n      \"truck-loading\",\r\n      \"truck-monster\",\r\n      \"truck-moving\",\r\n      \"truck-pickup\",\r\n      \"tshirt\",\r\n      \"tty\",\r\n      \"tv\",\r\n      \"umbrella\",\r\n      \"umbrella-beach\",\r\n      \"underline\",\r\n      \"undo\",\r\n      \"undo-alt\",\r\n      \"universal-access\",\r\n      \"university\",\r\n      \"unlink\",\r\n      \"unlock\",\r\n      \"unlock-alt\",\r\n      \"upload\",\r\n      \"user\",\r\n      \"user-alt\",\r\n      \"user-alt-slash\",\r\n      \"user-astronaut\",\r\n      \"user-check\",\r\n      \"user-circle\",\r\n      \"user-clock\",\r\n      \"user-cog\",\r\n      \"user-edit\",\r\n      \"user-friends\",\r\n      \"user-graduate\",\r\n      \"user-lock\",\r\n      \"user-md\",\r\n      \"user-minus\",\r\n      \"user-ninja\",\r\n      \"user-plus\",\r\n      \"user-secret\",\r\n      \"user-shield\",\r\n      \"user-slash\",\r\n      \"user-tag\",\r\n      \"user-tie\",\r\n      \"user-times\",\r\n      \"users\",\r\n      \"users-cog\",\r\n      \"utensil-spoon\",\r\n      \"utensils\",\r\n      \"vector-square\",\r\n      \"venus\",\r\n      \"venus-double\",\r\n      \"venus-mars\",\r\n      \"vial\",\r\n      \"vials\",\r\n      \"video\",\r\n      \"video-slash\",\r\n      \"volleyball-ball\",\r\n      \"volume-down\",\r\n      \"volume-off\",\r\n      \"volume-up\",\r\n      \"walking\",\r\n      \"wallet\",\r\n      \"warehouse\",\r\n      \"weight\",\r\n      \"weight-hanging\",\r\n      \"wheelchair\",\r\n      \"wifi\",\r\n      \"window-close\",\r\n      \"window-maximize\",\r\n      \"window-minimize\",\r\n      \"window-restore\",\r\n      \"wine-glass\",\r\n      \"wine-glass-alt\",\r\n      \"won-sign\",\r\n      \"wrench\",\r\n      \"x-ray\",\r\n      \"yen-sign\"\r\n    ],\r\n    iconsBrand: [\r\n      \"500px\",\r\n      \"accessible-icon\",\r\n      \"accusoft\",\r\n      \"adn\",\r\n      \"adversal\",\r\n      \"affiliatetheme\",\r\n      \"algolia\",\r\n      \"amazon\",\r\n      \"amazon-pay\",\r\n      \"amilia\",\r\n      \"android\",\r\n      \"angellist\",\r\n      \"angrycreative\",\r\n      \"angular\",\r\n      \"app-store\",\r\n      \"app-store-ios\",\r\n      \"apper\",\r\n      \"apple\",\r\n      \"apple-pay\",\r\n      \"asymmetrik\",\r\n      \"audible\",\r\n      \"autoprefixer\",\r\n      \"avianex\",\r\n      \"aviato\",\r\n      \"aws\",\r\n      \"bandcamp\",\r\n      \"behance\",\r\n      \"behance-square\",\r\n      \"bimobject\",\r\n      \"bitbucket\",\r\n      \"bitcoin\",\r\n      \"bity\",\r\n      \"black-tie\",\r\n      \"blackberry\",\r\n      \"blogger\",\r\n      \"blogger-b\",\r\n      \"bluetooth\",\r\n      \"bluetooth-b\",\r\n      \"btc\",\r\n      \"buromobelexperte\",\r\n      \"buysellads\",\r\n      \"cc-amazon-pay\",\r\n      \"cc-amex\",\r\n      \"cc-apple-pay\",\r\n      \"cc-diners-club\",\r\n      \"cc-discover\",\r\n      \"cc-jcb\",\r\n      \"cc-mastercard\",\r\n      \"cc-paypal\",\r\n      \"cc-stripe\",\r\n      \"cc-visa\",\r\n      \"centercode\",\r\n      \"chrome\",\r\n      \"cloudscale\",\r\n      \"cloudsmith\",\r\n      \"cloudversify\",\r\n      \"vcodepen\",\r\n      \"codiepie\",\r\n      \"connectdevelop\",\r\n      \"contao\",\r\n      \"cpanel\",\r\n      \"creative-commons\",\r\n      \"creative-commons-by\",\r\n      \"creative-commons-nc\",\r\n      \"creative-commons-nc-eu\",\r\n      \"creative-commons-nc-jp\",\r\n      \"creative-commons-nd\",\r\n      \"creative-commons-pd\",\r\n      \"creative-commons-pd-alt\",\r\n      \"creative-commons-remix\",\r\n      \"creative-commons-sa\",\r\n      \"creative-commons-sampling\",\r\n      \"creative-commons-sampling-plus\",\r\n      \"creative-commons-share\",\r\n      \"css3\",\r\n      \"css3-alt\",\r\n      \"cuttlefish\",\r\n      \"d-and-d\",\r\n      \"dashcube\",\r\n      \"delicious\",\r\n      \"deploydog\",\r\n      \"deskpro\",\r\n      \"deviantart\",\r\n      \"digg\",\r\n      \"digital-ocean\",\r\n      \"discord\",\r\n      \"discourse\",\r\n      \"dochub\",\r\n      \"docker\",\r\n      \"draft2digital\",\r\n      \"dribbble\",\r\n      \"dribbble-square\",\r\n      \"dropbox\",\r\n      \"drupal\",\r\n      \"dyalog\",\r\n      \"earlybirds\",\r\n      \"ebay\",\r\n      \"edge\",\r\n      \"elementor\",\r\n      \"ello\",\r\n      \"ember\",\r\n      \"empire\",\r\n      \"envira\",\r\n      \"erlang\",\r\n      \"ethereum\",\r\n      \"etsy\",\r\n      \"expeditedssl\",\r\n      \"facebook\",\r\n      \"facebook-f\",\r\n      \"facebook-messenger\",\r\n      \"facebook-square\",\r\n      \"firefox\",\r\n      \"first-order\",\r\n      \"first-order-alt\",\r\n      \"firstdraft\",\r\n      \"flickr\",\r\n      \"flipboard\",\r\n      \"fly\",\r\n      \"font-awesome\",\r\n      \"font-awesome-alt\",\r\n      \"font-awesome-flag\",\r\n      \"fonticons\",\r\n      \"fonticons-fi\",\r\n      \"fort-awesome\",\r\n      \"fort-awesome-alt\",\r\n      \"forumbee\",\r\n      \"foursquare\",\r\n      \"free-code-camp\",\r\n      \"freebsd\",\r\n      \"fulcrum\",\r\n      \"galactic-republic\",\r\n      \"galactic-senate\",\r\n      \"get-pocket\",\r\n      \"gg\",\r\n      \"gg-circle\",\r\n      \"git\",\r\n      \"git-square\",\r\n      \"github\",\r\n      \"github-alt\",\r\n      \"github-square\",\r\n      \"gitkraken\",\r\n      \"gitlab\",\r\n      \"gitter\",\r\n      \"glide\",\r\n      \"glide-g\",\r\n      \"gofore\",\r\n      \"goodreads\",\r\n      \"goodreads-g\",\r\n      \"google\",\r\n      \"google-drive\",\r\n      \"google-play\",\r\n      \"google-plus\",\r\n      \"google-plus-g\",\r\n      \"google-plus-square\",\r\n      \"google-wallet\",\r\n      \"gratipay\",\r\n      \"grav\",\r\n      \"gripfire\",\r\n      \"grunt\",\r\n      \"gulp\",\r\n      \"hacker-news\",\r\n      \"hacker-news-square\",\r\n      \"hackerrank\",\r\n      \"hips\",\r\n      \"hire-a-helper\",\r\n      \"hooli\",\r\n      \"hornbill\",\r\n      \"hotjar\",\r\n      \"houzz\",\r\n      \"html5\",\r\n      \"hubspot\",\r\n      \"imdb\",\r\n      \"instagram\",\r\n      \"internet-explorer\",\r\n      \"ioxhost\",\r\n      \"itunes\",\r\n      \"itunes-note\",\r\n      \"java\",\r\n      \"jedi-order\",\r\n      \"jenkins\",\r\n      \"joget\",\r\n      \"joomla\",\r\n      \"js\",\r\n      \"js-square\",\r\n      \"jsfiddle\",\r\n      \"kaggle\",\r\n      \"keybase\",\r\n      \"keycdn\",\r\n      \"kickstarter\",\r\n      \"kickstarter-k\",\r\n      \"korvue\",\r\n      \"laravel\",\r\n      \"lastfm\",\r\n      \"lastfm-square\",\r\n      \"leanpub\",\r\n      \"less\",\r\n      \"line\",\r\n      \"linkedin\",\r\n      \"linkedin-in\",\r\n      \"linode\",\r\n      \"linux\",\r\n      \"lyft\",\r\n      \"magento\",\r\n      \"mailchimp\",\r\n      \"mandalorian\",\r\n      \"markdown\",\r\n      \"mastodon\",\r\n      \"maxcdn\",\r\n      \"medapps\",\r\n      \"medium\",\r\n      \"medium-m\",\r\n      \"medrt\",\r\n      \"meetup\",\r\n      \"megaport\",\r\n      \"microsoft\",\r\n      \"mix\",\r\n      \"mixcloud\",\r\n      \"mizuni\",\r\n      \"modx\",\r\n      \"monero\",\r\n      \"napster\",\r\n      \"neos\",\r\n      \"nimblr\",\r\n      \"nintendo-switch\",\r\n      \"node\",\r\n      \"node-js\",\r\n      \"npm\",\r\n      \"ns8\",\r\n      \"nutritionix\",\r\n      \"odnoklassniki\",\r\n      \"odnoklassniki-square\",\r\n      \"old-republic\",\r\n      \"opencart\",\r\n      \"openid\",\r\n      \"opera\",\r\n      \"optin-monster\",\r\n      \"osi\",\r\n      \"page4\",\r\n      \"pagelines\",\r\n      \"palfed\",\r\n      \"patreon\",\r\n      \"paypal\",\r\n      \"periscope\",\r\n      \"phabricator\",\r\n      \"phoenix-framework\",\r\n      \"phoenix-squadron\",\r\n      \"php\",\r\n      \"pied-piper\",\r\n      \"pied-piper-alt\",\r\n      \"pied-piper-hat\",\r\n      \"pied-piper-pp\",\r\n      \"pinterest\",\r\n      \"pinterest-p\",\r\n      \"pinterest-square\",\r\n      \"playstation\",\r\n      \"product-hunt\",\r\n      \"pushed\",\r\n      \"python\",\r\n      \"qq\",\r\n      \"quinscape\",\r\n      \"quora\",\r\n      \"r-project\",\r\n      \"ravelry\",\r\n      \"react\",\r\n      \"readme\",\r\n      \"rebel\",\r\n      \"red-river\",\r\n      \"reddit\",\r\n      \"reddit-alien\",\r\n      \"reddit-square\",\r\n      \"rendact\",\r\n      \"renren\",\r\n      \"replyd\",\r\n      \"researchgate\",\r\n      \"resolving\",\r\n      \"rev\",\r\n      \"rocketchat\",\r\n      \"rockrms\",\r\n      \"safari\",\r\n      \"sass\",\r\n      \"schlix\",\r\n      \"scribd\",\r\n      \"searchengin\",\r\n      \"sellcast\",\r\n      \"sellsy\",\r\n      \"servicestack\",\r\n      \"shirtsinbulk\",\r\n      \"shopware\",\r\n      \"simplybuilt\",\r\n      \"sistrix\",\r\n      \"sith\",\r\n      \"skyatlas\",\r\n      \"skype\",\r\n      \"slack\",\r\n      \"slack-hash\",\r\n      \"slideshare\",\r\n      \"snapchat\",\r\n      \"snapchat-ghost\",\r\n      \"snapchat-square\",\r\n      \"soundcloud\",\r\n      \"speakap\",\r\n      \"spotify\",\r\n      \"squarespace\",\r\n      \"stack-exchange\",\r\n      \"stack-overflow\",\r\n      \"staylinked\",\r\n      \"steam\",\r\n      \"steam-square\",\r\n      \"steam-symbol\",\r\n      \"sticker-mule\",\r\n      \"strava\",\r\n      \"stripe\",\r\n      \"stripe-s\",\r\n      \"studiovinari\",\r\n      \"stumbleupon\",\r\n      \"stumbleupon-circle\",\r\n      \"superpowers\",\r\n      \"supple\",\r\n      \"telegram\",\r\n      \"telegram-plane\",\r\n      \"tencent-weibo\",\r\n      \"themeco\",\r\n      \"themeisle\",\r\n      \"trade-federation\",\r\n      \"trello\",\r\n      \"tripadvisor\",\r\n      \"tumblr\",\r\n      \"tumblr-square\",\r\n      \"twitch\",\r\n      \"twitter\",\r\n      \"twitter-square\",\r\n      \"typo3\",\r\n      \"uber\",\r\n      \"uikit\",\r\n      \"uniregistry\",\r\n      \"untappd\",\r\n      \"usb\",\r\n      \"ussunnah\",\r\n      \"vaadin\",\r\n      \"viacoin\",\r\n      \"viadeo\",\r\n      \"viadeo-square\",\r\n      \"viber\",\r\n      \"vimeo\",\r\n      \"vimeo-square\",\r\n      \"vimeo-v\",\r\n      \"vine\",\r\n      \"vk\",\r\n      \"vnv\",\r\n      \"vuejs\",\r\n      \"weebly\",\r\n      \"weibo\",\r\n      \"weixin\",\r\n      \"whatsapp\",\r\n      \"whatsapp-square\",\r\n      \"whmcs\",\r\n      \"wikipedia-w\",\r\n      \"windows\",\r\n      \"wix\",\r\n      \"wolf-pack-battalion\",\r\n      \"wordpress\",\r\n      \"wordpress-simple\",\r\n      \"wpbeginner\",\r\n      \"wpexplorer\",\r\n      \"wpforms\",\r\n      \"xbox\",\r\n      \"xing\",\r\n      \"xing-square\",\r\n      \"y-combinator\",\r\n      \"yahoo\",\r\n      \"yandex\",\r\n      \"yandex-international\",\r\n      \"yelp\",\r\n      \"yoast\",\r\n      \"youtube\",\r\n      \"youtube-square\",\r\n      \"zhihu\"\r\n    ]\r\n  })\r\n};\r\n</script>\r\n\r\n<style scoped>\r\n.faicon {\r\n  min-height: 30px;\r\n  text-align: center;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$8 = "data-v-98884e52";
+  const __vue_scope_id__$g = "data-v-98884e52";
   /* module identifier */
-  const __vue_module_identifier__$8 = undefined;
+  const __vue_module_identifier__$g = undefined;
   /* functional template */
-  const __vue_is_functional_template__$8 = false;
+  const __vue_is_functional_template__$g = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$8 = normalizeComponent(
-    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-    __vue_inject_styles__$8,
-    __vue_script__$8,
-    __vue_scope_id__$8,
-    __vue_is_functional_template__$8,
-    __vue_module_identifier__$8,
+  const __vue_component__$g = normalizeComponent(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$g,
+    __vue_script__$g,
+    __vue_scope_id__$g,
+    __vue_is_functional_template__$g,
+    __vue_module_identifier__$g,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ImageZoomOnHover = /** @class */ (function (_super) {
-    __extends(ImageZoomOnHover, _super);
-    function ImageZoomOnHover() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let ImageZoomOnHover = class ImageZoomOnHover extends Vue {
+    // Compute style of image.
+    get imageStyle() {
+        return {
+            "background-color": "#fff",
+            "background-image": "url(" + this.imageUrl + ")",
+            "background-size": "contain",
+            "background-position": "center",
+            transition: "all 0.5s ease",
+            height: "100%",
+            width: "100%"
+        };
     }
-    Object.defineProperty(ImageZoomOnHover.prototype, "imageStyle", {
-        // Compute style of image.
-        get: function () {
-            return {
-                "background-color": "#fff",
-                "background-image": "url(" + this.imageUrl + ")",
-                "background-size": "contain",
-                "background-position": "center",
-                transition: "all 0.5s ease",
-                height: "100%",
-                width: "100%"
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ImageZoomOnHover.prototype, "imageUrl", void 0);
-    ImageZoomOnHover = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], ImageZoomOnHover);
-    return ImageZoomOnHover;
-}(Vue));
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ImageZoomOnHover.prototype, "imageUrl", void 0);
+ImageZoomOnHover = __decorate([
+    Component({})
+], ImageZoomOnHover);
+var script$f = ImageZoomOnHover;
 
 /* script */
-const __vue_script__$9 = ImageZoomOnHover;
+const __vue_script__$h = script$f;
 
 /* template */
-var __vue_render__$9 = function() {
+var __vue_render__$h = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -2771,34 +3465,34 @@ var __vue_render__$9 = function() {
     _c("div", { staticClass: "zoomed", style: _vm.imageStyle })
   ])
 };
-var __vue_staticRenderFns__$9 = [];
-__vue_render__$9._withStripped = true;
+var __vue_staticRenderFns__$h = [];
+__vue_render__$h._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$9 = function (inject) {
+  const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-4ce995a9_0", { source: "\n.zoomer[data-v-4ce995a9] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  margin: 10px;\n}\n.zoomed[data-v-4ce995a9] {\r\n  transition: all 0.5s ease;\n}\n.zoomed[data-v-4ce995a9]:hover {\r\n  transform: scale(1.05);\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\ImageZoomOnHover.vue"],"names":[],"mappings":";AA8BA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,YAAA;AACA;AACA;EACA,yBAAA;AACA;AACA;EACA,sBAAA;AACA","file":"ImageZoomOnHover.vue","sourcesContent":["<template>\r\n  <div class=\"zoomer\">\r\n    <div class=\"zoomed\" :style=\"imageStyle\" />\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class ImageZoomOnHover extends Vue {\r\n  @Prop() readonly imageUrl!: string;\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-position\": \"center\",\r\n      transition: \"all 0.5s ease\",\r\n      height: \"100%\",\r\n      width: \"100%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.zoomer {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  margin: 10px;\r\n}\r\n.zoomed {\r\n  transition: all 0.5s ease;\r\n}\r\n.zoomed:hover {\r\n  transform: scale(1.05);\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-ad5a208c_0", { source: "\n.zoomer[data-v-ad5a208c] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  margin: 10px;\n}\n.zoomed[data-v-ad5a208c] {\r\n  transition: all 0.5s ease;\n}\n.zoomed[data-v-ad5a208c]:hover {\r\n  transform: scale(1.05);\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\ImageZoomOnHover.vue"],"names":[],"mappings":";AA8BA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,YAAA;AACA;AACA;EACA,yBAAA;AACA;AACA;EACA,sBAAA;AACA","file":"ImageZoomOnHover.vue","sourcesContent":["<template>\r\n  <div class=\"zoomer\">\r\n    <div class=\"zoomed\" :style=\"imageStyle\" />\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class ImageZoomOnHover extends Vue {\r\n  @Prop() readonly imageUrl!: string;\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-position\": \"center\",\r\n      transition: \"all 0.5s ease\",\r\n      height: \"100%\",\r\n      width: \"100%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.zoomer {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  margin: 10px;\r\n}\r\n.zoomed {\r\n  transition: all 0.5s ease;\r\n}\r\n.zoomed:hover {\r\n  transform: scale(1.05);\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = "data-v-4ce995a9";
+  const __vue_scope_id__$h = "data-v-ad5a208c";
   /* module identifier */
-  const __vue_module_identifier__$9 = undefined;
+  const __vue_module_identifier__$h = undefined;
   /* functional template */
-  const __vue_is_functional_template__$9 = false;
+  const __vue_is_functional_template__$h = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$9 = normalizeComponent(
-    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-    __vue_inject_styles__$9,
-    __vue_script__$9,
-    __vue_scope_id__$9,
-    __vue_is_functional_template__$9,
-    __vue_module_identifier__$9,
+  const __vue_component__$h = normalizeComponent(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$h,
+    __vue_script__$h,
+    __vue_scope_id__$h,
+    __vue_is_functional_template__$h,
+    __vue_module_identifier__$h,
     false,
     createInjector,
     undefined,
@@ -2819,13 +3513,13 @@ function routeTo(component, url) {
 
 //
 
-var script$5 = {
+var script$g = {
   data: () => ({}),
 
   props: ["label", "url", "text"],
 
   components: {
-    HeaderField: __vue_component__$7
+    HeaderField: __vue_component__$f
   },
 
   methods: {
@@ -2837,10 +3531,10 @@ var script$5 = {
 };
 
 /* script */
-const __vue_script__$a = script$5;
+const __vue_script__$i = script$g;
 
 /* template */
-var __vue_render__$a = function() {
+var __vue_render__$i = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -2855,60 +3549,56 @@ var __vue_render__$a = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$a = [];
-__vue_render__$a._withStripped = true;
+var __vue_staticRenderFns__$i = [];
+__vue_render__$i._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$a = function (inject) {
+  const __vue_inject_styles__$i = function (inject) {
     if (!inject) return
     inject("data-v-ff72be10_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"LinkedHeaderField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$a = "data-v-ff72be10";
+  const __vue_scope_id__$i = "data-v-ff72be10";
   /* module identifier */
-  const __vue_module_identifier__$a = undefined;
+  const __vue_module_identifier__$i = undefined;
   /* functional template */
-  const __vue_is_functional_template__$a = false;
+  const __vue_is_functional_template__$i = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$a = normalizeComponent(
-    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-    __vue_inject_styles__$a,
-    __vue_script__$a,
-    __vue_scope_id__$a,
-    __vue_is_functional_template__$a,
-    __vue_module_identifier__$a,
+  const __vue_component__$i = normalizeComponent(
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    __vue_inject_styles__$i,
+    __vue_script__$i,
+    __vue_scope_id__$i,
+    __vue_is_functional_template__$i,
+    __vue_module_identifier__$i,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var LoadingOverlay = /** @class */ (function (_super) {
-    __extends(LoadingOverlay, _super);
-    function LoadingOverlay() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], LoadingOverlay.prototype, "loadingMessage", void 0);
-    LoadingOverlay = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], LoadingOverlay);
-    return LoadingOverlay;
-}(Vue));
+let LoadingOverlay = class LoadingOverlay extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], LoadingOverlay.prototype, "loadingMessage", void 0);
+LoadingOverlay = __decorate([
+    Component({})
+], LoadingOverlay);
+var script$h = LoadingOverlay;
 
 /* script */
-const __vue_script__$b = LoadingOverlay;
+const __vue_script__$j = script$h;
 
 /* template */
-var __vue_render__$b = function() {
+var __vue_render__$j = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -2964,61 +3654,57 @@ var __vue_render__$b = function() {
     1
   )
 };
-var __vue_staticRenderFns__$b = [];
-__vue_render__$b._withStripped = true;
+var __vue_staticRenderFns__$j = [];
+__vue_render__$j._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$b = function (inject) {
+  const __vue_inject_styles__$j = function (inject) {
     if (!inject) return
-    inject("data-v-07c26cc4_0", { source: "\n.overlay[data-v-07c26cc4] {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\LoadingOverlay.vue"],"names":[],"mappings":";AA6BA;EACA,kBAAA;EACA,MAAA;EACA,SAAA;EACA,OAAA;EACA,QAAA;AACA","file":"LoadingOverlay.vue","sourcesContent":["<template>\r\n  <div class=\"overlay\">\r\n    <v-container fill-height>\r\n      <v-layout align-center justify-center column fill-height>\r\n        <v-flex xs5/>\r\n        <v-flex xs1>\r\n          <v-progress-circular size=\"65\" color=\"#666\" class=\"mb-4\" :indeterminate=\"true\"/>\r\n        </v-flex>\r\n        <v-flex xs1>\r\n          <div class=\"subheading\" style=\"color: #666;\">{{ loadingMessage || 'Loading ...' }}</div>\r\n        </v-flex>\r\n        <v-flex xs5/>\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport Vue from \"vue\";\r\n\r\n@Component({})\r\nexport default class LoadingOverlay extends Vue {\r\n  @Prop() readonly loadingMessage!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-003323df_0", { source: "\n.overlay[data-v-003323df] {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\LoadingOverlay.vue"],"names":[],"mappings":";AA6BA;EACA,kBAAA;EACA,MAAA;EACA,SAAA;EACA,OAAA;EACA,QAAA;AACA","file":"LoadingOverlay.vue","sourcesContent":["<template>\r\n  <div class=\"overlay\">\r\n    <v-container fill-height>\r\n      <v-layout align-center justify-center column fill-height>\r\n        <v-flex xs5 />\r\n        <v-flex xs1>\r\n          <v-progress-circular size=\"65\" color=\"#666\" class=\"mb-4\" :indeterminate=\"true\" />\r\n        </v-flex>\r\n        <v-flex xs1>\r\n          <div class=\"subheading\" style=\"color: #666;\">{{ loadingMessage || 'Loading ...' }}</div>\r\n        </v-flex>\r\n        <v-flex xs5 />\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport Vue from \"vue\";\r\n\r\n@Component({})\r\nexport default class LoadingOverlay extends Vue {\r\n  @Prop() readonly loadingMessage!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$b = "data-v-07c26cc4";
+  const __vue_scope_id__$j = "data-v-003323df";
   /* module identifier */
-  const __vue_module_identifier__$b = undefined;
+  const __vue_module_identifier__$j = undefined;
   /* functional template */
-  const __vue_is_functional_template__$b = false;
+  const __vue_is_functional_template__$j = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$b = normalizeComponent(
-    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-    __vue_inject_styles__$b,
-    __vue_script__$b,
-    __vue_scope_id__$b,
-    __vue_is_functional_template__$b,
-    __vue_module_identifier__$b,
+  const __vue_component__$j = normalizeComponent(
+    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+    __vue_inject_styles__$j,
+    __vue_script__$j,
+    __vue_scope_id__$j,
+    __vue_is_functional_template__$j,
+    __vue_module_identifier__$j,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ContentDeleteIcon = /** @class */ (function (_super) {
-    __extends(ContentDeleteIcon, _super);
-    function ContentDeleteIcon() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ContentDeleteIcon.prototype.onDeleteClicked = function () {
+let ContentDeleteIcon = class ContentDeleteIcon extends Vue {
+    onDeleteClicked() {
         this.$emit("delete");
-    };
-    ContentDeleteIcon = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], ContentDeleteIcon);
-    return ContentDeleteIcon;
-}(Vue));
+    }
+};
+ContentDeleteIcon = __decorate([
+    Component({
+        components: {}
+    })
+], ContentDeleteIcon);
+var script$i = ContentDeleteIcon;
 
 /* script */
-const __vue_script__$c = ContentDeleteIcon;
+const __vue_script__$k = script$i;
 
 /* template */
-var __vue_render__$c = function() {
+var __vue_render__$k = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3032,81 +3718,73 @@ var __vue_render__$c = function() {
     [_vm._v("fa-trash")]
   )
 };
-var __vue_staticRenderFns__$c = [];
-__vue_render__$c._withStripped = true;
+var __vue_staticRenderFns__$k = [];
+__vue_render__$k._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$c = function (inject) {
+  const __vue_inject_styles__$k = function (inject) {
     if (!inject) return
-    inject("data-v-c363129c_0", { source: "\n.trash[data-v-c363129c] {\r\n  color: #ddd;\n}\n.trash[data-v-c363129c]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentDeleteIcon.vue"],"names":[],"mappings":";AAmBA;EACA,WAAA;AACA;AACA;EACA,WAAA;AACA","file":"ContentDeleteIcon.vue","sourcesContent":["<template>\r\n  <v-icon small class=\"trash\" @click=\"onDeleteClicked\">fa-trash</v-icon>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class ContentDeleteIcon extends Vue {\r\n  onDeleteClicked(): void {\r\n    this.$emit(\"delete\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.trash {\r\n  color: #ddd;\r\n}\r\n.trash:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-6779f9fa_0", { source: "\n.trash[data-v-6779f9fa] {\r\n  color: #ddd;\n}\n.trash[data-v-6779f9fa]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentDeleteIcon.vue"],"names":[],"mappings":";AAmBA;EACA,WAAA;AACA;AACA;EACA,WAAA;AACA","file":"ContentDeleteIcon.vue","sourcesContent":["<template>\r\n  <v-icon small class=\"trash\" @click=\"onDeleteClicked\">fa-trash</v-icon>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"vue-property-decorator\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class ContentDeleteIcon extends Vue {\r\n  onDeleteClicked(): void {\r\n    this.$emit(\"delete\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.trash {\r\n  color: #ddd;\r\n}\r\n.trash:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = "data-v-c363129c";
+  const __vue_scope_id__$k = "data-v-6779f9fa";
   /* module identifier */
-  const __vue_module_identifier__$c = undefined;
+  const __vue_module_identifier__$k = undefined;
   /* functional template */
-  const __vue_is_functional_template__$c = false;
+  const __vue_is_functional_template__$k = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$c = normalizeComponent(
-    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-    __vue_inject_styles__$c,
-    __vue_script__$c,
-    __vue_scope_id__$c,
-    __vue_is_functional_template__$c,
-    __vue_module_identifier__$c,
+  const __vue_component__$k = normalizeComponent(
+    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+    __vue_inject_styles__$k,
+    __vue_script__$k,
+    __vue_scope_id__$k,
+    __vue_is_functional_template__$k,
+    __vue_module_identifier__$k,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ContentField = /** @class */ (function (_super) {
-    __extends(ContentField, _super);
-    function ContentField() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let ContentField = class ContentField extends Vue {
+    get displayValue() {
+        return this.password ? "***" : this.value;
     }
-    Object.defineProperty(ContentField.prototype, "displayValue", {
-        get: function () {
-            return this.password ? "***" : this.value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentField.prototype, "name", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentField.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], ContentField.prototype, "alt", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], ContentField.prototype, "password", void 0);
-    ContentField = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], ContentField);
-    return ContentField;
-}(Vue));
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentField.prototype, "name", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentField.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], ContentField.prototype, "alt", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], ContentField.prototype, "password", void 0);
+ContentField = __decorate([
+    Component({
+        components: {}
+    })
+], ContentField);
+var script$j = ContentField;
 
 /* script */
-const __vue_script__$d = ContentField;
+const __vue_script__$l = script$j;
 
 /* template */
-var __vue_render__$d = function() {
+var __vue_render__$l = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3126,7 +3804,7 @@ var __vue_render__$d = function() {
             "font-weight": "700"
           }
         },
-        [_vm._v(_vm._s(_vm.name))]
+        [_vm._v("\n    " + _vm._s(_vm.name) + "\n  ")]
       ),
       _vm._v(" "),
       _c("span", { staticStyle: { display: "inline-block", width: "400px" } }, [
@@ -3135,69 +3813,65 @@ var __vue_render__$d = function() {
     ]
   )
 };
-var __vue_staticRenderFns__$d = [];
-__vue_render__$d._withStripped = true;
+var __vue_staticRenderFns__$l = [];
+__vue_render__$l._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$d = function (inject) {
+  const __vue_inject_styles__$l = function (inject) {
     if (!inject) return
-    inject("data-v-5aa88e48_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentField.vue"}, media: undefined });
+    inject("data-v-815bc036_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentField.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$d = "data-v-5aa88e48";
+  const __vue_scope_id__$l = "data-v-815bc036";
   /* module identifier */
-  const __vue_module_identifier__$d = undefined;
+  const __vue_module_identifier__$l = undefined;
   /* functional template */
-  const __vue_is_functional_template__$d = false;
+  const __vue_is_functional_template__$l = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$d = normalizeComponent(
-    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-    __vue_inject_styles__$d,
-    __vue_script__$d,
-    __vue_scope_id__$d,
-    __vue_is_functional_template__$d,
-    __vue_module_identifier__$d,
+  const __vue_component__$l = normalizeComponent(
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    __vue_inject_styles__$l,
+    __vue_script__$l,
+    __vue_scope_id__$l,
+    __vue_is_functional_template__$l,
+    __vue_module_identifier__$l,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ContentLink = /** @class */ (function (_super) {
-    __extends(ContentLink, _super);
-    function ContentLink() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ContentLink.prototype.onLinkClicked = function () {
+let ContentLink = class ContentLink extends Vue {
+    onLinkClicked() {
         this.$emit("linkClicked");
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentLink.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentLink.prototype, "text", void 0);
-    ContentLink = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], ContentLink);
-    return ContentLink;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentLink.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentLink.prototype, "text", void 0);
+ContentLink = __decorate([
+    Component({
+        components: {}
+    })
+], ContentLink);
+var script$k = ContentLink;
 
 /* script */
-const __vue_script__$e = ContentLink;
+const __vue_script__$m = script$k;
 
 /* template */
-var __vue_render__$e = function() {
+var __vue_render__$m = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3210,82 +3884,75 @@ var __vue_render__$e = function() {
     },
     [
       _c("a", { staticClass: "clink" }, [_vm._v(_vm._s(_vm.text))]),
+      _vm._v(" "),
       _c("v-icon", { staticClass: "ilink" }, [_vm._v(_vm._s(_vm.icon))])
     ],
     1
   )
 };
-var __vue_staticRenderFns__$e = [];
-__vue_render__$e._withStripped = true;
+var __vue_staticRenderFns__$m = [];
+__vue_render__$m._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$e = function (inject) {
+  const __vue_inject_styles__$m = function (inject) {
     if (!inject) return
-    inject("data-v-88b12654_0", { source: "\n.clink[data-v-88b12654] {\r\n  color: #2255cc;\r\n  font-size: 13px;\n}\n.clink[data-v-88b12654]:hover {\r\n  text-decoration: underline;\n}\n.ilink[data-v-88b12654] {\r\n  color: #2255cc;\r\n  line-height: 1.17;\r\n  font-size: 11px;\r\n  margin-left: 5px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentLink.vue"],"names":[],"mappings":";AAyBA;EACA,cAAA;EACA,eAAA;AACA;AACA;EACA,0BAAA;AACA;AACA;EACA,cAAA;EACA,iBAAA;EACA,eAAA;EACA,gBAAA;AACA","file":"ContentLink.vue","sourcesContent":["<template>\r\n  <v-card @click=\"onLinkClicked\" flat class=\"caption mb-1\">\r\n    <a class=\"clink\">{{ text }}</a\r\n    ><v-icon class=\"ilink\">{{ icon }}</v-icon>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class ContentLink extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly text!: string;\r\n\r\n  onLinkClicked() {\r\n    this.$emit(\"linkClicked\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.clink {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n}\r\n.clink:hover {\r\n  text-decoration: underline;\r\n}\r\n.ilink {\r\n  color: #2255cc;\r\n  line-height: 1.17;\r\n  font-size: 11px;\r\n  margin-left: 5px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-0c4c3566_0", { source: "\n.clink[data-v-0c4c3566] {\r\n  color: #2255cc;\r\n  font-size: 13px;\n}\n.clink[data-v-0c4c3566]:hover {\r\n  text-decoration: underline;\n}\n.ilink[data-v-0c4c3566] {\r\n  color: #2255cc;\r\n  line-height: 1.17;\r\n  font-size: 11px;\r\n  margin-left: 5px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentLink.vue"],"names":[],"mappings":";AAyBA;EACA,cAAA;EACA,eAAA;AACA;AACA;EACA,0BAAA;AACA;AACA;EACA,cAAA;EACA,iBAAA;EACA,eAAA;EACA,gBAAA;AACA","file":"ContentLink.vue","sourcesContent":["<template>\r\n  <v-card @click=\"onLinkClicked\" flat class=\"caption mb-1\">\r\n    <a class=\"clink\">{{ text }}</a>\r\n    <v-icon class=\"ilink\">{{ icon }}</v-icon>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class ContentLink extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly text!: string;\r\n\r\n  onLinkClicked() {\r\n    this.$emit(\"linkClicked\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.clink {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n}\r\n.clink:hover {\r\n  text-decoration: underline;\r\n}\r\n.ilink {\r\n  color: #2255cc;\r\n  line-height: 1.17;\r\n  font-size: 11px;\r\n  margin-left: 5px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$e = "data-v-88b12654";
+  const __vue_scope_id__$m = "data-v-0c4c3566";
   /* module identifier */
-  const __vue_module_identifier__$e = undefined;
+  const __vue_module_identifier__$m = undefined;
   /* functional template */
-  const __vue_is_functional_template__$e = false;
+  const __vue_is_functional_template__$m = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$e = normalizeComponent(
-    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-    __vue_inject_styles__$e,
-    __vue_script__$e,
-    __vue_scope_id__$e,
-    __vue_is_functional_template__$e,
-    __vue_module_identifier__$e,
+  const __vue_component__$m = normalizeComponent(
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    __vue_inject_styles__$m,
+    __vue_script__$m,
+    __vue_scope_id__$m,
+    __vue_is_functional_template__$m,
+    __vue_module_identifier__$m,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ContentHeader = /** @class */ (function (_super) {
-    __extends(ContentHeader, _super);
-    function ContentHeader() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let ContentHeader = class ContentHeader extends Vue {
+    get iconClass() {
+        return this.fa ? "icon-fa" : "icon-non-fa";
     }
-    Object.defineProperty(ContentHeader.prototype, "iconClass", {
-        get: function () {
-            return this.fa ? "icon-fa" : "icon-non-fa";
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentHeader.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentHeader.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], ContentHeader.prototype, "fa", void 0);
-    ContentHeader = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {},
-        })
-    ], ContentHeader);
-    return ContentHeader;
-}(Vue));
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentHeader.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentHeader.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], ContentHeader.prototype, "fa", void 0);
+ContentHeader = __decorate([
+    Component({
+        components: {}
+    })
+], ContentHeader);
+var script$l = ContentHeader;
 
 /* script */
-const __vue_script__$f = ContentHeader;
+const __vue_script__$n = script$l;
 
 /* template */
-var __vue_render__$f = function() {
+var __vue_render__$n = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3294,6 +3961,7 @@ var __vue_render__$f = function() {
     { staticClass: "mb-3", attrs: { flat: "" } },
     [
       _c("v-icon", { class: _vm.iconClass }, [_vm._v(_vm._s(_vm.icon))]),
+      _vm._v(" "),
       _c("span", { staticClass: "subheading" }, [
         _vm._v(_vm._s(_vm.title) + ":")
       ])
@@ -3301,74 +3969,70 @@ var __vue_render__$f = function() {
     1
   )
 };
-var __vue_staticRenderFns__$f = [];
-__vue_render__$f._withStripped = true;
+var __vue_staticRenderFns__$n = [];
+__vue_render__$n._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$f = function (inject) {
+  const __vue_inject_styles__$n = function (inject) {
     if (!inject) return
-    inject("data-v-41dd6e29_0", { source: "\n.icon-fa[data-v-41dd6e29] {\r\n  font-size: 13px !important;\r\n  width: 25px;\n}\n.icon-non-fa[data-v-41dd6e29] {\r\n  font-size: 16px !important;\r\n  width: 25px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentHeader.vue"],"names":[],"mappings":";AA0BA;EACA,0BAAA;EACA,WAAA;AACA;AACA;EACA,0BAAA;EACA,WAAA;AACA","file":"ContentHeader.vue","sourcesContent":["<template>\r\n  <v-card flat class=\"mb-3\">\r\n    <v-icon :class=\"iconClass\">{{ icon }}</v-icon\r\n    ><span class=\"subheading\">{{ title }}:</span>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {},\r\n})\r\nexport default class ContentHeader extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n\r\n  get iconClass(): string {\r\n    return this.fa ? \"icon-fa\" : \"icon-non-fa\";\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.icon-fa {\r\n  font-size: 13px !important;\r\n  width: 25px;\r\n}\r\n.icon-non-fa {\r\n  font-size: 16px !important;\r\n  width: 25px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-a5172b64_0", { source: "\n.icon-fa[data-v-a5172b64] {\r\n  font-size: 13px !important;\r\n  width: 25px;\n}\n.icon-non-fa[data-v-a5172b64] {\r\n  font-size: 16px !important;\r\n  width: 25px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentHeader.vue"],"names":[],"mappings":";AA0BA;EACA,0BAAA;EACA,WAAA;AACA;AACA;EACA,0BAAA;EACA,WAAA;AACA","file":"ContentHeader.vue","sourcesContent":["<template>\r\n  <v-card flat class=\"mb-3\">\r\n    <v-icon :class=\"iconClass\">{{ icon }}</v-icon>\r\n    <span class=\"subheading\">{{ title }}:</span>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class ContentHeader extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n\r\n  get iconClass(): string {\r\n    return this.fa ? \"icon-fa\" : \"icon-non-fa\";\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.icon-fa {\r\n  font-size: 13px !important;\r\n  width: 25px;\r\n}\r\n.icon-non-fa {\r\n  font-size: 16px !important;\r\n  width: 25px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$f = "data-v-41dd6e29";
+  const __vue_scope_id__$n = "data-v-a5172b64";
   /* module identifier */
-  const __vue_module_identifier__$f = undefined;
+  const __vue_module_identifier__$n = undefined;
   /* functional template */
-  const __vue_is_functional_template__$f = false;
+  const __vue_is_functional_template__$n = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$f = normalizeComponent(
-    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-    __vue_inject_styles__$f,
-    __vue_script__$f,
-    __vue_scope_id__$f,
-    __vue_is_functional_template__$f,
-    __vue_module_identifier__$f,
+  const __vue_component__$n = normalizeComponent(
+    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+    __vue_inject_styles__$n,
+    __vue_script__$n,
+    __vue_scope_id__$n,
+    __vue_is_functional_template__$n,
+    __vue_module_identifier__$n,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var Section = /** @class */ (function (_super) {
-    __extends(Section, _super);
-    function Section() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], Section.prototype, "fa", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "help", void 0);
-    Section = __decorate([
-        sitewhereIdeCommon.Component({
-            components: { ContentHeader: __vue_component__$f },
-        })
-    ], Section);
-    return Section;
-}(Vue));
+let Section = class Section extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], Section.prototype, "fa", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section.prototype, "help", void 0);
+Section = __decorate([
+    Component({
+        components: { ContentHeader: __vue_component__$n }
+    })
+], Section);
+var script$m = Section;
 
 /* script */
-const __vue_script__$g = Section;
+const __vue_script__$o = script$m;
 
 /* template */
-var __vue_render__$g = function() {
+var __vue_render__$o = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3392,62 +4056,58 @@ var __vue_render__$g = function() {
     1
   )
 };
-var __vue_staticRenderFns__$g = [];
-__vue_render__$g._withStripped = true;
+var __vue_staticRenderFns__$o = [];
+__vue_render__$o._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$g = function (inject) {
+  const __vue_inject_styles__$o = function (inject) {
     if (!inject) return
-    inject("data-v-49dc2152_0", { source: "\n.overlay[data-v-49dc2152] {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentSection.vue"],"names":[],"mappings":";AA4BA;EACA,kBAAA;EACA,SAAA;EACA,QAAA;EACA,MAAA;EACA,SAAA;AACA","file":"ContentSection.vue","sourcesContent":["<template>\r\n  <v-card style=\"display: relative;\" flat>\r\n    <content-header :title=\"title\" :icon=\"icon\" :fa=\"fa\" />\r\n    <v-card flat style=\"margin-left: 25px;\">\r\n      <slot />\r\n    </v-card>\r\n    <div class=\"overlay\"><slot name=\"overlay\" /></div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport ContentHeader from \"./ContentHeader.vue\";\r\n\r\n@Component({\r\n  components: { ContentHeader },\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-55dc39f8_0", { source: "\n.overlay[data-v-55dc39f8] {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\ContentSection.vue"],"names":[],"mappings":";AA8BA;EACA,kBAAA;EACA,SAAA;EACA,QAAA;EACA,MAAA;EACA,SAAA;AACA","file":"ContentSection.vue","sourcesContent":["<template>\r\n  <v-card style=\"display: relative;\" flat>\r\n    <content-header :title=\"title\" :icon=\"icon\" :fa=\"fa\" />\r\n    <v-card flat style=\"margin-left: 25px;\">\r\n      <slot />\r\n    </v-card>\r\n    <div class=\"overlay\">\r\n      <slot name=\"overlay\" />\r\n    </div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport ContentHeader from \"./ContentHeader.vue\";\r\n\r\n@Component({\r\n  components: { ContentHeader }\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.overlay {\r\n  position: absolute;\r\n  left: 50%;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$g = "data-v-49dc2152";
+  const __vue_scope_id__$o = "data-v-55dc39f8";
   /* module identifier */
-  const __vue_module_identifier__$g = undefined;
+  const __vue_module_identifier__$o = undefined;
   /* functional template */
-  const __vue_is_functional_template__$g = false;
+  const __vue_is_functional_template__$o = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$g = normalizeComponent(
-    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$g,
-    __vue_script__$g,
-    __vue_scope_id__$g,
-    __vue_is_functional_template__$g,
-    __vue_module_identifier__$g,
+  const __vue_component__$o = normalizeComponent(
+    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+    __vue_inject_styles__$o,
+    __vue_script__$o,
+    __vue_scope_id__$o,
+    __vue_is_functional_template__$o,
+    __vue_module_identifier__$o,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ContentWarning = /** @class */ (function (_super) {
-    __extends(ContentWarning, _super);
-    function ContentWarning() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentWarning.prototype, "text", void 0);
-    ContentWarning = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], ContentWarning);
-    return ContentWarning;
-}(Vue));
+let ContentWarning = class ContentWarning extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentWarning.prototype, "text", void 0);
+ContentWarning = __decorate([
+    Component({
+        components: {}
+    })
+], ContentWarning);
+var script$n = ContentWarning;
 
 /* script */
-const __vue_script__$h = ContentWarning;
+const __vue_script__$p = script$n;
 
 /* template */
-var __vue_render__$h = function() {
+var __vue_render__$p = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3462,70 +4122,66 @@ var __vue_render__$h = function() {
       _c("v-icon", { staticClass: "mr-2", attrs: { small: "" } }, [
         _vm._v("fa-exclamation-circle")
       ]),
-      _vm._v(_vm._s(_vm.text) + "\n")
+      _vm._v("\n  " + _vm._s(_vm.text) + "\n")
     ],
     1
   )
 };
-var __vue_staticRenderFns__$h = [];
-__vue_render__$h._withStripped = true;
+var __vue_staticRenderFns__$p = [];
+__vue_render__$p._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$h = function (inject) {
+  const __vue_inject_styles__$p = function (inject) {
     if (!inject) return
-    inject("data-v-37a8de66_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentWarning.vue"}, media: undefined });
+    inject("data-v-7885369f_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ContentWarning.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$h = "data-v-37a8de66";
+  const __vue_scope_id__$p = "data-v-7885369f";
   /* module identifier */
-  const __vue_module_identifier__$h = undefined;
+  const __vue_module_identifier__$p = undefined;
   /* functional template */
-  const __vue_is_functional_template__$h = false;
+  const __vue_is_functional_template__$p = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$h = normalizeComponent(
-    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-    __vue_inject_styles__$h,
-    __vue_script__$h,
-    __vue_scope_id__$h,
-    __vue_is_functional_template__$h,
-    __vue_module_identifier__$h,
+  const __vue_component__$p = normalizeComponent(
+    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+    __vue_inject_styles__$p,
+    __vue_script__$p,
+    __vue_scope_id__$p,
+    __vue_is_functional_template__$p,
+    __vue_module_identifier__$p,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var DatatableLink = /** @class */ (function (_super) {
-    __extends(DatatableLink, _super);
-    function DatatableLink() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DatatableLink.prototype.onLinkClicked = function () {
+let DatatableLink = class DatatableLink extends Vue {
+    onLinkClicked() {
         this.$emit("linkClicked");
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DatatableLink.prototype, "text", void 0);
-    DatatableLink = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], DatatableLink);
-    return DatatableLink;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DatatableLink.prototype, "text", void 0);
+DatatableLink = __decorate([
+    Component({
+        components: {}
+    })
+], DatatableLink);
+var script$o = DatatableLink;
 
 /* script */
-const __vue_script__$i = DatatableLink;
+const __vue_script__$q = script$o;
 
 /* template */
-var __vue_render__$i = function() {
+var __vue_render__$q = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3540,86 +4196,82 @@ var __vue_render__$i = function() {
     [_c("a", { staticClass: "clink" }, [_vm._v(_vm._s(_vm.text))])]
   )
 };
-var __vue_staticRenderFns__$i = [];
-__vue_render__$i._withStripped = true;
+var __vue_staticRenderFns__$q = [];
+__vue_render__$q._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$i = function (inject) {
+  const __vue_inject_styles__$q = function (inject) {
     if (!inject) return
-    inject("data-v-4c9b9bd6_0", { source: "\n.clink[data-v-4c9b9bd6] {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n  text-decoration: underline;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableLink.vue"],"names":[],"mappings":";AA4BA;EACA,cAAA;EACA,eAAA;EACA,0BAAA;AACA","file":"DatatableLink.vue","sourcesContent":["<template>\r\n  <v-card\r\n    style=\"background-color: transparent;\"\r\n    @click=\"onLinkClicked\"\r\n    flat\r\n    class=\"caption\"\r\n  >\r\n    <a class=\"clink\">{{ text }}</a>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class DatatableLink extends Vue {\r\n  @Prop() readonly text!: string;\r\n\r\n  onLinkClicked() {\r\n    this.$emit(\"linkClicked\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.clink {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n  text-decoration: underline;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-bd136fec_0", { source: "\n.clink[data-v-bd136fec] {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n  text-decoration: underline;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableLink.vue"],"names":[],"mappings":";AAuBA;EACA,cAAA;EACA,eAAA;EACA,0BAAA;AACA","file":"DatatableLink.vue","sourcesContent":["<template>\r\n  <v-card style=\"background-color: transparent;\" @click=\"onLinkClicked\" flat class=\"caption\">\r\n    <a class=\"clink\">{{ text }}</a>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class DatatableLink extends Vue {\r\n  @Prop() readonly text!: string;\r\n\r\n  onLinkClicked() {\r\n    this.$emit(\"linkClicked\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.clink {\r\n  color: #2255cc;\r\n  font-size: 13px;\r\n  text-decoration: underline;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$i = "data-v-4c9b9bd6";
+  const __vue_scope_id__$q = "data-v-bd136fec";
   /* module identifier */
-  const __vue_module_identifier__$i = undefined;
+  const __vue_module_identifier__$q = undefined;
   /* functional template */
-  const __vue_is_functional_template__$i = false;
+  const __vue_is_functional_template__$q = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$i = normalizeComponent(
-    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-    __vue_inject_styles__$i,
-    __vue_script__$i,
-    __vue_scope_id__$i,
-    __vue_is_functional_template__$i,
-    __vue_module_identifier__$i,
+  const __vue_component__$q = normalizeComponent(
+    { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
+    __vue_inject_styles__$q,
+    __vue_script__$q,
+    __vue_scope_id__$q,
+    __vue_is_functional_template__$q,
+    __vue_module_identifier__$q,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var Section$1 = /** @class */ (function (_super) {
-    __extends(Section, _super);
-    function Section() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], Section.prototype, "fa", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "help", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], Section.prototype, "headers", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], Section.prototype, "items", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Section.prototype, "width", void 0);
-    Section = __decorate([
-        sitewhereIdeCommon.Component({
-            components: { ContentHeader: __vue_component__$f },
-        })
-    ], Section);
-    return Section;
-}(Vue));
+let Section$1 = class Section extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section$1.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], Section$1.prototype, "fa", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section$1.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section$1.prototype, "help", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], Section$1.prototype, "headers", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], Section$1.prototype, "items", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Section$1.prototype, "width", void 0);
+Section$1 = __decorate([
+    Component({
+        components: { ContentHeader: __vue_component__$n }
+    })
+], Section$1);
+var script$p = Section$1;
 
 /* script */
-const __vue_script__$j = Section$1;
+const __vue_script__$r = script$p;
 
 /* template */
-var __vue_render__$j = function() {
+var __vue_render__$r = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3672,143 +4324,140 @@ var __vue_render__$j = function() {
     1
   )
 };
-var __vue_staticRenderFns__$j = [];
-__vue_render__$j._withStripped = true;
+var __vue_staticRenderFns__$r = [];
+__vue_render__$r._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$j = function (inject) {
+  const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-4ee1ec56_0", { source: "\n.datatable[data-v-4ee1ec56] tr {\r\n  height: 30px;\n}\n.datatable[data-v-4ee1ec56] th {\r\n  padding: 3px !important;\n}\n.datatable[data-v-4ee1ec56] td {\r\n  padding: 3px !important;\r\n  height: 30px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableSection.vue"],"names":[],"mappings":";AA0CA;EACA,YAAA;AACA;AACA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;AACA","file":"DatatableSection.vue","sourcesContent":["<template>\r\n  <v-card flat>\r\n    <content-header :title=\"title\" :icon=\"icon\" :fa=\"fa\" />\r\n    <v-card flat style=\"margin-left: 25px;\" :width=\"width\">\r\n      <v-data-table\r\n        class=\"datatable\"\r\n        dense\r\n        :headers=\"headers\"\r\n        :items=\"items\"\r\n        hide-actions\r\n      >\r\n        <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\"\r\n          ><slot :name=\"slot\" v-bind=\"scope\"\r\n        /></template>\r\n      </v-data-table>\r\n      <slot name=\"datatable-footer\" />\r\n      <slot name=\"datatable-dialogs\" />\r\n    </v-card>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport ContentHeader from \"./ContentHeader.vue\";\r\n\r\n@Component({\r\n  components: { ContentHeader },\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n  @Prop() readonly headers!: any[];\r\n  @Prop() readonly items!: any[];\r\n  @Prop() readonly width!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.datatable >>> tr {\r\n  height: 30px;\r\n}\r\n.datatable >>> th {\r\n  padding: 3px !important;\r\n}\r\n.datatable >>> td {\r\n  padding: 3px !important;\r\n  height: 30px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-70dbf956_0", { source: "\n.datatable[data-v-70dbf956] tr {\r\n  height: 30px;\n}\n.datatable[data-v-70dbf956] th {\r\n  padding: 3px !important;\n}\n.datatable[data-v-70dbf956] td {\r\n  padding: 3px !important;\r\n  height: 30px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\DatatableSection.vue"],"names":[],"mappings":";AAoCA;EACA,YAAA;AACA;AACA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;AACA","file":"DatatableSection.vue","sourcesContent":["<template>\r\n  <v-card flat>\r\n    <content-header :title=\"title\" :icon=\"icon\" :fa=\"fa\" />\r\n    <v-card flat style=\"margin-left: 25px;\" :width=\"width\">\r\n      <v-data-table class=\"datatable\" dense :headers=\"headers\" :items=\"items\" hide-actions>\r\n        <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\">\r\n          <slot :name=\"slot\" v-bind=\"scope\" />\r\n        </template>\r\n      </v-data-table>\r\n      <slot name=\"datatable-footer\" />\r\n      <slot name=\"datatable-dialogs\" />\r\n    </v-card>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport ContentHeader from \"./ContentHeader.vue\";\r\n\r\n@Component({\r\n  components: { ContentHeader }\r\n})\r\nexport default class Section extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly fa!: boolean;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly help!: string;\r\n  @Prop() readonly headers!: any[];\r\n  @Prop() readonly items!: any[];\r\n  @Prop() readonly width!: string;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.datatable >>> tr {\r\n  height: 30px;\r\n}\r\n.datatable >>> th {\r\n  padding: 3px !important;\r\n}\r\n.datatable >>> td {\r\n  padding: 3px !important;\r\n  height: 30px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$j = "data-v-4ee1ec56";
+  const __vue_scope_id__$r = "data-v-70dbf956";
   /* module identifier */
-  const __vue_module_identifier__$j = undefined;
+  const __vue_module_identifier__$r = undefined;
   /* functional template */
-  const __vue_is_functional_template__$j = false;
+  const __vue_is_functional_template__$r = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$j = normalizeComponent(
-    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-    __vue_inject_styles__$j,
-    __vue_script__$j,
-    __vue_scope_id__$j,
-    __vue_is_functional_template__$j,
-    __vue_module_identifier__$j,
+  const __vue_component__$r = normalizeComponent(
+    { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
+    __vue_inject_styles__$r,
+    __vue_script__$r,
+    __vue_scope_id__$r,
+    __vue_is_functional_template__$r,
+    __vue_module_identifier__$r,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var BaseDialog = /** @class */ (function (_super) {
-    __extends(BaseDialog, _super);
-    function BaseDialog() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.active = null;
-        return _this;
+let BaseDialog = class BaseDialog extends Vue {
+    constructor() {
+        super(...arguments);
+        this.active = null;
     }
-    BaseDialog.prototype.onTabSelected = function (updated) {
+    onTabSelected(updated) {
         this.$emit("tabSelected", updated);
-    };
+    }
     /** Set the active tab */
-    BaseDialog.prototype.setActiveTab = function (tab) {
-        var _this = this;
-        this.$nextTick(function () {
-            _this.active = tab;
+    setActiveTab(tab) {
+        this.$nextTick(() => {
+            this.active = tab;
         });
-    };
+    }
     /** Handle cancel clicked */
-    BaseDialog.prototype.onCancelClicked = function (e) {
+    onCancelClicked(e) {
         this.$emit("cancelClicked", e);
-    };
+    }
     /** Handle create clicked */
-    BaseDialog.prototype.onCreateClicked = function (e) {
+    onCreateClicked(e) {
         this.$emit("createClicked", e);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], BaseDialog.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: 600 }),
-        __metadata("design:type", Number)
-    ], BaseDialog.prototype, "width", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], BaseDialog.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: true }),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "visible", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: true }),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "tabbed", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], BaseDialog.prototype, "createLabel", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], BaseDialog.prototype, "cancelLabel", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], BaseDialog.prototype, "error", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "hideButtons", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "hideCreate", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "invalid", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: false }),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "lazy", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: true }),
-        __metadata("design:type", Boolean)
-    ], BaseDialog.prototype, "loaded", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: "Loading..." }),
-        __metadata("design:type", String)
-    ], BaseDialog.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Watch("active", { immediate: true }),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], BaseDialog.prototype, "onTabSelected", null);
-    BaseDialog = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                ErrorBanner: __vue_component__$5,
-                LoadingOverlay: __vue_component__$b
-            }
-        })
-    ], BaseDialog);
-    return BaseDialog;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], BaseDialog.prototype, "title", void 0);
+__decorate([
+    Prop({ default: 600 }),
+    __metadata("design:type", Number)
+], BaseDialog.prototype, "width", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], BaseDialog.prototype, "icon", void 0);
+__decorate([
+    Prop({ default: true }),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "visible", void 0);
+__decorate([
+    Prop({ default: true }),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "tabbed", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], BaseDialog.prototype, "createLabel", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], BaseDialog.prototype, "cancelLabel", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], BaseDialog.prototype, "error", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "hideButtons", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "hideCreate", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "invalid", void 0);
+__decorate([
+    Prop({ default: false }),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "lazy", void 0);
+__decorate([
+    Prop({ default: true }),
+    __metadata("design:type", Boolean)
+], BaseDialog.prototype, "loaded", void 0);
+__decorate([
+    Prop({ default: "Loading..." }),
+    __metadata("design:type", String)
+], BaseDialog.prototype, "loadingMessage", void 0);
+__decorate([
+    Watch("active", { immediate: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], BaseDialog.prototype, "onTabSelected", null);
+BaseDialog = __decorate([
+    Component({
+        components: {
+            ErrorBanner: __vue_component__$d,
+            LoadingOverlay: __vue_component__$j
+        }
+    })
+], BaseDialog);
+var script$q = BaseDialog;
 
 /* script */
-const __vue_script__$k = BaseDialog;
+const __vue_script__$s = script$q;
 
 /* template */
-var __vue_render__$k = function() {
+var __vue_render__$s = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -3901,7 +4550,11 @@ var __vue_render__$k = function() {
                       attrs: { outline: "", color: "primary" },
                       on: { click: _vm.onCancelClicked }
                     },
-                    [_vm._v(_vm._s(_vm.cancelLabel))]
+                    [
+                      _vm._v(
+                        "\n        " + _vm._s(_vm.cancelLabel) + "\n      "
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   !_vm.hideCreate
@@ -3925,80 +4578,82 @@ var __vue_render__$k = function() {
     1
   )
 };
-var __vue_staticRenderFns__$k = [];
-__vue_render__$k._withStripped = true;
+var __vue_staticRenderFns__$s = [];
+__vue_render__$s._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$k = function (inject) {
+  const __vue_inject_styles__$s = function (inject) {
     if (!inject) return
-    inject("data-v-59e81aa4_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
+    inject("data-v-9c6a354c_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"BaseDialog.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$k = "data-v-59e81aa4";
+  const __vue_scope_id__$s = "data-v-9c6a354c";
   /* module identifier */
-  const __vue_module_identifier__$k = undefined;
+  const __vue_module_identifier__$s = undefined;
   /* functional template */
-  const __vue_is_functional_template__$k = false;
+  const __vue_is_functional_template__$s = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$k = normalizeComponent(
-    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-    __vue_inject_styles__$k,
-    __vue_script__$k,
-    __vue_scope_id__$k,
-    __vue_is_functional_template__$k,
-    __vue_module_identifier__$k,
+  const __vue_component__$s = normalizeComponent(
+    { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
+    __vue_inject_styles__$s,
+    __vue_script__$s,
+    __vue_scope_id__$s,
+    __vue_is_functional_template__$s,
+    __vue_module_identifier__$s,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var NewElementChooser = /** @class */ (function (_super) {
-    __extends(NewElementChooser, _super);
-    function NewElementChooser() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.dialogVisible = false;
-        return _this;
+let NewElementChooser = class NewElementChooser extends Vue {
+    constructor() {
+        super(...arguments);
+        this.dialogVisible = false;
     }
     /** Open dialog */
-    NewElementChooser.prototype.openDialog = function () {
+    openDialog() {
         this.dialogVisible = true;
-    };
+    }
     /** Close dialog */
-    NewElementChooser.prototype.closeDialog = function () {
+    closeDialog() {
         this.dialogVisible = false;
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NewElementChooser.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NewElementChooser.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Number)
-    ], NewElementChooser.prototype, "width", void 0);
-    NewElementChooser = __decorate([
-        sitewhereIdeCommon.Component({
-            components: { BaseDialog: __vue_component__$k }
-        })
-    ], NewElementChooser);
-    return NewElementChooser;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NewElementChooser.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NewElementChooser.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Number)
+], NewElementChooser.prototype, "width", void 0);
+__decorate([
+    Ref(),
+    __metadata("design:type", __vue_component__$s)
+], NewElementChooser.prototype, "dialog", void 0);
+NewElementChooser = __decorate([
+    Component({
+        components: { BaseDialog: __vue_component__$s }
+    })
+], NewElementChooser);
+var script$r = NewElementChooser;
 
 /* script */
-const __vue_script__$l = NewElementChooser;
+const __vue_script__$t = script$r;
 
 /* template */
-var __vue_render__$l = function() {
+var __vue_render__$t = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4029,70 +4684,66 @@ var __vue_render__$l = function() {
     1
   )
 };
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
+var __vue_staticRenderFns__$t = [];
+__vue_render__$t._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$l = function (inject) {
+  const __vue_inject_styles__$t = function (inject) {
     if (!inject) return
-    inject("data-v-44387fee_0", { source: "\n.scroll-chooser[data-v-44387fee] {\r\n  max-height: 300px;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\NewElementChooser.vue"],"names":[],"mappings":";AAsDA;EACA,iBAAA;EACA,gBAAA;AACA","file":"NewElementChooser.vue","sourcesContent":["<template>\r\n  <base-dialog\r\n    ref=\"dialog\"\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :width=\"width\"\r\n    :loaded=\"true\"\r\n    :visible=\"dialogVisible\"\r\n    :tabbed=\"false\"\r\n    :hideCreate=\"true\"\r\n    cancelLabel=\"Cancel\"\r\n    @cancelClicked=\"closeDialog\"\r\n  >\r\n    <v-card class=\"scroll-chooser\" flat>\r\n      <slot />\r\n    </v-card>\r\n  </base-dialog>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop, Refs } from \"sitewhere-ide-common\";\r\nimport { ITabbedComponent } from \"sitewhere-ide-common\";\r\n\r\nimport BaseDialog from \"../dialog/BaseDialog.vue\";\r\n\r\n@Component({\r\n  components: { BaseDialog }\r\n})\r\nexport default class NewElementChooser extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly width!: number;\r\n\r\n  dialogVisible: boolean = false;\r\n\r\n  /** References */\r\n  $refs!: Refs<{\r\n    dialog: ITabbedComponent;\r\n  }>;\r\n\r\n  /** Open dialog */\r\n  openDialog(): void {\r\n    this.dialogVisible = true;\r\n  }\r\n\r\n  /** Close dialog */\r\n  closeDialog(): void {\r\n    this.dialogVisible = false;\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.scroll-chooser {\r\n  max-height: 300px;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-eb9f45e0_0", { source: "\n.scroll-chooser[data-v-eb9f45e0] {\r\n  max-height: 300px;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\NewElementChooser.vue"],"names":[],"mappings":";AAkDA;EACA,iBAAA;EACA,gBAAA;AACA","file":"NewElementChooser.vue","sourcesContent":["<template>\r\n  <base-dialog\r\n    ref=\"dialog\"\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :width=\"width\"\r\n    :loaded=\"true\"\r\n    :visible=\"dialogVisible\"\r\n    :tabbed=\"false\"\r\n    :hideCreate=\"true\"\r\n    cancelLabel=\"Cancel\"\r\n    @cancelClicked=\"closeDialog\"\r\n  >\r\n    <v-card class=\"scroll-chooser\" flat>\r\n      <slot />\r\n    </v-card>\r\n  </base-dialog>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop, Ref } from \"vue-property-decorator\";\r\nimport { ITabbedComponent } from \"sitewhere-ide-common\";\r\n\r\nimport BaseDialog from \"../dialog/BaseDialog.vue\";\r\n\r\n@Component({\r\n  components: { BaseDialog }\r\n})\r\nexport default class NewElementChooser extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly width!: number;\r\n  @Ref() readonly dialog!: BaseDialog;\r\n\r\n  dialogVisible: boolean = false;\r\n\r\n  /** Open dialog */\r\n  openDialog(): void {\r\n    this.dialogVisible = true;\r\n  }\r\n\r\n  /** Close dialog */\r\n  closeDialog(): void {\r\n    this.dialogVisible = false;\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.scroll-chooser {\r\n  max-height: 300px;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$l = "data-v-44387fee";
+  const __vue_scope_id__$t = "data-v-eb9f45e0";
   /* module identifier */
-  const __vue_module_identifier__$l = undefined;
+  const __vue_module_identifier__$t = undefined;
   /* functional template */
-  const __vue_is_functional_template__$l = false;
+  const __vue_is_functional_template__$t = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$l = normalizeComponent(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-    __vue_inject_styles__$l,
-    __vue_script__$l,
-    __vue_scope_id__$l,
-    __vue_is_functional_template__$l,
-    __vue_module_identifier__$l,
+  const __vue_component__$t = normalizeComponent(
+    { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
+    __vue_inject_styles__$t,
+    __vue_script__$t,
+    __vue_scope_id__$t,
+    __vue_is_functional_template__$t,
+    __vue_module_identifier__$t,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var NewElementChooser$1 = /** @class */ (function (_super) {
-    __extends(NewElementChooser, _super);
-    function NewElementChooser() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
+let NewElementChooser$1 = class NewElementChooser extends Vue {
     /** Called when the element is clicked */
-    NewElementChooser.prototype.onElementClicked = function () {
+    onElementClicked() {
         this.$emit("chosen", this.itemId);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NewElementChooser.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NewElementChooser.prototype, "itemId", void 0);
-    NewElementChooser = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], NewElementChooser);
-    return NewElementChooser;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NewElementChooser$1.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NewElementChooser$1.prototype, "itemId", void 0);
+NewElementChooser$1 = __decorate([
+    Component({
+        components: {}
+    })
+], NewElementChooser$1);
+var script$s = NewElementChooser$1;
 
 /* script */
-const __vue_script__$m = NewElementChooser$1;
+const __vue_script__$u = script$s;
 
 /* template */
-var __vue_render__$m = function() {
+var __vue_render__$u = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4110,6 +4761,7 @@ var __vue_render__$m = function() {
               _c("v-icon", { staticClass: "mr-2", attrs: { small: "" } }, [
                 _vm._v(_vm._s(_vm.icon))
               ]),
+              _vm._v(" "),
               _vm._t("default")
             ],
             2
@@ -4123,62 +4775,58 @@ var __vue_render__$m = function() {
     1
   )
 };
-var __vue_staticRenderFns__$m = [];
-__vue_render__$m._withStripped = true;
+var __vue_staticRenderFns__$u = [];
+__vue_render__$u._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$m = function (inject) {
+  const __vue_inject_styles__$u = function (inject) {
     if (!inject) return
-    inject("data-v-6f59a340_0", { source: "\n.elm-entry[data-v-6f59a340] {\r\n  cursor: pointer;\r\n  border-left: 5px solid transparent;\n}\n.elm-entry[data-v-6f59a340]:hover {\r\n  border-left: 5px solid #ccc;\r\n  background-color: #eee;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\NewElementEntry.vue"],"names":[],"mappings":";AA+BA;EACA,eAAA;EACA,kCAAA;AACA;AACA;EACA,2BAAA;EACA,sBAAA;AACA","file":"NewElementEntry.vue","sourcesContent":["<template>\r\n  <div>\r\n    <v-card flat>\r\n      <v-card-text class=\"elm-entry\" @click=\"onElementClicked\">\r\n        <v-icon small class=\"mr-2\">{{ icon }}</v-icon\r\n        ><slot\r\n      /></v-card-text>\r\n    </v-card>\r\n    <v-divider />\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class NewElementChooser extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly itemId!: string;\r\n\r\n  /** Called when the element is clicked */\r\n  onElementClicked(): void {\r\n    this.$emit(\"chosen\", this.itemId);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.elm-entry {\r\n  cursor: pointer;\r\n  border-left: 5px solid transparent;\r\n}\r\n.elm-entry:hover {\r\n  border-left: 5px solid #ccc;\r\n  background-color: #eee;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-6ff72e9a_0", { source: "\n.elm-entry[data-v-6ff72e9a] {\r\n  cursor: pointer;\r\n  border-left: 5px solid transparent;\n}\n.elm-entry[data-v-6ff72e9a]:hover {\r\n  border-left: 5px solid #ccc;\r\n  background-color: #eee;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\configuration\\NewElementEntry.vue"],"names":[],"mappings":";AA+BA;EACA,eAAA;EACA,kCAAA;AACA;AACA;EACA,2BAAA;EACA,sBAAA;AACA","file":"NewElementEntry.vue","sourcesContent":["<template>\r\n  <div>\r\n    <v-card flat>\r\n      <v-card-text class=\"elm-entry\" @click=\"onElementClicked\">\r\n        <v-icon small class=\"mr-2\">{{ icon }}</v-icon>\r\n        <slot />\r\n      </v-card-text>\r\n    </v-card>\r\n    <v-divider />\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({\r\n  components: {}\r\n})\r\nexport default class NewElementChooser extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly itemId!: string;\r\n\r\n  /** Called when the element is clicked */\r\n  onElementClicked(): void {\r\n    this.$emit(\"chosen\", this.itemId);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.elm-entry {\r\n  cursor: pointer;\r\n  border-left: 5px solid transparent;\r\n}\r\n.elm-entry:hover {\r\n  border-left: 5px solid #ccc;\r\n  background-color: #eee;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$m = "data-v-6f59a340";
+  const __vue_scope_id__$u = "data-v-6ff72e9a";
   /* module identifier */
-  const __vue_module_identifier__$m = undefined;
+  const __vue_module_identifier__$u = undefined;
   /* functional template */
-  const __vue_is_functional_template__$m = false;
+  const __vue_is_functional_template__$u = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$m = normalizeComponent(
-    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-    __vue_inject_styles__$m,
-    __vue_script__$m,
-    __vue_scope_id__$m,
-    __vue_is_functional_template__$m,
-    __vue_module_identifier__$m,
+  const __vue_component__$u = normalizeComponent(
+    { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
+    __vue_inject_styles__$u,
+    __vue_script__$u,
+    __vue_scope_id__$u,
+    __vue_is_functional_template__$u,
+    __vue_module_identifier__$u,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var PageHeader = /** @class */ (function (_super) {
-    __extends(PageHeader, _super);
-    function PageHeader() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], PageHeader.prototype, "text", void 0);
-    PageHeader = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {}
-        })
-    ], PageHeader);
-    return PageHeader;
-}(Vue));
+let PageHeader = class PageHeader extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], PageHeader.prototype, "text", void 0);
+PageHeader = __decorate([
+    Component({
+        components: {}
+    })
+], PageHeader);
+var script$t = PageHeader;
 
 /* script */
-const __vue_script__$n = PageHeader;
+const __vue_script__$v = script$t;
 
 /* template */
-var __vue_render__$n = function() {
+var __vue_render__$v = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4192,56 +4840,52 @@ var __vue_render__$n = function() {
     [_vm._v(_vm._s(_vm.text))]
   )
 };
-var __vue_staticRenderFns__$n = [];
-__vue_render__$n._withStripped = true;
+var __vue_staticRenderFns__$v = [];
+__vue_render__$v._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$n = function (inject) {
+  const __vue_inject_styles__$v = function (inject) {
     if (!inject) return
-    inject("data-v-3f8202af_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"PageHeader.vue"}, media: undefined });
+    inject("data-v-71f36d8d_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"PageHeader.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$n = "data-v-3f8202af";
+  const __vue_scope_id__$v = "data-v-71f36d8d";
   /* module identifier */
-  const __vue_module_identifier__$n = undefined;
+  const __vue_module_identifier__$v = undefined;
   /* functional template */
-  const __vue_is_functional_template__$n = false;
+  const __vue_is_functional_template__$v = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$n = normalizeComponent(
-    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
-    __vue_inject_styles__$n,
-    __vue_script__$n,
-    __vue_scope_id__$n,
-    __vue_is_functional_template__$n,
-    __vue_module_identifier__$n,
+  const __vue_component__$v = normalizeComponent(
+    { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
+    __vue_inject_styles__$v,
+    __vue_script__$v,
+    __vue_scope_id__$v,
+    __vue_is_functional_template__$v,
+    __vue_module_identifier__$v,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var DialogForm = /** @class */ (function (_super) {
-    __extends(DialogForm, _super);
-    function DialogForm() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DialogForm = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], DialogForm);
-    return DialogForm;
-}(Vue));
+let DialogForm = class DialogForm extends Vue {
+};
+DialogForm = __decorate([
+    Component({})
+], DialogForm);
+var script$u = DialogForm;
 
 /* script */
-const __vue_script__$o = DialogForm;
+const __vue_script__$w = script$u;
 
 /* template */
-var __vue_render__$o = function() {
+var __vue_render__$w = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4259,17 +4903,17 @@ var __vue_render__$o = function() {
     1
   )
 };
-var __vue_staticRenderFns__$o = [];
-__vue_render__$o._withStripped = true;
+var __vue_staticRenderFns__$w = [];
+__vue_render__$w._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$o = undefined;
+  const __vue_inject_styles__$w = undefined;
   /* scoped */
-  const __vue_scope_id__$o = undefined;
+  const __vue_scope_id__$w = undefined;
   /* module identifier */
-  const __vue_module_identifier__$o = undefined;
+  const __vue_module_identifier__$w = undefined;
   /* functional template */
-  const __vue_is_functional_template__$o = false;
+  const __vue_is_functional_template__$w = false;
   /* style inject */
   
   /* style inject SSR */
@@ -4278,73 +4922,65 @@ __vue_render__$o._withStripped = true;
   
 
   
-  const __vue_component__$o = normalizeComponent(
-    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
+  const __vue_component__$w = normalizeComponent(
+    { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
+    __vue_inject_styles__$w,
+    __vue_script__$w,
+    __vue_scope_id__$w,
+    __vue_is_functional_template__$w,
+    __vue_module_identifier__$w,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var FormDateTimePicker = /** @class */ (function (_super) {
-    __extends(FormDateTimePicker, _super);
-    function FormDateTimePicker() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let FormDateTimePicker = class FormDateTimePicker extends Vue {
+    get wrapped() {
+        return this.value;
     }
-    Object.defineProperty(FormDateTimePicker.prototype, "wrapped", {
-        get: function () {
-            return this.value;
-        },
-        set: function (updated) {
-            this.$emit("input", updated);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormDateTimePicker.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormDateTimePicker.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormDateTimePicker.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormDateTimePicker.prototype, "required", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormDateTimePicker.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormDateTimePicker.prototype, "type", void 0);
-    FormDateTimePicker = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                DateTimePicker: __vue_component__$4
-            }
-        })
-    ], FormDateTimePicker);
-    return FormDateTimePicker;
-}(Vue));
+    set wrapped(updated) {
+        this.$emit("input", updated);
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormDateTimePicker.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormDateTimePicker.prototype, "label", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormDateTimePicker.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormDateTimePicker.prototype, "required", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormDateTimePicker.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormDateTimePicker.prototype, "type", void 0);
+FormDateTimePicker = __decorate([
+    Component({
+        components: {
+            DateTimePicker: __vue_component__$c
+        }
+    })
+], FormDateTimePicker);
+var script$v = FormDateTimePicker;
 
 /* script */
-const __vue_script__$p = FormDateTimePicker;
+const __vue_script__$x = script$v;
 
 /* template */
-var __vue_render__$p = function() {
+var __vue_render__$x = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4368,17 +5004,17 @@ var __vue_render__$p = function() {
     1
   )
 };
-var __vue_staticRenderFns__$p = [];
-__vue_render__$p._withStripped = true;
+var __vue_staticRenderFns__$x = [];
+__vue_render__$x._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$p = undefined;
+  const __vue_inject_styles__$x = undefined;
   /* scoped */
-  const __vue_scope_id__$p = undefined;
+  const __vue_scope_id__$x = undefined;
   /* module identifier */
-  const __vue_module_identifier__$p = undefined;
+  const __vue_module_identifier__$x = undefined;
   /* functional template */
-  const __vue_is_functional_template__$p = false;
+  const __vue_is_functional_template__$x = false;
   /* style inject */
   
   /* style inject SSR */
@@ -4387,88 +5023,80 @@ __vue_render__$p._withStripped = true;
   
 
   
-  const __vue_component__$p = normalizeComponent(
-    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
-    __vue_inject_styles__$p,
-    __vue_script__$p,
-    __vue_scope_id__$p,
-    __vue_is_functional_template__$p,
-    __vue_module_identifier__$p,
+  const __vue_component__$x = normalizeComponent(
+    { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
+    __vue_inject_styles__$x,
+    __vue_script__$x,
+    __vue_scope_id__$x,
+    __vue_is_functional_template__$x,
+    __vue_module_identifier__$x,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var FormSelect = /** @class */ (function (_super) {
-    __extends(FormSelect, _super);
-    function FormSelect() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let FormSelect = class FormSelect extends Vue {
+    get wrapped() {
+        return this.value;
     }
-    Object.defineProperty(FormSelect.prototype, "wrapped", {
-        get: function () {
-            return this.value;
-        },
-        set: function (updated) {
-            this.$emit("input", updated);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    FormSelect.prototype.onSelectionChanged = function (selection) {
+    set wrapped(updated) {
+        this.$emit("input", updated);
+    }
+    onSelectionChanged(selection) {
         this.$emit("change", selection);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], FormSelect.prototype, "items", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormSelect.prototype, "required", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "itemText", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "itemValue", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormSelect.prototype, "multiple", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormSelect.prototype, "chips", void 0);
-    FormSelect = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], FormSelect);
-    return FormSelect;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect.prototype, "label", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], FormSelect.prototype, "items", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormSelect.prototype, "required", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect.prototype, "itemText", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect.prototype, "itemValue", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormSelect.prototype, "multiple", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormSelect.prototype, "chips", void 0);
+FormSelect = __decorate([
+    Component({})
+], FormSelect);
+var script$w = FormSelect;
 
 /* script */
-const __vue_script__$q = FormSelect;
+const __vue_script__$y = script$w;
 
 /* template */
-var __vue_render__$q = function() {
+var __vue_render__$y = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4507,109 +5135,101 @@ var __vue_render__$q = function() {
     1
   )
 };
-var __vue_staticRenderFns__$q = [];
-__vue_render__$q._withStripped = true;
+var __vue_staticRenderFns__$y = [];
+__vue_render__$y._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$q = function (inject) {
+  const __vue_inject_styles__$y = function (inject) {
     if (!inject) return
-    inject("data-v-0882046e_0", { source: "\n.text-field-input[data-v-0882046e] i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\FormSelect.vue"],"names":[],"mappings":";AAyDA;EACA,eAAA;EACA,WAAA;AACA","file":"FormSelect.vue","sourcesContent":["<template>\r\n  <div class=\"mb-3\">\r\n    <v-select\r\n      class=\"text-field-input\"\r\n      :required=\"required\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :items=\"items\"\r\n      v-model=\"wrapped\"\r\n      :multiple=\"multiple\"\r\n      :item-text=\"itemText\"\r\n      :item-value=\"itemValue\"\r\n      :chips=\"chips\"\r\n      :prepend-icon=\"icon\"\r\n      :menu-props=\"{ closeOnContentClick: true }\"\r\n      :hide-details=\"true\"\r\n      placeholder=\" \"\r\n      @change=\"onSelectionChanged\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class FormSelect extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly items!: {}[];\r\n  @Prop() readonly required!: boolean;\r\n  @Prop() readonly value!: string;\r\n  @Prop() readonly itemText!: string;\r\n  @Prop() readonly itemValue!: string;\r\n  @Prop() readonly multiple!: boolean;\r\n  @Prop() readonly chips!: boolean;\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  onSelectionChanged(selection: any) {\r\n    this.$emit(\"change\", selection);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-b48b6b86_0", { source: "\n.text-field-input[data-v-b48b6b86] i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\FormSelect.vue"],"names":[],"mappings":";AAyDA;EACA,eAAA;EACA,WAAA;AACA","file":"FormSelect.vue","sourcesContent":["<template>\r\n  <div class=\"mb-3\">\r\n    <v-select\r\n      class=\"text-field-input\"\r\n      :required=\"required\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :items=\"items\"\r\n      v-model=\"wrapped\"\r\n      :multiple=\"multiple\"\r\n      :item-text=\"itemText\"\r\n      :item-value=\"itemValue\"\r\n      :chips=\"chips\"\r\n      :prepend-icon=\"icon\"\r\n      :menu-props=\"{ closeOnContentClick: true }\"\r\n      :hide-details=\"true\"\r\n      placeholder=\" \"\r\n      @change=\"onSelectionChanged\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class FormSelect extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly items!: {}[];\r\n  @Prop() readonly required!: boolean;\r\n  @Prop() readonly value!: string;\r\n  @Prop() readonly itemText!: string;\r\n  @Prop() readonly itemValue!: string;\r\n  @Prop() readonly multiple!: boolean;\r\n  @Prop() readonly chips!: boolean;\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  onSelectionChanged(selection: any) {\r\n    this.$emit(\"change\", selection);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$q = "data-v-0882046e";
+  const __vue_scope_id__$y = "data-v-b48b6b86";
   /* module identifier */
-  const __vue_module_identifier__$q = undefined;
+  const __vue_module_identifier__$y = undefined;
   /* functional template */
-  const __vue_is_functional_template__$q = false;
+  const __vue_is_functional_template__$y = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$q = normalizeComponent(
-    { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
-    __vue_inject_styles__$q,
-    __vue_script__$q,
-    __vue_scope_id__$q,
-    __vue_is_functional_template__$q,
-    __vue_module_identifier__$q,
+  const __vue_component__$y = normalizeComponent(
+    { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
+    __vue_inject_styles__$y,
+    __vue_script__$y,
+    __vue_scope_id__$y,
+    __vue_is_functional_template__$y,
+    __vue_module_identifier__$y,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var FormSelect$1 = /** @class */ (function (_super) {
-    __extends(FormSelect, _super);
-    function FormSelect() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let FormSelect$1 = class FormSelect extends Vue {
+    get wrapped() {
+        return this.value;
     }
-    Object.defineProperty(FormSelect.prototype, "wrapped", {
-        get: function () {
-            return this.value;
-        },
-        set: function (updated) {
-            this.$emit("input", updated);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    FormSelect.prototype.onSelectionChanged = function (selection) {
+    set wrapped(updated) {
+        this.$emit("input", updated);
+    }
+    onSelectionChanged(selection) {
         this.$emit("change", selection);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], FormSelect.prototype, "items", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormSelect.prototype, "required", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "itemText", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormSelect.prototype, "itemValue", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormSelect.prototype, "multiple", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormSelect.prototype, "chips", void 0);
-    FormSelect = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], FormSelect);
-    return FormSelect;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect$1.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect$1.prototype, "label", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect$1.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], FormSelect$1.prototype, "items", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormSelect$1.prototype, "required", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect$1.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect$1.prototype, "itemText", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormSelect$1.prototype, "itemValue", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormSelect$1.prototype, "multiple", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormSelect$1.prototype, "chips", void 0);
+FormSelect$1 = __decorate([
+    Component({})
+], FormSelect$1);
+var script$x = FormSelect$1;
 
 /* script */
-const __vue_script__$r = FormSelect$1;
+const __vue_script__$z = script$x;
 
 /* template */
-var __vue_render__$r = function() {
+var __vue_render__$z = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4642,106 +5262,102 @@ var __vue_render__$r = function() {
     1
   )
 };
-var __vue_staticRenderFns__$r = [];
-__vue_render__$r._withStripped = true;
+var __vue_staticRenderFns__$z = [];
+__vue_render__$z._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$r = function (inject) {
+  const __vue_inject_styles__$z = function (inject) {
     if (!inject) return
-    inject("data-v-3eefd107_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormSelectCondensed.vue"}, media: undefined });
+    inject("data-v-b2c31850_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormSelectCondensed.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = "data-v-3eefd107";
+  const __vue_scope_id__$z = "data-v-b2c31850";
   /* module identifier */
-  const __vue_module_identifier__$r = undefined;
+  const __vue_module_identifier__$z = undefined;
   /* functional template */
-  const __vue_is_functional_template__$r = false;
+  const __vue_is_functional_template__$z = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$r = normalizeComponent(
-    { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
-    __vue_inject_styles__$r,
-    __vue_script__$r,
-    __vue_scope_id__$r,
-    __vue_is_functional_template__$r,
-    __vue_module_identifier__$r,
+  const __vue_component__$z = normalizeComponent(
+    { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
+    __vue_inject_styles__$z,
+    __vue_script__$z,
+    __vue_scope_id__$z,
+    __vue_is_functional_template__$z,
+    __vue_module_identifier__$z,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var FormText = /** @class */ (function (_super) {
-    __extends(FormText, _super);
-    function FormText() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let FormText = class FormText extends Vue {
+    get wrapped() {
+        return this.value;
     }
-    Object.defineProperty(FormText.prototype, "wrapped", {
-        get: function () {
-            return this.value;
-        },
-        set: function (updated) {
-            this.$emit("input", updated);
-        },
-        enumerable: true,
-        configurable: true
-    });
+    set wrapped(updated) {
+        this.$emit("input", updated);
+    }
     /** Focus the wrapped input */
-    FormText.prototype.focus = function () {
-        this.$refs.field.focus();
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormText.prototype, "required", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "value", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "type", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormText.prototype, "readonly", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormText.prototype, "dense", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormText.prototype, "autofocus", void 0);
-    FormText = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], FormText);
-    return FormText;
-}(Vue));
+    focus() {
+        this.field.focus();
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText.prototype, "label", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormText.prototype, "required", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText.prototype, "value", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText.prototype, "type", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormText.prototype, "readonly", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormText.prototype, "dense", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormText.prototype, "autofocus", void 0);
+__decorate([
+    Ref(),
+    __metadata("design:type", Object)
+], FormText.prototype, "field", void 0);
+FormText = __decorate([
+    Component({})
+], FormText);
+var script$y = FormText;
 
 /* script */
-const __vue_script__$s = FormText;
+const __vue_script__$A = script$y;
 
 /* template */
-var __vue_render__$s = function() {
+var __vue_render__$A = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4777,86 +5393,78 @@ var __vue_render__$s = function() {
     1
   )
 };
-var __vue_staticRenderFns__$s = [];
-__vue_render__$s._withStripped = true;
+var __vue_staticRenderFns__$A = [];
+__vue_render__$A._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$s = function (inject) {
+  const __vue_inject_styles__$A = function (inject) {
     if (!inject) return
-    inject("data-v-9a6194a8_0", { source: "\n.text-field-input[data-v-9a6194a8] i.v-icon {\r\n  font-size: 16px;\r\n  color: #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\FormText.vue"],"names":[],"mappings":";AA2DA;EACA,eAAA;EACA,WAAA;AACA","file":"FormText.vue","sourcesContent":["<template>\r\n  <div :class=\"!dense ? 'mb-3' : ''\">\r\n    <v-text-field\r\n      ref=\"field\"\r\n      class=\"text-field-input\"\r\n      :required=\"required\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :type=\"type\"\r\n      placeholder=\" \"\r\n      v-model=\"wrapped\"\r\n      hide-details\r\n      :prepend-icon=\"icon\"\r\n      :disabled=\"readonly\"\r\n      :autofocus=\"autofocus\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop, Refs } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class FormText extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly required!: boolean;\r\n  @Prop() readonly value!: string;\r\n  @Prop() readonly type!: string;\r\n  @Prop() readonly readonly!: boolean;\r\n  @Prop() readonly dense!: boolean;\r\n  @Prop() readonly autofocus!: boolean;\r\n\r\n  // References.\r\n  $refs!: Refs<{\r\n    field: any;\r\n  }>;\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  /** Focus the wrapped input */\r\n  focus(): void {\r\n    this.$refs.field.focus();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-507e3f55_0", { source: "\n.text-field-input[data-v-507e3f55] i.v-icon {\r\n  font-size: 16px;\r\n  color: #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\FormText.vue"],"names":[],"mappings":";AAuDA;EACA,eAAA;EACA,WAAA;AACA","file":"FormText.vue","sourcesContent":["<template>\r\n  <div :class=\"!dense ? 'mb-3' : ''\">\r\n    <v-text-field\r\n      ref=\"field\"\r\n      class=\"text-field-input\"\r\n      :required=\"required\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :type=\"type\"\r\n      placeholder=\" \"\r\n      v-model=\"wrapped\"\r\n      hide-details\r\n      :prepend-icon=\"icon\"\r\n      :disabled=\"readonly\"\r\n      :autofocus=\"autofocus\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop, Ref } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class FormText extends Vue {\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly required!: boolean;\r\n  @Prop() readonly value!: string;\r\n  @Prop() readonly type!: string;\r\n  @Prop() readonly readonly!: boolean;\r\n  @Prop() readonly dense!: boolean;\r\n  @Prop() readonly autofocus!: boolean;\r\n  @Ref() readonly field!: any;\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  /** Focus the wrapped input */\r\n  focus(): void {\r\n    this.field.focus();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$s = "data-v-9a6194a8";
+  const __vue_scope_id__$A = "data-v-507e3f55";
   /* module identifier */
-  const __vue_module_identifier__$s = undefined;
+  const __vue_module_identifier__$A = undefined;
   /* functional template */
-  const __vue_is_functional_template__$s = false;
+  const __vue_is_functional_template__$A = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$s = normalizeComponent(
-    { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
-    __vue_inject_styles__$s,
-    __vue_script__$s,
-    __vue_scope_id__$s,
-    __vue_is_functional_template__$s,
-    __vue_module_identifier__$s,
+  const __vue_component__$A = normalizeComponent(
+    { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
+    __vue_inject_styles__$A,
+    __vue_script__$A,
+    __vue_scope_id__$A,
+    __vue_is_functional_template__$A,
+    __vue_module_identifier__$A,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var FormText$1 = /** @class */ (function (_super) {
-    __extends(FormText, _super);
-    function FormText() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let FormText$1 = class FormText extends Vue {
+    get wrapped() {
+        return this.value;
     }
-    Object.defineProperty(FormText.prototype, "wrapped", {
-        get: function () {
-            return this.value;
-        },
-        set: function (updated) {
-            this.$emit("input", updated);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], FormText.prototype, "required", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], FormText.prototype, "value", void 0);
-    FormText = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], FormText);
-    return FormText;
-}(Vue));
+    set wrapped(updated) {
+        this.$emit("input", updated);
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText$1.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText$1.prototype, "label", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText$1.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], FormText$1.prototype, "required", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], FormText$1.prototype, "value", void 0);
+FormText$1 = __decorate([
+    Component({})
+], FormText$1);
+var script$z = FormText$1;
 
 /* script */
-const __vue_script__$t = FormText$1;
+const __vue_script__$B = script$z;
 
 /* template */
-var __vue_render__$t = function() {
+var __vue_render__$B = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -4887,125 +5495,109 @@ var __vue_render__$t = function() {
     1
   )
 };
-var __vue_staticRenderFns__$t = [];
-__vue_render__$t._withStripped = true;
+var __vue_staticRenderFns__$B = [];
+__vue_render__$B._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$t = function (inject) {
+  const __vue_inject_styles__$B = function (inject) {
     if (!inject) return
-    inject("data-v-8074332e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormTextArea.vue"}, media: undefined });
+    inject("data-v-2009c778_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"FormTextArea.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$t = "data-v-8074332e";
+  const __vue_scope_id__$B = "data-v-2009c778";
   /* module identifier */
-  const __vue_module_identifier__$t = undefined;
+  const __vue_module_identifier__$B = undefined;
   /* functional template */
-  const __vue_is_functional_template__$t = false;
+  const __vue_is_functional_template__$B = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$t = normalizeComponent(
-    { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
-    __vue_inject_styles__$t,
-    __vue_script__$t,
-    __vue_scope_id__$t,
-    __vue_is_functional_template__$t,
-    __vue_module_identifier__$t,
+  const __vue_component__$B = normalizeComponent(
+    { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
+    __vue_inject_styles__$B,
+    __vue_script__$B,
+    __vue_scope_id__$B,
+    __vue_is_functional_template__$B,
+    __vue_module_identifier__$B,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ScriptChooser = /** @class */ (function (_super) {
-    __extends(ScriptChooser, _super);
-    function ScriptChooser() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.items = [];
-        return _this;
+let ScriptChooser = class ScriptChooser extends Vue {
+    constructor() {
+        super(...arguments);
+        this.items = [];
     }
-    Object.defineProperty(ScriptChooser.prototype, "wrapped", {
-        get: function () {
-            return this.value;
-        },
-        set: function (updated) {
-            this.$emit("input", updated);
-        },
-        enumerable: true,
-        configurable: true
-    });
+    get wrapped() {
+        return this.value;
+    }
+    set wrapped(updated) {
+        this.$emit("input", updated);
+    }
     /** Perform reset on initial create */
-    ScriptChooser.prototype.created = function () {
+    created() {
         this.reset();
-    };
+    }
     /** Reload list of scripts for functional area */
-    ScriptChooser.prototype.reset = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, err_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, sitewhereIdeCommon.listTenantScriptsForCategory(this.$store, this.functionalArea, this.tenantId, this.category)];
-                    case 1:
-                        response = _a.sent();
-                        this.items = response.data;
-                        return [3 /*break*/, 3];
-                    case 2:
-                        err_1 = _a.sent();
-                        sitewhereIdeCommon.showError(this, err_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
+    reset() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let response = yield listTenantScriptsForCategory(this.$store, this.functionalArea, this.tenantId, this.category);
+                this.items = response.data;
+            }
+            catch (err) {
+                showError(this, err);
+            }
         });
-    };
-    ScriptChooser.prototype.onSelectionChanged = function (selection) {
+    }
+    onSelectionChanged(selection) {
         this.$emit("change", selection);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "tenantId", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "functionalArea", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "category", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "label", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ScriptChooser.prototype, "value", void 0);
-    ScriptChooser = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], ScriptChooser);
-    return ScriptChooser;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "tenantId", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "functionalArea", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "category", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "label", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ScriptChooser.prototype, "value", void 0);
+ScriptChooser = __decorate([
+    Component({})
+], ScriptChooser);
+var script$A = ScriptChooser;
 
 /* script */
-const __vue_script__$u = ScriptChooser;
+const __vue_script__$C = script$A;
 
 /* template */
-var __vue_render__$u = function() {
+var __vue_render__$C = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5042,85 +5634,83 @@ var __vue_render__$u = function() {
     1
   )
 };
-var __vue_staticRenderFns__$u = [];
-__vue_render__$u._withStripped = true;
+var __vue_staticRenderFns__$C = [];
+__vue_render__$C._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$u = function (inject) {
+  const __vue_inject_styles__$C = function (inject) {
     if (!inject) return
-    inject("data-v-a4640536_0", { source: "\n.text-field-input[data-v-a4640536] i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\ScriptChooser.vue"],"names":[],"mappings":";AAkFA;EACA,eAAA;EACA,WAAA;AACA","file":"ScriptChooser.vue","sourcesContent":["<template>\r\n  <div class=\"mb-3\">\r\n    <v-select\r\n      class=\"text-field-input\"\r\n      :required=\"true\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :items=\"items\"\r\n      v-model=\"wrapped\"\r\n      item-text=\"name\"\r\n      item-value=\"id\"\r\n      :prepend-icon=\"icon\"\r\n      :menu-props=\"{ closeOnContentClick: true }\"\r\n      :hide-details=\"true\"\r\n      placeholder=\" \"\r\n      @change=\"onSelectionChanged\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport {\r\n  Component,\r\n  Prop,\r\n  listTenantScriptsForCategory\r\n} from \"sitewhere-ide-common\";\r\n\r\nimport { AxiosResponse } from \"axios\";\r\nimport { IScriptMetadata } from \"sitewhere-rest-api\";\r\nimport { showError } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class ScriptChooser extends Vue {\r\n  @Prop() readonly tenantId!: string;\r\n  @Prop() readonly functionalArea!: string;\r\n  @Prop() readonly category!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly value!: string;\r\n\r\n  items: IScriptMetadata[] = [];\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  /** Perform reset on initial create */\r\n  created() {\r\n    this.reset();\r\n  }\r\n\r\n  /** Reload list of scripts for functional area */\r\n  async reset() {\r\n    try {\r\n      let response: AxiosResponse<IScriptMetadata[]> = await listTenantScriptsForCategory(\r\n        this.$store,\r\n        this.functionalArea,\r\n        this.tenantId,\r\n        this.category\r\n      );\r\n      this.items = response.data;\r\n    } catch (err) {\r\n      showError(this, err);\r\n    }\r\n  }\r\n\r\n  onSelectionChanged(selection: any) {\r\n    this.$emit(\"change\", selection);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-dd48b850_0", { source: "\n.text-field-input[data-v-dd48b850] i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\common\\form\\ScriptChooser.vue"],"names":[],"mappings":";AA8EA;EACA,eAAA;EACA,WAAA;AACA","file":"ScriptChooser.vue","sourcesContent":["<template>\r\n  <div class=\"mb-3\">\r\n    <v-select\r\n      class=\"text-field-input\"\r\n      :required=\"true\"\r\n      :title=\"title\"\r\n      :label=\"label\"\r\n      :items=\"items\"\r\n      v-model=\"wrapped\"\r\n      item-text=\"name\"\r\n      item-value=\"id\"\r\n      :prepend-icon=\"icon\"\r\n      :menu-props=\"{ closeOnContentClick: true }\"\r\n      :hide-details=\"true\"\r\n      placeholder=\" \"\r\n      @change=\"onSelectionChanged\"\r\n    />\r\n    <div class=\"verror\">\r\n      <slot />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\nimport { listTenantScriptsForCategory, showError } from \"sitewhere-ide-common\";\r\n\r\nimport { AxiosResponse } from \"axios\";\r\nimport { IScriptMetadata } from \"sitewhere-rest-api\";\r\n\r\n@Component({})\r\nexport default class ScriptChooser extends Vue {\r\n  @Prop() readonly tenantId!: string;\r\n  @Prop() readonly functionalArea!: string;\r\n  @Prop() readonly category!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly label!: string;\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly value!: string;\r\n\r\n  items: IScriptMetadata[] = [];\r\n\r\n  get wrapped(): string {\r\n    return this.value;\r\n  }\r\n\r\n  set wrapped(updated: string) {\r\n    this.$emit(\"input\", updated);\r\n  }\r\n\r\n  /** Perform reset on initial create */\r\n  created() {\r\n    this.reset();\r\n  }\r\n\r\n  /** Reload list of scripts for functional area */\r\n  async reset() {\r\n    try {\r\n      let response: AxiosResponse<IScriptMetadata[]> = await listTenantScriptsForCategory(\r\n        this.$store,\r\n        this.functionalArea,\r\n        this.tenantId,\r\n        this.category\r\n      );\r\n      this.items = response.data;\r\n    } catch (err) {\r\n      showError(this, err);\r\n    }\r\n  }\r\n\r\n  onSelectionChanged(selection: any) {\r\n    this.$emit(\"change\", selection);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.text-field-input >>> i.v-icon {\r\n  font-size: 16px;\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$u = "data-v-a4640536";
+  const __vue_scope_id__$C = "data-v-dd48b850";
   /* module identifier */
-  const __vue_module_identifier__$u = undefined;
+  const __vue_module_identifier__$C = undefined;
   /* functional template */
-  const __vue_is_functional_template__$u = false;
+  const __vue_is_functional_template__$C = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$u = normalizeComponent(
-    { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
-    __vue_inject_styles__$u,
-    __vue_script__$u,
-    __vue_scope_id__$u,
-    __vue_is_functional_template__$u,
-    __vue_module_identifier__$u,
+  const __vue_component__$C = normalizeComponent(
+    { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
+    __vue_inject_styles__$C,
+    __vue_script__$C,
+    __vue_scope_id__$C,
+    __vue_is_functional_template__$C,
+    __vue_module_identifier__$C,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ConfirmDialog = /** @class */ (function (_super) {
-    __extends(ConfirmDialog, _super);
-    function ConfirmDialog() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.visible = false;
-        _this.error = null;
-        return _this;
+let ConfirmDialog = class ConfirmDialog extends Vue {
+    constructor() {
+        super(...arguments);
+        this.visible = false;
+        this.error = null;
     }
     /** Called to open the dialog */
-    ConfirmDialog.prototype.open = function () {
+    open() {
         this.visible = true;
-    };
+    }
     /** Called when action button is clicked */
-    ConfirmDialog.prototype.onActionConfirmed = function () {
+    onActionConfirmed() {
         this.$emit("confirmed");
         this.visible = false;
-    };
+    }
     /** Called after cancel button is clicked */
-    ConfirmDialog.prototype.onCancelClicked = function (e) {
+    onCancelClicked(e) {
         this.$emit("cancelled");
         this.visible = false;
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ConfirmDialog.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Number)
-    ], ConfirmDialog.prototype, "width", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ConfirmDialog.prototype, "buttonText", void 0);
-    ConfirmDialog = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], ConfirmDialog);
-    return ConfirmDialog;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ConfirmDialog.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Number)
+], ConfirmDialog.prototype, "width", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ConfirmDialog.prototype, "buttonText", void 0);
+ConfirmDialog = __decorate([
+    Component({})
+], ConfirmDialog);
+var script$B = ConfirmDialog;
 
 /* script */
-const __vue_script__$v = ConfirmDialog;
+const __vue_script__$D = script$B;
 
 /* template */
-var __vue_render__$v = function() {
+var __vue_render__$D = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5197,17 +5787,17 @@ var __vue_render__$v = function() {
     1
   )
 };
-var __vue_staticRenderFns__$v = [];
-__vue_render__$v._withStripped = true;
+var __vue_staticRenderFns__$D = [];
+__vue_render__$D._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$v = undefined;
+  const __vue_inject_styles__$D = undefined;
   /* scoped */
-  const __vue_scope_id__$v = undefined;
+  const __vue_scope_id__$D = undefined;
   /* module identifier */
-  const __vue_module_identifier__$v = undefined;
+  const __vue_module_identifier__$D = undefined;
   /* functional template */
-  const __vue_is_functional_template__$v = false;
+  const __vue_is_functional_template__$D = false;
   /* style inject */
   
   /* style inject SSR */
@@ -5216,63 +5806,59 @@ __vue_render__$v._withStripped = true;
   
 
   
-  const __vue_component__$v = normalizeComponent(
-    { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
-    __vue_inject_styles__$v,
-    __vue_script__$v,
-    __vue_scope_id__$v,
-    __vue_is_functional_template__$v,
-    __vue_module_identifier__$v,
+  const __vue_component__$D = normalizeComponent(
+    { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
+    __vue_inject_styles__$D,
+    __vue_script__$D,
+    __vue_scope_id__$D,
+    __vue_is_functional_template__$D,
+    __vue_module_identifier__$D,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var DeleteDialog = /** @class */ (function (_super) {
-    __extends(DeleteDialog, _super);
-    function DeleteDialog() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
+let DeleteDialog = class DeleteDialog extends Vue {
     // Called after create button is clicked.
-    DeleteDialog.prototype.onDeleteClicked = function (e) {
+    onDeleteClicked(e) {
         this.$emit("delete");
-    };
+    }
     // Called after cancel button is clicked.
-    DeleteDialog.prototype.onCancelClicked = function (e) {
+    onCancelClicked(e) {
         this.$emit("cancel");
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DeleteDialog.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Number)
-    ], DeleteDialog.prototype, "width", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DeleteDialog.prototype, "error", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: false }),
-        __metadata("design:type", Boolean)
-    ], DeleteDialog.prototype, "visible", void 0);
-    DeleteDialog = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                ErrorBanner: __vue_component__$5
-            }
-        })
-    ], DeleteDialog);
-    return DeleteDialog;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DeleteDialog.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Number)
+], DeleteDialog.prototype, "width", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DeleteDialog.prototype, "error", void 0);
+__decorate([
+    Prop({ default: false }),
+    __metadata("design:type", Boolean)
+], DeleteDialog.prototype, "visible", void 0);
+DeleteDialog = __decorate([
+    Component({
+        components: {
+            ErrorBanner: __vue_component__$d
+        }
+    })
+], DeleteDialog);
+var script$C = DeleteDialog;
 
 /* script */
-const __vue_script__$w = DeleteDialog;
+const __vue_script__$E = script$C;
 
 /* template */
-var __vue_render__$w = function() {
+var __vue_render__$E = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5363,56 +5949,52 @@ var __vue_render__$w = function() {
     1
   )
 };
-var __vue_staticRenderFns__$w = [];
-__vue_render__$w._withStripped = true;
+var __vue_staticRenderFns__$E = [];
+__vue_render__$E._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$w = function (inject) {
+  const __vue_inject_styles__$E = function (inject) {
     if (!inject) return
-    inject("data-v-5453c202_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DeleteDialog.vue"}, media: undefined });
+    inject("data-v-188445d0_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DeleteDialog.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$w = "data-v-5453c202";
+  const __vue_scope_id__$E = "data-v-188445d0";
   /* module identifier */
-  const __vue_module_identifier__$w = undefined;
+  const __vue_module_identifier__$E = undefined;
   /* functional template */
-  const __vue_is_functional_template__$w = false;
+  const __vue_is_functional_template__$E = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$w = normalizeComponent(
-    { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
-    __vue_inject_styles__$w,
-    __vue_script__$w,
-    __vue_scope_id__$w,
-    __vue_is_functional_template__$w,
-    __vue_module_identifier__$w,
+  const __vue_component__$E = normalizeComponent(
+    { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
+    __vue_inject_styles__$E,
+    __vue_script__$E,
+    __vue_scope_id__$E,
+    __vue_is_functional_template__$E,
+    __vue_module_identifier__$E,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var DialogHeader = /** @class */ (function (_super) {
-    __extends(DialogHeader, _super);
-    function DialogHeader() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DialogHeader = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], DialogHeader);
-    return DialogHeader;
-}(Vue));
+let DialogHeader = class DialogHeader extends Vue {
+};
+DialogHeader = __decorate([
+    Component({})
+], DialogHeader);
+var script$D = DialogHeader;
 
 /* script */
-const __vue_script__$x = DialogHeader;
+const __vue_script__$F = script$D;
 
 /* template */
-var __vue_render__$x = function() {
+var __vue_render__$F = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5429,17 +6011,17 @@ var __vue_render__$x = function() {
     2
   )
 };
-var __vue_staticRenderFns__$x = [];
-__vue_render__$x._withStripped = true;
+var __vue_staticRenderFns__$F = [];
+__vue_render__$F._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$x = undefined;
+  const __vue_inject_styles__$F = undefined;
   /* scoped */
-  const __vue_scope_id__$x = undefined;
+  const __vue_scope_id__$F = undefined;
   /* module identifier */
-  const __vue_module_identifier__$x = undefined;
+  const __vue_module_identifier__$F = undefined;
   /* functional template */
-  const __vue_is_functional_template__$x = false;
+  const __vue_is_functional_template__$F = false;
   /* style inject */
   
   /* style inject SSR */
@@ -5448,13 +6030,13 @@ __vue_render__$x._withStripped = true;
   
 
   
-  const __vue_component__$x = normalizeComponent(
-    { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
-    __vue_inject_styles__$x,
-    __vue_script__$x,
-    __vue_scope_id__$x,
-    __vue_is_functional_template__$x,
-    __vue_module_identifier__$x,
+  const __vue_component__$F = normalizeComponent(
+    { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
+    __vue_inject_styles__$F,
+    __vue_script__$F,
+    __vue_scope_id__$F,
+    __vue_is_functional_template__$F,
+    __vue_module_identifier__$F,
     false,
     undefined,
     undefined,
@@ -5492,8 +6074,8 @@ function arrayToMetadata(arrayMeta) {
 /** Generate a unique id */
 function generateUniqueId() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-        var r = crypto.getRandomValues(new Uint8Array(1))[0] % 16 | 0;
-        var v = c === "x" ? r : (r & 0x3) | 0x8;
+        let r = crypto.getRandomValues(new Uint8Array(1))[0] % 16 | 0;
+        let v = c === "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
     });
 }
@@ -5520,51 +6102,49 @@ function arrayMove(arr, old_index, new_index) {
     return arr;
 }
 
-var MetadataPanel = /** @class */ (function (_super) {
-    __extends(MetadataPanel, _super);
-    function MetadataPanel() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.metadata = [];
-        _this.newItemName = "";
-        _this.newItemValue = "";
-        _this.error = null;
-        return _this;
+let MetadataPanel = class MetadataPanel extends __vue_component__$4 {
+    constructor() {
+        super(...arguments);
+        this.metadata = [];
+        this.newItemName = "";
+        this.newItemValue = "";
+        this.error = null;
     }
     /** Reset section content */
-    MetadataPanel.prototype.reset = function () {
+    reset() {
         this.metadata = [];
         this.error = null;
-    };
+    }
     /** Perform validation */
-    MetadataPanel.prototype.validate = function () {
+    validate() {
         return true;
-    };
+    }
     /** Load form data from an object */
-    MetadataPanel.prototype.load = function (input) {
-        var initial = input.metadata;
+    load(input) {
+        let initial = input.metadata;
         if (initial) {
             this.metadata = metadataToArray(initial);
         }
-    };
+    }
     /** Save form data to an object */
-    MetadataPanel.prototype.save = function () {
-        var updated = arrayToMetadata(this.metadata);
+    save() {
+        let updated = arrayToMetadata(this.metadata);
         return {
             metadata: updated
         };
-    };
+    }
     /** Delete an item */
-    MetadataPanel.prototype.onDeleteItem = function (deleteName) {
-        var updated = [];
-        this.metadata.forEach(function (item) {
+    onDeleteItem(deleteName) {
+        let updated = [];
+        this.metadata.forEach(item => {
             if (item.name !== deleteName) {
                 updated.push(item);
             }
         });
         this.metadata = updated;
-    };
+    }
     // Let owner know an item was added.
-    MetadataPanel.prototype.onAddItem = function () {
+    onAddItem() {
         var item = {
             name: this.newItemName,
             value: this.newItemValue
@@ -5584,78 +6164,74 @@ var MetadataPanel = /** @class */ (function (_super) {
             this.newItemValue = "";
             this.error = null;
         }
-    };
-    Object.defineProperty(MetadataPanel.prototype, "headers", {
-        get: function () {
-            if (!this.readOnly) {
-                return [
-                    {
-                        align: "left",
-                        sortable: false,
-                        text: "Name",
-                        value: "name"
-                    },
-                    {
-                        align: "left",
-                        sortable: false,
-                        text: "Value",
-                        value: "value"
-                    },
-                    {
-                        align: "left",
-                        sortable: false,
-                        text: "Delete",
-                        value: "value"
-                    }
-                ];
-            }
-            else {
-                return [
-                    {
-                        align: "left",
-                        sortable: false,
-                        text: "Name",
-                        value: "name"
-                    },
-                    {
-                        align: "left",
-                        sortable: false,
-                        text: "Value",
-                        value: "value"
-                    }
-                ];
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: false }),
-        __metadata("design:type", Boolean)
-    ], MetadataPanel.prototype, "readOnly", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: "No metadata has been assigned" }),
-        __metadata("design:type", String)
-    ], MetadataPanel.prototype, "noDataMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({
-            default: function () {
-                return [5];
-            }
-        }),
-        __metadata("design:type", Array)
-    ], MetadataPanel.prototype, "pageSizes", void 0);
-    MetadataPanel = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], MetadataPanel);
-    return MetadataPanel;
-}(sitewhereIdeCommon.DialogSection));
+    }
+    get headers() {
+        if (!this.readOnly) {
+            return [
+                {
+                    align: "left",
+                    sortable: false,
+                    text: "Name",
+                    value: "name"
+                },
+                {
+                    align: "left",
+                    sortable: false,
+                    text: "Value",
+                    value: "value"
+                },
+                {
+                    align: "left",
+                    sortable: false,
+                    text: "Delete",
+                    value: "value"
+                }
+            ];
+        }
+        else {
+            return [
+                {
+                    align: "left",
+                    sortable: false,
+                    text: "Name",
+                    value: "name"
+                },
+                {
+                    align: "left",
+                    sortable: false,
+                    text: "Value",
+                    value: "value"
+                }
+            ];
+        }
+    }
+};
+__decorate([
+    Prop({ default: false }),
+    __metadata("design:type", Boolean)
+], MetadataPanel.prototype, "readOnly", void 0);
+__decorate([
+    Prop({ default: "No metadata has been assigned" }),
+    __metadata("design:type", String)
+], MetadataPanel.prototype, "noDataMessage", void 0);
+__decorate([
+    Prop({
+        default: () => {
+            return [5];
+        }
+    }),
+    __metadata("design:type", Array)
+], MetadataPanel.prototype, "pageSizes", void 0);
+MetadataPanel = __decorate([
+    Component({})
+], MetadataPanel);
+var script$E = MetadataPanel;
 
 /* script */
-const __vue_script__$y = MetadataPanel;
+const __vue_script__$G = script$E;
 
 /* template */
-var __vue_render__$y = function() {
+var __vue_render__$G = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5872,56 +6448,52 @@ var __vue_render__$y = function() {
     1
   )
 };
-var __vue_staticRenderFns__$y = [];
-__vue_render__$y._withStripped = true;
+var __vue_staticRenderFns__$G = [];
+__vue_render__$G._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$y = function (inject) {
+  const __vue_inject_styles__$G = function (inject) {
     if (!inject) return
-    inject("data-v-496fb60c_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"MetadataPanel.vue"}, media: undefined });
+    inject("data-v-44add45b_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"MetadataPanel.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$y = "data-v-496fb60c";
+  const __vue_scope_id__$G = "data-v-44add45b";
   /* module identifier */
-  const __vue_module_identifier__$y = undefined;
+  const __vue_module_identifier__$G = undefined;
   /* functional template */
-  const __vue_is_functional_template__$y = false;
+  const __vue_is_functional_template__$G = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$y = normalizeComponent(
-    { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
-    __vue_inject_styles__$y,
-    __vue_script__$y,
-    __vue_scope_id__$y,
-    __vue_is_functional_template__$y,
-    __vue_module_identifier__$y,
+  const __vue_component__$G = normalizeComponent(
+    { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
+    __vue_inject_styles__$G,
+    __vue_script__$G,
+    __vue_scope_id__$G,
+    __vue_is_functional_template__$G,
+    __vue_module_identifier__$G,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ListEntry = /** @class */ (function (_super) {
-    __extends(ListEntry, _super);
-    function ListEntry() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ListEntry = __decorate([
-        sitewhereIdeCommon.Component
-    ], ListEntry);
-    return ListEntry;
-}(Vue));
+let ListEntry = class ListEntry extends Vue {
+};
+ListEntry = __decorate([
+    Component
+], ListEntry);
+var script$F = ListEntry;
 
 /* script */
-const __vue_script__$z = ListEntry;
+const __vue_script__$H = script$F;
 
 /* template */
-var __vue_render__$z = function() {
+var __vue_render__$H = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -5932,56 +6504,52 @@ var __vue_render__$z = function() {
     2
   )
 };
-var __vue_staticRenderFns__$z = [];
-__vue_render__$z._withStripped = true;
+var __vue_staticRenderFns__$H = [];
+__vue_render__$H._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$z = function (inject) {
+  const __vue_inject_styles__$H = function (inject) {
     if (!inject) return
-    inject("data-v-16a2b23b_0", { source: "\n.list-entry[data-v-16a2b23b] {\r\n  border: 1px solid #eee;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListEntry.vue"],"names":[],"mappings":";AAeA;EACA,sBAAA;AACA","file":"ListEntry.vue","sourcesContent":["<template>\r\n  <v-card class=\"list-entry\" flat hover>\r\n    <slot />\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component\r\nexport default class ListEntry extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.list-entry {\r\n  border: 1px solid #eee;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-459ba68c_0", { source: "\n.list-entry[data-v-459ba68c] {\r\n  border: 1px solid #eee;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListEntry.vue"],"names":[],"mappings":";AAeA;EACA,sBAAA;AACA","file":"ListEntry.vue","sourcesContent":["<template>\r\n  <v-card class=\"list-entry\" flat hover>\r\n    <slot />\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"vue-property-decorator\";\r\n\r\n@Component\r\nexport default class ListEntry extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.list-entry {\r\n  border: 1px solid #eee;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$z = "data-v-16a2b23b";
+  const __vue_scope_id__$H = "data-v-459ba68c";
   /* module identifier */
-  const __vue_module_identifier__$z = undefined;
+  const __vue_module_identifier__$H = undefined;
   /* functional template */
-  const __vue_is_functional_template__$z = false;
+  const __vue_is_functional_template__$H = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$z = normalizeComponent(
-    { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
-    __vue_inject_styles__$z,
-    __vue_script__$z,
-    __vue_scope_id__$z,
-    __vue_is_functional_template__$z,
-    __vue_module_identifier__$z,
+  const __vue_component__$H = normalizeComponent(
+    { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
+    __vue_inject_styles__$H,
+    __vue_script__$H,
+    __vue_scope_id__$H,
+    __vue_is_functional_template__$H,
+    __vue_module_identifier__$H,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ListLayout = /** @class */ (function (_super) {
-    __extends(ListLayout, _super);
-    function ListLayout() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ListLayout = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], ListLayout);
-    return ListLayout;
-}(Vue));
+let ListLayout = class ListLayout extends Vue {
+};
+ListLayout = __decorate([
+    Component({})
+], ListLayout);
+var script$G = ListLayout;
 
 /* script */
-const __vue_script__$A = ListLayout;
+const __vue_script__$I = script$G;
 
 /* template */
-var __vue_render__$A = function() {
+var __vue_render__$I = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6002,76 +6570,72 @@ var __vue_render__$A = function() {
     1
   )
 };
-var __vue_staticRenderFns__$A = [];
-__vue_render__$A._withStripped = true;
+var __vue_staticRenderFns__$I = [];
+__vue_render__$I._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$A = function (inject) {
+  const __vue_inject_styles__$I = function (inject) {
     if (!inject) return
-    inject("data-v-15fab996_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ListLayout.vue"}, media: undefined });
+    inject("data-v-6fee8c5e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"ListLayout.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$A = "data-v-15fab996";
+  const __vue_scope_id__$I = "data-v-6fee8c5e";
   /* module identifier */
-  const __vue_module_identifier__$A = undefined;
+  const __vue_module_identifier__$I = undefined;
   /* functional template */
-  const __vue_is_functional_template__$A = false;
+  const __vue_is_functional_template__$I = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$A = normalizeComponent(
-    { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
-    __vue_inject_styles__$A,
-    __vue_script__$A,
-    __vue_scope_id__$A,
-    __vue_is_functional_template__$A,
-    __vue_module_identifier__$A,
+  const __vue_component__$I = normalizeComponent(
+    { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
+    __vue_inject_styles__$I,
+    __vue_script__$I,
+    __vue_scope_id__$I,
+    __vue_is_functional_template__$I,
+    __vue_module_identifier__$I,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var NavigationPage = /** @class */ (function (_super) {
-    __extends(NavigationPage, _super);
-    function NavigationPage() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationPage.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationPage.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationPage.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], NavigationPage.prototype, "loaded", void 0);
-    NavigationPage = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                LoadingOverlay: __vue_component__$b
-            }
-        })
-    ], NavigationPage);
-    return NavigationPage;
-}(Vue));
+let NavigationPage = class NavigationPage extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NavigationPage.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NavigationPage.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NavigationPage.prototype, "loadingMessage", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], NavigationPage.prototype, "loaded", void 0);
+NavigationPage = __decorate([
+    Component({
+        components: {
+            LoadingOverlay: __vue_component__$j
+        }
+    })
+], NavigationPage);
+var script$H = NavigationPage;
 
 /* script */
-const __vue_script__$B = NavigationPage;
+const __vue_script__$J = script$H;
 
 /* template */
-var __vue_render__$B = function() {
+var __vue_render__$J = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6118,71 +6682,67 @@ var __vue_render__$B = function() {
     2
   )
 };
-var __vue_staticRenderFns__$B = [];
-__vue_render__$B._withStripped = true;
+var __vue_staticRenderFns__$J = [];
+__vue_render__$J._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$B = function (inject) {
+  const __vue_inject_styles__$J = function (inject) {
     if (!inject) return
-    inject("data-v-380c53f4_0", { source: "\n.flex-rows[data-v-380c53f4] {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.toolbar[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\n}\n.header[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\n}\n.content[data-v-380c53f4] {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\n}\n.footer[data-v-380c53f4] {\r\n  flex: 0;\r\n  z-index: 1;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationPage.vue"],"names":[],"mappings":";AA0CA;EACA,aAAA;EACA,sBAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;EACA,WAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA","file":"NavigationPage.vue","sourcesContent":["<template>\r\n  <v-card class=\"flex-rows\" flat fill-height>\r\n    <v-toolbar class=\"elevation-1 toolbar\" dense>\r\n      <v-icon>{{ icon }}</v-icon>\r\n      <v-toolbar-title class=\"ml-2 subheading\">{{ title }}</v-toolbar-title>\r\n      <v-spacer></v-spacer>\r\n      <slot name=\"actions\"/>\r\n    </v-toolbar>\r\n    <div class=\"header\">\r\n      <slot name=\"header\"/>\r\n    </div>\r\n    <div class=\"content\">\r\n      <slot v-if=\"loaded\" name=\"content\"/>\r\n    </div>\r\n    <div class=\"footer\">\r\n      <slot name=\"footer\"/>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\"/>\r\n    <slot name=\"dialogs\"/>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class NavigationPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.toolbar {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\r\n}\r\n.header {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n.content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\r\n}\r\n.footer {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-dcb661ca_0", { source: "\n.flex-rows[data-v-dcb661ca] {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.toolbar[data-v-dcb661ca] {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\n}\n.header[data-v-dcb661ca] {\r\n  flex: 0;\r\n  z-index: 1;\n}\n.content[data-v-dcb661ca] {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\n}\n.footer[data-v-dcb661ca] {\r\n  flex: 0;\r\n  z-index: 1;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationPage.vue"],"names":[],"mappings":";AA0CA;EACA,aAAA;EACA,sBAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;EACA,WAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;EACA,UAAA;AACA;AACA;EACA,OAAA;EACA,UAAA;AACA","file":"NavigationPage.vue","sourcesContent":["<template>\r\n  <v-card class=\"flex-rows\" flat fill-height>\r\n    <v-toolbar class=\"elevation-1 toolbar\" dense>\r\n      <v-icon>{{ icon }}</v-icon>\r\n      <v-toolbar-title class=\"ml-2 subheading\">{{ title }}</v-toolbar-title>\r\n      <v-spacer></v-spacer>\r\n      <slot name=\"actions\" />\r\n    </v-toolbar>\r\n    <div class=\"header\">\r\n      <slot name=\"header\" />\r\n    </div>\r\n    <div class=\"content\">\r\n      <slot v-if=\"loaded\" name=\"content\" />\r\n    </div>\r\n    <div class=\"footer\">\r\n      <slot name=\"footer\" />\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n    <slot name=\"dialogs\" />\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class NavigationPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.toolbar {\r\n  flex: 0;\r\n  z-index: 1;\r\n  color: #333;\r\n}\r\n.header {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n.content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  z-index: 0;\r\n}\r\n.footer {\r\n  flex: 0;\r\n  z-index: 1;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$B = "data-v-380c53f4";
+  const __vue_scope_id__$J = "data-v-dcb661ca";
   /* module identifier */
-  const __vue_module_identifier__$B = undefined;
+  const __vue_module_identifier__$J = undefined;
   /* functional template */
-  const __vue_is_functional_template__$B = false;
+  const __vue_is_functional_template__$J = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$B = normalizeComponent(
-    { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
-    __vue_inject_styles__$B,
-    __vue_script__$B,
-    __vue_scope_id__$B,
-    __vue_is_functional_template__$B,
-    __vue_module_identifier__$B,
+  const __vue_component__$J = normalizeComponent(
+    { render: __vue_render__$J, staticRenderFns: __vue_staticRenderFns__$J },
+    __vue_inject_styles__$J,
+    __vue_script__$J,
+    __vue_scope_id__$J,
+    __vue_is_functional_template__$J,
+    __vue_module_identifier__$J,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var Pager = /** @class */ (function (_super) {
-    __extends(Pager, _super);
-    function Pager() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Pager.prototype.onButtonClicked = function (e) {
+let Pager = class Pager extends Vue {
+    onButtonClicked(e) {
         this.$emit("click", e);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Pager.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], Pager.prototype, "text", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: false }),
-        __metadata("design:type", Boolean)
-    ], Pager.prototype, "disabled", void 0);
-    Pager = __decorate([
-        sitewhereIdeCommon.Component
-    ], Pager);
-    return Pager;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Pager.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], Pager.prototype, "text", void 0);
+__decorate([
+    Prop({ default: false }),
+    __metadata("design:type", Boolean)
+], Pager.prototype, "disabled", void 0);
+Pager = __decorate([
+    Component
+], Pager);
+var script$I = Pager;
 
 /* script */
-const __vue_script__$C = Pager;
+const __vue_script__$K = script$I;
 
 /* template */
-var __vue_render__$C = function() {
+var __vue_render__$K = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6212,17 +6772,17 @@ var __vue_render__$C = function() {
     1
   )
 };
-var __vue_staticRenderFns__$C = [];
-__vue_render__$C._withStripped = true;
+var __vue_staticRenderFns__$K = [];
+__vue_render__$K._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$C = undefined;
+  const __vue_inject_styles__$K = undefined;
   /* scoped */
-  const __vue_scope_id__$C = undefined;
+  const __vue_scope_id__$K = undefined;
   /* module identifier */
-  const __vue_module_identifier__$C = undefined;
+  const __vue_module_identifier__$K = undefined;
   /* functional template */
-  const __vue_is_functional_template__$C = false;
+  const __vue_is_functional_template__$K = false;
   /* style inject */
   
   /* style inject SSR */
@@ -6231,30 +6791,29 @@ __vue_render__$C._withStripped = true;
   
 
   
-  const __vue_component__$C = normalizeComponent(
-    { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
-    __vue_inject_styles__$C,
-    __vue_script__$C,
-    __vue_scope_id__$C,
-    __vue_is_functional_template__$C,
-    __vue_module_identifier__$C,
+  const __vue_component__$K = normalizeComponent(
+    { render: __vue_render__$K, staticRenderFns: __vue_staticRenderFns__$K },
+    __vue_inject_styles__$K,
+    __vue_script__$K,
+    __vue_scope_id__$K,
+    __vue_is_functional_template__$K,
+    __vue_module_identifier__$K,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var Pager$1 = /** @class */ (function (_super) {
-    __extends(Pager, _super);
-    function Pager() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.page = 1;
-        _this.pageSize = null;
-        _this.defaultResults = {
+let Pager$1 = class Pager extends Vue {
+    constructor() {
+        super(...arguments);
+        this.page = 1;
+        this.pageSize = null;
+        this.defaultResults = {
             numResults: 0,
             results: []
         };
-        _this.defaultPageSizes = [
+        this.defaultPageSizes = [
             {
                 text: "10",
                 value: 10
@@ -6268,155 +6827,126 @@ var Pager$1 = /** @class */ (function (_super) {
                 value: 50
             }
         ];
-        return _this;
     }
-    Pager.prototype.created = function () {
+    created() {
         if (!this.pageSize) {
             this.pageSize = this.pageSizesWithDefaults[0].value;
         }
         this.onPagingUpdated();
-    };
+    }
     // Refresh results on page size updated.
-    Pager.prototype.onPageSizeUpdated = function (val, oldVal) {
+    onPageSizeUpdated(val, oldVal) {
         this.page = 1;
         this.onPagingUpdated();
-    };
-    Object.defineProperty(Pager.prototype, "resultsWithDefaults", {
-        // Results with defaults fallback.
-        get: function () {
-            return this.results || this.defaultResults;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Pager.prototype, "total", {
-        // Total record count.
-        get: function () {
-            return this.resultsWithDefaults.numResults;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Pager.prototype, "description", {
-        // Description.
-        get: function () {
-            var size = this.pageSize || 0;
-            var total = this.total;
-            var page = this.page;
-            var first = size * (page - 1) + 1;
-            var last = Math.min(total, first + size - 1);
-            return "" + first + "-" + last + " of " + total;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Pager.prototype, "pageCount", {
-        // Calculate number of pages.
-        get: function () {
-            var results = this.resultsWithDefaults;
-            var total = results.numResults;
-            var size = this.pageSize || 0;
-            var mod = total % size;
-            var count = (total / size) | 0;
-            count += mod > 0 ? 1 : 0;
-            return count;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Pager.prototype, "pageSizesWithDefaults", {
-        // Get list of available page sizes with fallback defaults.
-        get: function () {
-            return this.pageSizes || this.defaultPageSizes;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Pager.prototype, "previousEnabled", {
-        // Indicates if 'first' button should be enabled.
-        get: function () {
-            return this.page > 1;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Pager.prototype, "nextEnabled", {
-        // Indicates if 'first' button should be enabled.
-        get: function () {
-            return this.page < this.pageCount;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    }
+    // Results with defaults fallback.
+    get resultsWithDefaults() {
+        return this.results || this.defaultResults;
+    }
+    // Total record count.
+    get total() {
+        return this.resultsWithDefaults.numResults;
+    }
+    // Description.
+    get description() {
+        let size = this.pageSize || 0;
+        let total = this.total;
+        let page = this.page;
+        var first = size * (page - 1) + 1;
+        var last = Math.min(total, first + size - 1);
+        return "" + first + "-" + last + " of " + total;
+    }
+    // Calculate number of pages.
+    get pageCount() {
+        var results = this.resultsWithDefaults;
+        var total = results.numResults;
+        var size = this.pageSize || 0;
+        var mod = total % size;
+        var count = (total / size) | 0;
+        count += mod > 0 ? 1 : 0;
+        return count;
+    }
+    // Get list of available page sizes with fallback defaults.
+    get pageSizesWithDefaults() {
+        return this.pageSizes || this.defaultPageSizes;
+    }
+    // Indicates if 'first' button should be enabled.
+    get previousEnabled() {
+        return this.page > 1;
+    }
+    // Indicates if 'first' button should be enabled.
+    get nextEnabled() {
+        return this.page < this.pageCount;
+    }
     // Called to move to first page.
-    Pager.prototype.onFirstPage = function () {
+    onFirstPage() {
         if (this.page !== 1) {
             this.page = 1;
             this.onPagingUpdated();
         }
-    };
+    }
     // Called to move to previous page.
-    Pager.prototype.onPreviousPage = function () {
+    onPreviousPage() {
         if (this.page > 1) {
             this.page--;
             this.onPagingUpdated();
         }
-    };
+    }
     // Called to refresh data.
-    Pager.prototype.onRefresh = function () {
+    onRefresh() {
         this.onPagingUpdated();
-    };
+    }
     // Called to move to next page.
-    Pager.prototype.onNextPage = function () {
+    onNextPage() {
         if (this.page < this.pageCount) {
             this.page++;
             this.onPagingUpdated();
         }
-    };
+    }
     // Called to move to last page.
-    Pager.prototype.onLastPage = function () {
+    onLastPage() {
         if (this.page < this.pageCount) {
             this.page = this.pageCount;
             this.onPagingUpdated();
         }
-    };
+    }
     // Called when paging values are updated.
-    Pager.prototype.onPagingUpdated = function () {
+    onPagingUpdated() {
         var paging = {
             pageNumber: this.page,
             pageSize: this.pageSize || 0
         };
         this.$emit("pagingUpdated", paging);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], Pager.prototype, "results", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], Pager.prototype, "pageSizes", void 0);
-    __decorate([
-        sitewhereIdeCommon.Watch("pageSize"),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Number, Number]),
-        __metadata("design:returntype", void 0)
-    ], Pager.prototype, "onPageSizeUpdated", null);
-    Pager = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                PagerButton: __vue_component__$C
-            }
-        })
-    ], Pager);
-    return Pager;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], Pager$1.prototype, "results", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], Pager$1.prototype, "pageSizes", void 0);
+__decorate([
+    Watch("pageSize"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], Pager$1.prototype, "onPageSizeUpdated", null);
+Pager$1 = __decorate([
+    Component({
+        components: {
+            PagerButton: __vue_component__$K
+        }
+    })
+], Pager$1);
+var script$J = Pager$1;
 
 /* script */
-const __vue_script__$D = Pager$1;
+const __vue_script__$L = script$J;
 
 /* template */
-var __vue_render__$D = function() {
+var __vue_render__$L = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6547,105 +7077,93 @@ var __vue_render__$D = function() {
     2
   )
 };
-var __vue_staticRenderFns__$D = [];
-__vue_render__$D._withStripped = true;
+var __vue_staticRenderFns__$L = [];
+__vue_render__$L._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$D = function (inject) {
+  const __vue_inject_styles__$L = function (inject) {
     if (!inject) return
-    inject("data-v-794ac787_0", { source: "\n.pager[data-v-794ac787] {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\Pager.vue"],"names":[],"mappings":";AA6MA;EACA,WAAA;EACA,sBAAA;EACA,0BAAA;AACA","file":"Pager.vue","sourcesContent":["<template>\r\n  <div class=\"pager\">\r\n    <slot v-if=\"results && results.numResults === 0\" name=\"noresults\"></slot>\r\n    <v-container class=\"ma-0 pa-0\">\r\n      <v-layout row wrap>\r\n        <v-flex xs2>\r\n          <v-subheader class=\"ma-0 pt-0 pr-0\">Rows per page</v-subheader>\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-btn-toggle v-model=\"pageSize\" class=\"mt-1\">\r\n            <v-btn\r\n              flat\r\n              :value=\"entry.value\"\r\n              v-for=\"entry in pageSizesWithDefaults\"\r\n              :key=\"entry.value\"\r\n              >{{ entry.text }}</v-btn\r\n            >\r\n          </v-btn-toggle>\r\n        </v-flex>\r\n        <v-flex xs4>\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onFirstPage\"\r\n            icon=\"fa-fast-backward\"\r\n            text=\"First Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onPreviousPage\"\r\n            icon=\"fa-backward\"\r\n            text=\"Previous Page\"\r\n          />\r\n          <pager-button @click=\"onRefresh\" icon=\"fa-sync\" text=\"Refresh\" />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onNextPage\"\r\n            icon=\"fa-forward\"\r\n            text=\"Next Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onLastPage\"\r\n            icon=\"fa-fast-forward\"\r\n            text=\"Last Page\"\r\n          />\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-subheader class=\"ma-0 pt-0 right\">{{ description }}</v-subheader>\r\n        </v-flex>\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport PagerButton from \"./PagerButton.vue\";\r\n\r\nimport {\r\n  Component,\r\n  Prop,\r\n  Watch,\r\n  IPaging,\r\n  IPageSizes\r\n} from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    PagerButton\r\n  }\r\n})\r\nexport default class Pager extends Vue {\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n\r\n  page: number = 1;\r\n  pageSize: number | null = null;\r\n  defaultResults: { numResults: number; results: {}[] } = {\r\n    numResults: 0,\r\n    results: []\r\n  };\r\n  defaultPageSizes: IPageSizes = [\r\n    {\r\n      text: \"10\",\r\n      value: 10\r\n    },\r\n    {\r\n      text: \"25\",\r\n      value: 25\r\n    },\r\n    {\r\n      text: \"50\",\r\n      value: 50\r\n    }\r\n  ];\r\n\r\n  created() {\r\n    if (!this.pageSize) {\r\n      this.pageSize = this.pageSizesWithDefaults[0].value;\r\n    }\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Refresh results on page size updated.\r\n  @Watch(\"pageSize\") onPageSizeUpdated(val: number, oldVal: number) {\r\n    this.page = 1;\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Results with defaults fallback.\r\n  get resultsWithDefaults(): { numResults: number; results: {}[] } {\r\n    return this.results || this.defaultResults;\r\n  }\r\n\r\n  // Total record count.\r\n  get total(): number {\r\n    return this.resultsWithDefaults.numResults;\r\n  }\r\n\r\n  // Description.\r\n  get description(): string {\r\n    let size = this.pageSize || 0;\r\n    let total = this.total;\r\n    let page = this.page;\r\n    var first = size * (page - 1) + 1;\r\n    var last = Math.min(total, first + size - 1);\r\n    return \"\" + first + \"-\" + last + \" of \" + total;\r\n  }\r\n\r\n  // Calculate number of pages.\r\n  get pageCount() {\r\n    var results = this.resultsWithDefaults;\r\n    var total = results.numResults;\r\n    var size = this.pageSize || 0;\r\n    var mod = total % size;\r\n    var count = (total / size) | 0;\r\n    count += mod > 0 ? 1 : 0;\r\n    return count;\r\n  }\r\n\r\n  // Get list of available page sizes with fallback defaults.\r\n  get pageSizesWithDefaults(): { text: string; value: number }[] {\r\n    return this.pageSizes || this.defaultPageSizes;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get previousEnabled(): boolean {\r\n    return this.page > 1;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get nextEnabled(): boolean {\r\n    return this.page < this.pageCount;\r\n  }\r\n\r\n  // Called to move to first page.\r\n  onFirstPage() {\r\n    if (this.page !== 1) {\r\n      this.page = 1;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to previous page.\r\n  onPreviousPage() {\r\n    if (this.page > 1) {\r\n      this.page--;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to refresh data.\r\n  onRefresh() {\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Called to move to next page.\r\n  onNextPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page++;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to last page.\r\n  onLastPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page = this.pageCount;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called when paging values are updated.\r\n  onPagingUpdated() {\r\n    var paging: IPaging = {\r\n      pageNumber: this.page,\r\n      pageSize: this.pageSize || 0\r\n    };\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.pager {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-530897b7_0", { source: "\n.pager[data-v-530897b7] {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\Pager.vue"],"names":[],"mappings":";AAuMA;EACA,WAAA;EACA,sBAAA;EACA,0BAAA;AACA","file":"Pager.vue","sourcesContent":["<template>\r\n  <div class=\"pager\">\r\n    <slot v-if=\"results && results.numResults === 0\" name=\"noresults\"></slot>\r\n    <v-container class=\"ma-0 pa-0\">\r\n      <v-layout row wrap>\r\n        <v-flex xs2>\r\n          <v-subheader class=\"ma-0 pt-0 pr-0\">Rows per page</v-subheader>\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-btn-toggle v-model=\"pageSize\" class=\"mt-1\">\r\n            <v-btn\r\n              flat\r\n              :value=\"entry.value\"\r\n              v-for=\"entry in pageSizesWithDefaults\"\r\n              :key=\"entry.value\"\r\n            >{{ entry.text }}</v-btn>\r\n          </v-btn-toggle>\r\n        </v-flex>\r\n        <v-flex xs4>\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onFirstPage\"\r\n            icon=\"fa-fast-backward\"\r\n            text=\"First Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!previousEnabled\"\r\n            @click=\"onPreviousPage\"\r\n            icon=\"fa-backward\"\r\n            text=\"Previous Page\"\r\n          />\r\n          <pager-button @click=\"onRefresh\" icon=\"fa-sync\" text=\"Refresh\" />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onNextPage\"\r\n            icon=\"fa-forward\"\r\n            text=\"Next Page\"\r\n          />\r\n          <pager-button\r\n            :disabled=\"!nextEnabled\"\r\n            @click=\"onLastPage\"\r\n            icon=\"fa-fast-forward\"\r\n            text=\"Last Page\"\r\n          />\r\n        </v-flex>\r\n        <v-flex xs3>\r\n          <v-subheader class=\"ma-0 pt-0 right\">{{ description }}</v-subheader>\r\n        </v-flex>\r\n      </v-layout>\r\n    </v-container>\r\n  </div>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport PagerButton from \"./PagerButton.vue\";\r\n\r\nimport { Component, Prop, Watch } from \"vue-property-decorator\";\r\nimport { IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    PagerButton\r\n  }\r\n})\r\nexport default class Pager extends Vue {\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n\r\n  page: number = 1;\r\n  pageSize: number | null = null;\r\n  defaultResults: { numResults: number; results: {}[] } = {\r\n    numResults: 0,\r\n    results: []\r\n  };\r\n  defaultPageSizes: IPageSizes = [\r\n    {\r\n      text: \"10\",\r\n      value: 10\r\n    },\r\n    {\r\n      text: \"25\",\r\n      value: 25\r\n    },\r\n    {\r\n      text: \"50\",\r\n      value: 50\r\n    }\r\n  ];\r\n\r\n  created() {\r\n    if (!this.pageSize) {\r\n      this.pageSize = this.pageSizesWithDefaults[0].value;\r\n    }\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Refresh results on page size updated.\r\n  @Watch(\"pageSize\") onPageSizeUpdated(val: number, oldVal: number) {\r\n    this.page = 1;\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Results with defaults fallback.\r\n  get resultsWithDefaults(): { numResults: number; results: {}[] } {\r\n    return this.results || this.defaultResults;\r\n  }\r\n\r\n  // Total record count.\r\n  get total(): number {\r\n    return this.resultsWithDefaults.numResults;\r\n  }\r\n\r\n  // Description.\r\n  get description(): string {\r\n    let size = this.pageSize || 0;\r\n    let total = this.total;\r\n    let page = this.page;\r\n    var first = size * (page - 1) + 1;\r\n    var last = Math.min(total, first + size - 1);\r\n    return \"\" + first + \"-\" + last + \" of \" + total;\r\n  }\r\n\r\n  // Calculate number of pages.\r\n  get pageCount() {\r\n    var results = this.resultsWithDefaults;\r\n    var total = results.numResults;\r\n    var size = this.pageSize || 0;\r\n    var mod = total % size;\r\n    var count = (total / size) | 0;\r\n    count += mod > 0 ? 1 : 0;\r\n    return count;\r\n  }\r\n\r\n  // Get list of available page sizes with fallback defaults.\r\n  get pageSizesWithDefaults(): { text: string; value: number }[] {\r\n    return this.pageSizes || this.defaultPageSizes;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get previousEnabled(): boolean {\r\n    return this.page > 1;\r\n  }\r\n\r\n  // Indicates if 'first' button should be enabled.\r\n  get nextEnabled(): boolean {\r\n    return this.page < this.pageCount;\r\n  }\r\n\r\n  // Called to move to first page.\r\n  onFirstPage() {\r\n    if (this.page !== 1) {\r\n      this.page = 1;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to previous page.\r\n  onPreviousPage() {\r\n    if (this.page > 1) {\r\n      this.page--;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to refresh data.\r\n  onRefresh() {\r\n    this.onPagingUpdated();\r\n  }\r\n\r\n  // Called to move to next page.\r\n  onNextPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page++;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called to move to last page.\r\n  onLastPage() {\r\n    if (this.page < this.pageCount) {\r\n      this.page = this.pageCount;\r\n      this.onPagingUpdated();\r\n    }\r\n  }\r\n\r\n  // Called when paging values are updated.\r\n  onPagingUpdated() {\r\n    var paging: IPaging = {\r\n      pageNumber: this.page,\r\n      pageSize: this.pageSize || 0\r\n    };\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.pager {\r\n  color: #333;\r\n  background-color: #eee;\r\n  border-top: 1px solid #ccc;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$D = "data-v-794ac787";
+  const __vue_scope_id__$L = "data-v-530897b7";
   /* module identifier */
-  const __vue_module_identifier__$D = undefined;
+  const __vue_module_identifier__$L = undefined;
   /* functional template */
-  const __vue_is_functional_template__$D = false;
+  const __vue_is_functional_template__$L = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$D = normalizeComponent(
-    { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
-    __vue_inject_styles__$D,
-    __vue_script__$D,
-    __vue_scope_id__$D,
-    __vue_is_functional_template__$D,
-    __vue_module_identifier__$D,
+  const __vue_component__$L = normalizeComponent(
+    { render: __vue_render__$L, staticRenderFns: __vue_staticRenderFns__$L },
+    __vue_inject_styles__$L,
+    __vue_script__$L,
+    __vue_scope_id__$L,
+    __vue_is_functional_template__$L,
+    __vue_module_identifier__$L,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ListPage = /** @class */ (function (_super) {
-    __extends(ListPage, _super);
-    function ListPage() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let ListPage = class ListPage extends Vue {
+    /** Detect whether loaded with results */
+    get hasResults() {
+        return this.loaded && this.results && this.results.numResults > 0;
     }
-    Object.defineProperty(ListPage.prototype, "hasResults", {
-        /** Detect whether loaded with results */
-        get: function () {
-            return this.loaded && this.results && this.results.numResults > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListPage.prototype, "noResults", {
-        /** Detect whether loaded with no results */
-        get: function () {
-            return this.loaded && this.results && this.results.numResults === 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /** Detect whether loaded with no results */
+    get noResults() {
+        return this.loaded && this.results && this.results.numResults === 0;
+    }
     /** Update paging values and run query */
-    ListPage.prototype.onPagingUpdated = function (paging) {
+    onPagingUpdated(paging) {
         this.$emit("pagingUpdated", paging);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ListPage.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ListPage.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ListPage.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], ListPage.prototype, "pageSizes", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], ListPage.prototype, "loaded", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], ListPage.prototype, "results", void 0);
-    ListPage = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                NavigationPage: __vue_component__$B,
-                Pager: __vue_component__$D,
-            },
-        })
-    ], ListPage);
-    return ListPage;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ListPage.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ListPage.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ListPage.prototype, "loadingMessage", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], ListPage.prototype, "pageSizes", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], ListPage.prototype, "loaded", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], ListPage.prototype, "results", void 0);
+ListPage = __decorate([
+    Component({
+        components: {
+            NavigationPage: __vue_component__$J,
+            Pager: __vue_component__$L
+        }
+    })
+], ListPage);
+var script$K = ListPage;
 
 /* script */
-const __vue_script__$E = ListPage;
+const __vue_script__$M = script$K;
 
 /* template */
-var __vue_render__$E = function() {
+var __vue_render__$M = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6698,101 +7216,89 @@ var __vue_render__$E = function() {
     2
   )
 };
-var __vue_staticRenderFns__$E = [];
-__vue_render__$E._withStripped = true;
+var __vue_staticRenderFns__$M = [];
+__vue_render__$M._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$E = function (inject) {
+  const __vue_inject_styles__$M = function (inject) {
     if (!inject) return
-    inject("data-v-a76cdcf0_0", { source: "\n.flex-rows[data-v-a76cdcf0] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-a76cdcf0] {\r\n  flex: 0;\n}\n.list-content[data-v-a76cdcf0] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListPage.vue"],"names":[],"mappings":";AA0EA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA","file":"ListPage.vue","sourcesContent":["<template>\r\n  <navigation-page\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :loadingMessage=\"loadingMessage\"\r\n    :loaded=\"loaded\"\r\n  >\r\n    <template slot=\"content\">\r\n      <div class=\"flex-rows\">\r\n        <div class=\"list-filters\">\r\n          <slot name=\"filters\" />\r\n        </div>\r\n        <div class=\"list-content\">\r\n          <slot v-if=\"hasResults\" />\r\n          <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n        </div>\r\n      </div>\r\n    </template>\r\n    <template slot=\"footer\">\r\n      <pager\r\n        :results=\"results\"\r\n        @pagingUpdated=\"onPagingUpdated\"\r\n        :pageSizes=\"pageSizes\"\r\n      />\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\nimport Pager from \"../list/Pager.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage,\r\n    Pager,\r\n  },\r\n})\r\nexport default class ListPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-44205fd0_0", { source: "\n.flex-rows[data-v-44205fd0] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-44205fd0] {\r\n  flex: 0;\n}\n.list-content[data-v-44205fd0] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListPage.vue"],"names":[],"mappings":";AAkEA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA","file":"ListPage.vue","sourcesContent":["<template>\r\n  <navigation-page :icon=\"icon\" :title=\"title\" :loadingMessage=\"loadingMessage\" :loaded=\"loaded\">\r\n    <template slot=\"content\">\r\n      <div class=\"flex-rows\">\r\n        <div class=\"list-filters\">\r\n          <slot name=\"filters\" />\r\n        </div>\r\n        <div class=\"list-content\">\r\n          <slot v-if=\"hasResults\" />\r\n          <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n        </div>\r\n      </div>\r\n    </template>\r\n    <template slot=\"footer\">\r\n      <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\nimport Pager from \"../list/Pager.vue\";\r\n\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\nimport { IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage,\r\n    Pager\r\n  }\r\n})\r\nexport default class ListPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$E = "data-v-a76cdcf0";
+  const __vue_scope_id__$M = "data-v-44205fd0";
   /* module identifier */
-  const __vue_module_identifier__$E = undefined;
+  const __vue_module_identifier__$M = undefined;
   /* functional template */
-  const __vue_is_functional_template__$E = false;
+  const __vue_is_functional_template__$M = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$E = normalizeComponent(
-    { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
-    __vue_inject_styles__$E,
-    __vue_script__$E,
-    __vue_scope_id__$E,
-    __vue_is_functional_template__$E,
-    __vue_module_identifier__$E,
+  const __vue_component__$M = normalizeComponent(
+    { render: __vue_render__$M, staticRenderFns: __vue_staticRenderFns__$M },
+    __vue_inject_styles__$M,
+    __vue_script__$M,
+    __vue_scope_id__$M,
+    __vue_is_functional_template__$M,
+    __vue_module_identifier__$M,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var ListTab = /** @class */ (function (_super) {
-    __extends(ListTab, _super);
-    function ListTab() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let ListTab = class ListTab extends Vue {
+    /** Detect whether loaded with results */
+    get hasResults() {
+        return this.loaded && this.results && this.results.numResults > 0;
     }
-    Object.defineProperty(ListTab.prototype, "hasResults", {
-        /** Detect whether loaded with results */
-        get: function () {
-            return this.loaded && this.results && this.results.numResults > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListTab.prototype, "noResults", {
-        /** Detect whether loaded with no results */
-        get: function () {
-            return this.loaded && this.results && this.results.numResults === 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /** Detect whether loaded with no results */
+    get noResults() {
+        return this.loaded && this.results && this.results.numResults === 0;
+    }
     /** Update paging values and run query */
-    ListTab.prototype.onPagingUpdated = function (paging) {
+    onPagingUpdated(paging) {
         this.$emit("pagingUpdated", paging);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ListTab.prototype, "tabkey", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], ListTab.prototype, "pageSizes", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ListTab.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], ListTab.prototype, "loaded", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], ListTab.prototype, "results", void 0);
-    ListTab = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                Pager: __vue_component__$D,
-                LoadingOverlay: __vue_component__$b
-            }
-        })
-    ], ListTab);
-    return ListTab;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ListTab.prototype, "tabkey", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], ListTab.prototype, "pageSizes", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ListTab.prototype, "loadingMessage", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], ListTab.prototype, "loaded", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], ListTab.prototype, "results", void 0);
+ListTab = __decorate([
+    Component({
+        components: {
+            Pager: __vue_component__$L,
+            LoadingOverlay: __vue_component__$j
+        }
+    })
+], ListTab);
+var script$L = ListTab;
 
 /* script */
-const __vue_script__$F = ListTab;
+const __vue_script__$N = script$L;
 
 /* template */
-var __vue_render__$F = function() {
+var __vue_render__$N = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6840,177 +7346,154 @@ var __vue_render__$F = function() {
     2
   )
 };
-var __vue_staticRenderFns__$F = [];
-__vue_render__$F._withStripped = true;
+var __vue_staticRenderFns__$N = [];
+__vue_render__$N._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$F = function (inject) {
+  const __vue_inject_styles__$N = function (inject) {
     if (!inject) return
-    inject("data-v-59846156_0", { source: "\n.flex-rows[data-v-59846156] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-59846156] {\r\n  flex: 0;\n}\n.list-content[data-v-59846156] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.list-footer[data-v-59846156] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListTab.vue"],"names":[],"mappings":";AA0DA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ListTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"list-filters\">\r\n        <slot name=\"filters\" />\r\n      </div>\r\n      <div class=\"list-content\">\r\n        <slot v-if=\"hasResults\" />\r\n        <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n      </div>\r\n      <div class=\"list-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n    <slot name=\"dialogs\" />\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport Pager from \"./Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { Component, Prop, IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ListTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.list-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-77bbde59_0", { source: "\n.flex-rows[data-v-77bbde59] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.list-filters[data-v-77bbde59] {\r\n  flex: 0;\n}\n.list-content[data-v-77bbde59] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.list-footer[data-v-77bbde59] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\list\\ListTab.vue"],"names":[],"mappings":";AA2DA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ListTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"list-filters\">\r\n        <slot name=\"filters\" />\r\n      </div>\r\n      <div class=\"list-content\">\r\n        <slot v-if=\"hasResults\" />\r\n        <slot name=\"noresults\" v-else-if=\"noResults\" />\r\n      </div>\r\n      <div class=\"list-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n    <slot name=\"dialogs\" />\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\n\r\nimport Pager from \"./Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\nimport { IPaging, IPageSizes } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ListTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Detect whether loaded with results */\r\n  get hasResults() {\r\n    return this.loaded && this.results && this.results.numResults > 0;\r\n  }\r\n\r\n  /** Detect whether loaded with no results */\r\n  get noResults() {\r\n    return this.loaded && this.results && this.results.numResults === 0;\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.list-filters {\r\n  flex: 0;\r\n}\r\n.list-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.list-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$F = "data-v-59846156";
+  const __vue_scope_id__$N = "data-v-77bbde59";
   /* module identifier */
-  const __vue_module_identifier__$F = undefined;
+  const __vue_module_identifier__$N = undefined;
   /* functional template */
-  const __vue_is_functional_template__$F = false;
+  const __vue_is_functional_template__$N = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$F = normalizeComponent(
-    { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
-    __vue_inject_styles__$F,
-    __vue_script__$F,
-    __vue_scope_id__$F,
-    __vue_is_functional_template__$F,
-    __vue_module_identifier__$F,
+  const __vue_component__$N = normalizeComponent(
+    { render: __vue_render__$N, staticRenderFns: __vue_staticRenderFns__$N },
+    __vue_inject_styles__$N,
+    __vue_script__$N,
+    __vue_scope_id__$N,
+    __vue_is_functional_template__$N,
+    __vue_module_identifier__$N,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var RemoteConnectionsList = /** @class */ (function (_super) {
-    __extends(RemoteConnectionsList, _super);
-    function RemoteConnectionsList() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.selected = [];
-        _this.selection = null;
-        return _this;
+let RemoteConnectionsList = class RemoteConnectionsList extends Vue {
+    constructor() {
+        super(...arguments);
+        this.selected = [];
+        this.selection = null;
     }
     /** Single select item */
-    RemoteConnectionsList.prototype.onSelect = function (selected) {
-        var _this = this;
+    onSelect(selected) {
         this.selected = [];
-        this.connections.forEach(function (connection) {
+        this.connections.forEach(connection => {
             if (connection.id == selected.id) {
-                _this.selected.push(connection);
-                _this.selection = connection;
-                _this.$emit("selected", connection);
+                this.selected.push(connection);
+                this.selection = connection;
+                this.$emit("selected", connection);
             }
         });
-    };
-    RemoteConnectionsList.prototype.textStyle = function (conn) {
+    }
+    textStyle(conn) {
         return {
             "font-weight": conn.id === this.remotes.default ? "bold" : "normal"
         };
-    };
-    Object.defineProperty(RemoteConnectionsList.prototype, "isUpDisabled", {
-        get: function () {
-            if (this.selection) {
-                if (this.getConnectionIndex(this.selection) === 0) {
-                    return true;
-                }
-                return false;
-            }
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RemoteConnectionsList.prototype, "isDownDisabled", {
-        get: function () {
-            if (this.selection) {
-                if (this.getConnectionIndex(this.selection) >=
-                    this.remotes.connections.length - 1) {
-                    return true;
-                }
-                return false;
-            }
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RemoteConnectionsList.prototype, "isDefaultDisabled", {
-        get: function () {
-            if (this.selection) {
-                if (this.selection.id === this.remotes.default) {
-                    return true;
-                }
-                return false;
-            }
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RemoteConnectionsList.prototype, "isDeleteDisabled", {
-        get: function () {
-            if (this.selection) {
-                if (this.selection.id === this.remotes.default) {
-                    return true;
-                }
-                return false;
-            }
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RemoteConnectionsList.prototype, "connections", {
-        get: function () {
-            return this.remotes ? this.remotes.connections : [];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    RemoteConnectionsList.prototype.getNameAndUrl = function (connection) {
-        return connection.name + " (" + connection.protocol + "://" + connection.host + ":" + connection.port + ")";
-    };
-    /** Handle click on connection in list */
-    RemoteConnectionsList.prototype.onConnectionClicked = function (connection) {
-        this.selected = [connection];
-    };
-    /** Get index for a connection */
-    RemoteConnectionsList.prototype.getConnectionIndex = function (connection) {
-        return this.remotes.connections.indexOf(connection);
-    };
-    /** Move connection up in the list */
-    RemoteConnectionsList.prototype.onConnectionMoveUp = function () {
+    }
+    get isUpDisabled() {
         if (this.selection) {
-            var old = this.getConnectionIndex(this.selection);
+            if (this.getConnectionIndex(this.selection) === 0) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    get isDownDisabled() {
+        if (this.selection) {
+            if (this.getConnectionIndex(this.selection) >=
+                this.remotes.connections.length - 1) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    get isDefaultDisabled() {
+        if (this.selection) {
+            if (this.selection.id === this.remotes.default) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    get isDeleteDisabled() {
+        if (this.selection) {
+            if (this.selection.id === this.remotes.default) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    get connections() {
+        return this.remotes ? this.remotes.connections : [];
+    }
+    getNameAndUrl(connection) {
+        return `${connection.name} (${connection.protocol}://${connection.host}:${connection.port})`;
+    }
+    /** Handle click on connection in list */
+    onConnectionClicked(connection) {
+        this.selected = [connection];
+    }
+    /** Get index for a connection */
+    getConnectionIndex(connection) {
+        return this.remotes.connections.indexOf(connection);
+    }
+    /** Move connection up in the list */
+    onConnectionMoveUp() {
+        if (this.selection) {
+            let old = this.getConnectionIndex(this.selection);
             arrayMove(this.remotes.connections, old, old - 1);
         }
-    };
+    }
     /** Move connection down in the list */
-    RemoteConnectionsList.prototype.onConnectionMoveDown = function () {
+    onConnectionMoveDown() {
         if (this.selection) {
-            var old = this.getConnectionIndex(this.selection);
+            let old = this.getConnectionIndex(this.selection);
             arrayMove(this.remotes.connections, old, old + 1);
         }
-    };
+    }
     /** Delete a connection */
-    RemoteConnectionsList.prototype.onConnectionDelete = function () {
+    onConnectionDelete() {
         if (this.selection) {
             this.remotes.connections.splice(this.getConnectionIndex(this.selection), 1);
         }
-    };
+    }
     /** Set current selection as the default */
-    RemoteConnectionsList.prototype.onConnectionDefault = function () {
+    onConnectionDefault() {
         if (this.selection) {
             this.remotes.default = this.selection.id;
         }
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], RemoteConnectionsList.prototype, "remotes", void 0);
-    RemoteConnectionsList = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], RemoteConnectionsList);
-    return RemoteConnectionsList;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], RemoteConnectionsList.prototype, "remotes", void 0);
+RemoteConnectionsList = __decorate([
+    Component({})
+], RemoteConnectionsList);
+var script$M = RemoteConnectionsList;
 
 /* script */
-const __vue_script__$G = RemoteConnectionsList;
+const __vue_script__$O = script$M;
 
 /* template */
-var __vue_render__$G = function() {
+var __vue_render__$O = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -7208,17 +7691,17 @@ var __vue_render__$G = function() {
     1
   )
 };
-var __vue_staticRenderFns__$G = [];
-__vue_render__$G._withStripped = true;
+var __vue_staticRenderFns__$O = [];
+__vue_render__$O._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$G = undefined;
+  const __vue_inject_styles__$O = undefined;
   /* scoped */
-  const __vue_scope_id__$G = undefined;
+  const __vue_scope_id__$O = undefined;
   /* module identifier */
-  const __vue_module_identifier__$G = undefined;
+  const __vue_module_identifier__$O = undefined;
   /* functional template */
-  const __vue_is_functional_template__$G = false;
+  const __vue_is_functional_template__$O = false;
   /* style inject */
   
   /* style inject SSR */
@@ -7227,13 +7710,13 @@ __vue_render__$G._withStripped = true;
   
 
   
-  const __vue_component__$G = normalizeComponent(
-    { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
-    __vue_inject_styles__$G,
-    __vue_script__$G,
-    __vue_scope_id__$G,
-    __vue_is_functional_template__$G,
-    __vue_module_identifier__$G,
+  const __vue_component__$O = normalizeComponent(
+    { render: __vue_render__$O, staticRenderFns: __vue_staticRenderFns__$O },
+    __vue_inject_styles__$O,
+    __vue_script__$O,
+    __vue_scope_id__$O,
+    __vue_is_functional_template__$O,
+    __vue_module_identifier__$O,
     false,
     undefined,
     undefined,
@@ -8166,15 +8649,14 @@ unwrapExports(validators);
 var validators_1 = validators.required;
 var validators_2 = validators.helpers;
 
-var RemoteConnectionDetails = /** @class */ (function (_super) {
-    __extends(RemoteConnectionDetails, _super);
-    function RemoteConnectionDetails() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.name = null;
-        _this.protocol = null;
-        _this.host = null;
-        _this.port = null;
-        _this.protocols = [
+let RemoteConnectionDetails = class RemoteConnectionDetails extends __vue_component__$4 {
+    constructor() {
+        super(...arguments);
+        this.name = null;
+        this.protocol = null;
+        this.host = null;
+        this.port = null;
+        this.protocols = [
             {
                 text: "http",
                 value: "http"
@@ -8184,30 +8666,29 @@ var RemoteConnectionDetails = /** @class */ (function (_super) {
                 value: "https"
             }
         ];
-        return _this;
     }
     /** Reset section content */
-    RemoteConnectionDetails.prototype.reset = function () {
+    reset() {
         this.name = null;
         this.protocol = null;
         this.host = null;
         this.port = null;
         this.$v.$reset();
-    };
+    }
     /** Perform validation */
-    RemoteConnectionDetails.prototype.validate = function () {
+    validate() {
         this.$v.$touch();
         return !this.$v.$invalid;
-    };
+    }
     /** Load form data from an object */
-    RemoteConnectionDetails.prototype.load = function (input) {
+    load(input) {
         this.name = input.name;
         this.protocol = input.protocol;
         this.host = input.areaType.host;
         this.port = input.port;
-    };
+    }
     /** Save form data to an object */
-    RemoteConnectionDetails.prototype.save = function () {
+    save() {
         return {
             id: generateUniqueId(),
             name: this.name,
@@ -8215,44 +8696,44 @@ var RemoteConnectionDetails = /** @class */ (function (_super) {
             host: this.host,
             port: this.port
         };
-    };
+    }
     /** Called when create button is clicked */
-    RemoteConnectionDetails.prototype.onCreateClicked = function () {
-        var added = this.save();
+    onCreateClicked() {
+        let added = this.save();
         this.$emit("added", added);
         this.reset();
-    };
-    RemoteConnectionDetails = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                DialogForm: __vue_component__$o,
-                FormText: __vue_component__$s,
-                FormSelect: __vue_component__$q
+    }
+};
+RemoteConnectionDetails = __decorate([
+    Component({
+        components: {
+            DialogForm: __vue_component__$w,
+            FormText: __vue_component__$A,
+            FormSelect: __vue_component__$y
+        },
+        validations: {
+            name: {
+                required: validators_1
             },
-            validations: {
-                name: {
-                    required: validators_1
-                },
-                protocol: {
-                    required: validators_1
-                },
-                host: {
-                    required: validators_1
-                },
-                port: {
-                    required: validators_1
-                }
+            protocol: {
+                required: validators_1
+            },
+            host: {
+                required: validators_1
+            },
+            port: {
+                required: validators_1
             }
-        })
-    ], RemoteConnectionDetails);
-    return RemoteConnectionDetails;
-}(sitewhereIdeCommon.DialogSection));
+        }
+    })
+], RemoteConnectionDetails);
+var script$N = RemoteConnectionDetails;
 
 /* script */
-const __vue_script__$H = RemoteConnectionDetails;
+const __vue_script__$P = script$N;
 
 /* template */
-var __vue_render__$H = function() {
+var __vue_render__$P = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8399,17 +8880,17 @@ var __vue_render__$H = function() {
     1
   )
 };
-var __vue_staticRenderFns__$H = [];
-__vue_render__$H._withStripped = true;
+var __vue_staticRenderFns__$P = [];
+__vue_render__$P._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$H = undefined;
+  const __vue_inject_styles__$P = undefined;
   /* scoped */
-  const __vue_scope_id__$H = undefined;
+  const __vue_scope_id__$P = undefined;
   /* module identifier */
-  const __vue_module_identifier__$H = undefined;
+  const __vue_module_identifier__$P = undefined;
   /* functional template */
-  const __vue_is_functional_template__$H = false;
+  const __vue_is_functional_template__$P = false;
   /* style inject */
   
   /* style inject SSR */
@@ -8418,74 +8899,76 @@ __vue_render__$H._withStripped = true;
   
 
   
-  const __vue_component__$H = normalizeComponent(
-    { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
-    __vue_inject_styles__$H,
-    __vue_script__$H,
-    __vue_scope_id__$H,
-    __vue_is_functional_template__$H,
-    __vue_module_identifier__$H,
+  const __vue_component__$P = normalizeComponent(
+    { render: __vue_render__$P, staticRenderFns: __vue_staticRenderFns__$P },
+    __vue_inject_styles__$P,
+    __vue_script__$P,
+    __vue_scope_id__$P,
+    __vue_is_functional_template__$P,
+    __vue_module_identifier__$P,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var RemotesDialog = /** @class */ (function (_super) {
-    __extends(RemotesDialog, _super);
-    function RemotesDialog() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.remotes = null;
-        return _this;
+let RemotesDialog = class RemotesDialog extends __vue_component__$3 {
+    constructor() {
+        super(...arguments);
+        this.remotes = null;
     }
-    Object.defineProperty(RemotesDialog.prototype, "icon", {
-        /** Get icon for dialog */
-        get: function () {
-            return sitewhereIdeCommon.NavigationIcon.Remotes;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /** Get icon for dialog */
+    get icon() {
+        return NavigationIcon.Remotes;
+    }
     // Reset dialog contents.
-    RemotesDialog.prototype.reset = function () {
-        if (this.$refs.details) {
-            this.$refs.connections.reset();
+    reset() {
+        if (this.connections) {
+            this.connections.reset();
         }
-    };
+    }
     // Load dialog from a given payload.
-    RemotesDialog.prototype.load = function (payload) {
+    load(payload) {
         this.remotes = JSON.parse(JSON.stringify(payload));
         this.reset();
-        if (this.$refs.connections) {
-            this.$refs.connections.load(payload);
+        if (this.connections) {
+            this.connections.load(payload);
         }
-    };
+    }
     // Called when a new connection is added.
-    RemotesDialog.prototype.onConnectionAdded = function (added) {
+    onConnectionAdded(added) {
         if (this.remotes) {
             this.remotes.connections.push(added);
         }
-    };
+    }
     // Called after create button is clicked.
-    RemotesDialog.prototype.onCreateClicked = function (e) {
+    onCreateClicked(e) {
         this.$emit("save", this.remotes);
-    };
-    RemotesDialog = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                RemoteConnectionsList: __vue_component__$G,
-                RemoteConnectionDetails: __vue_component__$H
-            }
-        })
-    ], RemotesDialog);
-    return RemotesDialog;
-}(sitewhereIdeCommon.DialogComponent));
+    }
+};
+__decorate([
+    Ref(),
+    __metadata("design:type", Object)
+], RemotesDialog.prototype, "dialog", void 0);
+__decorate([
+    Ref(),
+    __metadata("design:type", Object)
+], RemotesDialog.prototype, "connections", void 0);
+RemotesDialog = __decorate([
+    Component({
+        components: {
+            RemoteConnectionsList: __vue_component__$O,
+            RemoteConnectionDetails: __vue_component__$P
+        }
+    })
+], RemotesDialog);
+var script$O = RemotesDialog;
 
 /* script */
-const __vue_script__$I = RemotesDialog;
+const __vue_script__$Q = script$O;
 
 /* template */
-var __vue_render__$I = function() {
+var __vue_render__$Q = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8521,6 +9004,7 @@ var __vue_render__$I = function() {
         { staticClass: "ml-2 mr-2 mb-0 mt-4", attrs: { flat: "" } },
         [
           _c("remote-connection-details", {
+            ref: "connections",
             staticClass: "pa-1",
             on: { added: _vm.onConnectionAdded }
           })
@@ -8531,17 +9015,17 @@ var __vue_render__$I = function() {
     1
   )
 };
-var __vue_staticRenderFns__$I = [];
-__vue_render__$I._withStripped = true;
+var __vue_staticRenderFns__$Q = [];
+__vue_render__$Q._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$I = undefined;
+  const __vue_inject_styles__$Q = undefined;
   /* scoped */
-  const __vue_scope_id__$I = undefined;
+  const __vue_scope_id__$Q = undefined;
   /* module identifier */
-  const __vue_module_identifier__$I = undefined;
+  const __vue_module_identifier__$Q = undefined;
   /* functional template */
-  const __vue_is_functional_template__$I = false;
+  const __vue_is_functional_template__$Q = false;
   /* style inject */
   
   /* style inject SSR */
@@ -8550,76 +9034,69 @@ __vue_render__$I._withStripped = true;
   
 
   
-  const __vue_component__$I = normalizeComponent(
-    { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
-    __vue_inject_styles__$I,
-    __vue_script__$I,
-    __vue_scope_id__$I,
-    __vue_is_functional_template__$I,
-    __vue_module_identifier__$I,
+  const __vue_component__$Q = normalizeComponent(
+    { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
+    __vue_inject_styles__$Q,
+    __vue_script__$Q,
+    __vue_scope_id__$Q,
+    __vue_is_functional_template__$Q,
+    __vue_module_identifier__$Q,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var RemotesDropdown = /** @class */ (function (_super) {
-    __extends(RemotesDropdown, _super);
-    function RemotesDropdown() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.selected = null;
-        return _this;
+let RemotesDropdown = class RemotesDropdown extends Vue {
+    constructor() {
+        super(...arguments);
+        this.selected = null;
     }
-    Object.defineProperty(RemotesDropdown.prototype, "connections", {
-        get: function () {
-            return this.remotes ? this.remotes.connections : [];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    RemotesDropdown.prototype.onConnectionsUpdated = function (updated) {
-        var _this = this;
-        updated.forEach(function (connection) {
-            if (_this.remotes && _this.remotes.default) {
-                if (_this.remotes.default === connection.id) {
-                    _this.selected = connection;
+    get connections() {
+        return this.remotes ? this.remotes.connections : [];
+    }
+    onConnectionsUpdated(updated) {
+        updated.forEach(connection => {
+            if (this.remotes && this.remotes.default) {
+                if (this.remotes.default === connection.id) {
+                    this.selected = connection;
                 }
             }
         });
-    };
-    RemotesDropdown.prototype.onSelectionChanged = function (updated) {
+    }
+    onSelectionChanged(updated) {
         this.$emit("selected", updated);
-    };
-    RemotesDropdown.prototype.getNameAndUrl = function (connection) {
-        return connection.name + " (" + connection.protocol + "://" + connection.host + ":" + connection.port + ")";
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], RemotesDropdown.prototype, "remotes", void 0);
-    __decorate([
-        sitewhereIdeCommon.Watch("connections", { immediate: true }),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Array]),
-        __metadata("design:returntype", void 0)
-    ], RemotesDropdown.prototype, "onConnectionsUpdated", null);
-    __decorate([
-        sitewhereIdeCommon.Watch("selected", { immediate: true }),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], RemotesDropdown.prototype, "onSelectionChanged", null);
-    RemotesDropdown = __decorate([
-        sitewhereIdeCommon.Component
-    ], RemotesDropdown);
-    return RemotesDropdown;
-}(Vue));
+    }
+    getNameAndUrl(connection) {
+        return `${connection.name} (${connection.protocol}://${connection.host}:${connection.port})`;
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], RemotesDropdown.prototype, "remotes", void 0);
+__decorate([
+    Watch("connections", { immediate: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], RemotesDropdown.prototype, "onConnectionsUpdated", null);
+__decorate([
+    Watch("selected", { immediate: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], RemotesDropdown.prototype, "onSelectionChanged", null);
+RemotesDropdown = __decorate([
+    Component
+], RemotesDropdown);
+var script$P = RemotesDropdown;
 
 /* script */
-const __vue_script__$J = RemotesDropdown;
+const __vue_script__$R = script$P;
 
 /* template */
-var __vue_render__$J = function() {
+var __vue_render__$R = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8658,17 +9135,17 @@ var __vue_render__$J = function() {
     }
   })
 };
-var __vue_staticRenderFns__$J = [];
-__vue_render__$J._withStripped = true;
+var __vue_staticRenderFns__$R = [];
+__vue_render__$R._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$J = undefined;
+  const __vue_inject_styles__$R = undefined;
   /* scoped */
-  const __vue_scope_id__$J = undefined;
+  const __vue_scope_id__$R = undefined;
   /* module identifier */
-  const __vue_module_identifier__$J = undefined;
+  const __vue_module_identifier__$R = undefined;
   /* functional template */
-  const __vue_is_functional_template__$J = false;
+  const __vue_is_functional_template__$R = false;
   /* style inject */
   
   /* style inject SSR */
@@ -8677,51 +9154,47 @@ __vue_render__$J._withStripped = true;
   
 
   
-  const __vue_component__$J = normalizeComponent(
-    { render: __vue_render__$J, staticRenderFns: __vue_staticRenderFns__$J },
-    __vue_inject_styles__$J,
-    __vue_script__$J,
-    __vue_scope_id__$J,
-    __vue_is_functional_template__$J,
-    __vue_module_identifier__$J,
+  const __vue_component__$R = normalizeComponent(
+    { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
+    __vue_inject_styles__$R,
+    __vue_script__$R,
+    __vue_scope_id__$R,
+    __vue_is_functional_template__$R,
+    __vue_module_identifier__$R,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var ContentTab = /** @class */ (function (_super) {
-    __extends(ContentTab, _super);
-    function ContentTab() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentTab.prototype, "tabkey", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], ContentTab.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], ContentTab.prototype, "loaded", void 0);
-    ContentTab = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                LoadingOverlay: __vue_component__$b
-            }
-        })
-    ], ContentTab);
-    return ContentTab;
-}(Vue));
+let ContentTab = class ContentTab extends Vue {
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentTab.prototype, "tabkey", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], ContentTab.prototype, "loadingMessage", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], ContentTab.prototype, "loaded", void 0);
+ContentTab = __decorate([
+    Component({
+        components: {
+            LoadingOverlay: __vue_component__$j
+        }
+    })
+], ContentTab);
+var script$Q = ContentTab;
 
 /* script */
-const __vue_script__$K = ContentTab;
+const __vue_script__$S = script$Q;
 
 /* template */
-var __vue_render__$K = function() {
+var __vue_render__$S = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8762,351 +9235,54 @@ var __vue_render__$K = function() {
     2
   )
 };
-var __vue_staticRenderFns__$K = [];
-__vue_render__$K._withStripped = true;
+var __vue_staticRenderFns__$S = [];
+__vue_render__$S._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$K = function (inject) {
+  const __vue_inject_styles__$S = function (inject) {
     if (!inject) return
-    inject("data-v-ece93276_0", { source: "\n.flex-rows[data-v-ece93276] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-ece93276] {\r\n  flex: 0;\n}\n.tab-content[data-v-ece93276] {\r\n  flex: 1;\r\n  background-color: #fff;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-ece93276] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\ContentTab.vue"],"names":[],"mappings":";AAuCA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ContentTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\" />\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <slot v-if=\"loaded\" />\r\n        <v-card style=\"height: 100%\" v-else>\r\n          <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n        </v-card>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <slot name=\"footer\" />\r\n      </div>\r\n    </div>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ContentTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #fff;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-ba3b4054_0", { source: "\n.flex-rows[data-v-ba3b4054] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-ba3b4054] {\r\n  flex: 0;\n}\n.tab-content[data-v-ba3b4054] {\r\n  flex: 1;\r\n  background-color: #fff;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-ba3b4054] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\ContentTab.vue"],"names":[],"mappings":";AAuCA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"ContentTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\" />\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <slot v-if=\"loaded\" />\r\n        <v-card style=\"height: 100%\" v-else>\r\n          <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n        </v-card>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <slot name=\"footer\" />\r\n      </div>\r\n    </div>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class ContentTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #fff;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$K = "data-v-ece93276";
+  const __vue_scope_id__$S = "data-v-ba3b4054";
   /* module identifier */
-  const __vue_module_identifier__$K = undefined;
+  const __vue_module_identifier__$S = undefined;
   /* functional template */
-  const __vue_is_functional_template__$K = false;
+  const __vue_is_functional_template__$S = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$K = normalizeComponent(
-    { render: __vue_render__$K, staticRenderFns: __vue_staticRenderFns__$K },
-    __vue_inject_styles__$K,
-    __vue_script__$K,
-    __vue_scope_id__$K,
-    __vue_is_functional_template__$K,
-    __vue_module_identifier__$K,
+  const __vue_component__$S = normalizeComponent(
+    { render: __vue_render__$S, staticRenderFns: __vue_staticRenderFns__$S },
+    __vue_inject_styles__$S,
+    __vue_script__$S,
+    __vue_scope_id__$S,
+    __vue_is_functional_template__$S,
+    __vue_module_identifier__$S,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-/**
-  * vue-class-component v7.2.3
-  * (c) 2015-present Evan You
-  * @license MIT
-  */
-
-function _typeof(obj) {
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-// The rational behind the verbose Reflect-feature check below is the fact that there are polyfills
-// which add an implementation for Reflect.defineMetadata but not for Reflect.getOwnMetadataKeys.
-// Without this check consumers will encounter hard to track down runtime errors.
-function reflectionIsSupported() {
-  return typeof Reflect !== 'undefined' && Reflect.defineMetadata && Reflect.getOwnMetadataKeys;
-}
-function copyReflectionMetadata(to, from) {
-  forwardMetadata(to, from);
-  Object.getOwnPropertyNames(from.prototype).forEach(function (key) {
-    forwardMetadata(to.prototype, from.prototype, key);
-  });
-  Object.getOwnPropertyNames(from).forEach(function (key) {
-    forwardMetadata(to, from, key);
-  });
-}
-
-function forwardMetadata(to, from, propertyKey) {
-  var metaKeys = propertyKey ? Reflect.getOwnMetadataKeys(from, propertyKey) : Reflect.getOwnMetadataKeys(from);
-  metaKeys.forEach(function (metaKey) {
-    var metadata = propertyKey ? Reflect.getOwnMetadata(metaKey, from, propertyKey) : Reflect.getOwnMetadata(metaKey, from);
-
-    if (propertyKey) {
-      Reflect.defineMetadata(metaKey, metadata, to, propertyKey);
-    } else {
-      Reflect.defineMetadata(metaKey, metadata, to);
-    }
-  });
-}
-
-var fakeArray = {
-  __proto__: []
+let DataEntryPanel = class DataEntryPanel extends Vue {
 };
-var hasProto = fakeArray instanceof Array;
-function isPrimitive(value) {
-  var type = _typeof(value);
-
-  return value == null || type !== 'object' && type !== 'function';
-}
-function warn(message) {
-  if (typeof console !== 'undefined') {
-    console.warn('[vue-class-component] ' + message);
-  }
-}
-
-function collectDataFromConstructor(vm, Component) {
-  // override _init to prevent to init as Vue instance
-  var originalInit = Component.prototype._init;
-
-  Component.prototype._init = function () {
-    var _this = this;
-
-    // proxy to actual vm
-    var keys = Object.getOwnPropertyNames(vm); // 2.2.0 compat (props are no longer exposed as self properties)
-
-    if (vm.$options.props) {
-      for (var key in vm.$options.props) {
-        if (!vm.hasOwnProperty(key)) {
-          keys.push(key);
-        }
-      }
-    }
-
-    keys.forEach(function (key) {
-      if (key.charAt(0) !== '_') {
-        Object.defineProperty(_this, key, {
-          get: function get() {
-            return vm[key];
-          },
-          set: function set(value) {
-            vm[key] = value;
-          },
-          configurable: true
-        });
-      }
-    });
-  }; // should be acquired class property values
-
-
-  var data = new Component(); // restore original _init to avoid memory leak (#209)
-
-  Component.prototype._init = originalInit; // create plain data object
-
-  var plainData = {};
-  Object.keys(data).forEach(function (key) {
-    if (data[key] !== undefined) {
-      plainData[key] = data[key];
-    }
-  });
-
-  if (process.env.NODE_ENV !== 'production') {
-    if (!(Component.prototype instanceof Vue) && Object.keys(plainData).length > 0) {
-      warn('Component class must inherit Vue or its descendant class ' + 'when class property is used.');
-    }
-  }
-
-  return plainData;
-}
-
-var $internalHooks = ['data', 'beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeDestroy', 'destroyed', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'render', 'errorCaptured', 'serverPrefetch' // 2.6
-];
-function componentFactory(Component) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  options.name = options.name || Component._componentTag || Component.name; // prototype props.
-
-  var proto = Component.prototype;
-  Object.getOwnPropertyNames(proto).forEach(function (key) {
-    if (key === 'constructor') {
-      return;
-    } // hooks
-
-
-    if ($internalHooks.indexOf(key) > -1) {
-      options[key] = proto[key];
-      return;
-    }
-
-    var descriptor = Object.getOwnPropertyDescriptor(proto, key);
-
-    if (descriptor.value !== void 0) {
-      // methods
-      if (typeof descriptor.value === 'function') {
-        (options.methods || (options.methods = {}))[key] = descriptor.value;
-      } else {
-        // typescript decorated data
-        (options.mixins || (options.mixins = [])).push({
-          data: function data() {
-            return _defineProperty({}, key, descriptor.value);
-          }
-        });
-      }
-    } else if (descriptor.get || descriptor.set) {
-      // computed properties
-      (options.computed || (options.computed = {}))[key] = {
-        get: descriptor.get,
-        set: descriptor.set
-      };
-    }
-  });
-  (options.mixins || (options.mixins = [])).push({
-    data: function data() {
-      return collectDataFromConstructor(this, Component);
-    }
-  }); // decorate options
-
-  var decorators = Component.__decorators__;
-
-  if (decorators) {
-    decorators.forEach(function (fn) {
-      return fn(options);
-    });
-    delete Component.__decorators__;
-  } // find super
-
-
-  var superProto = Object.getPrototypeOf(Component.prototype);
-  var Super = superProto instanceof Vue ? superProto.constructor : Vue;
-  var Extended = Super.extend(options);
-  forwardStaticMembers(Extended, Component, Super);
-
-  if (reflectionIsSupported()) {
-    copyReflectionMetadata(Extended, Component);
-  }
-
-  return Extended;
-}
-var reservedPropertyNames = [// Unique id
-'cid', // Super Vue constructor
-'super', // Component options that will be used by the component
-'options', 'superOptions', 'extendOptions', 'sealedOptions', // Private assets
-'component', 'directive', 'filter'];
-var shouldIgnore = {
-  prototype: true,
-  arguments: true,
-  callee: true,
-  caller: true
-};
-
-function forwardStaticMembers(Extended, Original, Super) {
-  // We have to use getOwnPropertyNames since Babel registers methods as non-enumerable
-  Object.getOwnPropertyNames(Original).forEach(function (key) {
-    // Skip the properties that should not be overwritten
-    if (shouldIgnore[key]) {
-      return;
-    } // Some browsers does not allow reconfigure built-in properties
-
-
-    var extendedDescriptor = Object.getOwnPropertyDescriptor(Extended, key);
-
-    if (extendedDescriptor && !extendedDescriptor.configurable) {
-      return;
-    }
-
-    var descriptor = Object.getOwnPropertyDescriptor(Original, key); // If the user agent does not support `__proto__` or its family (IE <= 10),
-    // the sub class properties may be inherited properties from the super class in TypeScript.
-    // We need to exclude such properties to prevent to overwrite
-    // the component options object which stored on the extended constructor (See #192).
-    // If the value is a referenced value (object or function),
-    // we can check equality of them and exclude it if they have the same reference.
-    // If it is a primitive value, it will be forwarded for safety.
-
-    if (!hasProto) {
-      // Only `cid` is explicitly exluded from property forwarding
-      // because we cannot detect whether it is a inherited property or not
-      // on the no `__proto__` environment even though the property is reserved.
-      if (key === 'cid') {
-        return;
-      }
-
-      var superDescriptor = Object.getOwnPropertyDescriptor(Super, key);
-
-      if (!isPrimitive(descriptor.value) && superDescriptor && superDescriptor.value === descriptor.value) {
-        return;
-      }
-    } // Warn if the users manually declare reserved properties
-
-
-    if (process.env.NODE_ENV !== 'production' && reservedPropertyNames.indexOf(key) >= 0) {
-      warn("Static property name '".concat(key, "' declared on class '").concat(Original.name, "' ") + 'conflicts with reserved property name of Vue internal. ' + 'It may cause unexpected behavior of the component. Consider renaming the property.');
-    }
-
-    Object.defineProperty(Extended, key, descriptor);
-  });
-}
-
-function Component(options) {
-  if (typeof options === 'function') {
-    return componentFactory(options);
-  }
-
-  return function (Component) {
-    return componentFactory(Component, options);
-  };
-}
-
-Component.registerHooks = function registerHooks(keys) {
-  $internalHooks.push.apply($internalHooks, _toConsumableArray(keys));
-};
-
-var DataEntryPanel = /** @class */ (function (_super) {
-    __extends(DataEntryPanel, _super);
-    function DataEntryPanel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DataEntryPanel = __decorate([
-        Component({
-            components: {}
-        })
-    ], DataEntryPanel);
-    return DataEntryPanel;
-}(Vue));
+DataEntryPanel = __decorate([
+    Component({
+        components: {}
+    })
+], DataEntryPanel);
+var script$R = DataEntryPanel;
 
 /* script */
-const __vue_script__$L = DataEntryPanel;
+const __vue_script__$T = script$R;
 
 /* template */
-var __vue_render__$L = function() {
+var __vue_render__$T = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9117,109 +9293,97 @@ var __vue_render__$L = function() {
     1
   )
 };
-var __vue_staticRenderFns__$L = [];
-__vue_render__$L._withStripped = true;
+var __vue_staticRenderFns__$T = [];
+__vue_render__$T._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$L = function (inject) {
+  const __vue_inject_styles__$T = function (inject) {
     if (!inject) return
-    inject("data-v-f33dfbec_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DataEntryPanel.vue"}, media: undefined });
+    inject("data-v-2d6ed950_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"DataEntryPanel.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$L = "data-v-f33dfbec";
+  const __vue_scope_id__$T = "data-v-2d6ed950";
   /* module identifier */
-  const __vue_module_identifier__$L = undefined;
+  const __vue_module_identifier__$T = undefined;
   /* functional template */
-  const __vue_is_functional_template__$L = false;
+  const __vue_is_functional_template__$T = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$L = normalizeComponent(
-    { render: __vue_render__$L, staticRenderFns: __vue_staticRenderFns__$L },
-    __vue_inject_styles__$L,
-    __vue_script__$L,
-    __vue_scope_id__$L,
-    __vue_is_functional_template__$L,
-    __vue_module_identifier__$L,
+  const __vue_component__$T = normalizeComponent(
+    { render: __vue_render__$T, staticRenderFns: __vue_staticRenderFns__$T },
+    __vue_inject_styles__$T,
+    __vue_script__$T,
+    __vue_scope_id__$T,
+    __vue_is_functional_template__$T,
+    __vue_module_identifier__$T,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var DataTableTab = /** @class */ (function (_super) {
-    __extends(DataTableTab, _super);
-    function DataTableTab() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let DataTableTab = class DataTableTab extends Vue {
+    /** Get current matches */
+    get matches() {
+        return this.results ? this.results.results : [];
     }
-    Object.defineProperty(DataTableTab.prototype, "matches", {
-        /** Get current matches */
-        get: function () {
-            return this.results ? this.results.results : [];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(DataTableTab.prototype, "tableStyle", {
-        /** Dims results when loading */
-        get: function () {
-            return { opacity: this.loaded ? 1.0 : 0.3 };
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /** Dims results when loading */
+    get tableStyle() {
+        return { opacity: this.loaded ? 1.0 : 0.3 };
+    }
     /** Update paging values and run query */
-    DataTableTab.prototype.onPagingUpdated = function (paging) {
+    onPagingUpdated(paging) {
         this.$emit("pagingUpdated", paging);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DataTableTab.prototype, "tabkey", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], DataTableTab.prototype, "headers", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], DataTableTab.prototype, "pageSizes", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DataTableTab.prototype, "noDataText", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DataTableTab.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], DataTableTab.prototype, "loaded", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], DataTableTab.prototype, "results", void 0);
-    DataTableTab = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                Pager: __vue_component__$D,
-                LoadingOverlay: __vue_component__$b
-            }
-        })
-    ], DataTableTab);
-    return DataTableTab;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DataTableTab.prototype, "tabkey", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], DataTableTab.prototype, "headers", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], DataTableTab.prototype, "pageSizes", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DataTableTab.prototype, "noDataText", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DataTableTab.prototype, "loadingMessage", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], DataTableTab.prototype, "loaded", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], DataTableTab.prototype, "results", void 0);
+DataTableTab = __decorate([
+    Component({
+        components: {
+            Pager: __vue_component__$L,
+            LoadingOverlay: __vue_component__$j
+        }
+    })
+], DataTableTab);
+var script$S = DataTableTab;
 
 /* script */
-const __vue_script__$M = DataTableTab;
+const __vue_script__$U = script$S;
 
 /* template */
-var __vue_render__$M = function() {
+var __vue_render__$U = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9299,86 +9463,84 @@ var __vue_render__$M = function() {
     2
   )
 };
-var __vue_staticRenderFns__$M = [];
-__vue_render__$M._withStripped = true;
+var __vue_staticRenderFns__$U = [];
+__vue_render__$U._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$M = function (inject) {
+  const __vue_inject_styles__$U = function (inject) {
     if (!inject) return
-    inject("data-v-1a035a38_0", { source: "\n.flex-rows[data-v-1a035a38] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-1a035a38] {\r\n  flex: 0;\n}\n.tab-content[data-v-1a035a38] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-1a035a38] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DataTableTab.vue"],"names":[],"mappings":";AA0EA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"DataTableTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\"/>\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <v-layout row wrap>\r\n          <v-flex xs12>\r\n            <v-data-table\r\n              :headers=\"headers\"\r\n              :items=\"matches\"\r\n              :hide-actions=\"true\"\r\n              :no-data-text=\"noDataText\"\r\n              :style=\"tableStyle\"\r\n            >\r\n              <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\">\r\n                <slot :name=\"slot\" v-bind=\"scope\"/>\r\n              </template>\r\n            </v-data-table>\r\n          </v-flex>\r\n        </v-layout>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\"/>\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\"/>\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport Pager from \"../list/Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { IPaging, IPageSizes, ITableHeaders } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class DataTableTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly headers!: ITableHeaders;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly noDataText!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Get current matches */\r\n  get matches(): {}[] {\r\n    return this.results ? this.results.results : [];\r\n  }\r\n\r\n  /** Dims results when loading */\r\n  get tableStyle(): {} {\r\n    return { opacity: this.loaded ? 1.0 : 0.3 };\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-2fb3cffb_0", { source: "\n.flex-rows[data-v-2fb3cffb] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tab-header[data-v-2fb3cffb] {\r\n  flex: 0;\n}\n.tab-content[data-v-2fb3cffb] {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\n}\n.tab-footer[data-v-2fb3cffb] {\r\n  flex: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DataTableTab.vue"],"names":[],"mappings":";AA0EA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,sBAAA;EACA,gBAAA;AACA;AACA;EACA,OAAA;AACA","file":"DataTableTab.vue","sourcesContent":["<template>\r\n  <v-tab-item :key=\"tabkey\">\r\n    <div class=\"flex-rows\">\r\n      <div class=\"tab-header\">\r\n        <slot name=\"header\" />\r\n      </div>\r\n      <div class=\"tab-content\">\r\n        <v-layout row wrap>\r\n          <v-flex xs12>\r\n            <v-data-table\r\n              :headers=\"headers\"\r\n              :items=\"matches\"\r\n              :hide-actions=\"true\"\r\n              :no-data-text=\"noDataText\"\r\n              :style=\"tableStyle\"\r\n            >\r\n              <template v-for=\"(_, slot) of $scopedSlots\" v-slot:[slot]=\"scope\">\r\n                <slot :name=\"slot\" v-bind=\"scope\" />\r\n              </template>\r\n            </v-data-table>\r\n          </v-flex>\r\n        </v-layout>\r\n      </div>\r\n      <div class=\"tab-footer\">\r\n        <pager :results=\"results\" @pagingUpdated=\"onPagingUpdated\" :pageSizes=\"pageSizes\" />\r\n      </div>\r\n    </div>\r\n    <loading-overlay v-if=\"!loaded\" :loadingMessage=\"loadingMessage\" />\r\n    <slot name=\"dialogs\"></slot>\r\n  </v-tab-item>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport Pager from \"../list/Pager.vue\";\r\nimport LoadingOverlay from \"../common/LoadingOverlay.vue\";\r\n\r\nimport { IPaging, IPageSizes, ITableHeaders } from \"sitewhere-ide-common\";\r\n\r\n@Component({\r\n  components: {\r\n    Pager,\r\n    LoadingOverlay\r\n  }\r\n})\r\nexport default class DataTableTab extends Vue {\r\n  @Prop() readonly tabkey!: string;\r\n  @Prop() readonly headers!: ITableHeaders;\r\n  @Prop() readonly pageSizes!: IPageSizes;\r\n  @Prop() readonly noDataText!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly results!: { numResults: number; results: {}[] };\r\n\r\n  /** Get current matches */\r\n  get matches(): {}[] {\r\n    return this.results ? this.results.results : [];\r\n  }\r\n\r\n  /** Dims results when loading */\r\n  get tableStyle(): {} {\r\n    return { opacity: this.loaded ? 1.0 : 0.3 };\r\n  }\r\n\r\n  /** Update paging values and run query */\r\n  onPagingUpdated(paging: IPaging) {\r\n    this.$emit(\"pagingUpdated\", paging);\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tab-header {\r\n  flex: 0;\r\n}\r\n.tab-content {\r\n  flex: 1;\r\n  background-color: #eee;\r\n  overflow-y: auto;\r\n}\r\n.tab-footer {\r\n  flex: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$M = "data-v-1a035a38";
+  const __vue_scope_id__$U = "data-v-2fb3cffb";
   /* module identifier */
-  const __vue_module_identifier__$M = undefined;
+  const __vue_module_identifier__$U = undefined;
   /* functional template */
-  const __vue_is_functional_template__$M = false;
+  const __vue_is_functional_template__$U = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$M = normalizeComponent(
-    { render: __vue_render__$M, staticRenderFns: __vue_staticRenderFns__$M },
-    __vue_inject_styles__$M,
-    __vue_script__$M,
-    __vue_scope_id__$M,
-    __vue_is_functional_template__$M,
-    __vue_module_identifier__$M,
+  const __vue_component__$U = normalizeComponent(
+    { render: __vue_render__$U, staticRenderFns: __vue_staticRenderFns__$U },
+    __vue_inject_styles__$U,
+    __vue_script__$U,
+    __vue_scope_id__$U,
+    __vue_is_functional_template__$U,
+    __vue_module_identifier__$U,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var DetailPage = /** @class */ (function (_super) {
-    __extends(DetailPage, _super);
-    function DetailPage() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.active = null;
-        return _this;
+let DetailPage = class DetailPage extends Vue {
+    constructor() {
+        super(...arguments);
+        this.active = null;
     }
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DetailPage.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DetailPage.prototype, "title", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], DetailPage.prototype, "loadingMessage", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], DetailPage.prototype, "loaded", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], DetailPage.prototype, "record", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Boolean)
-    ], DetailPage.prototype, "tabsOnBottom", void 0);
-    DetailPage = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                NavigationPage: __vue_component__$B
-            }
-        })
-    ], DetailPage);
-    return DetailPage;
-}(Vue));
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DetailPage.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DetailPage.prototype, "title", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], DetailPage.prototype, "loadingMessage", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], DetailPage.prototype, "loaded", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], DetailPage.prototype, "record", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", Boolean)
+], DetailPage.prototype, "tabsOnBottom", void 0);
+DetailPage = __decorate([
+    Component({
+        components: {
+            NavigationPage: __vue_component__$J
+        }
+    })
+], DetailPage);
+var script$T = DetailPage;
 
 /* script */
-const __vue_script__$N = DetailPage;
+const __vue_script__$V = script$T;
 
 /* template */
-var __vue_render__$N = function() {
+var __vue_render__$V = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9484,56 +9646,52 @@ var __vue_render__$N = function() {
     2
   )
 };
-var __vue_staticRenderFns__$N = [];
-__vue_render__$N._withStripped = true;
+var __vue_staticRenderFns__$V = [];
+__vue_render__$V._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$N = function (inject) {
+  const __vue_inject_styles__$V = function (inject) {
     if (!inject) return
-    inject("data-v-46d4c89a_0", { source: "\n.flex-rows[data-v-46d4c89a] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tabs-row[data-v-46d4c89a] {\r\n  flex: 0;\n}\n.tab-items-row[data-v-46d4c89a] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\n.tab-items-row[data-v-46d4c89a] .v-window__container,\r\n.tab-items-row[data-v-46d4c89a] .v-window-item {\r\n  height: 100%;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DetailPage.vue"],"names":[],"mappings":";AA6DA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA;AACA;;EAEA,YAAA;AACA","file":"DetailPage.vue","sourcesContent":["<template>\r\n  <navigation-page\r\n    :icon=\"icon\"\r\n    :title=\"title\"\r\n    :loadingMessage=\"loadingMessage\"\r\n    :loaded=\"loaded\"\r\n  >\r\n    <template slot=\"header\">\r\n      <slot name=\"header\" />\r\n    </template>\r\n    <template v-if=\"record\" slot=\"content\">\r\n      <div v-if=\"tabsOnBottom\" class=\"flex-rows\">\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\" />\r\n        </v-tabs-items>\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\" />\r\n        </v-tabs>\r\n      </div>\r\n      <div v-else class=\"flex-rows\">\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\" />\r\n        </v-tabs>\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\" />\r\n        </v-tabs-items>\r\n      </div>\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage\r\n  }\r\n})\r\nexport default class DetailPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly record!: {};\r\n  @Prop() readonly tabsOnBottom!: boolean;\r\n\r\n  active: string | null = null;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tabs-row {\r\n  flex: 0;\r\n}\r\n.tab-items-row {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n.tab-items-row >>> .v-window__container,\r\n.tab-items-row >>> .v-window-item {\r\n  height: 100%;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-95bb9612_0", { source: "\n.flex-rows[data-v-95bb9612] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\n}\n.tabs-row[data-v-95bb9612] {\r\n  flex: 0;\n}\n.tab-items-row[data-v-95bb9612] {\r\n  flex: 1;\r\n  overflow-y: auto;\n}\n.tab-items-row[data-v-95bb9612] .v-window__container,\r\n.tab-items-row[data-v-95bb9612] .v-window-item {\r\n  height: 100%;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\DetailPage.vue"],"names":[],"mappings":";AAwDA;EACA,aAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,OAAA;AACA;AACA;EACA,OAAA;EACA,gBAAA;AACA;AACA;;EAEA,YAAA;AACA","file":"DetailPage.vue","sourcesContent":["<template>\r\n  <navigation-page :icon=\"icon\" :title=\"title\" :loadingMessage=\"loadingMessage\" :loaded=\"loaded\">\r\n    <template slot=\"header\">\r\n      <slot name=\"header\" />\r\n    </template>\r\n    <template v-if=\"record\" slot=\"content\">\r\n      <div v-if=\"tabsOnBottom\" class=\"flex-rows\">\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\" />\r\n        </v-tabs-items>\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\" />\r\n        </v-tabs>\r\n      </div>\r\n      <div v-else class=\"flex-rows\">\r\n        <v-tabs class=\"tabs-row\" v-model=\"active\">\r\n          <slot name=\"tabs\" />\r\n        </v-tabs>\r\n        <v-tabs-items class=\"tab-items-row\" v-model=\"active\">\r\n          <slot name=\"tab-items\" />\r\n        </v-tabs-items>\r\n      </div>\r\n    </template>\r\n    <template slot=\"actions\">\r\n      <slot name=\"actions\" />\r\n    </template>\r\n    <template slot=\"dialogs\">\r\n      <slot name=\"dialogs\" />\r\n    </template>\r\n  </navigation-page>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport NavigationPage from \"../navigation/NavigationPage.vue\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationPage\r\n  }\r\n})\r\nexport default class DetailPage extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly title!: string;\r\n  @Prop() readonly loadingMessage!: string;\r\n  @Prop() readonly loaded!: boolean;\r\n  @Prop() readonly record!: {};\r\n  @Prop() readonly tabsOnBottom!: boolean;\r\n\r\n  active: string | null = null;\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.flex-rows {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n.tabs-row {\r\n  flex: 0;\r\n}\r\n.tab-items-row {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n}\r\n.tab-items-row >>> .v-window__container,\r\n.tab-items-row >>> .v-window-item {\r\n  height: 100%;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$N = "data-v-46d4c89a";
+  const __vue_scope_id__$V = "data-v-95bb9612";
   /* module identifier */
-  const __vue_module_identifier__$N = undefined;
+  const __vue_module_identifier__$V = undefined;
   /* functional template */
-  const __vue_is_functional_template__$N = false;
+  const __vue_is_functional_template__$V = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$N = normalizeComponent(
-    { render: __vue_render__$N, staticRenderFns: __vue_staticRenderFns__$N },
-    __vue_inject_styles__$N,
-    __vue_script__$N,
-    __vue_scope_id__$N,
-    __vue_is_functional_template__$N,
-    __vue_module_identifier__$N,
+  const __vue_component__$V = normalizeComponent(
+    { render: __vue_render__$V, staticRenderFns: __vue_staticRenderFns__$V },
+    __vue_inject_styles__$V,
+    __vue_script__$V,
+    __vue_scope_id__$V,
+    __vue_is_functional_template__$V,
+    __vue_module_identifier__$V,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var NavigationHeaderLeft = /** @class */ (function (_super) {
-    __extends(NavigationHeaderLeft, _super);
-    function NavigationHeaderLeft() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    NavigationHeaderLeft = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], NavigationHeaderLeft);
-    return NavigationHeaderLeft;
-}(Vue));
+let NavigationHeaderLeft = class NavigationHeaderLeft extends Vue {
+};
+NavigationHeaderLeft = __decorate([
+    Component({})
+], NavigationHeaderLeft);
+var script$U = NavigationHeaderLeft;
 
 /* script */
-const __vue_script__$O = NavigationHeaderLeft;
+const __vue_script__$W = script$U;
 
 /* template */
-var __vue_render__$O = function() {
+var __vue_render__$W = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9551,95 +9709,79 @@ var __vue_render__$O = function() {
     2
   )
 };
-var __vue_staticRenderFns__$O = [];
-__vue_render__$O._withStripped = true;
+var __vue_staticRenderFns__$W = [];
+__vue_render__$W._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$O = function (inject) {
+  const __vue_inject_styles__$W = function (inject) {
     if (!inject) return
-    inject("data-v-f78ad04a_0", { source: "\n.right-overlay[data-v-f78ad04a] {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderLeft.vue"],"names":[],"mappings":";AAkBA;EACA,kBAAA;EACA,QAAA;EACA,MAAA;AACA","file":"NavigationHeaderLeft.vue","sourcesContent":["<template>\r\n  <v-card flat style=\"position: relative; height: 100%\">\r\n    <slot />\r\n    <div class=\"right-overlay\">\r\n      <slot name=\"right-overlay\" />\r\n    </div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderLeft extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.right-overlay {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-8ca34a28_0", { source: "\n.right-overlay[data-v-8ca34a28] {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderLeft.vue"],"names":[],"mappings":";AAkBA;EACA,kBAAA;EACA,QAAA;EACA,MAAA;AACA","file":"NavigationHeaderLeft.vue","sourcesContent":["<template>\r\n  <v-card flat style=\"position: relative; height: 100%\">\r\n    <slot />\r\n    <div class=\"right-overlay\">\r\n      <slot name=\"right-overlay\" />\r\n    </div>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderLeft extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.right-overlay {\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$O = "data-v-f78ad04a";
+  const __vue_scope_id__$W = "data-v-8ca34a28";
   /* module identifier */
-  const __vue_module_identifier__$O = undefined;
+  const __vue_module_identifier__$W = undefined;
   /* functional template */
-  const __vue_is_functional_template__$O = false;
+  const __vue_is_functional_template__$W = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$O = normalizeComponent(
-    { render: __vue_render__$O, staticRenderFns: __vue_staticRenderFns__$O },
-    __vue_inject_styles__$O,
-    __vue_script__$O,
-    __vue_scope_id__$O,
-    __vue_is_functional_template__$O,
-    __vue_module_identifier__$O,
+  const __vue_component__$W = normalizeComponent(
+    { render: __vue_render__$W, staticRenderFns: __vue_staticRenderFns__$W },
+    __vue_inject_styles__$W,
+    __vue_script__$W,
+    __vue_scope_id__$W,
+    __vue_is_functional_template__$W,
+    __vue_module_identifier__$W,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var HeaderBrandingPanel = /** @class */ (function (_super) {
-    __extends(HeaderBrandingPanel, _super);
-    function HeaderBrandingPanel() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let HeaderBrandingPanel = class HeaderBrandingPanel extends Vue {
+    /** Accessor for image URL */
+    get imageUrl() {
+        return this.entity ? this.entity.imageUrl : null;
     }
-    Object.defineProperty(HeaderBrandingPanel.prototype, "imageUrl", {
-        /** Accessor for image URL */
-        get: function () {
-            return this.entity ? this.entity.imageUrl : null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(HeaderBrandingPanel.prototype, "icon", {
-        /** Accessor for icon */
-        get: function () {
-            return this.entity ? this.entity.icon : null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(HeaderBrandingPanel.prototype, "imageStyle", {
-        // Compute style of image.
-        get: function () {
-            return {
-                "background-color": "#fff",
-                "background-image": "url(" + this.entity.imageUrl + ")",
-                "background-size": "contain",
-                "background-repeat": "no-repeat",
-                "background-position": "50% 50%"
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Object)
-    ], HeaderBrandingPanel.prototype, "entity", void 0);
-    HeaderBrandingPanel = __decorate([
-        sitewhereIdeCommon.Component({
-            components: {
-                NavigationHeaderLeft: __vue_component__$O,
-                ImageZoomOnHover: __vue_component__$9
-            }
-        })
-    ], HeaderBrandingPanel);
-    return HeaderBrandingPanel;
-}(Vue));
+    /** Accessor for icon */
+    get icon() {
+        return this.entity ? this.entity.icon : null;
+    }
+    // Compute style of image.
+    get imageStyle() {
+        return {
+            "background-color": "#fff",
+            "background-image": "url(" + this.entity.imageUrl + ")",
+            "background-size": "contain",
+            "background-repeat": "no-repeat",
+            "background-position": "50% 50%"
+        };
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Object)
+], HeaderBrandingPanel.prototype, "entity", void 0);
+HeaderBrandingPanel = __decorate([
+    Component({
+        components: {
+            NavigationHeaderLeft: __vue_component__$W,
+            ImageZoomOnHover: __vue_component__$h
+        }
+    })
+], HeaderBrandingPanel);
+var script$V = HeaderBrandingPanel;
 
 /* script */
-const __vue_script__$P = HeaderBrandingPanel;
+const __vue_script__$X = script$V;
 
 /* template */
-var __vue_render__$P = function() {
+var __vue_render__$X = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9665,56 +9807,52 @@ var __vue_render__$P = function() {
     1
   )
 };
-var __vue_staticRenderFns__$P = [];
-__vue_render__$P._withStripped = true;
+var __vue_staticRenderFns__$X = [];
+__vue_render__$X._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$P = function (inject) {
+  const __vue_inject_styles__$X = function (inject) {
     if (!inject) return
-    inject("data-v-e160ddbc_0", { source: "\n.header-image[data-v-e160ddbc] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-e160ddbc] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAmDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,aAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <image-zoom-on-hover v-if=\"imageUrl\" :imageUrl=\"imageUrl\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\nimport ImageZoomOnHover from \"../common/ImageZoomOnHover.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft,\r\n    ImageZoomOnHover\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-24f7d9f1_0", { source: "\n.header-image[data-v-24f7d9f1] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\n}\n.header-icon[data-v-24f7d9f1] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\HeaderBrandingPanel.vue"],"names":[],"mappings":";AAmDA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;AACA;AAEA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,UAAA;EACA,aAAA;AACA","file":"HeaderBrandingPanel.vue","sourcesContent":["<template>\r\n  <navigation-header-left>\r\n    <image-zoom-on-hover v-if=\"imageUrl\" :imageUrl=\"imageUrl\" />\r\n    <span v-else-if=\"icon\" class=\"header-icon\">\r\n      <font-awesome-icon class=\"grey--text\" :icon=\"icon\" size=\"7x\" />\r\n    </span>\r\n  </navigation-header-left>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\nimport NavigationHeaderLeft from \"./NavigationHeaderLeft.vue\";\r\nimport ImageZoomOnHover from \"../common/ImageZoomOnHover.vue\";\r\n\r\nimport { IBrandedEntity } from \"sitewhere-rest-api\";\r\n\r\n@Component({\r\n  components: {\r\n    NavigationHeaderLeft,\r\n    ImageZoomOnHover\r\n  }\r\n})\r\nexport default class HeaderBrandingPanel extends Vue {\r\n  @Prop() readonly entity!: IBrandedEntity;\r\n\r\n  /** Accessor for image URL */\r\n  get imageUrl() {\r\n    return this.entity ? this.entity.imageUrl : null;\r\n  }\r\n\r\n  /** Accessor for icon */\r\n  get icon() {\r\n    return this.entity ? this.entity.icon : null;\r\n  }\r\n\r\n  // Compute style of image.\r\n  get imageStyle() {\r\n    return {\r\n      \"background-color\": \"#fff\",\r\n      \"background-image\": \"url(\" + this.entity.imageUrl + \")\",\r\n      \"background-size\": \"contain\",\r\n      \"background-repeat\": \"no-repeat\",\r\n      \"background-position\": \"50% 50%\"\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-image {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n}\r\n\r\n.header-icon {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  bottom: 0px;\r\n  right: 0px;\r\n  padding: 50px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$P = "data-v-e160ddbc";
+  const __vue_scope_id__$X = "data-v-24f7d9f1";
   /* module identifier */
-  const __vue_module_identifier__$P = undefined;
+  const __vue_module_identifier__$X = undefined;
   /* functional template */
-  const __vue_is_functional_template__$P = false;
+  const __vue_is_functional_template__$X = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$P = normalizeComponent(
-    { render: __vue_render__$P, staticRenderFns: __vue_staticRenderFns__$P },
-    __vue_inject_styles__$P,
-    __vue_script__$P,
-    __vue_scope_id__$P,
-    __vue_is_functional_template__$P,
-    __vue_module_identifier__$P,
+  const __vue_component__$X = normalizeComponent(
+    { render: __vue_render__$X, staticRenderFns: __vue_staticRenderFns__$X },
+    __vue_inject_styles__$X,
+    __vue_script__$X,
+    __vue_scope_id__$X,
+    __vue_is_functional_template__$X,
+    __vue_module_identifier__$X,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var InAppFooter = /** @class */ (function (_super) {
-    __extends(InAppFooter, _super);
-    function InAppFooter() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    InAppFooter = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], InAppFooter);
-    return InAppFooter;
-}(Vue));
+let InAppFooter = class InAppFooter extends Vue {
+};
+InAppFooter = __decorate([
+    Component({})
+], InAppFooter);
+var script$W = InAppFooter;
 
 /* script */
-const __vue_script__$Q = InAppFooter;
+const __vue_script__$Y = script$W;
 
 /* template */
-var __vue_render__$Q = function() {
+var __vue_render__$Y = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9722,71 +9860,69 @@ var __vue_render__$Q = function() {
     _c("div", { staticClass: "footer-content" }, [_vm._t("default")], 2)
   ])
 };
-var __vue_staticRenderFns__$Q = [];
-__vue_render__$Q._withStripped = true;
+var __vue_staticRenderFns__$Y = [];
+__vue_render__$Y._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$Q = function (inject) {
+  const __vue_inject_styles__$Y = function (inject) {
     if (!inject) return
-    inject("data-v-4078e95f_0", { source: "\n.footer-content[data-v-4078e95f] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <slot/>\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-8835994c_0", { source: "\n.footer-content[data-v-8835994c] {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppFooter.vue"],"names":[],"mappings":";AAiBA;EACA,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,YAAA;AACA","file":"InAppFooter.vue","sourcesContent":["<template>\r\n  <v-footer app>\r\n    <div class=\"footer-content\">\r\n      <slot />\r\n    </div>\r\n  </v-footer>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class InAppFooter extends Vue {}\r\n</script>\r\n\r\n<style scoped>\r\n.footer-content {\r\n  border-top: 1px solid #ddd;\r\n  width: 100%;\r\n  height: 100%;\r\n  color: #666;\r\n  padding: 7px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$Q = "data-v-4078e95f";
+  const __vue_scope_id__$Y = "data-v-8835994c";
   /* module identifier */
-  const __vue_module_identifier__$Q = undefined;
+  const __vue_module_identifier__$Y = undefined;
   /* functional template */
-  const __vue_is_functional_template__$Q = false;
+  const __vue_is_functional_template__$Y = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$Q = normalizeComponent(
-    { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
-    __vue_inject_styles__$Q,
-    __vue_script__$Q,
-    __vue_scope_id__$Q,
-    __vue_is_functional_template__$Q,
-    __vue_module_identifier__$Q,
+  const __vue_component__$Y = normalizeComponent(
+    { render: __vue_render__$Y, staticRenderFns: __vue_staticRenderFns__$Y },
+    __vue_inject_styles__$Y,
+    __vue_script__$Y,
+    __vue_scope_id__$Y,
+    __vue_is_functional_template__$Y,
+    __vue_module_identifier__$Y,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var InAppSystemBar = /** @class */ (function (_super) {
-    __extends(InAppSystemBar, _super);
-    function InAppSystemBar() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.title = Electron.remote.getCurrentWindow().getTitle();
-        return _this;
+let InAppSystemBar = class InAppSystemBar extends Vue {
+    constructor() {
+        super(...arguments);
+        this.title = Electron.remote.getCurrentWindow().getTitle();
     }
-    InAppSystemBar.prototype.openWebTools = function () {
+    openWebTools() {
         Electron.remote.getCurrentWebContents().openDevTools();
-    };
-    InAppSystemBar.prototype.minWindow = function () {
+    }
+    minWindow() {
         Electron.remote.getCurrentWindow().minimize();
-    };
-    InAppSystemBar.prototype.maxWindow = function () {
+    }
+    maxWindow() {
         Electron.remote.getCurrentWindow().maximize();
-    };
-    InAppSystemBar.prototype.closeWindow = function () {
+    }
+    closeWindow() {
         Electron.remote.getCurrentWindow().close();
         Electron.app.quit();
-    };
-    InAppSystemBar = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], InAppSystemBar);
-    return InAppSystemBar;
-}(Vue));
+    }
+};
+InAppSystemBar = __decorate([
+    Component({})
+], InAppSystemBar);
+var script$X = InAppSystemBar;
 
 /* script */
-const __vue_script__$R = InAppSystemBar;
+const __vue_script__$Z = script$X;
 
 /* template */
-var __vue_render__$R = function() {
+var __vue_render__$Z = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -9851,64 +9987,60 @@ var __vue_render__$R = function() {
     1
   )
 };
-var __vue_staticRenderFns__$R = [];
-__vue_render__$R._withStripped = true;
+var __vue_staticRenderFns__$Z = [];
+__vue_render__$Z._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$R = function (inject) {
+  const __vue_inject_styles__$Z = function (inject) {
     if (!inject) return
-    inject("data-v-660b8b92_0", { source: "\n.title-bar-button[data-v-660b8b92] {\r\n  -webkit-app-region: no-drag;\n}\n.system-bar-title[data-v-660b8b92] {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppSystemBar.vue"],"names":[],"mappings":";AAiDA;EACA,2BAAA;AACA;AACA;EACA,WAAA;EACA,iBAAA;EACA,kBAAA;AACA","file":"InAppSystemBar.vue","sourcesContent":["<template>\r\n  <v-system-bar color=\"#444\" class=\"title-bar\">\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"openWebTools\">\r\n      <v-icon color=\"white\">menu</v-icon>\r\n    </v-btn>\r\n    <span class=\"system-bar-title\">{{ title }}</span>\r\n    <v-spacer></v-spacer>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"minWindow\">\r\n      <v-icon color=\"white\">remove</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"maxWindow\">\r\n      <v-icon color=\"white\">check_box_outline_blank</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"closeWindow\">\r\n      <v-icon color=\"white\">close</v-icon>\r\n    </v-btn>\r\n  </v-system-bar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"sitewhere-ide-common\";\r\n\r\nimport Electron from \"electron\";\r\n\r\n@Component({})\r\nexport default class InAppSystemBar extends Vue {\r\n  title: string = Electron.remote.getCurrentWindow().getTitle();\r\n\r\n  openWebTools() {\r\n    Electron.remote.getCurrentWebContents().openDevTools();\r\n  }\r\n\r\n  minWindow() {\r\n    Electron.remote.getCurrentWindow().minimize();\r\n  }\r\n\r\n  maxWindow() {\r\n    Electron.remote.getCurrentWindow().maximize();\r\n  }\r\n\r\n  closeWindow() {\r\n    Electron.remote.getCurrentWindow().close();\r\n    Electron.app.quit();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.title-bar-button {\r\n  -webkit-app-region: no-drag;\r\n}\r\n.system-bar-title {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-5eb1d823_0", { source: "\n.title-bar-button[data-v-5eb1d823] {\r\n  -webkit-app-region: no-drag;\n}\n.system-bar-title[data-v-5eb1d823] {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\InAppSystemBar.vue"],"names":[],"mappings":";AAiDA;EACA,2BAAA;AACA;AACA;EACA,WAAA;EACA,iBAAA;EACA,kBAAA;AACA","file":"InAppSystemBar.vue","sourcesContent":["<template>\r\n  <v-system-bar color=\"#444\" class=\"title-bar\">\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"openWebTools\">\r\n      <v-icon color=\"white\">menu</v-icon>\r\n    </v-btn>\r\n    <span class=\"system-bar-title\">{{ title }}</span>\r\n    <v-spacer></v-spacer>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"minWindow\">\r\n      <v-icon color=\"white\">remove</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"maxWindow\">\r\n      <v-icon color=\"white\">check_box_outline_blank</v-icon>\r\n    </v-btn>\r\n    <v-btn flat icon small class=\"ma-0 title-bar-button\" @click=\"closeWindow\">\r\n      <v-icon color=\"white\">close</v-icon>\r\n    </v-btn>\r\n  </v-system-bar>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component } from \"vue-property-decorator\";\r\n\r\nimport Electron from \"electron\";\r\n\r\n@Component({})\r\nexport default class InAppSystemBar extends Vue {\r\n  title: string = Electron.remote.getCurrentWindow().getTitle();\r\n\r\n  openWebTools() {\r\n    Electron.remote.getCurrentWebContents().openDevTools();\r\n  }\r\n\r\n  minWindow() {\r\n    Electron.remote.getCurrentWindow().minimize();\r\n  }\r\n\r\n  maxWindow() {\r\n    Electron.remote.getCurrentWindow().maximize();\r\n  }\r\n\r\n  closeWindow() {\r\n    Electron.remote.getCurrentWindow().close();\r\n    Electron.app.quit();\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.title-bar-button {\r\n  -webkit-app-region: no-drag;\r\n}\r\n.system-bar-title {\r\n  color: #eee;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$R = "data-v-660b8b92";
+  const __vue_scope_id__$Z = "data-v-5eb1d823";
   /* module identifier */
-  const __vue_module_identifier__$R = undefined;
+  const __vue_module_identifier__$Z = undefined;
   /* functional template */
-  const __vue_is_functional_template__$R = false;
+  const __vue_is_functional_template__$Z = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$R = normalizeComponent(
-    { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
-    __vue_inject_styles__$R,
-    __vue_script__$R,
-    __vue_scope_id__$R,
-    __vue_is_functional_template__$R,
-    __vue_module_identifier__$R,
+  const __vue_component__$Z = normalizeComponent(
+    { render: __vue_render__$Z, staticRenderFns: __vue_staticRenderFns__$Z },
+    __vue_inject_styles__$Z,
+    __vue_script__$Z,
+    __vue_scope_id__$Z,
+    __vue_is_functional_template__$Z,
+    __vue_module_identifier__$Z,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var Navigation = /** @class */ (function (_super) {
-    __extends(Navigation, _super);
-    function Navigation() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
+let Navigation = class Navigation extends Vue {
     /** Called when a section is clicked */
-    Navigation.prototype.onSectionClicked = function (section) {
+    onSectionClicked(section) {
         this.$emit("sectionSelected", section);
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", Array)
-    ], Navigation.prototype, "sections", void 0);
-    Navigation = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], Navigation);
-    return Navigation;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", Array)
+], Navigation.prototype, "sections", void 0);
+Navigation = __decorate([
+    Component({})
+], Navigation);
+var script$Y = Navigation;
 
 /* script */
-const __vue_script__$S = Navigation;
+const __vue_script__$_ = script$Y;
 
 /* template */
-var __vue_render__$S = function() {
+var __vue_render__$_ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -10013,71 +10145,67 @@ var __vue_render__$S = function() {
       )
     : _vm._e()
 };
-var __vue_staticRenderFns__$S = [];
-__vue_render__$S._withStripped = true;
+var __vue_staticRenderFns__$_ = [];
+__vue_render__$_._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$S = function (inject) {
+  const __vue_inject_styles__$_ = function (inject) {
     if (!inject) return
-    inject("data-v-35f5af52_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"Navigation.vue"}, media: undefined });
+    inject("data-v-cc688ed6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"Navigation.vue"}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$S = "data-v-35f5af52";
+  const __vue_scope_id__$_ = "data-v-cc688ed6";
   /* module identifier */
-  const __vue_module_identifier__$S = undefined;
+  const __vue_module_identifier__$_ = undefined;
   /* functional template */
-  const __vue_is_functional_template__$S = false;
+  const __vue_is_functional_template__$_ = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$S = normalizeComponent(
-    { render: __vue_render__$S, staticRenderFns: __vue_staticRenderFns__$S },
-    __vue_inject_styles__$S,
-    __vue_script__$S,
-    __vue_scope_id__$S,
-    __vue_is_functional_template__$S,
-    __vue_module_identifier__$S,
+  const __vue_component__$_ = normalizeComponent(
+    { render: __vue_render__$_, staticRenderFns: __vue_staticRenderFns__$_ },
+    __vue_inject_styles__$_,
+    __vue_script__$_,
+    __vue_scope_id__$_,
+    __vue_is_functional_template__$_,
+    __vue_module_identifier__$_,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var NavigationActionButton = /** @class */ (function (_super) {
-    __extends(NavigationActionButton, _super);
-    function NavigationActionButton() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    NavigationActionButton.prototype.onAction = function () {
+let NavigationActionButton = class NavigationActionButton extends Vue {
+    onAction() {
         this.$emit("action");
-    };
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationActionButton.prototype, "icon", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationActionButton.prototype, "tooltip", void 0);
-    __decorate([
-        sitewhereIdeCommon.Prop({ default: false }),
-        __metadata("design:type", Boolean)
-    ], NavigationActionButton.prototype, "material", void 0);
-    NavigationActionButton = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], NavigationActionButton);
-    return NavigationActionButton;
-}(Vue));
+    }
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NavigationActionButton.prototype, "icon", void 0);
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NavigationActionButton.prototype, "tooltip", void 0);
+__decorate([
+    Prop({ default: false }),
+    __metadata("design:type", Boolean)
+], NavigationActionButton.prototype, "material", void 0);
+NavigationActionButton = __decorate([
+    Component({})
+], NavigationActionButton);
+var script$Z = NavigationActionButton;
 
 /* script */
-const __vue_script__$T = NavigationActionButton;
+const __vue_script__$$ = script$Z;
 
 /* template */
-var __vue_render__$T = function() {
+var __vue_render__$$ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -10093,7 +10221,7 @@ var __vue_render__$T = function() {
           on: { click: _vm.onAction },
           slot: "activator"
         },
-        [_vm._v(_vm._s(_vm.icon))]
+        [_vm._v("\n    " + _vm._s(_vm.icon) + "\n  ")]
       ),
       _vm._v(" "),
       _c("span", [_vm._v(_vm._s(_vm.tooltip))])
@@ -10101,56 +10229,52 @@ var __vue_render__$T = function() {
     1
   )
 };
-var __vue_staticRenderFns__$T = [];
-__vue_render__$T._withStripped = true;
+var __vue_staticRenderFns__$$ = [];
+__vue_render__$$._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$T = function (inject) {
+  const __vue_inject_styles__$$ = function (inject) {
     if (!inject) return
-    inject("data-v-60febc63_0", { source: "\n.navbutton[data-v-60febc63] {\r\n  font-size: 16px;\r\n  padding-left: 8px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-60febc63]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA0BA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon class=\"ma-0 ml-1 navbutton\" @click=\"onAction\" slot=\"activator\">{{\r\n      icon\r\n    }}</v-icon>\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 16px;\r\n  padding-left: 8px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-0b3cae2e_0", { source: "\n.navbutton[data-v-0b3cae2e] {\r\n  font-size: 16px;\r\n  padding-left: 8px;\r\n  color: #666;\r\n  vertical-align: middle;\n}\n.navbutton[data-v-0b3cae2e]:hover {\r\n  color: #999;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationActionButton.vue"],"names":[],"mappings":";AA4BA;EACA,eAAA;EACA,iBAAA;EACA,WAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;AACA","file":"NavigationActionButton.vue","sourcesContent":["<template>\r\n  <v-tooltip left>\r\n    <v-icon class=\"ma-0 ml-1 navbutton\" @click=\"onAction\" slot=\"activator\">\r\n      {{\r\n      icon\r\n      }}\r\n    </v-icon>\r\n    <span>{{ tooltip }}</span>\r\n  </v-tooltip>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class NavigationActionButton extends Vue {\r\n  @Prop() readonly icon!: string;\r\n  @Prop() readonly tooltip!: string;\r\n  @Prop({ default: false }) readonly material!: boolean;\r\n\r\n  onAction() {\r\n    this.$emit(\"action\");\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.navbutton {\r\n  font-size: 16px;\r\n  padding-left: 8px;\r\n  color: #666;\r\n  vertical-align: middle;\r\n}\r\n.navbutton:hover {\r\n  color: #999;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$T = "data-v-60febc63";
+  const __vue_scope_id__$$ = "data-v-0b3cae2e";
   /* module identifier */
-  const __vue_module_identifier__$T = undefined;
+  const __vue_module_identifier__$$ = undefined;
   /* functional template */
-  const __vue_is_functional_template__$T = false;
+  const __vue_is_functional_template__$$ = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$T = normalizeComponent(
-    { render: __vue_render__$T, staticRenderFns: __vue_staticRenderFns__$T },
-    __vue_inject_styles__$T,
-    __vue_script__$T,
-    __vue_scope_id__$T,
-    __vue_is_functional_template__$T,
-    __vue_module_identifier__$T,
+  const __vue_component__$$ = normalizeComponent(
+    { render: __vue_render__$$, staticRenderFns: __vue_staticRenderFns__$$ },
+    __vue_inject_styles__$$,
+    __vue_script__$$,
+    __vue_scope_id__$$,
+    __vue_is_functional_template__$$,
+    __vue_module_identifier__$$,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-var NavigationHeaderFields = /** @class */ (function (_super) {
-    __extends(NavigationHeaderFields, _super);
-    function NavigationHeaderFields() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    NavigationHeaderFields = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], NavigationHeaderFields);
-    return NavigationHeaderFields;
-}(Vue));
+let NavigationHeaderFields = class NavigationHeaderFields extends Vue {
+};
+NavigationHeaderFields = __decorate([
+    Component({})
+], NavigationHeaderFields);
+var script$_ = NavigationHeaderFields;
 
 /* script */
-const __vue_script__$U = NavigationHeaderFields;
+const __vue_script__$10 = script$_;
 
 /* template */
-var __vue_render__$U = function() {
+var __vue_render__$10 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -10161,17 +10285,17 @@ var __vue_render__$U = function() {
     2
   )
 };
-var __vue_staticRenderFns__$U = [];
-__vue_render__$U._withStripped = true;
+var __vue_staticRenderFns__$10 = [];
+__vue_render__$10._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$U = undefined;
+  const __vue_inject_styles__$10 = undefined;
   /* scoped */
-  const __vue_scope_id__$U = undefined;
+  const __vue_scope_id__$10 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$U = undefined;
+  const __vue_module_identifier__$10 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$U = false;
+  const __vue_is_functional_template__$10 = false;
   /* style inject */
   
   /* style inject SSR */
@@ -10180,49 +10304,41 @@ __vue_render__$U._withStripped = true;
   
 
   
-  const __vue_component__$U = normalizeComponent(
-    { render: __vue_render__$U, staticRenderFns: __vue_staticRenderFns__$U },
-    __vue_inject_styles__$U,
-    __vue_script__$U,
-    __vue_scope_id__$U,
-    __vue_is_functional_template__$U,
-    __vue_module_identifier__$U,
+  const __vue_component__$10 = normalizeComponent(
+    { render: __vue_render__$10, staticRenderFns: __vue_staticRenderFns__$10 },
+    __vue_inject_styles__$10,
+    __vue_script__$10,
+    __vue_scope_id__$10,
+    __vue_is_functional_template__$10,
+    __vue_module_identifier__$10,
     false,
     undefined,
     undefined,
     undefined
   );
 
-var NavigationHeaderPanel = /** @class */ (function (_super) {
-    __extends(NavigationHeaderPanel, _super);
-    function NavigationHeaderPanel() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let NavigationHeaderPanel = class NavigationHeaderPanel extends Vue {
+    // Style for top-level panel.
+    get panelStyle() {
+        return {
+            "min-height": this.height
+        };
     }
-    Object.defineProperty(NavigationHeaderPanel.prototype, "panelStyle", {
-        // Style for top-level panel.
-        get: function () {
-            return {
-                "min-height": this.height
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    __decorate([
-        sitewhereIdeCommon.Prop(),
-        __metadata("design:type", String)
-    ], NavigationHeaderPanel.prototype, "height", void 0);
-    NavigationHeaderPanel = __decorate([
-        sitewhereIdeCommon.Component({})
-    ], NavigationHeaderPanel);
-    return NavigationHeaderPanel;
-}(Vue));
+};
+__decorate([
+    Prop(),
+    __metadata("design:type", String)
+], NavigationHeaderPanel.prototype, "height", void 0);
+NavigationHeaderPanel = __decorate([
+    Component({})
+], NavigationHeaderPanel);
+var script$$ = NavigationHeaderPanel;
 
 /* script */
-const __vue_script__$V = NavigationHeaderPanel;
+const __vue_script__$11 = script$$;
 
 /* template */
-var __vue_render__$V = function() {
+var __vue_render__$11 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -10247,165 +10363,112 @@ var __vue_render__$V = function() {
     1
   )
 };
-var __vue_staticRenderFns__$V = [];
-__vue_render__$V._withStripped = true;
+var __vue_staticRenderFns__$11 = [];
+__vue_render__$11._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$V = function (inject) {
+  const __vue_inject_styles__$11 = function (inject) {
     if (!inject) return
-    inject("data-v-6b0c2a59_0", { source: "\n.header-panel[data-v-6b0c2a59] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-left[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-right[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-content[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\n}\n.options-menu[data-v-6b0c2a59] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AAqCA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span class=\"header-left\">\r\n        <slot name=\"left\" />\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\" />\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\" />\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\" />\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"sitewhere-ide-common\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-left {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
+    inject("data-v-d788bf2c_0", { source: "\n.header-panel[data-v-d788bf2c] {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\n}\n.header-left[data-v-d788bf2c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-right[data-v-d788bf2c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\n}\n.header-content[data-v-d788bf2c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\n}\n.options-menu[data-v-d788bf2c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\n}\r\n", map: {"version":3,"sources":["C:\\Users\\Derek\\Documents\\GitHub\\sitewhere-ide-components\\src\\components\\navigation\\NavigationHeaderPanel.vue"],"names":[],"mappings":";AAqCA;EACA,gBAAA;EACA,kBAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,WAAA;EACA,YAAA;EACA,YAAA;AACA;AAEA;EACA,kBAAA;EACA,SAAA;EACA,YAAA;AACA","file":"NavigationHeaderPanel.vue","sourcesContent":["<template>\r\n  <v-card flat :style=\"panelStyle\" class=\"white mt-2 mb-3 pr-3 pl-3 header-panel\">\r\n    <v-card-text>\r\n      <span class=\"header-left\">\r\n        <slot name=\"left\" />\r\n      </span>\r\n      <span class=\"header-content\">\r\n        <slot name=\"content\" />\r\n      </span>\r\n      <span class=\"header-right\">\r\n        <slot name=\"right\" />\r\n      </span>\r\n      <span class=\"options-menu\">\r\n        <slot name=\"options\" />\r\n      </span>\r\n    </v-card-text>\r\n  </v-card>\r\n</template>\r\n\r\n<script lang=\"ts\">\r\nimport Vue from \"vue\";\r\nimport { Component, Prop } from \"vue-property-decorator\";\r\n\r\n@Component({})\r\nexport default class NavigationHeaderPanel extends Vue {\r\n  @Prop() readonly height!: string;\r\n\r\n  // Style for top-level panel.\r\n  get panelStyle() {\r\n    return {\r\n      \"min-height\": this.height\r\n    };\r\n  }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.header-panel {\r\n  min-width: 920px;\r\n  overflow-y: hidden;\r\n}\r\n\r\n.header-left {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-right {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  bottom: 10px;\r\n  width: 230px;\r\n  height: 100%;\r\n}\r\n\r\n.header-content {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 250px;\r\n  right: 250px;\r\n  height: 100%;\r\n}\r\n\r\n.options-menu {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 190px;\r\n}\r\n</style>\r\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$V = "data-v-6b0c2a59";
+  const __vue_scope_id__$11 = "data-v-d788bf2c";
   /* module identifier */
-  const __vue_module_identifier__$V = undefined;
+  const __vue_module_identifier__$11 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$V = false;
+  const __vue_is_functional_template__$11 = false;
   /* style inject SSR */
   
   /* style inject shadow dom */
   
 
   
-  const __vue_component__$V = normalizeComponent(
-    { render: __vue_render__$V, staticRenderFns: __vue_staticRenderFns__$V },
-    __vue_inject_styles__$V,
-    __vue_script__$V,
-    __vue_scope_id__$V,
-    __vue_is_functional_template__$V,
-    __vue_module_identifier__$V,
+  const __vue_component__$11 = normalizeComponent(
+    { render: __vue_render__$11, staticRenderFns: __vue_staticRenderFns__$11 },
+    __vue_inject_styles__$11,
+    __vue_script__$11,
+    __vue_scope_id__$11,
+    __vue_is_functional_template__$11,
+    __vue_module_identifier__$11,
     false,
     createInjector,
     undefined,
     undefined
   );
 
-// Common components.
+/** Process as Vue plugin */
+function SiteWhereIdeComponents(Vue) {
+  Vue.use(SiteWhereIdeCommon);
 
-// Process as Vue plugin.
-function SiteWhere(Vue) {
   // Register common components.
-  Vue.component("sw-clipboard-copy-field", __vue_component__);
-  Vue.component("sw-color-input-field", __vue_component__$1);
-  Vue.component("sw-color-picker", __vue_component__$2);
-  Vue.component("sw-condensed-toolbar", __vue_component__$3);
-  Vue.component("sw-date-time-picker", __vue_component__$4);
-  Vue.component("sw-error-banner", __vue_component__$5);
-  Vue.component("sw-fab", __vue_component__$6);
-  Vue.component("sw-header-field", __vue_component__$7);
-  Vue.component("sw-icon-selector", __vue_component__$8);
-  Vue.component("sw-image-zoom-on-hover", __vue_component__$9);
-  Vue.component("sw-linked-header-field", __vue_component__$a);
-  Vue.component("sw-loading-overlay", __vue_component__$b);
+  Vue.component("sw-clipboard-copy-field", __vue_component__$8);
+  Vue.component("sw-color-input-field", __vue_component__$9);
+  Vue.component("sw-color-picker", __vue_component__$a);
+  Vue.component("sw-condensed-toolbar", __vue_component__$b);
+  Vue.component("sw-date-time-picker", __vue_component__$c);
+  Vue.component("sw-error-banner", __vue_component__$d);
+  Vue.component("sw-fab", __vue_component__$e);
+  Vue.component("sw-header-field", __vue_component__$f);
+  Vue.component("sw-icon-selector", __vue_component__$g);
+  Vue.component("sw-image-zoom-on-hover", __vue_component__$h);
+  Vue.component("sw-linked-header-field", __vue_component__$i);
+  Vue.component("sw-loading-overlay", __vue_component__$j);
 
   // Register configuration components.
-  Vue.component("sw-content-delete-icon", __vue_component__$c);
-  Vue.component("sw-content-field", __vue_component__$d);
-  Vue.component("sw-content-link", __vue_component__$e);
-  Vue.component("sw-content-section", __vue_component__$g);
-  Vue.component("sw-content-warning", __vue_component__$h);
-  Vue.component("sw-datatable-link", __vue_component__$i);
-  Vue.component("sw-datatable-section", __vue_component__$j);
-  Vue.component("sw-new-element-chooser", __vue_component__$l);
-  Vue.component("sw-new-element-entry", __vue_component__$m);
-  Vue.component("sw-page-header", __vue_component__$n);
+  Vue.component("sw-content-delete-icon", __vue_component__$k);
+  Vue.component("sw-content-field", __vue_component__$l);
+  Vue.component("sw-content-link", __vue_component__$m);
+  Vue.component("sw-content-section", __vue_component__$o);
+  Vue.component("sw-content-warning", __vue_component__$p);
+  Vue.component("sw-datatable-link", __vue_component__$q);
+  Vue.component("sw-datatable-section", __vue_component__$r);
+  Vue.component("sw-new-element-chooser", __vue_component__$t);
+  Vue.component("sw-new-element-entry", __vue_component__$u);
+  Vue.component("sw-page-header", __vue_component__$v);
 
   // Register common form components.
-  Vue.component("sw-dialog-form", __vue_component__$o);
-  Vue.component("sw-form-date-time-picker", __vue_component__$p);
-  Vue.component("sw-form-select", __vue_component__$q);
-  Vue.component("sw-form-select-condensed", __vue_component__$r);
-  Vue.component("sw-form-text", __vue_component__$s);
-  Vue.component("sw-form-text-area", __vue_component__$t);
-  Vue.component("sw-script-chooser", __vue_component__$u);
+  Vue.component("sw-dialog-form", __vue_component__$w);
+  Vue.component("sw-form-date-time-picker", __vue_component__$x);
+  Vue.component("sw-form-select", __vue_component__$y);
+  Vue.component("sw-form-select-condensed", __vue_component__$z);
+  Vue.component("sw-form-text", __vue_component__$A);
+  Vue.component("sw-form-text-area", __vue_component__$B);
+  Vue.component("sw-script-chooser", __vue_component__$C);
 
   // Register dialog components.
-  Vue.component("sw-base-dialog", __vue_component__$k);
-  Vue.component("sw-confirm-dialog", __vue_component__$v);
-  Vue.component("sw-delete-dialog", __vue_component__$w);
-  Vue.component("sw-dialog-header", __vue_component__$x);
-  Vue.component("sw-metadata-panel", __vue_component__$y);
+  Vue.component("sw-base-dialog", __vue_component__$s);
+  Vue.component("sw-confirm-dialog", __vue_component__$D);
+  Vue.component("sw-delete-dialog", __vue_component__$E);
+  Vue.component("sw-dialog-header", __vue_component__$F);
+  Vue.component("sw-metadata-panel", __vue_component__$G);
 
   // Register list components.
-  Vue.component("sw-list-entry", __vue_component__$z);
-  Vue.component("sw-list-layout", __vue_component__$A);
-  Vue.component("sw-list-page", __vue_component__$E);
-  Vue.component("sw-list-tab", __vue_component__$F);
-  Vue.component("sw-pager", __vue_component__$D);
+  Vue.component("sw-list-entry", __vue_component__$H);
+  Vue.component("sw-list-layout", __vue_component__$I);
+  Vue.component("sw-list-page", __vue_component__$M);
+  Vue.component("sw-list-tab", __vue_component__$N);
+  Vue.component("sw-pager", __vue_component__$L);
 
   // Register login components.
-  Vue.component("sw-remotes-dialog", __vue_component__$I);
-  Vue.component("sw-remotes-dropdown", __vue_component__$J);
+  Vue.component("sw-remotes-dialog", __vue_component__$Q);
+  Vue.component("sw-remotes-dropdown", __vue_component__$R);
 
   // Register navigation components.
-  Vue.component("sw-content-tab", __vue_component__$K);
-  Vue.component("sw-data-entry-panel", __vue_component__$L);
-  Vue.component("sw-data-table-tab", __vue_component__$M);
-  Vue.component("sw-detail-page", __vue_component__$N);
-  Vue.component("sw-header-branding-panel", __vue_component__$P);
-  Vue.component("sw-in-app-footer", __vue_component__$Q);
-  Vue.component("sw-in-app-system-bar", __vue_component__$R);
-  Vue.component("sw-navigation", __vue_component__$S);
-  Vue.component("sw-navigation-action-button", __vue_component__$T);
-  Vue.component("sw-navigation-header-fields", __vue_component__$U);
-  Vue.component("sw-navigation-header-left", __vue_component__$O);
-  Vue.component("sw-navigation-header-panel", __vue_component__$V);
-  Vue.component("sw-navigation-page", __vue_component__$B);
+  Vue.component("sw-content-tab", __vue_component__$S);
+  Vue.component("sw-data-entry-panel", __vue_component__$T);
+  Vue.component("sw-data-table-tab", __vue_component__$U);
+  Vue.component("sw-detail-page", __vue_component__$V);
+  Vue.component("sw-header-branding-panel", __vue_component__$X);
+  Vue.component("sw-in-app-footer", __vue_component__$Y);
+  Vue.component("sw-in-app-system-bar", __vue_component__$Z);
+  Vue.component("sw-navigation", __vue_component__$_);
+  Vue.component("sw-navigation-action-button", __vue_component__$$);
+  Vue.component("sw-navigation-header-fields", __vue_component__$10);
+  Vue.component("sw-navigation-header-left", __vue_component__$W);
+  Vue.component("sw-navigation-header-panel", __vue_component__$11);
+  Vue.component("sw-navigation-page", __vue_component__$J);
 }
 
-exports.BaseDialog = __vue_component__$k;
-exports.ClipboardCopyField = __vue_component__;
-exports.ColorInputField = __vue_component__$1;
-exports.ColorPicker = __vue_component__$2;
-exports.CondensedToolbar = __vue_component__$3;
-exports.ConfirmDialog = __vue_component__$v;
-exports.ContentDeleteIcon = __vue_component__$c;
-exports.ContentField = __vue_component__$d;
-exports.ContentLink = __vue_component__$e;
-exports.ContentSection = __vue_component__$g;
-exports.ContentTab = __vue_component__$K;
-exports.ContentWarning = __vue_component__$h;
-exports.DataEntryPanel = __vue_component__$L;
-exports.DataTableTab = __vue_component__$M;
-exports.DatatableLink = __vue_component__$i;
-exports.DatatableSection = __vue_component__$j;
-exports.DateTimePicker = __vue_component__$4;
-exports.DeleteDialog = __vue_component__$w;
-exports.DetailPage = __vue_component__$N;
-exports.DialogForm = __vue_component__$o;
-exports.DialogHeader = __vue_component__$x;
-exports.ErrorBanner = __vue_component__$5;
-exports.FloatingActionButton = __vue_component__$6;
-exports.FormDateTimePicker = __vue_component__$p;
-exports.FormSelect = __vue_component__$q;
-exports.FormSelectCondensed = __vue_component__$r;
-exports.FormText = __vue_component__$s;
-exports.FormTextArea = __vue_component__$t;
-exports.HeaderBrandingPanel = __vue_component__$P;
-exports.HeaderField = __vue_component__$7;
-exports.IconSelector = __vue_component__$8;
-exports.ImageZoomOnHover = __vue_component__$9;
-exports.InAppFooter = __vue_component__$Q;
-exports.InAppSystemBar = __vue_component__$R;
-exports.LinkedHeaderField = __vue_component__$a;
-exports.ListEntry = __vue_component__$z;
-exports.ListLayout = __vue_component__$A;
-exports.ListPage = __vue_component__$E;
-exports.ListTab = __vue_component__$F;
-exports.LoadingOverlay = __vue_component__$b;
-exports.MetadataPanel = __vue_component__$y;
-exports.Navigation = __vue_component__$S;
-exports.NavigationActionButton = __vue_component__$T;
-exports.NavigationHeaderFields = __vue_component__$U;
-exports.NavigationHeaderLeft = __vue_component__$O;
-exports.NavigationHeaderPanel = __vue_component__$V;
-exports.NavigationPage = __vue_component__$B;
-exports.NewElementChooser = __vue_component__$l;
-exports.NewElementEntry = __vue_component__$m;
-exports.PageHeader = __vue_component__$n;
-exports.Pager = __vue_component__$D;
-exports.RemotesDialog = __vue_component__$I;
-exports.RemotesDropdown = __vue_component__$J;
-exports.ScriptChooser = __vue_component__$u;
-exports.default = SiteWhere;
+export default SiteWhereIdeComponents;
+export { __vue_component__$s as BaseDialog, __vue_component__$8 as ClipboardCopyField, __vue_component__$9 as ColorInputField, __vue_component__$a as ColorPicker, __vue_component__$b as CondensedToolbar, __vue_component__$D as ConfirmDialog, __vue_component__$k as ContentDeleteIcon, __vue_component__$l as ContentField, __vue_component__$m as ContentLink, __vue_component__$o as ContentSection, __vue_component__$S as ContentTab, __vue_component__$p as ContentWarning, __vue_component__ as CreateDialogComponent, __vue_component__$T as DataEntryPanel, __vue_component__$U as DataTableTab, __vue_component__$q as DatatableLink, __vue_component__$r as DatatableSection, __vue_component__$c as DateTimePicker, __vue_component__$E as DeleteDialog, __vue_component__$1 as DeleteDialogComponent, __vue_component__$2 as DetailComponent, __vue_component__$V as DetailPage, __vue_component__$3 as DialogComponent, __vue_component__$w as DialogForm, __vue_component__$F as DialogHeader, __vue_component__$4 as DialogSection, __vue_component__$5 as EditDialogComponent, __vue_component__$d as ErrorBanner, __vue_component__$e as FloatingActionButton, __vue_component__$x as FormDateTimePicker, __vue_component__$y as FormSelect, __vue_component__$z as FormSelectCondensed, __vue_component__$A as FormText, __vue_component__$B as FormTextArea, __vue_component__$X as HeaderBrandingPanel, __vue_component__$6 as HeaderComponent, __vue_component__$f as HeaderField, __vue_component__$g as IconSelector, __vue_component__$h as ImageZoomOnHover, __vue_component__$Y as InAppFooter, __vue_component__$Z as InAppSystemBar, __vue_component__$i as LinkedHeaderField, __vue_component__$7 as ListComponent, __vue_component__$H as ListEntry, __vue_component__$I as ListLayout, __vue_component__$M as ListPage, __vue_component__$N as ListTab, __vue_component__$j as LoadingOverlay, __vue_component__$G as MetadataPanel, __vue_component__$_ as Navigation, __vue_component__$$ as NavigationActionButton, __vue_component__$10 as NavigationHeaderFields, __vue_component__$W as NavigationHeaderLeft, __vue_component__$11 as NavigationHeaderPanel, __vue_component__$J as NavigationPage, __vue_component__$t as NewElementChooser, __vue_component__$u as NewElementEntry, __vue_component__$v as PageHeader, __vue_component__$L as Pager, __vue_component__$Q as RemotesDialog, __vue_component__$R as RemotesDropdown, __vue_component__$C as ScriptChooser };

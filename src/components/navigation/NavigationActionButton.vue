@@ -1,15 +1,17 @@
 <template>
   <v-tooltip left>
-    <v-icon class="ma-0 ml-1 navbutton" @click="onAction" slot="activator">{{
+    <v-icon class="ma-0 ml-1 navbutton" @click="onAction" slot="activator">
+      {{
       icon
-    }}</v-icon>
+      }}
+    </v-icon>
     <span>{{ tooltip }}</span>
   </v-tooltip>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component({})
 export default class NavigationActionButton extends Vue {

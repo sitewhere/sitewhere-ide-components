@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <slot/>
+      <slot />
     </v-layout>
   </v-container>
 </template>

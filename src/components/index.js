@@ -1,3 +1,15 @@
+import SiteWhereIdeCommon from "sitewhere-ide-common";
+
+// Core components.
+import CreateDialogComponent from "./core/CreateDialogComponent.vue";
+import DeleteDialogComponent from "./core/DeleteDialogComponent.vue";
+import DetailComponent from "./core/DetailComponent.vue";
+import DialogComponent from "./core/DialogComponent.vue";
+import DialogSection from "./core/DialogSection.vue";
+import EditDialogComponent from "./core/EditDialogComponent.vue";
+import HeaderComponent from "./core/HeaderComponent.vue";
+import ListComponent from "./core/ListComponent.vue";
+
 // Common components.
 import ClipboardCopyField from "./common/ClipboardCopyField.vue";
 import ColorInputField from "./common/ColorInputField.vue";
@@ -65,8 +77,10 @@ import NavigationHeaderLeft from "./navigation/NavigationHeaderLeft.vue";
 import NavigationHeaderPanel from "./navigation/NavigationHeaderPanel.vue";
 import NavigationPage from "./navigation/NavigationPage.vue";
 
-// Process as Vue plugin.
-function SiteWhere(Vue) {
+/** Process as Vue plugin */
+function SiteWhereIdeComponents(Vue) {
+  Vue.use(SiteWhereIdeCommon);
+
   // Register common components.
   Vue.component("sw-clipboard-copy-field", ClipboardCopyField);
   Vue.component("sw-color-input-field", ColorInputField);
@@ -136,6 +150,18 @@ function SiteWhere(Vue) {
   Vue.component("sw-navigation-page", NavigationPage);
 }
 
+// Export core components.
+export {
+  CreateDialogComponent,
+  DeleteDialogComponent,
+  DetailComponent,
+  DialogComponent,
+  DialogSection,
+  EditDialogComponent,
+  HeaderComponent,
+  ListComponent
+}
+
 // Export common components.
 export {
   ClipboardCopyField,
@@ -199,4 +225,4 @@ export {
   NavigationPage
 };
 
-export default SiteWhere;
+export default SiteWhereIdeComponents;

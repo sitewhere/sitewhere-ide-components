@@ -33,7 +33,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, INavigationSection } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
+import { INavigationSection } from "sitewhere-ide-common";
 import Vue from "vue";
 
 @Component({})

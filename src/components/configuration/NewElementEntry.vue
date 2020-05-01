@@ -2,9 +2,9 @@
   <div>
     <v-card flat>
       <v-card-text class="elm-entry" @click="onElementClicked">
-        <v-icon small class="mr-2">{{ icon }}</v-icon
-        ><slot
-      /></v-card-text>
+        <v-icon small class="mr-2">{{ icon }}</v-icon>
+        <slot />
+      </v-card-text>
     </v-card>
     <v-divider />
   </div>
@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component({
   components: {}

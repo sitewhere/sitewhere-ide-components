@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "sitewhere-ide-common";
+import { Component } from "vue-property-decorator";
 
 @Component
 export default class ListEntry extends Vue {}

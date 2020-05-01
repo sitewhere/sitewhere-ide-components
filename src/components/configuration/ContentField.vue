@@ -1,15 +1,17 @@
 <template>
   <v-card :color="alt ? '#fafafa' : '#ffffff'" flat class="caption mb-1">
-    <span style="display: inline-block; width: 180px; font-weight: 700">{{
+    <span style="display: inline-block; width: 180px; font-weight: 700">
+      {{
       name
-    }}</span>
+      }}
+    </span>
     <span style="display: inline-block; width: 400px;">{{ displayValue }}</span>
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component({
   components: {}

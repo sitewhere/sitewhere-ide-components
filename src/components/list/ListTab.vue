@@ -23,7 +23,8 @@ import Vue from "vue";
 import Pager from "./Pager.vue";
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
-import { Component, Prop, IPaging, IPageSizes } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
+import { IPaging, IPageSizes } from "sitewhere-ide-common";
 
 @Component({
   components: {

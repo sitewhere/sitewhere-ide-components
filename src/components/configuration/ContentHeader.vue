@@ -1,16 +1,16 @@
 <template>
   <v-card flat class="mb-3">
-    <v-icon :class="iconClass">{{ icon }}</v-icon
-    ><span class="subheading">{{ title }}:</span>
+    <v-icon :class="iconClass">{{ icon }}</v-icon>
+    <span class="subheading">{{ title }}:</span>
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component({
-  components: {},
+  components: {}
 })
 export default class ContentHeader extends Vue {
   @Prop() readonly title!: string;

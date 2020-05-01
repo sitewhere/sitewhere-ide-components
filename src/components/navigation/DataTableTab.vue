@@ -2,7 +2,7 @@
   <v-tab-item :key="tabkey">
     <div class="flex-rows">
       <div class="tab-header">
-        <slot name="header"/>
+        <slot name="header" />
       </div>
       <div class="tab-content">
         <v-layout row wrap>
@@ -15,24 +15,24 @@
               :style="tableStyle"
             >
               <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
-                <slot :name="slot" v-bind="scope"/>
+                <slot :name="slot" v-bind="scope" />
               </template>
             </v-data-table>
           </v-flex>
         </v-layout>
       </div>
       <div class="tab-footer">
-        <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes"/>
+        <pager :results="results" @pagingUpdated="onPagingUpdated" :pageSizes="pageSizes" />
       </div>
     </div>
-    <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage"/>
+    <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
     <slot name="dialogs"></slot>
   </v-tab-item>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import Pager from "../list/Pager.vue";
 import LoadingOverlay from "../common/LoadingOverlay.vue";

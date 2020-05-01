@@ -4,25 +4,25 @@
       <v-icon>{{ icon }}</v-icon>
       <v-toolbar-title class="ml-2 subheading">{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <slot name="actions"/>
+      <slot name="actions" />
     </v-toolbar>
     <div class="header">
-      <slot name="header"/>
+      <slot name="header" />
     </div>
     <div class="content">
-      <slot v-if="loaded" name="content"/>
+      <slot v-if="loaded" name="content" />
     </div>
     <div class="footer">
-      <slot name="footer"/>
+      <slot name="footer" />
     </div>
-    <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage"/>
-    <slot name="dialogs"/>
+    <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
+    <slot name="dialogs" />
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 

@@ -23,15 +23,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {
-  Component,
-  Prop,
-  listTenantScriptsForCategory
-} from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
+import { listTenantScriptsForCategory, showError } from "sitewhere-ide-common";
 
 import { AxiosResponse } from "axios";
 import { IScriptMetadata } from "sitewhere-rest-api";
-import { showError } from "sitewhere-ide-common";
 
 @Component({})
 export default class ScriptChooser extends Vue {

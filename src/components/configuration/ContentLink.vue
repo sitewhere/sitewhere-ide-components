@@ -1,13 +1,13 @@
 <template>
   <v-card @click="onLinkClicked" flat class="caption mb-1">
-    <a class="clink">{{ text }}</a
-    ><v-icon class="ilink">{{ icon }}</v-icon>
+    <a class="clink">{{ text }}</a>
+    <v-icon class="ilink">{{ icon }}</v-icon>
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component({
   components: {}

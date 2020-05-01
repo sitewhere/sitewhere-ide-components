@@ -13,13 +13,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {
-  Component,
-  Prop,
-  Watch,
-  IRemotes,
-  IRemoteConnection
-} from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
+import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 
 @Component
 export default class RemotesDropdown extends Vue {

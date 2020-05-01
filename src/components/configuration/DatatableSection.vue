@@ -2,16 +2,10 @@
   <v-card flat>
     <content-header :title="title" :icon="icon" :fa="fa" />
     <v-card flat style="margin-left: 25px;" :width="width">
-      <v-data-table
-        class="datatable"
-        dense
-        :headers="headers"
-        :items="items"
-        hide-actions
-      >
-        <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope"
-          ><slot :name="slot" v-bind="scope"
-        /></template>
+      <v-data-table class="datatable" dense :headers="headers" :items="items" hide-actions>
+        <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
+          <slot :name="slot" v-bind="scope" />
+        </template>
       </v-data-table>
       <slot name="datatable-footer" />
       <slot name="datatable-dialogs" />
@@ -21,12 +15,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import ContentHeader from "./ContentHeader.vue";
 
 @Component({
-  components: { ContentHeader },
+  components: { ContentHeader }
 })
 export default class Section extends Vue {
   @Prop() readonly icon!: string;

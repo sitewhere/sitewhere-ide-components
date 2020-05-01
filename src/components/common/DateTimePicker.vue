@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
 import moment from "moment";

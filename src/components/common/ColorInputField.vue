@@ -12,7 +12,7 @@
       <v-flex xs6>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
           <v-btn :style="{ 'background-color' : valueOrDefault }" slot="activator"></v-btn>
-          <chrome :value="valueOrDefault" @input="onColorChosen"/>
+          <chrome :value="valueOrDefault" @input="onColorChosen" />
         </v-menu>
       </v-flex>
     </v-layout>
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
 import { Chrome } from "vue-color";

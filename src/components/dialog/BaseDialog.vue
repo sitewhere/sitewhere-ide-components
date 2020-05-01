@@ -23,23 +23,24 @@
       <v-divider v-if="!hideButtons" class="mb-2" />
       <v-card-actions v-if="!hideButtons">
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">{{
+        <v-btn outline color="primary" @click="onCancelClicked">
+          {{
           cancelLabel
-        }}</v-btn>
+          }}
+        </v-btn>
         <v-btn
           color="primary"
           v-if="!hideCreate"
           :disabled="invalid"
           @click="onCreateClicked"
-          >{{ createLabel }}</v-btn
-        >
+        >{{ createLabel }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
 import ErrorBanner from "../common/ErrorBanner.vue";

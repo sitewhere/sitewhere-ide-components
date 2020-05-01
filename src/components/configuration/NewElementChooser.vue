@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop, Refs } from "sitewhere-ide-common";
+import { Component, Prop, Ref } from "vue-property-decorator";
 import { ITabbedComponent } from "sitewhere-ide-common";
 
 import BaseDialog from "../dialog/BaseDialog.vue";
@@ -31,13 +31,9 @@ export default class NewElementChooser extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly title!: string;
   @Prop() readonly width!: number;
+  @Ref() readonly dialog!: BaseDialog;
 
   dialogVisible: boolean = false;
-
-  /** References */
-  $refs!: Refs<{
-    dialog: ITabbedComponent;
-  }>;
 
   /** Open dialog */
   openDialog(): void {

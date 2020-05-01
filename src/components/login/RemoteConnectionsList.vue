@@ -45,12 +45,8 @@
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  Prop,
-  IRemotes,
-  IRemoteConnection
-} from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
+import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 import Vue from "vue";
 
 import { arrayMove } from "../common/Utils";

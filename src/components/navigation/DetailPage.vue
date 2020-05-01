@@ -1,10 +1,5 @@
 <template>
-  <navigation-page
-    :icon="icon"
-    :title="title"
-    :loadingMessage="loadingMessage"
-    :loaded="loaded"
-  >
+  <navigation-page :icon="icon" :title="title" :loadingMessage="loadingMessage" :loaded="loaded">
     <template slot="header">
       <slot name="header" />
     </template>
@@ -37,7 +32,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import NavigationPage from "../navigation/NavigationPage.vue";
 

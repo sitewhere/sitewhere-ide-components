@@ -13,8 +13,7 @@
               :value="entry.value"
               v-for="entry in pageSizesWithDefaults"
               :key="entry.value"
-              >{{ entry.text }}</v-btn
-            >
+            >{{ entry.text }}</v-btn>
           </v-btn-toggle>
         </v-flex>
         <v-flex xs4>
@@ -57,13 +56,8 @@ import Vue from "vue";
 
 import PagerButton from "./PagerButton.vue";
 
-import {
-  Component,
-  Prop,
-  Watch,
-  IPaging,
-  IPageSizes
-} from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
+import { IPaging, IPageSizes } from "sitewhere-ide-common";
 
 @Component({
   components: {

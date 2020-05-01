@@ -10,25 +10,21 @@
         <template slot="items" slot-scope="props">
           <td width="250px" :title="props.item.name">
             {{
-              props.item.name.length > 25
-                ? props.item.name.substring(0, 25) + "..."
-                : props.item.name
+            props.item.name.length > 25
+            ? props.item.name.substring(0, 25) + "..."
+            : props.item.name
             }}
           </td>
           <td width="370px" :title="props.item.value">
             {{
-              props.item.value.length > 50
-                ? props.item.value.substring(0, 50) + "..."
-                : props.item.value
+            props.item.value.length > 50
+            ? props.item.value.substring(0, 50) + "..."
+            : props.item.value
             }}
           </td>
           <td v-if="!readOnly" width="20px">
             <v-tooltip left>
-              <v-btn
-                icon
-                @click="onDeleteItem(props.item.name)"
-                slot="activator"
-              >
+              <v-btn icon @click="onDeleteItem(props.item.name)" slot="activator">
                 <v-icon class="grey--text">fa-trash</v-icon>
               </v-btn>
               <span>Delete Item</span>
@@ -37,39 +33,20 @@
         </template>
       </v-data-table>
     </v-card-text>
-    <v-alert
-      error
-      :value="true"
-      class="ma-0"
-      style="width: 100%"
-      v-if="error"
-      >{{ error }}</v-alert
-    >
+    <v-alert error :value="true" class="ma-0" style="width: 100%" v-if="error">{{ error }}</v-alert>
     <div v-if="!readOnly">
       <v-container fluid>
         <v-layout row>
           <v-flex xs5 class="pr-3">
-            <v-text-field
-              light
-              label="Name"
-              placeholder=" "
-              v-model="newItemName"
-            />
+            <v-text-field light label="Name" placeholder=" " v-model="newItemName" />
           </v-flex>
           <v-flex xs6>
-            <v-text-field
-              light
-              label="Value"
-              placeholder=" "
-              v-model="newItemValue"
-            />
+            <v-text-field light label="Value" placeholder=" " v-model="newItemValue" />
           </v-flex>
           <v-flex xs1 class="pt-3">
             <v-tooltip left>
               <v-btn icon @click="onAddItem" slot="activator">
-                <v-icon class="blue--text text--darken-2"
-                  >fa-plus-circle</v-icon
-                >
+                <v-icon class="blue--text text--darken-2">fa-plus-circle</v-icon>
               </v-btn>
               <span>Add Item</span>
             </v-tooltip>
@@ -81,12 +58,10 @@
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  Prop,
-  DialogSection,
-  ITableHeaders
-} from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
+import { ITableHeaders } from "sitewhere-ide-common";
+
+import DialogSection from "../core/DialogSection.vue";
 
 import { arrayToMetadata, metadataToArray } from "../common/Utils";
 

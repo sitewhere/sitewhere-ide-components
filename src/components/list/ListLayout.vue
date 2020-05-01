@@ -1,13 +1,13 @@
 <template>
   <v-container class="pa-2" fluid grid-list-md fill-height>
     <v-layout align-content-start row wrap>
-      <slot/>
+      <slot />
     </v-layout>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component } from "sitewhere-ide-common";
+import { Component } from "vue-property-decorator";
 
 import Vue from "vue";
 

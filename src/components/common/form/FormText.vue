@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop, Refs } from "sitewhere-ide-common";
+import { Component, Prop, Ref } from "vue-property-decorator";
 
 @Component({})
 export default class FormText extends Vue {
@@ -35,11 +35,7 @@ export default class FormText extends Vue {
   @Prop() readonly readonly!: boolean;
   @Prop() readonly dense!: boolean;
   @Prop() readonly autofocus!: boolean;
-
-  // References.
-  $refs!: Refs<{
-    field: any;
-  }>;
+  @Ref() readonly field!: any;
 
   get wrapped(): string {
     return this.value;
@@ -51,7 +47,7 @@ export default class FormText extends Vue {
 
   /** Focus the wrapped input */
   focus(): void {
-    this.$refs.field.focus();
+    this.field.focus();
   }
 }
 </script>

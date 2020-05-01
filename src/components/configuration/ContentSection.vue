@@ -4,18 +4,20 @@
     <v-card flat style="margin-left: 25px;">
       <slot />
     </v-card>
-    <div class="overlay"><slot name="overlay" /></div>
+    <div class="overlay">
+      <slot name="overlay" />
+    </div>
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import ContentHeader from "./ContentHeader.vue";
 
 @Component({
-  components: { ContentHeader },
+  components: { ContentHeader }
 })
 export default class Section extends Vue {
   @Prop() readonly icon!: string;
