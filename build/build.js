@@ -44,17 +44,17 @@ function genConfig(opts) {
     input: {
       input: resolve("src/components/index.js"),
       external: [
+        "axios",
+        "electron",
         "moment",
         "sitewhere-rest-api",
         "sitewhere-ide-common",
-        "axios",
         "vue",
         "vuelidate",
-        "vue-property-decorator",
-        "vue-router",
         "vuex",
-        "electron",
-        "vue-color"
+        "vue-color",
+        "vue-property-decorator",
+        "vue-router"
       ],
       plugins: [
         nodeResolve(),
