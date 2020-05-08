@@ -57,7 +57,7 @@ export default class ScriptChooser extends Vue {
   /** Reload list of scripts for functional area */
   async reset() {
     try {
-      let response: AxiosResponse<IScriptMetadata[]> = await listTenantScriptsForCategory(
+      const response: AxiosResponse<IScriptMetadata[]> = await listTenantScriptsForCategory(
         this.$store,
         this.functionalArea,
         this.tenantId,

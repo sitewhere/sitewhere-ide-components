@@ -20,7 +20,6 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Ref } from "vue-property-decorator";
-import { ITabbedComponent } from "sitewhere-ide-common";
 
 import BaseDialog from "../dialog/BaseDialog.vue";
 
@@ -33,7 +32,7 @@ export default class NewElementChooser extends Vue {
   @Prop() readonly width!: number;
   @Ref() readonly dialog!: BaseDialog;
 
-  dialogVisible: boolean = false;
+  dialogVisible = false;
 
   /** Open dialog */
   openDialog(): void {

@@ -24,7 +24,7 @@ export default class ColorPicker extends Vue {
   @Prop({ default: 1 }) readonly opacity!: string;
   @Prop() readonly text!: string;
 
-  menu: boolean = false;
+  menu = false;
   currentColor: string | null = null;
   currentOpacity: number | null = null;
 

@@ -1,12 +1,6 @@
 import moment from "moment";
 
-/**
- * Common error handler.
- * @param err
- */
-export function handleError(err: Error): void {
-  console.log(err);
-}
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Format date in YYYY-MM-DD H:mm:ss format. N/A for null.
@@ -71,10 +65,10 @@ export function fourDecimalPlaces(val: number): string {
  * @param meta
  */
 export function metadataToArray(meta: { [id: string]: any }) {
-  var flat = [];
+  const flat = [];
   if (meta) {
-    for (var key in meta) {
-      if (meta.hasOwnProperty(key)) {
+    for (const key in meta) {
+      if (Object.prototype.hasOwnProperty.call(meta, key)) {
         flat.push({ name: key, value: meta[key] });
       }
     }
@@ -87,9 +81,9 @@ export function metadataToArray(meta: { [id: string]: any }) {
  * @param arrayMeta
  */
 export function arrayToMetadata(arrayMeta: any[]) {
-  var metadata: { [id: string]: any } = {};
+  const metadata: { [id: string]: any } = {};
   if (arrayMeta) {
-    for (var i = 0; i < arrayMeta.length; i++) {
+    for (let i = 0; i < arrayMeta.length; i++) {
       metadata[arrayMeta[i].name] = arrayMeta[i].value;
     }
   }
@@ -97,26 +91,12 @@ export function arrayToMetadata(arrayMeta: any[]) {
 }
 
 /**
- * Indicates if logged-in user is authorized for all auths in list.
- * @param component
- * @param list
- */
-export function isAuthForAll(component: any, list: string[]): boolean {
-  let user = component.$store.getters.user;
-  if (!user) {
-    console.log("No user for permissions check.");
-    return false;
-  }
-  return list.every(auth => user.authorities.indexOf(auth) > -1);
-}
-
-/**
  * Routes to a applicaton-relative URL.
  * @param component
  * @param url
  */
-export function routeTo(component: any, url: string): void {
-  var tenant = component.$store.getters.selectedTenant;
+export function routeTo(component: Vue, url: string): void {
+  const tenant = component.$store.getters.selectedTenant;
   if (tenant) {
     component.$router.push("/tenants/" + tenant.token + url);
   }
@@ -127,7 +107,7 @@ export function routeTo(component: any, url: string): void {
  * @param component
  * @param token
  */
-export function routeToDevice(component: any, token: string) {
+export function routeToDevice(component: Vue, token: string) {
   routeTo(component, "/devices/" + token);
 }
 
@@ -140,9 +120,9 @@ export function pagingForAllResults() {
 
 /** Generate a unique id */
 export function generateUniqueId(): string {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-    let r = crypto.getRandomValues(new Uint8Array(1))[0] % 16 | 0;
-    let v = c === "x" ? r : (r & 0x3) | 0x8;
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = crypto.getRandomValues(new Uint8Array(1))[0] % 16 | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
@@ -150,26 +130,26 @@ export function generateUniqueId(): string {
 /**
  * Move an element in an array from one index to another.
  * @param arr
- * @param old_index
- * @param new_index
+ * @param oldIndex
+ * @param newIndex
  */
 export function arrayMove(
   arr: any[],
-  old_index: number,
-  new_index: number
+  oldIndex: number,
+  newIndex: number
 ): any[] {
-  while (old_index < 0) {
-    old_index += arr.length;
+  while (oldIndex < 0) {
+    oldIndex += arr.length;
   }
-  while (new_index < 0) {
-    new_index += arr.length;
+  while (newIndex < 0) {
+    newIndex += arr.length;
   }
-  if (new_index >= arr.length) {
-    var k = new_index - arr.length;
+  if (newIndex >= arr.length) {
+    let k = newIndex - arr.length;
     while (k-- + 1) {
       arr.push(undefined);
     }
   }
-  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+  arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
   return arr;
 }

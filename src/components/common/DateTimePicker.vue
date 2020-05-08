@@ -64,14 +64,14 @@ export default class DateTimePicker extends Vue {
   @Prop() readonly label!: string;
 
   date: string | null = null;
-  time: string = "12:00";
-  datemenu: boolean = false;
-  timemenu: boolean = false;
+  time = "12:00";
+  datemenu = false;
+  timemenu = false;
 
   @Watch("value")
   onValueUpdated(updated: string) {
     if (updated) {
-      let datetime: Date | null = this.parseIso8601(updated);
+      const datetime: Date | null = this.parseIso8601(updated);
       if (datetime) {
         this.time =
           datetime
@@ -94,17 +94,17 @@ export default class DateTimePicker extends Vue {
   @Watch("date")
   onDateUpdated(updated: string) {
     if (updated) {
-      let value: Date = moment(updated).toDate();
-      let parts: string[] = this.time.split(":");
-      let hour = parseInt(parts[0]);
-      let minute = parseInt(parts[1]);
+      const value: Date = moment(updated).toDate();
+      const parts: string[] = this.time.split(":");
+      const hour = parseInt(parts[0]);
+      const minute = parseInt(parts[1]);
       value.setHours(hour, minute);
       this.$emit("input", value);
     }
   }
 
   @Watch("time")
-  onTimeUpdated(updated: string) {
+  onTimeUpdated() {
     if (this.date) {
       this.onDateUpdated(this.date);
     }

@@ -43,17 +43,14 @@ export default class DeleteDialog extends Vue {
   @Prop() readonly error!: string;
   @Prop({ default: false }) readonly visible!: boolean;
 
-  // Called after create button is clicked.
-  onDeleteClicked(e: any) {
+  /** Called after create button is clicked */
+  onDeleteClicked() {
     this.$emit("delete");
   }
 
-  // Called after cancel button is clicked.
-  onCancelClicked(e: any) {
+  /** Called after cancel button is clicked */
+  onCancelClicked() {
     this.$emit("cancel");
   }
 }
 </script>
-
-<style scoped>
-</style>

@@ -43,6 +43,17 @@
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
+import {
+  VBtn,
+  VDialog,
+  VCard,
+  VIcon,
+  VCardText,
+  VTabs,
+  VCardActions,
+  VSpacer
+} from "vuetify/lib";
+
 import ErrorBanner from "../common/ErrorBanner.vue";
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
@@ -51,7 +62,15 @@ import { ITabbedComponent } from "sitewhere-ide-common";
 @Component({
   components: {
     ErrorBanner,
-    LoadingOverlay
+    LoadingOverlay,
+    VBtn,
+    VDialog,
+    VCard,
+    VIcon,
+    VCardText,
+    VTabs,
+    VCardActions,
+    VSpacer
   }
 })
 export default class BaseDialog extends Vue implements ITabbedComponent {

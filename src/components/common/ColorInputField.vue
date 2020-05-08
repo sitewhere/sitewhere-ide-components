@@ -38,7 +38,7 @@ export default class ColorInputField extends Vue {
   updatedColor: string | null = null;
 
   @Watch("value")
-  onValueChanged(val: string, oldVal: string) {
+  onValueChanged(val: string) {
     this.updatedColor = val;
   }
 
@@ -54,6 +54,3 @@ export default class ColorInputField extends Vue {
   }
 }
 </script>
-
-<style scoped>
-</style>

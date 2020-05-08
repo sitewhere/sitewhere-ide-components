@@ -1,31 +1,42 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es5",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "noEmitOnError": false,
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
-    "strictFunctionTypes": false,
+    "declaration": true,
+    "declarationDir": "types",
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "node"
+      "webpack-env",
+      "vuetify"
     ],
     "paths": {
       "@/*": [
-        "src/*"
+        "src/components/*"
       ]
     },
     "lib": [
-      "es2018",
-      "dom"
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
     ]
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

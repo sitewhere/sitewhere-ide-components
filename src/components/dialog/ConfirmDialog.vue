@@ -28,7 +28,7 @@ export default class ConfirmDialog extends Vue {
   @Prop() readonly width!: number;
   @Prop() readonly buttonText!: string;
 
-  visible: boolean = false;
+  visible = false;
   error: any = null;
 
   /** Called to open the dialog */
@@ -43,7 +43,7 @@ export default class ConfirmDialog extends Vue {
   }
 
   /** Called after cancel button is clicked */
-  onCancelClicked(e: any) {
+  onCancelClicked() {
     this.$emit("cancelled");
     this.visible = false;
   }

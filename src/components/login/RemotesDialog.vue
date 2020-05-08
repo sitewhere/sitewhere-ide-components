@@ -24,8 +24,7 @@
 import { Component, Ref } from "vue-property-decorator";
 import { ITabbedComponent, NavigationIcon } from "sitewhere-ide-common";
 
-import DialogComponent from "../core/DialogComponent.vue";
-import DialogSection from "../core/DialogSection.vue";
+import { DialogComponent } from "../core/DialogComponent";
 import RemoteConnectionsList from "./RemoteConnectionsList.vue";
 import RemoteConnectionDetails from "./RemoteConnectionDetails.vue";
 
@@ -48,14 +47,14 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
     return NavigationIcon.Remotes;
   }
 
-  // Reset dialog contents.
+  /** Reset dialog contents */
   reset() {
     if (this.connections) {
       this.connections.reset();
     }
   }
 
-  // Load dialog from a given payload.
+  /** Load dialog from a given payload */
   load(payload: IRemotes) {
     this.remotes = JSON.parse(JSON.stringify(payload));
     this.reset();
@@ -64,15 +63,15 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
     }
   }
 
-  // Called when a new connection is added.
+  /** Called when a new connection is added */
   onConnectionAdded(added: IRemoteConnection) {
     if (this.remotes) {
       this.remotes.connections.push(added);
     }
   }
 
-  // Called after create button is clicked.
-  onCreateClicked(e: any) {
+  /** Called after create button is clicked */
+  onCreateClicked() {
     this.$emit("save", this.remotes);
   }
 }

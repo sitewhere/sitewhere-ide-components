@@ -51,37 +51,21 @@
 import { Component } from "vue-property-decorator";
 import { IRemoteConnection } from "sitewhere-ide-common";
 
-import { ComponentOptions } from "vue";
 import { generateUniqueId } from "../common/Utils";
 
-import DialogSection from "../core/DialogSection.vue";
+import { DialogSection } from "../core/DialogSection";
+
 import DialogForm from "../common/form/DialogForm.vue";
 import FormText from "../common/form/FormText.vue";
 import FormSelect from "../common/form/FormSelect.vue";
-
-import { required } from "vuelidate/lib/validators";
 
 @Component({
   components: {
     DialogForm,
     FormText,
     FormSelect
-  },
-  validations: {
-    name: {
-      required
-    },
-    protocol: {
-      required
-    },
-    host: {
-      required
-    },
-    port: {
-      required
-    }
   }
-} as any)
+})
 export default class RemoteConnectionDetails extends DialogSection {
   name: string | null = null;
   protocol: string | null = null;
@@ -98,30 +82,29 @@ export default class RemoteConnectionDetails extends DialogSection {
     }
   ];
 
-  /** Avoid compilation error */
-  $v: any;
-
   /** Reset section content */
   reset(): void {
     this.name = null;
     this.protocol = null;
     this.host = null;
     this.port = null;
-    this.$v.$reset();
+    // this.$v.$reset();
   }
 
   /** Perform validation */
   validate(): boolean {
-    this.$v.$touch();
-    return !this.$v.$invalid;
+    // this.$v.$touch();
+    // return !this.$v.$invalid;
+    return true;
   }
 
   /** Load form data from an object */
-  load(input: {}): void {
-    this.name = (input as any).name;
-    this.protocol = (input as any).protocol;
-    this.host = (input as any).areaType.host;
-    this.port = (input as any).port;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  load(input: any): void {
+    this.name = input.name;
+    this.protocol = input.protocol;
+    this.host = input.areaType.host;
+    this.port = input.port;
   }
 
   /** Save form data to an object */
@@ -137,7 +120,7 @@ export default class RemoteConnectionDetails extends DialogSection {
 
   /** Called when create button is clicked */
   onCreateClicked() {
-    let added: IRemoteConnection = this.save() as IRemoteConnection;
+    const added: IRemoteConnection = this.save() as IRemoteConnection;
     this.$emit("added", added);
     this.reset();
   }

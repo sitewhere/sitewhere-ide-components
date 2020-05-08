@@ -9,41 +9,28 @@
         @success="onFieldCopied"
         @error="onFieldCopyFailed"
       >
-        <font-awesome-icon
-          class="grey--text text--lighten-1 mt-1"
-          icon="copy"
-          size="sm"
-          style="vertical-align: top;"
-        />
+        <v-icon small>copy</v-icon>
       </span>
       <span>Copy to Clipboard</span>
     </v-tooltip>
-    <v-snackbar :timeout="2000" success v-model="showFieldCopied">
-      {{ message }}
-      <v-btn dark flat @click="showFieldCopied = false">Close</v-btn>
-    </v-snackbar>
   </span>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    showFieldCopied: false
-  }),
+<script lang="ts">
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import { showMessage } from "sitewhere-ide-common";
 
-  props: ["field", "message"],
-
-  methods: {
-    // Called after id is copied.
-    onFieldCopied: function(e) {
-      this.$data.showFieldCopied = true;
-    },
-
-    // Called if unable to copy id.
-    onFieldCopyFailed: function(e) {}
+@Component({})
+export default class ClipboardCopyField extends Vue {
+  /** Called after id is copied */
+  onFieldCopied() {
+    showMessage(this, "Value copied to clipboard.");
   }
-};
-</script>
 
-<style scoped>
-</style>
+  /** Called if unable to copy id */
+  onFieldCopyFailed() {
+    showMessage(this, "Unable to copy value to clipboard");
+  }
+}
+</script>

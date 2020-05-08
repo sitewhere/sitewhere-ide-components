@@ -61,7 +61,7 @@
 import { Component, Prop } from "vue-property-decorator";
 import { ITableHeaders } from "sitewhere-ide-common";
 
-import DialogSection from "../core/DialogSection.vue";
+import { DialogSection } from "../core/DialogSection";
 
 import { arrayToMetadata, metadataToArray } from "../common/Utils";
 
@@ -78,8 +78,8 @@ export default class MetadataPanel extends DialogSection {
   readonly pageSizes!: number[];
 
   metadata: { name: string; value: string }[] = [];
-  newItemName: string = "";
-  newItemValue: string = "";
+  newItemName = "";
+  newItemValue = "";
   error: string | null = null;
 
   /** Reset section content */
@@ -94,8 +94,9 @@ export default class MetadataPanel extends DialogSection {
   }
 
   /** Load form data from an object */
-  load(input: {}): void {
-    let initial = (input as any).metadata;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  load(input: any): void {
+    const initial = input.metadata;
     if (initial) {
       this.metadata = metadataToArray(initial);
     }
@@ -103,7 +104,7 @@ export default class MetadataPanel extends DialogSection {
 
   /** Save form data to an object */
   save(): {} {
-    let updated: {} = arrayToMetadata(this.metadata);
+    const updated: {} = arrayToMetadata(this.metadata);
     return {
       metadata: updated
     };
@@ -111,7 +112,7 @@ export default class MetadataPanel extends DialogSection {
 
   /** Delete an item */
   onDeleteItem(deleteName: string): void {
-    let updated: { name: string; value: string }[] = [];
+    const updated: { name: string; value: string }[] = [];
     this.metadata.forEach(item => {
       if (item.name !== deleteName) {
         updated.push(item);
@@ -122,7 +123,7 @@ export default class MetadataPanel extends DialogSection {
 
   // Let owner know an item was added.
   onAddItem() {
-    var item: { name: string; value: string } = {
+    const item: { name: string; value: string } = {
       name: this.newItemName,
       value: this.newItemValue
     };
@@ -133,7 +134,7 @@ export default class MetadataPanel extends DialogSection {
     }
 
     // Check for bad characters.
-    var regex = /^[\w-]+$/;
+    const regex = /^[\w-]+$/;
     if (!this.error && !regex.test(item.name)) {
       this.error = "Name contains invalid characters.";
     }

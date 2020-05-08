@@ -140,7 +140,7 @@ export default class RemoteConnectionsList extends Vue {
   /** Move connection up in the list */
   onConnectionMoveUp() {
     if (this.selection) {
-      let old: number = this.getConnectionIndex(this.selection);
+      const old: number = this.getConnectionIndex(this.selection);
       arrayMove(this.remotes.connections, old, old - 1);
     }
   }
@@ -148,7 +148,7 @@ export default class RemoteConnectionsList extends Vue {
   /** Move connection down in the list */
   onConnectionMoveDown() {
     if (this.selection) {
-      let old: number = this.getConnectionIndex(this.selection);
+      const old: number = this.getConnectionIndex(this.selection);
       arrayMove(this.remotes.connections, old, old + 1);
     }
   }

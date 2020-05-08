@@ -68,7 +68,7 @@ export default class Pager extends Vue {
   @Prop() readonly results!: { numResults: number; results: {}[] };
   @Prop() readonly pageSizes!: IPageSizes;
 
-  page: number = 1;
+  page = 1;
   pageSize: number | null = null;
   defaultResults: { numResults: number; results: {}[] } = {
     numResults: 0,
@@ -96,39 +96,39 @@ export default class Pager extends Vue {
     this.onPagingUpdated();
   }
 
-  // Refresh results on page size updated.
-  @Watch("pageSize") onPageSizeUpdated(val: number, oldVal: number) {
+  /** Refresh results on page size updated */
+  @Watch("pageSize") onPageSizeUpdated() {
     this.page = 1;
     this.onPagingUpdated();
   }
 
-  // Results with defaults fallback.
+  /** Results with defaults fallback */
   get resultsWithDefaults(): { numResults: number; results: {}[] } {
     return this.results || this.defaultResults;
   }
 
-  // Total record count.
+  /** Total record count */
   get total(): number {
     return this.resultsWithDefaults.numResults;
   }
 
-  // Description.
+  /** Description */
   get description(): string {
-    let size = this.pageSize || 0;
-    let total = this.total;
-    let page = this.page;
-    var first = size * (page - 1) + 1;
-    var last = Math.min(total, first + size - 1);
+    const size = this.pageSize || 0;
+    const total = this.total;
+    const page = this.page;
+    const first = size * (page - 1) + 1;
+    const last = Math.min(total, first + size - 1);
     return "" + first + "-" + last + " of " + total;
   }
 
-  // Calculate number of pages.
+  /** Calculate number of pages */
   get pageCount() {
-    var results = this.resultsWithDefaults;
-    var total = results.numResults;
-    var size = this.pageSize || 0;
-    var mod = total % size;
-    var count = (total / size) | 0;
+    const results = this.resultsWithDefaults;
+    const total = results.numResults;
+    const size = this.pageSize || 0;
+    const mod = total % size;
+    let count = (total / size) | 0;
     count += mod > 0 ? 1 : 0;
     return count;
   }
@@ -138,17 +138,17 @@ export default class Pager extends Vue {
     return this.pageSizes || this.defaultPageSizes;
   }
 
-  // Indicates if 'first' button should be enabled.
+  /** Indicates if 'previous' button should be enabled */
   get previousEnabled(): boolean {
     return this.page > 1;
   }
 
-  // Indicates if 'first' button should be enabled.
+  /** Indicates if 'next' button should be enabled */
   get nextEnabled(): boolean {
     return this.page < this.pageCount;
   }
 
-  // Called to move to first page.
+  /** Called to move to first page */
   onFirstPage() {
     if (this.page !== 1) {
       this.page = 1;
@@ -156,7 +156,7 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called to move to previous page.
+  /** Called to move to previous page */
   onPreviousPage() {
     if (this.page > 1) {
       this.page--;
@@ -164,12 +164,12 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called to refresh data.
+  /** Called to refresh data */
   onRefresh() {
     this.onPagingUpdated();
   }
 
-  // Called to move to next page.
+  /** Called to move to next page */
   onNextPage() {
     if (this.page < this.pageCount) {
       this.page++;
@@ -177,7 +177,7 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called to move to last page.
+  /** Called to move to last page */
   onLastPage() {
     if (this.page < this.pageCount) {
       this.page = this.pageCount;
@@ -185,9 +185,9 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called when paging values are updated.
+  /** Called when paging values are updated */
   onPagingUpdated() {
-    var paging: IPaging = {
+    const paging: IPaging = {
       pageNumber: this.page,
       pageSize: this.pageSize || 0
     };

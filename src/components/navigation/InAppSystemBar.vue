@@ -19,29 +19,26 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-
-import Electron from "electron";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component({})
 export default class InAppSystemBar extends Vue {
-  title: string = Electron.remote.getCurrentWindow().getTitle();
+  @Prop() readonly title!: string;
 
   openWebTools() {
-    Electron.remote.getCurrentWebContents().openDevTools();
+    this.$emit("openWebTools");
   }
 
   minWindow() {
-    Electron.remote.getCurrentWindow().minimize();
+    this.$emit("minimize");
   }
 
   maxWindow() {
-    Electron.remote.getCurrentWindow().maximize();
+    this.$emit("maximize");
   }
 
   closeWindow() {
-    Electron.remote.getCurrentWindow().close();
-    Electron.app.quit();
+    this.$emit("close");
   }
 }
 </script>
