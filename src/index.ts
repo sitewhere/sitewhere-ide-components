@@ -26,6 +26,7 @@ import NewElementChooser from "./components/configuration/NewElementChooser.vue"
 import NewElementEntry from "./components/configuration/NewElementEntry.vue";
 import PageHeader from "./components/configuration/PageHeader.vue";
 
+// Form components
 import DialogForm from "./components/common/form/DialogForm.vue";
 import FormDateTimePicker from "./components/common/form/FormDateTimePicker.vue";
 import FormSelect from "./components/common/form/FormSelect.vue";
@@ -149,6 +150,88 @@ export function SiteWhereIdeComponents<Options>(Vue: VueConstructor, options: Op
     Vue.component("sw-navigation-header-left", NavigationHeaderLeft);
     Vue.component("sw-navigation-header-panel", NavigationHeaderPanel);
     Vue.component("sw-navigation-page", NavigationPage);
+}
+
+/** Common components */
+export {
+    ClipboardCopyField,
+    ColorInputField,
+    ColorPicker,
+    CondensedToolbar,
+    DateTimePicker,
+    ErrorBanner,
+    FloatingActionButton,
+    HeaderField,
+    IconSelector,
+    ImageZoomOnHover,
+    LinkedHeaderField,
+    LoadingOverlay
+}
+
+/** Configuration components */
+export {
+    ContentDeleteIcon,
+    ContentField,
+    ContentLink,
+    ContentSection,
+    ContentWarning,
+    DatatableLink,
+    DatatableSection,
+    NewElementChooser,
+    NewElementEntry,
+    PageHeader
+}
+
+/** Form components */
+export {
+    DialogForm,
+    FormDateTimePicker,
+    FormSelect,
+    FormSelectCondensed,
+    FormText,
+    FormTextArea,
+    ScriptChooser
+}
+
+/** Dialog components */
+export {
+    BaseDialog,
+    ConfirmDialog,
+    DeleteDialog,
+    DialogHeader,
+    MetadataPanel
+}
+
+/** List components */
+export {
+    ListEntry,
+    ListLayout,
+    ListPage,
+    ListTab,
+    Pager
+}
+
+/** Login components */
+export {
+    RemotesDialog,
+    RemotesDropdown
+}
+
+/** Navigation components */
+export {
+    ContentTab,
+    DataEntryPanel,
+    DataTableTab,
+    DetailPage,
+    HeaderBrandingPanel,
+    InAppFooter,
+    InAppSystemBar,
+    Navigation,
+    NavigationActionButton,
+    NavigationHeaderFields,
+    NavigationHeaderLeft,
+    NavigationHeaderPanel,
+    NavigationPage
 }
 
 /** Core components */
