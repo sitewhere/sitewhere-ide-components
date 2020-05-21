@@ -21,7 +21,9 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VCard, VCardText } from "vuetify/lib";
+
+@Component({ components: { VCard, VCardText } })
 export default class NavigationHeaderPanel extends Vue {
   @Prop() readonly height!: string;
 

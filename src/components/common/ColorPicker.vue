@@ -14,9 +14,13 @@ import Vue from "vue";
 
 import { Sketch as Picker } from "vue-color";
 
+import { VMenu, VBtn } from "vuetify/lib";
+
 @Component({
   components: {
-    Picker
+    Picker,
+    VMenu,
+    VBtn
   }
 })
 export default class ColorPicker extends Vue {

@@ -16,7 +16,9 @@ import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 
-@Component
+import { VSelect, VIcon } from "vuetify/lib";
+
+@Component({ components: { VSelect, VIcon } })
 export default class RemotesDropdown extends Vue {
   @Prop() readonly remotes!: IRemotes;
 

@@ -1,17 +1,17 @@
 <template>
   <v-system-bar color="#444" class="title-bar">
-    <v-btn flat icon small class="ma-0 title-bar-button" @click="openWebTools">
+    <v-btn text icon small class="ma-0 title-bar-button" @click="openWebTools">
       <v-icon color="white">menu</v-icon>
     </v-btn>
     <span class="system-bar-title">{{ title }}</span>
     <v-spacer></v-spacer>
-    <v-btn flat icon small class="ma-0 title-bar-button" @click="minWindow">
+    <v-btn text icon small class="ma-0 title-bar-button" @click="minWindow">
       <v-icon color="white">remove</v-icon>
     </v-btn>
-    <v-btn flat icon small class="ma-0 title-bar-button" @click="maxWindow">
+    <v-btn text icon small class="ma-0 title-bar-button" @click="maxWindow">
       <v-icon color="white">check_box_outline_blank</v-icon>
     </v-btn>
-    <v-btn flat icon small class="ma-0 title-bar-button" @click="closeWindow">
+    <v-btn text icon small class="ma-0 title-bar-button" @click="closeWindow">
       <v-icon color="white">close</v-icon>
     </v-btn>
   </v-system-bar>
@@ -21,7 +21,9 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VSystemBar, VBtn, VIcon, VSpacer } from "vuetify/lib";
+
+@Component({ components: { VSystemBar, VBtn, VIcon, VSpacer } })
 export default class InAppSystemBar extends Vue {
   @Prop() readonly title!: string;
 

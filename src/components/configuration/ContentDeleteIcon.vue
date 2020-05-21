@@ -6,8 +6,10 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
+import { VIcon } from "vuetify/lib";
+
 @Component({
-  components: {}
+  components: { VIcon }
 })
 export default class ContentDeleteIcon extends Vue {
   onDeleteClicked(): void {

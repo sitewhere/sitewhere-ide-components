@@ -9,35 +9,55 @@
       no-action
     >
       <template v-slot:activator>
-        <v-list-tile @click="onSectionClicked(section)">
-          <v-list-tile-content>
-            <v-list-tile-title>{{ section.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <v-list-item @click="onSectionClicked(section)">
+          <v-list-item-content>
+            <v-list-item-title>{{ section.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </template>
 
-      <v-list-tile
+      <v-list-item
         @click="onSectionClicked(subsection)"
         v-for="subsection in section.subsections"
         :key="subsection.id"
       >
-        <v-list-tile-content>
-          <v-list-tile-title>{{ subsection.title }}</v-list-tile-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
+        <v-list-item-content>
+          <v-list-item-title>{{ subsection.title }}</v-list-item-title>
+        </v-list-item-content>
+        <v-list-item-action>
           <v-icon>{{ subsection.icon }}</v-icon>
-        </v-list-tile-action>
-      </v-list-tile>
+        </v-list-item-action>
+      </v-list-item>
     </v-list-group>
   </v-list>
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { INavigationSection } from "sitewhere-ide-common";
-import Vue from "vue";
 
-@Component({})
+import {
+  VList,
+  VListGroup,
+  VListItem,
+  VListItemContent,
+  VListItemTitle,
+  VListItemAction,
+  VIcon
+} from "vuetify/lib";
+
+@Component({
+  components: {
+    VList,
+    VListGroup,
+    VListItem,
+    VListItemContent,
+    VListItemTitle,
+    VListItemAction,
+    VIcon
+  }
+})
 export default class Navigation extends Vue {
   @Prop() readonly sections!: INavigationSection[];
 
@@ -47,5 +67,3 @@ export default class Navigation extends Vue {
   }
 }
 </script>
-
-<style scoped></style>

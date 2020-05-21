@@ -19,7 +19,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">Cancel</v-btn>
+        <v-btn outlined color="primary" @click="onCancelClicked">Cancel</v-btn>
         <v-btn color="primary" @click="onDeleteClicked">Delete</v-btn>
       </v-card-actions>
     </v-card>
@@ -32,9 +32,30 @@ import Vue from "vue";
 
 import ErrorBanner from "../common/ErrorBanner.vue";
 
+import {
+  VDialog,
+  VCard,
+  VToolbar,
+  VToolbarTitle,
+  VAlert,
+  VCardText,
+  VCardActions,
+  VSpacer,
+  VBtn
+} from "vuetify/lib";
+
 @Component({
   components: {
-    ErrorBanner
+    ErrorBanner,
+    VDialog,
+    VCard,
+    VToolbar,
+    VToolbarTitle,
+    VAlert,
+    VCardText,
+    VCardActions,
+    VSpacer,
+    VBtn
   }
 })
 export default class DeleteDialog extends Vue {

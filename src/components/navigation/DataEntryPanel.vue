@@ -10,11 +10,10 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
+import { VContainer, VLayout } from "vuetify/lib";
+
 @Component({
-  components: {}
+  components: { VContainer, VLayout }
 })
 export default class DataEntryPanel extends Vue {}
 </script>
-
-<style scoped>
-</style>

@@ -9,12 +9,12 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
+import { VCard, VIcon } from "vuetify/lib";
+
 @Component({
-  components: {}
+  components: { VCard, VIcon }
 })
 export default class ContentWarning extends Vue {
   @Prop() readonly text!: string;
 }
 </script>
-
-<style scoped></style>

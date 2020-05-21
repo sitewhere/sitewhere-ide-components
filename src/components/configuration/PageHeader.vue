@@ -6,12 +6,12 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
+import { VCard } from "vuetify/lib";
+
 @Component({
-  components: {}
+  components: { VCard }
 })
 export default class PageHeader extends Vue {
   @Prop() readonly text!: string;
 }
 </script>
-
-<style scoped></style>

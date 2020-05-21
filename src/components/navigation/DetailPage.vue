@@ -36,9 +36,13 @@ import { Component, Prop } from "vue-property-decorator";
 
 import NavigationPage from "../navigation/NavigationPage.vue";
 
+import { VTabsItems, VTabs } from "vuetify/lib";
+
 @Component({
   components: {
-    NavigationPage
+    NavigationPage,
+    VTabsItems,
+    VTabs
   }
 })
 export default class DetailPage extends Vue {

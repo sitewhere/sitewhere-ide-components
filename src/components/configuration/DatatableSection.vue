@@ -19,8 +19,10 @@ import { Component, Prop } from "vue-property-decorator";
 
 import ContentHeader from "./ContentHeader.vue";
 
+import { VCard, VDataTable } from "vuetify/lib";
+
 @Component({
-  components: { ContentHeader }
+  components: { ContentHeader, VCard, VDataTable }
 })
 export default class Section extends Vue {
   @Prop() readonly icon!: string;

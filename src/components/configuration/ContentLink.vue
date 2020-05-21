@@ -9,8 +9,10 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
+import { VCard, VIcon } from "vuetify/lib";
+
 @Component({
-  components: {}
+  components: { VCard, VIcon }
 })
 export default class ContentLink extends Vue {
   @Prop() readonly icon!: string;

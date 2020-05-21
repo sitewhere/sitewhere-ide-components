@@ -24,9 +24,13 @@ import { Component, Prop } from "vue-property-decorator";
 
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
+import { VTabItem, VCard } from "vuetify/lib";
+
 @Component({
   components: {
-    LoadingOverlay
+    LoadingOverlay,
+    VTabItem,
+    VCard
   }
 })
 export default class ContentTab extends Vue {

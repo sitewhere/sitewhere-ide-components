@@ -37,12 +37,18 @@ import { Component, Prop } from "vue-property-decorator";
 import Pager from "../list/Pager.vue";
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
+import { VTabItem, VLayout, VFlex, VDataTable } from "vuetify/lib";
+
 import { IPaging, IPageSizes, ITableHeaders } from "sitewhere-ide-common";
 
 @Component({
   components: {
     Pager,
-    LoadingOverlay
+    LoadingOverlay,
+    VTabItem,
+    VLayout,
+    VFlex,
+    VDataTable
   }
 })
 export default class DataTableTab extends Vue {

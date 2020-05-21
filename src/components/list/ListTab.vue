@@ -26,10 +26,13 @@ import LoadingOverlay from "../common/LoadingOverlay.vue";
 import { Component, Prop } from "vue-property-decorator";
 import { IPaging, IPageSizes } from "sitewhere-ide-common";
 
+import { VTabItem } from "vuetify/lib";
+
 @Component({
   components: {
     Pager,
-    LoadingOverlay
+    LoadingOverlay,
+    VTabItem
   }
 })
 export default class ListTab extends Vue {

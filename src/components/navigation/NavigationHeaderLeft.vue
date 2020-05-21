@@ -11,7 +11,9 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-@Component({})
+import { VCard } from "vuetify/lib";
+
+@Component({ components: { VCard } })
 export default class NavigationHeaderLeft extends Vue {}
 </script>
 

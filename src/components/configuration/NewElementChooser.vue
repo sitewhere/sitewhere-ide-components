@@ -23,8 +23,10 @@ import { Component, Prop, Ref } from "vue-property-decorator";
 
 import BaseDialog from "../dialog/BaseDialog.vue";
 
+import { VCard } from "vuetify/lib";
+
 @Component({
-  components: { BaseDialog }
+  components: { BaseDialog, VCard }
 })
 export default class NewElementChooser extends Vue {
   @Prop() readonly icon!: string;

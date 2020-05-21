@@ -59,11 +59,14 @@ import DialogForm from "../common/form/DialogForm.vue";
 import FormText from "../common/form/FormText.vue";
 import FormSelect from "../common/form/FormSelect.vue";
 
+import { VFlex } from "vuetify/lib";
+
 @Component({
   components: {
     DialogForm,
     FormText,
-    FormSelect
+    FormSelect,
+    VFlex
   }
 })
 export default class RemoteConnectionDetails extends DialogSection {

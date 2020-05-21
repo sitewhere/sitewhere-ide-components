@@ -9,7 +9,7 @@
         <v-flex xs3>
           <v-btn-toggle v-model="pageSize" class="mt-1">
             <v-btn
-              flat
+              text
               :value="entry.value"
               v-for="entry in pageSizesWithDefaults"
               :key="entry.value"
@@ -59,9 +59,22 @@ import PagerButton from "./PagerButton.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import { IPaging, IPageSizes } from "sitewhere-ide-common";
 
+import {
+  VContainer,
+  VLayout,
+  VFlex,
+  VSubheader,
+  VBtnToggle
+} from "vuetify/lib";
+
 @Component({
   components: {
-    PagerButton
+    PagerButton,
+    VContainer,
+    VLayout,
+    VFlex,
+    VSubheader,
+    VBtnToggle
   }
 })
 export default class Pager extends Vue {

@@ -16,11 +16,12 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-import Vue from "vue";
+import { VContainer, VLayout, VFlex, VProgressCircular } from "vuetify/lib";
 
-@Component({})
+@Component({ components: { VContainer, VLayout, VFlex, VProgressCircular } })
 export default class LoadingOverlay extends Vue {
   @Prop() readonly loadingMessage!: string;
 }

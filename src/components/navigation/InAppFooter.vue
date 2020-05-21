@@ -10,7 +10,9 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-@Component({})
+import { VFooter } from "vuetify/lib";
+
+@Component({ components: { VFooter } })
 export default class InAppFooter extends Vue {}
 </script>
 

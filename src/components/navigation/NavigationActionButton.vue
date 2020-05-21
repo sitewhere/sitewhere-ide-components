@@ -13,7 +13,9 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VTooltip, VIcon } from "vuetify/lib";
+
+@Component({ components: { VTooltip, VIcon } })
 export default class NavigationActionButton extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly tooltip!: string;

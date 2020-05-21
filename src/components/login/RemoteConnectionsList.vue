@@ -45,13 +45,15 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
-import Vue from "vue";
+
+import { VDataTable, VLayout, VFlex, VBtn, VIcon } from "vuetify/lib";
 
 import { arrayMove } from "../common/Utils";
 
-@Component({})
+@Component({ components: { VDataTable, VLayout, VFlex, VBtn, VIcon } })
 export default class RemoteConnectionsList extends Vue {
   @Prop() readonly remotes!: IRemotes;
 

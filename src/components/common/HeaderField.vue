@@ -1,28 +1,29 @@
 <template>
   <v-row class="mb-1">
-    <v-col
-      cols="4"
-      class="text-right subheading pr-4"
-    >
+    <v-col cols="4" class="text-right subheading pr-4">
       <strong>{{ label }}</strong>:
     </v-col>
-    <v-col
-      class="field"
-      cols="8"
-    >
+    <v-col class="field" cols="8">
       <slot />
     </v-col>
   </v-row>
 </template>
 
 <script>
-  export default {
+import { VRow, VCol } from "vuetify/lib";
 
-    props: ['label'],
-    data: () => ({}),
+export default {
+  props: ["label"],
 
-    methods: {},
-  }
+  components: {
+    VRow,
+    VCol
+  },
+
+  data: () => ({}),
+
+  methods: {}
+};
 </script>
 
 <style scoped>

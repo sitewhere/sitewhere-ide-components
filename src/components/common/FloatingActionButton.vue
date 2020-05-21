@@ -11,29 +11,30 @@
       class="elevation-5"
       @click.stop="onButtonClicked"
     >
-      <font-awesome-icon
-        :icon="icon"
-        size="lg"
-      />
+      <font-awesome-icon :icon="icon" size="lg" />
     </v-btn>
     <span>{{ label }}</span>
   </v-tooltip>
 </template>
 
 <script>
-  export default {
+import { VTooltip, VBtn } from "vuetify/lib";
 
-    props: ['label', 'icon'],
-    data: () => ({}),
+export default {
+  props: ["label", "icon"],
 
-    methods: {
-      // Called when button is clicked.
-      onButtonClicked: function () {
-        this.$emit('action')
-      },
-    },
+  components: {
+    VTooltip,
+    VBtn
+  },
+
+  data: () => ({}),
+
+  methods: {
+    // Called when button is clicked.
+    onButtonClicked: function() {
+      this.$emit("action");
+    }
   }
+};
 </script>
-
-<style scoped>
-</style>

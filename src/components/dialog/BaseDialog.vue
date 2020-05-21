@@ -1,10 +1,10 @@
 <template>
   <v-dialog v-model="visible" persistent :width="width">
-    <v-card>
-      <v-card class="pa-2 white--text" color="primary">
-        <v-icon class="mr-1" small dark>{{ icon }}</v-icon>
-        <span class="subheading">{{ title }}</span>
-      </v-card>
+    <v-card flat tile class="pa-2 white--text" color="primary">
+      <v-icon class="mr-1" small dark>{{ icon }}</v-icon>
+      <span class="subheading">{{ title }}</span>
+    </v-card>
+    <v-card flat tile>
       <slot name="error">
         <error-banner :error="error"></error-banner>
       </slot>
@@ -23,7 +23,7 @@
       <v-divider v-if="!hideButtons" class="mb-2" />
       <v-card-actions v-if="!hideButtons">
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">
+        <v-btn outlined color="primary" @click="onCancelClicked">
           {{
           cancelLabel
           }}
@@ -48,10 +48,31 @@ import LoadingOverlay from "../common/LoadingOverlay.vue";
 
 import { ITabbedComponent } from "sitewhere-ide-common";
 
+import {
+  VDialog,
+  VCard,
+  VIcon,
+  VCardText,
+  VTabs,
+  VDivider,
+  VCardActions,
+  VSpacer,
+  VBtn
+} from "vuetify/lib";
+
 @Component({
   components: {
     ErrorBanner,
-    LoadingOverlay
+    LoadingOverlay,
+    VDialog,
+    VCard,
+    VIcon,
+    VCardText,
+    VTabs,
+    VDivider,
+    VCardActions,
+    VSpacer,
+    VBtn
   }
 })
 export default class BaseDialog extends Vue implements ITabbedComponent {

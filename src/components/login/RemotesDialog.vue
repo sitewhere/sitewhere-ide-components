@@ -1,5 +1,5 @@
 <template>
-  <sw-base-dialog
+  <base-dialog
     ref="dialog"
     :icon="icon"
     title="Edit Remote Connection Settings"
@@ -17,23 +17,29 @@
     <v-card flat class="ml-2 mr-2 mb-0 mt-4">
       <remote-connection-details ref="connections" class="pa-1" @added="onConnectionAdded" />
     </v-card>
-  </sw-base-dialog>
+  </base-dialog>
 </template>
 
 <script lang="ts">
 import { Component, Ref } from "vue-property-decorator";
 import { ITabbedComponent, NavigationIcon } from "sitewhere-ide-common";
-
 import { DialogComponent } from "../core/DialogComponent";
+
+import BaseDialog from "../dialog/BaseDialog.vue";
 import RemoteConnectionsList from "./RemoteConnectionsList.vue";
 import RemoteConnectionDetails from "./RemoteConnectionDetails.vue";
 
 import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 
+import { VCard, VDivider } from "vuetify/lib";
+
 @Component({
   components: {
+    BaseDialog,
     RemoteConnectionsList,
-    RemoteConnectionDetails
+    RemoteConnectionDetails,
+    VCard,
+    VDivider
   }
 })
 export default class RemotesDialog extends DialogComponent<IRemotes> {

@@ -11,7 +11,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">Cancel</v-btn>
+        <v-btn outlined color="primary" @click="onCancelClicked">Cancel</v-btn>
         <v-btn color="primary" @click="onActionConfirmed">{{ buttonText || 'Ok' }}</v-btn>
       </v-card-actions>
     </v-card>
@@ -22,7 +22,29 @@
 import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
 
-@Component({})
+import {
+  VDialog,
+  VCard,
+  VToolbar,
+  VToolbarTitle,
+  VCardText,
+  VCardActions,
+  VSpacer,
+  VBtn
+} from "vuetify/lib";
+
+@Component({
+  components: {
+    VDialog,
+    VCard,
+    VToolbar,
+    VToolbarTitle,
+    VCardText,
+    VCardActions,
+    VSpacer,
+    VBtn
+  }
+})
 export default class ConfirmDialog extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly width!: number;

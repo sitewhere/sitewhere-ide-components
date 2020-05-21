@@ -16,10 +16,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-
 import { Component, Prop } from "vue-property-decorator";
 
-@Component
+import { VTooltip, VBtn, VIcon } from "vuetify/lib";
+
+@Component({ components: { VTooltip, VBtn, VIcon } })
 export default class Pager extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly text!: string;

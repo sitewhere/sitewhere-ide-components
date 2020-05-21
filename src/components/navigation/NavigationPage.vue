@@ -26,9 +26,16 @@ import { Component, Prop } from "vue-property-decorator";
 
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
+import { VCard, VToolbar, VIcon, VToolbarTitle, VSpacer } from "vuetify/lib";
+
 @Component({
   components: {
-    LoadingOverlay
+    LoadingOverlay,
+    VCard,
+    VToolbar,
+    VIcon,
+    VToolbarTitle,
+    VSpacer
   }
 })
 export default class NavigationPage extends Vue {

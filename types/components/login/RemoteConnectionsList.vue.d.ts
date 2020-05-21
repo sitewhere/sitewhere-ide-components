@@ -1,5 +1,5 @@
-import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 import Vue from "vue";
+import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 export default class RemoteConnectionsList extends Vue {
     readonly remotes: IRemotes;
     selected: IRemoteConnection[];

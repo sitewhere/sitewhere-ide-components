@@ -36,7 +36,7 @@
     <v-alert error :value="true" class="ma-0" style="width: 100%" v-if="error">{{ error }}</v-alert>
     <div v-if="!readOnly">
       <v-container fluid>
-        <v-layout >
+        <v-layout>
           <v-flex xs5 class="pr-3">
             <v-text-field light label="Name" placeholder=" " v-model="newItemName" />
           </v-flex>
@@ -63,9 +63,35 @@ import { ITableHeaders } from "sitewhere-ide-common";
 
 import { DialogSection } from "../core/DialogSection";
 
+import {
+  VCardText,
+  VDataTable,
+  VTooltip,
+  VBtn,
+  VIcon,
+  VAlert,
+  VContainer,
+  VLayout,
+  VFlex,
+  VTextField
+} from "vuetify/lib";
+
 import { arrayToMetadata, metadataToArray } from "../common/Utils";
 
-@Component({})
+@Component({
+  components: {
+    VCardText,
+    VDataTable,
+    VTooltip,
+    VBtn,
+    VIcon,
+    VAlert,
+    VContainer,
+    VLayout,
+    VFlex,
+    VTextField
+  }
+})
 export default class MetadataPanel extends DialogSection {
   @Prop({ default: false }) readonly readOnly!: boolean;
   @Prop({ default: "No metadata has been assigned" })

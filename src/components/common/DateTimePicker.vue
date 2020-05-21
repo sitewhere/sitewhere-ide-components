@@ -58,7 +58,25 @@ import Vue from "vue";
 
 import moment from "moment";
 
-@Component({})
+import {
+  VLayout,
+  VFlex,
+  VMenu,
+  VTextField,
+  VDatePicker,
+  VTimePicker
+} from "vuetify/lib";
+
+@Component({
+  components: {
+    VLayout,
+    VFlex,
+    VMenu,
+    VTextField,
+    VDatePicker,
+    VTimePicker
+  }
+})
 export default class DateTimePicker extends Vue {
   @Prop() readonly value!: Date;
   @Prop() readonly label!: string;

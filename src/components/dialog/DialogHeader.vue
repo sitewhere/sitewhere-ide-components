@@ -8,6 +8,8 @@
 import { Component } from "vue-property-decorator";
 import Vue from "vue";
 
-@Component({})
+import { VCard } from "vuetify/lib";
+
+@Component({ components: { VCard } })
 export default class DialogHeader extends Vue {}
 </script>

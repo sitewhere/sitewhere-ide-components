@@ -7,13 +7,11 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-import Vue from "vue";
+import { VContainer, VLayout } from "vuetify/lib";
 
-@Component({})
+@Component({ components: { VContainer, VLayout } })
 export default class ListLayout extends Vue {}
 </script>
-
-<style scoped>
-</style>
