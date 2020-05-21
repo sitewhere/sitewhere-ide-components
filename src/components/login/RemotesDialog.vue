@@ -38,6 +38,7 @@ import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 })
 export default class RemotesDialog extends DialogComponent<IRemotes> {
   @Ref() readonly dialog!: ITabbedComponent;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Ref() readonly connections!: any;
 
   remotes: IRemotes | null = null;

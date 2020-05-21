@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout wrap>
     <v-flex xs8>
       <v-menu
         v-model="datemenu"

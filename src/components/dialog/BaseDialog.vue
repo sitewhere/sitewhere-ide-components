@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="visible" :lazy="lazy" persistent :width="width">
+  <v-dialog v-model="visible" persistent :width="width">
     <v-card>
       <v-card class="pa-2 white--text" color="primary">
         <v-icon class="mr-1" small dark>{{ icon }}</v-icon>
@@ -43,17 +43,6 @@
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
-import {
-  VBtn,
-  VDialog,
-  VCard,
-  VIcon,
-  VCardText,
-  VTabs,
-  VCardActions,
-  VSpacer
-} from "vuetify/lib";
-
 import ErrorBanner from "../common/ErrorBanner.vue";
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
@@ -62,15 +51,7 @@ import { ITabbedComponent } from "sitewhere-ide-common";
 @Component({
   components: {
     ErrorBanner,
-    LoadingOverlay,
-    VBtn,
-    VDialog,
-    VCard,
-    VIcon,
-    VCardText,
-    VTabs,
-    VCardActions,
-    VSpacer
+    LoadingOverlay
   }
 })
 export default class BaseDialog extends Vue implements ITabbedComponent {
@@ -85,7 +66,6 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   @Prop() readonly hideButtons!: boolean;
   @Prop() readonly hideCreate!: boolean;
   @Prop() readonly invalid!: boolean;
-  @Prop({ default: false }) readonly lazy!: boolean;
   @Prop({ default: true }) readonly loaded!: boolean;
   @Prop({ default: "Loading..." }) readonly loadingMessage!: string;
 
@@ -104,15 +84,15 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
   }
 
   /** Handle cancel clicked */
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onCancelClicked(e: any) {
     this.$emit("cancelClicked", e);
   }
 
   /** Handle create clicked */
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onCreateClicked(e: any) {
     this.$emit("createClicked", e);
   }
 }
 </script>
-
-<style scoped></style>

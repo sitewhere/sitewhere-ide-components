@@ -24,7 +24,9 @@
 import Vue from "vue";
 import { Component, Prop, Ref } from "vue-property-decorator";
 
-@Component({})
+import { VTextField } from "vuetify/lib";
+
+@Component({ components: { VTextField } })
 export default class FormText extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;
@@ -35,6 +37,7 @@ export default class FormText extends Vue {
   @Prop() readonly readonly!: boolean;
   @Prop() readonly dense!: boolean;
   @Prop() readonly autofocus!: boolean;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Ref() readonly field!: any;
 
   get wrapped(): string {

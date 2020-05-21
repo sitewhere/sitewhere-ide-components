@@ -27,12 +27,15 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VTextField } from "vuetify/lib";
+
+@Component({ components: { VTextField } })
 export default class FormToken extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;
   @Prop() readonly required!: boolean;
   @Prop() readonly value!: string;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly validator!: any;
 
   get wrapped(): string {

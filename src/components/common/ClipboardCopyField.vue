@@ -21,7 +21,9 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import { showMessage } from "sitewhere-ide-common";
 
-@Component({})
+import { VTooltip } from "vuetify/lib";
+
+@Component({ components: { VTooltip } })
 export default class ClipboardCopyField extends Vue {
   /** Called after id is copied */
   onFieldCopied() {

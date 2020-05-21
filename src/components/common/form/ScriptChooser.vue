@@ -29,7 +29,9 @@ import { listTenantScriptsForCategory, showError } from "sitewhere-ide-common";
 import { AxiosResponse } from "axios";
 import { IScriptMetadata } from "sitewhere-rest-api";
 
-@Component({})
+import { VSelect } from "vuetify/lib";
+
+@Component({ components: { VSelect } })
 export default class ScriptChooser extends Vue {
   @Prop() readonly tenantId!: string;
   @Prop() readonly functionalArea!: string;
@@ -69,6 +71,7 @@ export default class ScriptChooser extends Vue {
     }
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onSelectionChanged(selection: any) {
     this.$emit("change", selection);
   }

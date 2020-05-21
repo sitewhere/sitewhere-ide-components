@@ -25,6 +25,7 @@ export default class Pager extends Vue {
   @Prop() readonly text!: string;
   @Prop({ default: false }) readonly disabled!: boolean;
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onButtonClicked(e: any) {
     this.$emit("click", e);
   }

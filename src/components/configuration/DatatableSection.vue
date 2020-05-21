@@ -27,7 +27,9 @@ export default class Section extends Vue {
   @Prop() readonly fa!: boolean;
   @Prop() readonly title!: string;
   @Prop() readonly help!: string;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly headers!: any[];
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly items!: any[];
   @Prop() readonly width!: string;
 }

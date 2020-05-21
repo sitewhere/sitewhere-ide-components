@@ -1,22 +1,28 @@
 <template>
-  <v-layout row wrap class="mb-1">
-    <v-flex xs4 class="text-xs-right subheading pr-4">
+  <v-row class="mb-1">
+    <v-col
+      cols="4"
+      class="text-right subheading pr-4"
+    >
       <strong>{{ label }}</strong>:
-    </v-flex>
-    <v-flex class="field" xs8>
-      <slot></slot>
-    </v-flex>
-  </v-layout>
+    </v-col>
+    <v-col
+      class="field"
+      cols="8"
+    >
+      <slot />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-export default {
-  data: () => ({}),
+  export default {
 
-  props: ["label"],
+    props: ['label'],
+    data: () => ({}),
 
-  methods: {}
-};
+    methods: {},
+  }
 </script>
 
 <style scoped>

@@ -29,6 +29,7 @@ export default class ConfirmDialog extends Vue {
   @Prop() readonly buttonText!: string;
 
   visible = false;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   error: any = null;
 
   /** Called to open the dialog */

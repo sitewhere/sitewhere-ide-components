@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-3">
-    <v-layout class="pl-2 pr-2 pt-0 pb-0" row wrap>
+    <v-layout class="pl-2 pr-2 pt-0 pb-0" wrap>
       <slot />
     </v-layout>
   </v-container>
@@ -9,7 +9,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import { VContainer, VLayout } from "vuetify/lib";
 
-@Component({})
+@Component({ components: { VContainer, VLayout } })
 export default class DialogForm extends Vue {}
 </script>

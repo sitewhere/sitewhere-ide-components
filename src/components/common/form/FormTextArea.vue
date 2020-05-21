@@ -19,7 +19,9 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VTextarea } from "vuetify/lib";
+
+@Component({ components: { VTextarea } })
 export default class FormText extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;
@@ -37,4 +39,3 @@ export default class FormText extends Vue {
 }
 </script>
 
-<style scoped></style>

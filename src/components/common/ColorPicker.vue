@@ -47,6 +47,7 @@ export default class ColorPicker extends Vue {
   }
 
   /** Called when a color is chosen */
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onColorChosen(val: any) {
     this.currentColor = val.hex;
     this.$emit("input", val.hex);

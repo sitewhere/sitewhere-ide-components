@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-2" fluid grid-list-md fill-height>
-    <v-layout align-content-start row wrap>
+    <v-layout align-content-start wrap>
       <slot />
     </v-layout>
   </v-container>

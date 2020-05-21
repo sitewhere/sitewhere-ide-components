@@ -2,7 +2,7 @@
   <div class="pager">
     <slot v-if="results && results.numResults === 0" name="noresults"></slot>
     <v-container class="ma-0 pa-0">
-      <v-layout row wrap>
+      <v-layout wrap>
         <v-flex xs2>
           <v-subheader class="ma-0 pt-0 pr-0">Rows per page</v-subheader>
         </v-flex>
@@ -44,7 +44,7 @@
           />
         </v-flex>
         <v-flex xs3>
-          <v-subheader class="ma-0 pt-0 right">{{ description }}</v-subheader>
+          <v-subheader class="ma-0 pt-0 float-right">{{ description }}</v-subheader>
         </v-flex>
       </v-layout>
     </v-container>

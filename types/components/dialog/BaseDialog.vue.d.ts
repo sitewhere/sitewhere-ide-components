@@ -12,7 +12,6 @@ export default class BaseDialog extends Vue implements ITabbedComponent {
     readonly hideButtons: boolean;
     readonly hideCreate: boolean;
     readonly invalid: boolean;
-    readonly lazy: boolean;
     readonly loaded: boolean;
     readonly loadingMessage: string;
     active: number | null;

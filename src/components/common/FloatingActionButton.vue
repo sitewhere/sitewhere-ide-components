@@ -1,6 +1,7 @@
 <template>
   <v-tooltip left>
     <v-btn
+      slot="activator"
       fab
       fixed
       bottom
@@ -9,27 +10,29 @@
       color="red darken-2"
       class="elevation-5"
       @click.stop="onButtonClicked"
-      slot="activator"
     >
-      <font-awesome-icon :icon="icon" size="lg"/>
+      <font-awesome-icon
+        :icon="icon"
+        size="lg"
+      />
     </v-btn>
     <span>{{ label }}</span>
   </v-tooltip>
 </template>
 
 <script>
-export default {
-  data: () => ({}),
+  export default {
 
-  props: ["label", "icon"],
+    props: ['label', 'icon'],
+    data: () => ({}),
 
-  methods: {
-    // Called when button is clicked.
-    onButtonClicked: function() {
-      this.$emit("action");
-    }
+    methods: {
+      // Called when button is clicked.
+      onButtonClicked: function () {
+        this.$emit('action')
+      },
+    },
   }
-};
 </script>
 
 <style scoped>

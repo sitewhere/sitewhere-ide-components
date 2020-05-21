@@ -5,7 +5,7 @@
         <slot name="header" />
       </div>
       <div class="tab-content">
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12>
             <v-data-table
               :headers="headers"

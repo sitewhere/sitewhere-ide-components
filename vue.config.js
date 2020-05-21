@@ -1,6 +1,6 @@
 module.exports = {
   transpileDependencies: [
-    "vuetify"
+    'vuetify',
   ],
   css: { extract: false },
   configureWebpack: {
@@ -15,7 +15,7 @@ module.exports = {
       'vuetify/lib',
       'vuex',
       'sitewhere-rest-api',
-      'sitewhere-ide-common'
+      'sitewhere-ide-common',
     ],
   },
   chainWebpack: config => {
@@ -25,17 +25,17 @@ module.exports = {
     //
     // Discussed here https://github.com/vuejs/vue-cli/issues/1081
     if (process.env.NODE_ENV === 'production') {
-      config.module.rule("ts").uses.delete("cache-loader");
+      config.module.rule('ts').uses.delete('cache-loader')
 
       config.module
         .rule('ts')
         .use('ts-loader')
         .loader('ts-loader')
         .tap(opts => {
-          opts.transpileOnly = false;
-          opts.happyPackMode = false;
-          return opts;
-        });
+          opts.transpileOnly = false
+          opts.happyPackMode = false
+          return opts
+        })
     }
   },
   parallel: false,

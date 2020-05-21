@@ -19,7 +19,7 @@
         </template>
       </v-data-table>
     </div>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs3 class="pa-1">
         <v-btn small block :disabled="isUpDisabled" @click="onConnectionMoveUp">
           <v-icon left>arrow_upward</v-icon>Up

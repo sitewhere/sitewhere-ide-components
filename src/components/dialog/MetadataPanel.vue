@@ -36,7 +36,7 @@
     <v-alert error :value="true" class="ma-0" style="width: 100%" v-if="error">{{ error }}</v-alert>
     <div v-if="!readOnly">
       <v-container fluid>
-        <v-layout row>
+        <v-layout >
           <v-flex xs5 class="pr-3">
             <v-text-field light label="Name" placeholder=" " v-model="newItemName" />
           </v-flex>

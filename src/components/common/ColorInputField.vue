@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-0 mb-3">
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs6>
         <v-text-field
           :label="text"
@@ -23,11 +23,26 @@
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
+import {
+  VContainer,
+  VLayout,
+  VFlex,
+  VTextField,
+  VMenu,
+  VBtn
+} from "vuetify/lib";
+
 import { Chrome } from "vue-color";
 
 @Component({
   components: {
-    Chrome
+    Chrome,
+    VContainer,
+    VFlex,
+    VLayout,
+    VTextField,
+    VMenu,
+    VBtn
   }
 })
 export default class ColorInputField extends Vue {
@@ -47,6 +62,7 @@ export default class ColorInputField extends Vue {
   }
 
   /** Called when color is chosen */
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onColorChosen(val: any) {
     this.updatedColor = val.hex;
     this.$emit("input", val.hex);
