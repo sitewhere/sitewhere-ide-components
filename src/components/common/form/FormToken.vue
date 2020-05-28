@@ -3,6 +3,7 @@
     <v-text-field
       :required="required"
       :title="title"
+      class="form-token-input"
       label="Token"
       placeholder=" "
       v-model="wrapped"
@@ -47,3 +48,10 @@ export default class FormToken extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.form-token-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
+}
+</style>

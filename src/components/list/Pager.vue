@@ -4,19 +4,19 @@
     <v-container class="ma-0 pa-0">
       <v-layout wrap>
         <v-flex xs2>
-          <v-subheader class="ma-0 pt-0 pr-0">Rows per page</v-subheader>
+          <v-subheader>Rows per page</v-subheader>
         </v-flex>
         <v-flex xs3>
-          <v-btn-toggle v-model="pageSize" class="mt-1">
+          <v-btn-toggle dense v-model="pageSize" class="mt-2">
             <v-btn
-              text
+              small
               :value="entry.value"
               v-for="entry in pageSizesWithDefaults"
               :key="entry.value"
             >{{ entry.text }}</v-btn>
           </v-btn-toggle>
         </v-flex>
-        <v-flex xs4>
+        <v-flex xs4 class="pa-2">
           <pager-button
             :disabled="!previousEnabled"
             @click="onFirstPage"
@@ -64,7 +64,8 @@ import {
   VLayout,
   VFlex,
   VSubheader,
-  VBtnToggle
+  VBtnToggle,
+  VBtn
 } from "vuetify/lib";
 
 @Component({
@@ -74,7 +75,8 @@ import {
     VLayout,
     VFlex,
     VSubheader,
-    VBtnToggle
+    VBtnToggle,
+    VBtn
   }
 })
 export default class Pager extends Vue {
@@ -213,6 +215,6 @@ export default class Pager extends Vue {
 .pager {
   color: #333;
   background-color: #eee;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ddd;
 }
 </style>

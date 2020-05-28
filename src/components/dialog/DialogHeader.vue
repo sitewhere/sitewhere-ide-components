@@ -1,15 +1,18 @@
 <template>
-  <v-card flat style="background-color: #f5f5f5; border-bottom: 1px solid #eee;">
-    <slot />
-  </v-card>
+  <div>
+    <v-card class="pa-4 body-2" flat color="#f5f5f5">
+      <slot />
+    </v-card>
+    <v-divider />
+  </div>
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import Vue from "vue";
 
-import { VCard } from "vuetify/lib";
+import { VCard, VDivider } from "vuetify/lib";
 
-@Component({ components: { VCard } })
+@Component({ components: { VCard, VDivider } })
 export default class DialogHeader extends Vue {}
 </script>

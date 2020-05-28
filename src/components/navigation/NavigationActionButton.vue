@@ -1,10 +1,10 @@
 <template>
   <v-tooltip left>
-    <v-icon class="ma-0 ml-1 navbutton" @click="onAction" slot="activator">
-      {{
-      icon
-      }}
-    </v-icon>
+    <template v-slot:activator="{ on }">
+      <v-btn v-on="on" small icon @click="onAction">
+        <v-icon small color="#666" class="navbutton">{{icon}}</v-icon>
+      </v-btn>
+    </template>
     <span>{{ tooltip }}</span>
   </v-tooltip>
 </template>
@@ -13,9 +13,9 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-import { VTooltip, VIcon } from "vuetify/lib";
+import { VTooltip, VBtn, VIcon } from "vuetify/lib";
 
-@Component({ components: { VTooltip, VIcon } })
+@Component({ components: { VTooltip, VBtn, VIcon } })
 export default class NavigationActionButton extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly tooltip!: string;
@@ -26,15 +26,3 @@ export default class NavigationActionButton extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.navbutton {
-  font-size: 16px;
-  padding-left: 8px;
-  color: #666;
-  vertical-align: middle;
-}
-.navbutton:hover {
-  color: #999;
-}
-</style>

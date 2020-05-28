@@ -10,7 +10,7 @@
             <v-data-table
               :headers="headers"
               :items="matches"
-              :hide-actions="true"
+              hide-default-footer
               :no-data-text="noDataText"
               :style="tableStyle"
             >

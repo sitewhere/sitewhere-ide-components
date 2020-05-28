@@ -4,6 +4,7 @@
       :required="required"
       :title="title"
       :label="label"
+      class="text-area-input"
       placeholder=" "
       v-model="wrapped"
       hide-details
@@ -39,3 +40,9 @@ export default class FormText extends Vue {
 }
 </script>
 
+<style scoped>
+.text-area-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
+}
+</style>

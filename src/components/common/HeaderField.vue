@@ -1,9 +1,9 @@
 <template>
-  <v-row class="mb-1">
-    <v-col cols="4" class="text-right subheading pr-4">
+  <v-row color="grey">
+    <v-col cols="4" class="text-right body-2 pt-1 pb-1 pr-4">
       <strong>{{ label }}</strong>:
     </v-col>
-    <v-col class="field" cols="8">
+    <v-col class="field body-2 pt-1 pb-1" cols="8">
       <slot />
     </v-col>
   </v-row>

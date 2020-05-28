@@ -1,16 +1,16 @@
 <template>
   <v-dialog v-model="visible" persistent :width="width">
-    <v-card flat tile class="pa-2 white--text" color="primary">
-      <v-icon class="mr-1" small dark>{{ icon }}</v-icon>
-      <span class="subheading">{{ title }}</span>
-    </v-card>
     <v-card flat tile>
+      <v-card flat tile class="pa-2 white--text" color="primary">
+        <v-icon class="mr-2 mb-1" style="font-size: 20px;" dark>{{ icon }}</v-icon>
+        <span style="font-size: 18px;">{{ title }}</span>
+      </v-card>
       <slot name="error">
-        <error-banner :error="error"></error-banner>
+        <error-banner :error="error" />
       </slot>
       <slot name="header" />
 
-      <v-card-text class="pa-0">
+      <v-card flat tile>
         <div style="position: relative;">
           <slot />
           <v-tabs v-model="active" v-if="tabbed">
@@ -19,16 +19,18 @@
           </v-tabs>
           <loading-overlay v-if="!loaded" :loadingMessage="loadingMessage" />
         </div>
-      </v-card-text>
+      </v-card>
+
       <v-divider v-if="!hideButtons" class="mb-2" />
       <v-card-actions v-if="!hideButtons">
         <v-spacer></v-spacer>
-        <v-btn outlined color="primary" @click="onCancelClicked">
+        <v-btn tile outlined color="primary" @click="onCancelClicked">
           {{
           cancelLabel
           }}
         </v-btn>
         <v-btn
+          tile
           color="primary"
           v-if="!hideCreate"
           :disabled="invalid"
@@ -62,8 +64,6 @@ import {
 
 @Component({
   components: {
-    ErrorBanner,
-    LoadingOverlay,
     VDialog,
     VCard,
     VIcon,
@@ -72,7 +72,9 @@ import {
     VDivider,
     VCardActions,
     VSpacer,
-    VBtn
+    VBtn,
+    ErrorBanner,
+    LoadingOverlay
   }
 })
 export default class BaseDialog extends Vue implements ITabbedComponent {

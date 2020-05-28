@@ -15,7 +15,7 @@
     </v-card>
     <v-divider />
     <v-card flat class="ml-2 mr-2 mb-0 mt-4">
-      <remote-connection-details ref="connections" class="pa-1" @added="onConnectionAdded" />
+      <remote-connection-details class="pa-1" @added="onConnectionAdded" />
     </v-card>
   </base-dialog>
 </template>
@@ -24,14 +24,15 @@
 import { Component, Ref } from "vue-property-decorator";
 import { ITabbedComponent, NavigationIcon } from "sitewhere-ide-common";
 import { DialogComponent } from "../core/DialogComponent";
+import { DialogSection } from "../core/DialogSection";
 
 import BaseDialog from "../dialog/BaseDialog.vue";
 import RemoteConnectionsList from "./RemoteConnectionsList.vue";
 import RemoteConnectionDetails from "./RemoteConnectionDetails.vue";
 
-import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
-
 import { VCard, VDivider } from "vuetify/lib";
+
+import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 
 @Component({
   components: {
@@ -44,8 +45,7 @@ import { VCard, VDivider } from "vuetify/lib";
 })
 export default class RemotesDialog extends DialogComponent<IRemotes> {
   @Ref() readonly dialog!: ITabbedComponent;
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  @Ref() readonly connections!: any;
+  @Ref() readonly connections!: DialogSection;
 
   remotes: IRemotes | null = null;
 
@@ -54,14 +54,14 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
     return NavigationIcon.Remotes;
   }
 
-  /** Reset dialog contents */
+  // Reset dialog contents.
   reset() {
     if (this.connections) {
       this.connections.reset();
     }
   }
 
-  /** Load dialog from a given payload */
+  // Load dialog from a given payload.
   load(payload: IRemotes) {
     this.remotes = JSON.parse(JSON.stringify(payload));
     this.reset();
@@ -70,14 +70,14 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
     }
   }
 
-  /** Called when a new connection is added */
+  // Called when a new connection is added.
   onConnectionAdded(added: IRemoteConnection) {
     if (this.remotes) {
       this.remotes.connections.push(added);
     }
   }
 
-  /** Called after create button is clicked */
+  // Called after create button is clicked.
   onCreateClicked() {
     this.$emit("save", this.remotes);
   }

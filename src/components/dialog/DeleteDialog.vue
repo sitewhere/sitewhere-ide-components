@@ -1,9 +1,10 @@
 <template>
   <v-dialog v-model="visible" persistent :width="width">
     <v-card>
-      <v-toolbar dense flat card dark color="primary">
-        <v-toolbar-title>{{title}}</v-toolbar-title>
-      </v-toolbar>
+      <v-card flat tile class="pa-2 white--text" color="primary">
+        <v-icon class="mr-2 mb-1" style="font-size: 20px;" dark>delete</v-icon>
+        <span style="font-size: 18px;">{{ title }}</span>
+      </v-card>
       <v-alert
         class="ma-0"
         error
@@ -35,13 +36,12 @@ import ErrorBanner from "../common/ErrorBanner.vue";
 import {
   VDialog,
   VCard,
-  VToolbar,
-  VToolbarTitle,
   VAlert,
   VCardText,
   VCardActions,
   VSpacer,
-  VBtn
+  VBtn,
+  VIcon
 } from "vuetify/lib";
 
 @Component({
@@ -49,13 +49,12 @@ import {
     ErrorBanner,
     VDialog,
     VCard,
-    VToolbar,
-    VToolbarTitle,
     VAlert,
     VCardText,
     VCardActions,
     VSpacer,
-    VBtn
+    VBtn,
+    VIcon
   }
 })
 export default class DeleteDialog extends Vue {

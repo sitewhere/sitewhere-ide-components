@@ -13,7 +13,12 @@ export default class RemoteConnectionDetails extends DialogSection {
     /** Perform validation */
     validate(): boolean;
     /** Load form data from an object */
-    load(input: any): void;
+    load(input: {
+        name: string;
+        protocol: string;
+        host: string;
+        port: number;
+    }): void;
     /** Save form data to an object */
     save(): {};
     /** Called when create button is clicked */

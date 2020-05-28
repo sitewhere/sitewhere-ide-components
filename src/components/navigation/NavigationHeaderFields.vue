@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-2" flat>
+  <v-card tile class="ma-2" flat>
     <slot />
   </v-card>
 </template>

@@ -5,29 +5,23 @@
       :key="section.id"
       v-model="section.active"
       :prepend-icon="section.icon"
-      :append-icon="section.subsections ? '$vuetify.icons.expand' : ''"
-      no-action
     >
       <template v-slot:activator>
-        <v-list-item @click="onSectionClicked(section)">
-          <v-list-item-content>
-            <v-list-item-title>{{ section.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-list-item-title>{{ section.title }}</v-list-item-title>
       </template>
 
+      <v-divider class="mb-4" />
       <v-list-item
         @click="onSectionClicked(subsection)"
         v-for="subsection in section.subsections"
         :key="subsection.id"
       >
-        <v-list-item-content>
-          <v-list-item-title>{{ subsection.title }}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-action>
+        <v-list-item-title>{{ subsection.title }}</v-list-item-title>
+        <v-list-item-icon>
           <v-icon>{{ subsection.icon }}</v-icon>
-        </v-list-item-action>
+        </v-list-item-icon>
       </v-list-item>
+      <v-divider class="mt-4" />
     </v-list-group>
   </v-list>
 </template>
@@ -43,8 +37,9 @@ import {
   VListItem,
   VListItemContent,
   VListItemTitle,
-  VListItemAction,
-  VIcon
+  VListItemIcon,
+  VIcon,
+  VDivider
 } from "vuetify/lib";
 
 @Component({
@@ -54,8 +49,9 @@ import {
     VListItem,
     VListItemContent,
     VListItemTitle,
-    VListItemAction,
-    VIcon
+    VListItemIcon,
+    VIcon,
+    VDivider
   }
 })
 export default class Navigation extends Vue {

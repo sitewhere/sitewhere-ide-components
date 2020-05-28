@@ -1,5 +1,5 @@
-import { PluginObject, VueConstructor } from 'vue';
 /** Common components */
+import BrandingPanel from './components/common/BrandingPanel.vue';
 import ClipboardCopyField from './components/common/ClipboardCopyField.vue';
 import ColorInputField from './components/common/ColorInputField.vue';
 import ColorPicker from './components/common/ColorPicker.vue';
@@ -24,12 +24,15 @@ import NewElementChooser from './components/configuration/NewElementChooser.vue'
 import NewElementEntry from './components/configuration/NewElementEntry.vue';
 import PageHeader from './components/configuration/PageHeader.vue';
 /** Form components */
+import Chooser from './components/common/Chooser.vue';
 import DialogForm from './components/common/form/DialogForm.vue';
 import FormDateTimePicker from './components/common/form/FormDateTimePicker.vue';
 import FormSelect from './components/common/form/FormSelect.vue';
 import FormSelectCondensed from './components/common/form/FormSelectCondensed.vue';
 import FormText from './components/common/form/FormText.vue';
 import FormTextArea from './components/common/form/FormTextArea.vue';
+import FormToken from './components/common/form/FormToken.vue';
+import Multichooser from './components/common/Multichooser.vue';
 import ScriptChooser from './components/common/form/ScriptChooser.vue';
 /** Dialog components */
 import BaseDialog from './components/dialog/BaseDialog.vue';
@@ -69,23 +72,17 @@ import { DialogSection } from './components/core/DialogSection';
 import { EditDialogComponent } from './components/core/EditDialogComponent';
 import { HeaderComponent } from './components/core/HeaderComponent';
 import { ListComponent } from './components/core/ListComponent';
-declare class Plugin implements PluginObject<Vue> {
-    install(Vue: VueConstructor): void;
-}
-declare const plugin: Plugin;
-export default plugin;
 /** Common components */
-export { ClipboardCopyField, ColorInputField, ColorPicker, CondensedToolbar, DateTimePicker, ErrorBanner, FloatingActionButton, HeaderField, IconSelector, ImageZoomOnHover, LinkedHeaderField, LoadingOverlay, };
+export { BrandingPanel, ClipboardCopyField, ColorInputField, ColorPicker, CondensedToolbar, DateTimePicker, ErrorBanner, FloatingActionButton, HeaderField, IconSelector, ImageZoomOnHover, LinkedHeaderField, LoadingOverlay };
 /** Configuration components */
 export { ContentDeleteIcon, ContentField, ContentLink, ContentSection, ContentWarning, DatatableLink, DatatableSection, NewElementChooser, NewElementEntry, PageHeader, };
 /** Form components */
-export { DialogForm, FormDateTimePicker, FormSelect, FormSelectCondensed, FormText, FormTextArea, ScriptChooser, };
+export { Chooser, DialogForm, FormDateTimePicker, FormSelect, FormSelectCondensed, FormText, FormTextArea, FormToken, Multichooser, ScriptChooser, };
 /** Dialog components */
 export { BaseDialog, ConfirmDialog, DeleteDialog, DialogHeader, MetadataPanel, };
+export { RemotesDialog, RemotesDropdown };
 /** List components */
 export { ListEntry, ListLayout, ListPage, ListTab, Pager, };
-/** Login components */
-export { RemotesDialog, RemotesDropdown, };
 /** Navigation components */
 export { ContentTab, DataEntryPanel, DataTableTab, DetailPage, HeaderBrandingPanel, InAppFooter, InAppSystemBar, Navigation, NavigationActionButton, NavigationHeaderFields, NavigationHeaderLeft, NavigationHeaderPanel, NavigationPage, };
 /** Core components */

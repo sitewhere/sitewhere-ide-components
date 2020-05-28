@@ -53,7 +53,7 @@ export default class NavigationPage extends Vue {
 }
 .toolbar {
   flex: 0;
-  z-index: 1;
+  z-index: 2;
   color: #333;
 }
 .header {

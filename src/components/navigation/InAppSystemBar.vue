@@ -1,18 +1,18 @@
 <template>
   <v-system-bar color="#444" class="title-bar">
     <v-btn text icon small class="ma-0 title-bar-button" @click="openWebTools">
-      <v-icon color="white">menu</v-icon>
+      <v-icon small color="grey">menu</v-icon>
     </v-btn>
     <span class="system-bar-title">{{ title }}</span>
     <v-spacer></v-spacer>
     <v-btn text icon small class="ma-0 title-bar-button" @click="minWindow">
-      <v-icon color="white">remove</v-icon>
+      <v-icon small color="grey">remove</v-icon>
     </v-btn>
     <v-btn text icon small class="ma-0 title-bar-button" @click="maxWindow">
-      <v-icon color="white">check_box_outline_blank</v-icon>
+      <v-icon small color="grey">check_box_outline_blank</v-icon>
     </v-btn>
     <v-btn text icon small class="ma-0 title-bar-button" @click="closeWindow">
-      <v-icon color="white">close</v-icon>
+      <v-icon small color="grey">close</v-icon>
     </v-btn>
   </v-system-bar>
 </template>

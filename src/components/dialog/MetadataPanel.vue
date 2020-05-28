@@ -24,9 +24,11 @@
           </td>
           <td v-if="!readOnly" width="20px">
             <v-tooltip left>
-              <v-btn icon @click="onDeleteItem(props.item.name)" slot="activator">
-                <v-icon class="grey--text">fa-trash</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" icon @click="onDeleteItem(props.item.name)" slot="activator">
+                  <v-icon class="grey--text">fa-trash</v-icon>
+                </v-btn>
+              </template>
               <span>Delete Item</span>
             </v-tooltip>
           </td>
@@ -45,9 +47,11 @@
           </v-flex>
           <v-flex xs1 class="pt-3">
             <v-tooltip left>
-              <v-btn icon @click="onAddItem" slot="activator">
-                <v-icon class="blue--text text--darken-2">fa-plus-circle</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" icon outlined color="primary" class="mt-1 ml-2" @click="onAddItem">
+                  <v-icon>add</v-icon>
+                </v-btn>
+              </template>
               <span>Add Item</span>
             </v-tooltip>
           </v-flex>

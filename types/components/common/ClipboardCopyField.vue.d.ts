@@ -1,7 +1,9 @@
 import Vue from "vue";
 export default class ClipboardCopyField extends Vue {
-    /** Called after id is copied */
+    readonly field: string;
+    readonly message: string;
+    /** Called after successful copy */
     onFieldCopied(): void;
-    /** Called if unable to copy id */
+    /** Called after failed copy */
     onFieldCopyFailed(): void;
 }

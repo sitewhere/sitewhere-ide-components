@@ -1,28 +1,25 @@
 <template>
-  <v-menu offset-y lazy>
-    <span slot="activator">
-      <v-container fluid class="pa-0">
+  <v-menu offset-y>
+    <template v-slot:activator="{ on }">
+      <v-container v-on="on" fluid class="pa-0">
         <v-row>
           <v-col cols="12">
-            <v-text-field v-model="icon" label="Icon" placeholder=" " prepend-icon="image" />
+            <v-text-field
+              class="mr-2 text-field-input"
+              v-model="icon"
+              label="Icon"
+              placeholder=" "
+              prepend-icon="image"
+            />
           </v-col>
         </v-row>
       </v-container>
-    </span>
+    </template>
     <v-card>
       <v-container :style="ddStyle" fluid grid-list-sm>
         <v-row>
           <v-col v-for="(icon) in iconsSolid" :key="icon" class="faicon" cols="1">
-            <v-tooltip left>
-              <font-awesome-icon
-                slot="activator"
-                class="faicon text--grey"
-                :icon="icon"
-                size="lg"
-                @click="onIconSelected(icon)"
-              />
-              <span>{{ icon }}</span>
-            </v-tooltip>
+            <v-icon @click="onIconSelected(icon)" color="#666">fa-{{ icon }}</v-icon>
           </v-col>
         </v-row>
       </v-container>
@@ -31,14 +28,7 @@
 </template>
 
 <script>
-import {
-  VMenu,
-  VContainer,
-  VRow,
-  VCol,
-  VTextField,
-  VTooltip
-} from "vuetify/lib";
+import { VMenu, VContainer, VRow, VCol, VTextField, VIcon } from "vuetify/lib";
 
 export default {
   props: ["value"],
@@ -49,7 +39,7 @@ export default {
     VRow,
     VCol,
     VTextField,
-    VTooltip
+    VIcon
   },
 
   data: () => ({
@@ -1216,7 +1206,7 @@ export default {
   methods: {
     // Called when icon is selected.
     onIconSelected: function(e) {
-      this.$data.selectedIcon = e;
+      this.$data.selectedIcon = "fa-" + e;
       this.$emit("input", e);
     }
   }
@@ -1224,8 +1214,8 @@ export default {
 </script>
 
 <style scoped>
-.faicon {
-  min-height: 30px;
-  text-align: center;
+.text-field-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
 }
 </style>

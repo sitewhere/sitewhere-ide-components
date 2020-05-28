@@ -1,9 +1,10 @@
 <template>
   <v-dialog v-model="visible" persistent :width="width">
     <v-card>
-      <v-toolbar dense flat card dark color="primary">
-        <v-toolbar-title>{{title}}</v-toolbar-title>
-      </v-toolbar>
+      <v-card flat tile class="pa-2 white--text" color="primary">
+        <v-icon class="mr-2 mb-1" style="font-size: 20px;" dark>fa-question-circle</v-icon>
+        <span style="font-size: 18px;">{{ title }}</span>
+      </v-card>
       <v-card-text>
         <slot>
           <div>Your content goes here!</div>

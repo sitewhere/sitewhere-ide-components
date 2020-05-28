@@ -1,5 +1,5 @@
 <template>
-  <v-footer app>
+  <v-footer app class="pa-0" style="z-index: 10;">
     <div class="footer-content">
       <slot />
     </div>

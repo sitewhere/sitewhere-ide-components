@@ -1,6 +1,5 @@
-import { PluginObject, VueConstructor } from 'vue'
-
 /** Common components */
+import BrandingPanel from './components/common/BrandingPanel.vue'
 import ClipboardCopyField from './components/common/ClipboardCopyField.vue'
 import ColorInputField from './components/common/ColorInputField.vue'
 import ColorPicker from './components/common/ColorPicker.vue'
@@ -27,12 +26,15 @@ import NewElementEntry from './components/configuration/NewElementEntry.vue'
 import PageHeader from './components/configuration/PageHeader.vue'
 
 /** Form components */
+import Chooser from './components/common/Chooser.vue'
 import DialogForm from './components/common/form/DialogForm.vue'
 import FormDateTimePicker from './components/common/form/FormDateTimePicker.vue'
 import FormSelect from './components/common/form/FormSelect.vue'
 import FormSelectCondensed from './components/common/form/FormSelectCondensed.vue'
 import FormText from './components/common/form/FormText.vue'
 import FormTextArea from './components/common/form/FormTextArea.vue'
+import FormToken from './components/common/form/FormToken.vue'
+import Multichooser from './components/common/Multichooser.vue'
 import ScriptChooser from './components/common/form/ScriptChooser.vue'
 
 /** Dialog components */
@@ -78,82 +80,9 @@ import { EditDialogComponent } from './components/core/EditDialogComponent'
 import { HeaderComponent } from './components/core/HeaderComponent'
 import { ListComponent } from './components/core/ListComponent'
 
-class Plugin implements PluginObject<Vue> {
-    install (Vue: VueConstructor) {
-        // Register common components.
-        Vue.component('sw-clipboard-copy-field', ClipboardCopyField)
-        Vue.component('sw-color-input-field', ColorInputField)
-        Vue.component('sw-color-picker', ColorPicker)
-        Vue.component('sw-condensed-toolbar', CondensedToolbar)
-        Vue.component('sw-date-time-picker', DateTimePicker)
-        Vue.component('sw-error-banner', ErrorBanner)
-        Vue.component('sw-fab', FloatingActionButton)
-        Vue.component('sw-header-field', HeaderField)
-        Vue.component('sw-icon-selector', IconSelector)
-        Vue.component('sw-image-zoom-on-hover', ImageZoomOnHover)
-        Vue.component('sw-linked-header-field', LinkedHeaderField)
-        Vue.component('sw-loading-overlay', LoadingOverlay)
-
-        // Register configuration components.
-        Vue.component('sw-content-delete-icon', ContentDeleteIcon)
-        Vue.component('sw-content-field', ContentField)
-        Vue.component('sw-content-link', ContentLink)
-        Vue.component('sw-content-section', ContentSection)
-        Vue.component('sw-content-warning', ContentWarning)
-        Vue.component('sw-datatable-link', DatatableLink)
-        Vue.component('sw-datatable-section', DatatableSection)
-        Vue.component('sw-new-element-chooser', NewElementChooser)
-        Vue.component('sw-new-element-entry', NewElementEntry)
-        Vue.component('sw-page-header', PageHeader)
-
-        // Register common form components.
-        Vue.component('sw-dialog-form', DialogForm)
-        Vue.component('sw-form-date-time-picker', FormDateTimePicker)
-        Vue.component('sw-form-select', FormSelect)
-        Vue.component('sw-form-select-condensed', FormSelectCondensed)
-        Vue.component('sw-form-text', FormText)
-        Vue.component('sw-form-text-area', FormTextArea)
-        Vue.component('sw-script-chooser', ScriptChooser)
-
-        // Register dialog components.
-        Vue.component('sw-base-dialog', BaseDialog)
-        Vue.component('sw-confirm-dialog', ConfirmDialog)
-        Vue.component('sw-delete-dialog', DeleteDialog)
-        Vue.component('sw-dialog-header', DialogHeader)
-        Vue.component('sw-metadata-panel', MetadataPanel)
-
-        // Register list components.
-        Vue.component('sw-list-entry', ListEntry)
-        Vue.component('sw-list-layout', ListLayout)
-        Vue.component('sw-list-page', ListPage)
-        Vue.component('sw-list-tab', ListTab)
-        Vue.component('sw-pager', Pager)
-
-        // Register login components.
-        Vue.component('sw-remotes-dialog', RemotesDialog)
-        Vue.component('sw-remotes-dropdown', RemotesDropdown)
-
-        // Register navigation components.
-        Vue.component('sw-content-tab', ContentTab)
-        Vue.component('sw-data-entry-panel', DataEntryPanel)
-        Vue.component('sw-data-table-tab', DataTableTab)
-        Vue.component('sw-detail-page', DetailPage)
-        Vue.component('sw-header-branding-panel', HeaderBrandingPanel)
-        Vue.component('sw-in-app-footer', InAppFooter)
-        Vue.component('sw-in-app-system-bar', InAppSystemBar)
-        Vue.component('sw-navigation', Navigation)
-        Vue.component('sw-navigation-action-button', NavigationActionButton)
-        Vue.component('sw-navigation-header-fields', NavigationHeaderFields)
-        Vue.component('sw-navigation-header-left', NavigationHeaderLeft)
-        Vue.component('sw-navigation-header-panel', NavigationHeaderPanel)
-        Vue.component('sw-navigation-page', NavigationPage)
-    }
-}
-const plugin: Plugin = new Plugin()
-export default plugin
-
 /** Common components */
 export {
+    BrandingPanel,
     ClipboardCopyField,
     ColorInputField,
     ColorPicker,
@@ -165,8 +94,8 @@ export {
     IconSelector,
     ImageZoomOnHover,
     LinkedHeaderField,
-    LoadingOverlay,
-}
+    LoadingOverlay
+};
 
 /** Configuration components */
 export {
@@ -184,12 +113,15 @@ export {
 
 /** Form components */
 export {
+    Chooser,
     DialogForm,
     FormDateTimePicker,
     FormSelect,
     FormSelectCondensed,
     FormText,
     FormTextArea,
+    FormToken,
+    Multichooser,
     ScriptChooser,
 }
 
@@ -202,6 +134,11 @@ export {
     MetadataPanel,
 }
 
+export {
+    RemotesDialog,
+    RemotesDropdown
+}
+
 /** List components */
 export {
     ListEntry,
@@ -209,12 +146,6 @@ export {
     ListPage,
     ListTab,
     Pager,
-}
-
-/** Login components */
-export {
-    RemotesDialog,
-    RemotesDropdown,
 }
 
 /** Navigation components */

@@ -1,17 +1,20 @@
 <template>
-  <v-container fluid class="pa-0 mb-3">
+  <v-container class="ma-0 pa-0" fluid>
     <v-layout wrap>
-      <v-flex xs6>
+      <v-flex xs8>
         <v-text-field
           :label="text"
+          class="text-field-input"
           placeholder=" "
           v-model="updatedColor"
           prepend-icon="color_lens"
-        ></v-text-field>
+        />
       </v-flex>
-      <v-flex xs6>
+      <v-flex xs4>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
-          <v-btn :style="{ 'background-color' : valueOrDefault }" slot="activator"></v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn class="mt-3 ml-3" v-on="on" :style="{ 'background-color' : valueOrDefault }" />
+          </template>
           <chrome :value="valueOrDefault" @input="onColorChosen" />
         </v-menu>
       </v-flex>
@@ -70,3 +73,10 @@ export default class ColorInputField extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.text-field-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
+}
+</style>

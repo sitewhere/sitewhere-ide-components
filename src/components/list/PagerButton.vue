@@ -1,15 +1,10 @@
 <template>
   <v-tooltip top>
-    <v-btn
-      :disabled="disabled"
-      icon
-      light
-      class="ml-0 mr-0 grey--text text--darken-2"
-      @click="onButtonClicked"
-      slot="activator"
-    >
-      <v-icon>{{ icon }}</v-icon>
-    </v-btn>
+    <template v-slot:activator="{ on }">
+      <v-btn v-on="on" :disabled="disabled" icon small @click="onButtonClicked">
+        <v-icon small class="grey--text text--darken-2">{{ icon }}</v-icon>
+      </v-btn>
+    </template>
     <span>{{ text }}</span>
   </v-tooltip>
 </template>

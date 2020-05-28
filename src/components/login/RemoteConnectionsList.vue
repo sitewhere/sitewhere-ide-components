@@ -1,11 +1,21 @@
 <template>
   <div>
     <div style="height: 300px; overflow-y: auto; border: 1px solid #ddd;">
-      <v-data-table v-model="selected" :items="connections" item-key="id" hide-headers hide-actions>
-        <template v-slot:items="props">
+      <v-data-table
+        v-model="selected"
+        :items="connections"
+        item-key="id"
+        hide-default-header
+        hide-default-footer
+      >
+        <template v-slot:item="props">
           <tr style="cursor: pointer;" :active="props.selected" @click="onSelect(props.item)">
             <td width="5%" class="pa-2">
-              <v-icon>{{ props.item.protocol === 'https' ? 'lock' : 'lock_open' }}</v-icon>
+              <v-icon>
+                {{
+                props.item.protocol === "https" ? "lock" : "lock_open"
+                }}
+              </v-icon>
             </td>
             <td
               width="90%"
@@ -19,41 +29,42 @@
         </template>
       </v-data-table>
     </div>
-    <v-layout wrap>
-      <v-flex xs3 class="pa-1">
-        <v-btn small block :disabled="isUpDisabled" @click="onConnectionMoveUp">
-          <v-icon left>arrow_upward</v-icon>Up
-        </v-btn>
-      </v-flex>
-      <v-flex xs3 class="pa-1">
-        <v-btn small block :disabled="isDownDisabled" @click="onConnectionMoveDown">
-          <v-icon left>arrow_downward</v-icon>Down
-        </v-btn>
-      </v-flex>
-      <v-flex xs3 class="pa-1">
-        <v-btn small block :disabled="isDefaultDisabled" @click="onConnectionDefault">
-          <v-icon left>star</v-icon>Default
-        </v-btn>
-      </v-flex>
-      <v-flex xs3 class="pa-1">
-        <v-btn small block :disabled="isDeleteDisabled" @click="onConnectionDelete">
-          <v-icon left>delete</v-icon>Delete
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <v-card flat tile class="mt-2">
+      <v-layout>
+        <v-flex xs3 class="mr-2">
+          <v-btn outlined small block :disabled="isUpDisabled" @click="onConnectionMoveUp">
+            <v-icon left>arrow_upward</v-icon>Up
+          </v-btn>
+        </v-flex>
+        <v-flex xs3 class="mr-2">
+          <v-btn outlined small block :disabled="isDownDisabled" @click="onConnectionMoveDown">
+            <v-icon left>arrow_downward</v-icon>Down
+          </v-btn>
+        </v-flex>
+        <v-flex xs3 class="mr-2">
+          <v-btn outlined small block :disabled="isDefaultDisabled" @click="onConnectionDefault">
+            <v-icon left>star</v-icon>Default
+          </v-btn>
+        </v-flex>
+        <v-flex xs3>
+          <v-btn outlined small block :disabled="isDeleteDisabled" @click="onConnectionDelete">
+            <v-icon left>delete</v-icon>Delete
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-card>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
+import Vue from "vue";
 
-import { VDataTable, VLayout, VFlex, VBtn, VIcon } from "vuetify/lib";
+import { VDataTable, VIcon, VCard, VLayout, VFlex, VBtn } from "vuetify/lib";
 
-import { arrayMove } from "../common/Utils";
+import { arrayMove, IRemotes, IRemoteConnection } from "sitewhere-ide-common";
 
-@Component({ components: { VDataTable, VLayout, VFlex, VBtn, VIcon } })
+@Component({ components: { VDataTable, VIcon, VCard, VLayout, VFlex, VBtn } })
 export default class RemoteConnectionsList extends Vue {
   @Prop() readonly remotes!: IRemotes;
 

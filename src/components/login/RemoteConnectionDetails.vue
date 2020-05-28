@@ -11,7 +11,7 @@
         <span v-if="!$v.name.required && $v.$dirty">Name is required.</span>
       </form-text>
     </v-flex>
-    <v-flex xs2>
+    <v-flex xs3>
       <form-select
         :items="protocols"
         title="Choose connection protocol"
@@ -27,7 +27,7 @@
         <span v-if="!$v.host.required && $v.$dirty">Hostname is required.</span>
       </form-text>
     </v-flex>
-    <v-flex xs3>
+    <v-flex xs2>
       <form-text
         required
         class="ml-3"
@@ -40,7 +40,7 @@
       </form-text>
     </v-flex>
     <v-flex xs1>
-      <v-btn class="mb-0" color="primary" icon @click="onCreateClicked">
+      <v-btn icon outlined color="primary" class="mt-1 ml-2" @click="onCreateClicked">
         <v-icon>add</v-icon>
       </v-btn>
     </v-flex>
@@ -49,24 +49,36 @@
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
-import { IRemoteConnection } from "sitewhere-ide-common";
-
-import { generateUniqueId } from "../common/Utils";
-
 import { DialogSection } from "../core/DialogSection";
 
 import DialogForm from "../common/form/DialogForm.vue";
 import FormText from "../common/form/FormText.vue";
 import FormSelect from "../common/form/FormSelect.vue";
 
-import { VFlex } from "vuetify/lib";
+import { VFlex, VBtn, VIcon } from "vuetify/lib";
+
+import { generateUniqueId, IRemoteConnection } from "sitewhere-ide-common";
+
+import { required } from "vuelidate/lib/validators";
+
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+import { Validation } from "vuelidate";
 
 @Component({
-  components: {
-    DialogForm,
-    FormText,
-    FormSelect,
-    VFlex
+  components: { DialogForm, FormText, FormSelect, VFlex, VBtn, VIcon },
+  validations: {
+    name: {
+      required
+    },
+    protocol: {
+      required
+    },
+    host: {
+      required
+    },
+    port: {
+      required
+    }
   }
 })
 export default class RemoteConnectionDetails extends DialogSection {
@@ -91,22 +103,25 @@ export default class RemoteConnectionDetails extends DialogSection {
     this.protocol = null;
     this.host = null;
     this.port = null;
-    // this.$v.$reset();
+    this.$v.$reset();
   }
 
   /** Perform validation */
   validate(): boolean {
-    // this.$v.$touch();
-    // return !this.$v.$invalid;
-    return true;
+    this.$v.$touch();
+    return !this.$v.$invalid;
   }
 
   /** Load form data from an object */
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  load(input: any): void {
+  load(input: {
+    name: string;
+    protocol: string;
+    host: string;
+    port: number;
+  }): void {
     this.name = input.name;
     this.protocol = input.protocol;
-    this.host = input.areaType.host;
+    this.host = input.host;
     this.port = input.port;
   }
 
