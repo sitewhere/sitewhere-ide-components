@@ -2,7 +2,7 @@
   <v-card class="flex-rows" flat fill-height>
     <v-toolbar class="elevation-1 toolbar" dense>
       <v-icon>{{ icon }}</v-icon>
-      <v-toolbar-title class="ml-2 subheading">{{ title }}</v-toolbar-title>
+      <v-toolbar-title class="ml-2 subtitle-1">{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <slot name="actions" />
     </v-toolbar>

@@ -2,7 +2,7 @@
   <v-card flat>
     <content-header :title="title" :icon="icon" :fa="fa" />
     <v-card flat style="margin-left: 25px;" :width="width">
-      <v-data-table class="datatable" dense :headers="headers" :items="items" hide-actions>
+      <v-data-table class="datatable" dense :headers="headers" :items="items" hide-default-footer>
         <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
           <slot :name="slot" v-bind="scope" />
         </template>
