@@ -1,6 +1,6 @@
 {
   "name": "sitewhere-ide-components",
-  "version": "3.0.0-alpha.17",
+  "version": "3.0.0-alpha.18",
   "description": "Common Vue.js components used in building SiteWhere IDEs",
   "main": "dist/sitewhere-ide-components.common.js",
   "types": "types/index.d.ts",
@@ -29,8 +29,8 @@
   "homepage": "https://github.com/sitewhere/sitewhere-ide-components#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "sitewhere-ide-common": "^3.0.0-alpha.3",
-    "sitewhere-rest-api": "^3.0.0-alpha.2",
+    "sitewhere-ide-common": "3.0.0-alpha.4",
+    "sitewhere-rest-api": "3.0.0-alpha.3",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-color": "^2.7.1",

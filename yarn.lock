@@ -6549,7 +6549,7 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-sitewhere-ide-common@^3.0.0-alpha.3:
+sitewhere-ide-common@3.0.0-alpha.4:
   version "3.0.0-alpha.4"
   resolved "https://registry.yarnpkg.com/sitewhere-ide-common/-/sitewhere-ide-common-3.0.0-alpha.4.tgz#892b6f93d2ce9ec08eef29740d46de78e4c326e9"
   integrity sha512-lUyW07TL8FarNjGeRVKrCoV+AEXgv3jNJzlHhE7J/zc2koYjTcbvs7Icm2TxikiRCBmoZDrMbzs7UKWisCj1dQ==
@@ -6558,14 +6558,7 @@ sitewhere-ide-common@^3.0.0-alpha.3:
     moment "^2.25.1"
     sitewhere-rest-api "^3.0.0-alpha.3"
 
-sitewhere-rest-api@^3.0.0-alpha.2:
-  version "3.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/sitewhere-rest-api/-/sitewhere-rest-api-3.0.0-alpha.2.tgz#2f2c2cd7340e65b9764899838df80ffe19bb9706"
-  integrity sha512-Nv2lf50QecV0+gbLQPzeKU07LdZmDIRMi0XP8dJgnJUMdQQli8IR9iUCZLufJdixBkBO4KURLFavu+p7ZWXpIg==
-  dependencies:
-    axios "^0.19.2"
-
-sitewhere-rest-api@^3.0.0-alpha.3:
+sitewhere-rest-api@3.0.0-alpha.3, sitewhere-rest-api@^3.0.0-alpha.3:
   version "3.0.0-alpha.3"
   resolved "https://registry.yarnpkg.com/sitewhere-rest-api/-/sitewhere-rest-api-3.0.0-alpha.3.tgz#a178c8e674eac1a043d7e8d5bb5024532166172d"
   integrity sha512-r9hd3MIG0l8nak8Zm6TPWZogFwTizxBSKKP4XHG1hWcFeJyl0K3PdBHgdl/ifOE/+o0iZwm9iwa7dkWuUeSF2Q==
