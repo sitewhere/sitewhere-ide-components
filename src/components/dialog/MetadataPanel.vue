@@ -4,34 +4,36 @@
       <v-data-table
         :headers="headers"
         :items="metadata"
-        :rows-per-page-items="pageSizes"
+        :items-per-page="5"
         :no-data-text="noDataMessage"
       >
-        <template slot="items" slot-scope="props">
-          <td width="250px" :title="props.item.name">
-            {{
-            props.item.name.length > 25
-            ? props.item.name.substring(0, 25) + "..."
-            : props.item.name
-            }}
-          </td>
-          <td width="370px" :title="props.item.value">
-            {{
-            props.item.value.length > 50
-            ? props.item.value.substring(0, 50) + "..."
-            : props.item.value
-            }}
-          </td>
-          <td v-if="!readOnly" width="20px">
-            <v-tooltip left>
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" icon @click="onDeleteItem(props.item.name)" slot="activator">
-                  <v-icon class="grey--text">fa-trash</v-icon>
-                </v-btn>
-              </template>
-              <span>Delete Item</span>
-            </v-tooltip>
-          </td>
+        <template slot="item" slot-scope="props">
+          <tr>
+            <td width="250px" :title="props.item.name">
+              {{
+              props.item.name.length > 25
+              ? props.item.name.substring(0, 25) + "..."
+              : props.item.name
+              }}
+            </td>
+            <td width="370px" :title="props.item.value">
+              {{
+              props.item.value.length > 50
+              ? props.item.value.substring(0, 50) + "..."
+              : props.item.value
+              }}
+            </td>
+            <td v-if="!readOnly" width="20px">
+              <v-tooltip left>
+                <template v-slot:activator="{ on }">
+                  <v-btn v-on="on" icon @click="onDeleteItem(props.item.name)" slot="activator">
+                    <v-icon class="grey--text">fa-trash</v-icon>
+                  </v-btn>
+                </template>
+                <span>Delete Item</span>
+              </v-tooltip>
+            </td>
+          </tr>
         </template>
       </v-data-table>
     </v-card-text>
