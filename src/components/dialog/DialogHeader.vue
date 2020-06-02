@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="pa-4 body-2" flat color="#f5f5f5">
+    <v-card class="pa-4 body-2" flat tile color="#f5f5f5">
       <slot />
     </v-card>
     <v-divider />

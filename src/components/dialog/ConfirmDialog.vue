@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="visible" persistent :width="width">
+  <v-dialog v-model="visible" persistent eager :width="width">
     <v-card>
       <v-card flat tile class="pa-2 white--text" color="primary">
         <v-icon class="mr-2 mb-1" style="font-size: 20px;" dark>fa-question-circle</v-icon>
