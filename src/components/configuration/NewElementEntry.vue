@@ -14,10 +14,10 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-import { VCard, VCardText, VIcon } from "vuetify/lib";
+import { VCard, VCardText, VIcon, VDivider } from "vuetify/lib";
 
 @Component({
-  components: { VCard, VCardText, VIcon }
+  components: { VCard, VCardText, VIcon, VDivider }
 })
 export default class NewElementChooser extends Vue {
   @Prop() readonly icon!: string;
