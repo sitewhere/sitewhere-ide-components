@@ -1,7 +1,7 @@
 <template>
   <v-card flat class="mb-3">
     <v-icon :class="iconClass">{{ icon }}</v-icon>
-    <span class="subheading">{{ title }}:</span>
+    <span class="subtitle-2">{{ title }}:</span>
   </v-card>
 </template>
 

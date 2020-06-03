@@ -15,6 +15,7 @@ import LoadingOverlay from './components/common/LoadingOverlay.vue'
 
 /** Configuration components */
 import ContentDeleteIcon from './components/configuration/ContentDeleteIcon.vue'
+import ContentDivider from './components/configuration/ContentDivider.vue'
 import ContentField from './components/configuration/ContentField.vue'
 import ContentLink from './components/configuration/ContentLink.vue'
 import ContentSection from './components/configuration/ContentSection.vue'
@@ -100,6 +101,7 @@ export {
 /** Configuration components */
 export {
     ContentDeleteIcon,
+    ContentDivider,
     ContentField,
     ContentLink,
     ContentSection,

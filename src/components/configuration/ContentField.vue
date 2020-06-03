@@ -29,5 +29,3 @@ export default class ContentField extends Vue {
   }
 }
 </script>
-
-<style scoped></style>
