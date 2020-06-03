@@ -1,7 +1,5 @@
 <template>
-  <v-card style="background-color: transparent;" @click="onLinkClicked" flat class="caption">
-    <a class="clink">{{ text }}</a>
-  </v-card>
+  <a @click="onLinkClicked" class="clink">{{ text }}</a>
 </template>
 
 <script lang="ts">
@@ -25,7 +23,8 @@ export default class DatatableLink extends Vue {
 <style scoped>
 .clink {
   color: #2255cc;
-  font-size: 13px;
+}
+.clink:hover {
   text-decoration: underline;
 }
 </style>

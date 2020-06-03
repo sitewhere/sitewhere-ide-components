@@ -1,7 +1,7 @@
 <template>
   <v-card style="display: relative;" flat>
     <content-header :title="title" :icon="icon" :fa="fa" />
-    <v-card flat style="margin-left: 25px;">
+    <v-card flat style="margin-left: 30px;">
       <slot />
     </v-card>
     <div class="overlay">

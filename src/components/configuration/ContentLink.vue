@@ -1,8 +1,8 @@
 <template>
-  <v-card @click="onLinkClicked" flat class="caption mb-1">
-    <a class="clink">{{ text }}</a>
+  <div>
+    <a @click="onLinkClicked" class="clink body-2">{{ text }}</a>
     <v-icon class="ilink">{{ icon }}</v-icon>
-  </v-card>
+  </div>
 </template>
 
 <script lang="ts">
@@ -27,7 +27,6 @@ export default class ContentLink extends Vue {
 <style scoped>
 .clink {
   color: #2255cc;
-  font-size: 13px;
 }
 .clink:hover {
   text-decoration: underline;

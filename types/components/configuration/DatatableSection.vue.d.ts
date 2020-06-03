@@ -1,5 +1,5 @@
 import Vue from "vue";
-export default class Section extends Vue {
+export default class DatatableSection extends Vue {
     readonly icon: string;
     readonly fa: boolean;
     readonly title: string;
@@ -7,4 +7,5 @@ export default class Section extends Vue {
     readonly headers: any[];
     readonly items: any[];
     readonly width: string;
+    readonly hideHeader: boolean;
 }

@@ -28,10 +28,10 @@ export default class ContentHeader extends Vue {
 <style scoped>
 .icon-fa {
   font-size: 13px !important;
-  width: 25px;
+  width: 30px;
 }
 .icon-non-fa {
   font-size: 16px !important;
-  width: 25px;
+  width: 30px;
 }
 </style>

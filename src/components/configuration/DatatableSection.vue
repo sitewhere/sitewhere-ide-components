@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
-    <content-header :title="title" :icon="icon" :fa="fa" />
-    <v-card flat style="margin-left: 25px;" :width="width">
+    <content-header v-if="!hideHeader" :title="title" :icon="icon" :fa="fa" />
+    <v-card flat style="margin-left: 30px;" :width="width">
       <v-data-table class="datatable" dense :headers="headers" :items="items" hide-default-footer>
         <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
           <slot :name="slot" v-bind="scope" />
@@ -24,7 +24,7 @@ import { VCard, VDataTable } from "vuetify/lib";
 @Component({
   components: { ContentHeader, VCard, VDataTable }
 })
-export default class Section extends Vue {
+export default class DatatableSection extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly fa!: boolean;
   @Prop() readonly title!: string;
@@ -34,12 +34,16 @@ export default class Section extends Vue {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly items!: any[];
   @Prop() readonly width!: string;
+  @Prop() readonly hideHeader!: boolean;
 }
 </script>
 
 <style scoped>
 .datatable >>> tr {
   height: 30px;
+}
+.datatable >>> tr:hover {
+  background: #ffffff !important;
 }
 .datatable >>> th {
   padding: 3px !important;
