@@ -2,7 +2,9 @@
   <div>
     <div class="subtitle-2">{{ title }}</div>
     <v-divider class="mt-1 mb-3" style="width: 50%" />
-    <v-card flat class="mb-3 caption" style="width: 50%">{{ description }}</v-card>
+    <v-card flat class="mb-3 caption" style="width: 50%">
+      <slot />
+    </v-card>
   </div>
 </template>
 
