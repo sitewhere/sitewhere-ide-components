@@ -1,7 +1,7 @@
 <template>
   <v-card flat class="mb-3">
     <v-icon :class="iconClass">{{ icon }}</v-icon>
-    <span class="subtitle-2">{{ title }}:</span>
+    <span class="subtitle-1">{{ title }}:</span>
   </v-card>
 </template>
 
@@ -28,10 +28,10 @@ export default class ContentHeader extends Vue {
 <style scoped>
 .icon-fa {
   font-size: 13px !important;
-  width: 30px;
+  width: 40px;
 }
 .icon-non-fa {
   font-size: 16px !important;
-  width: 30px;
+  width: 40px;
 }
 </style>

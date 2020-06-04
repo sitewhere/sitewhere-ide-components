@@ -24,6 +24,7 @@ import DatatableSection from './components/configuration/DatatableSection.vue';
 import NewElementChooser from './components/configuration/NewElementChooser.vue';
 import NewElementEntry from './components/configuration/NewElementEntry.vue';
 import PageHeader from './components/configuration/PageHeader.vue';
+import SectionOverview from './components/configuration/SectionOverview.vue';
 /** Form components */
 import Chooser from './components/common/Chooser.vue';
 import DialogForm from './components/common/form/DialogForm.vue';
@@ -76,7 +77,7 @@ import { ListComponent } from './components/core/ListComponent';
 /** Common components */
 export { BrandingPanel, ClipboardCopyField, ColorInputField, ColorPicker, CondensedToolbar, DateTimePicker, ErrorBanner, FloatingActionButton, HeaderField, IconSelector, ImageZoomOnHover, LinkedHeaderField, LoadingOverlay };
 /** Configuration components */
-export { ContentDeleteIcon, ContentDivider, ContentField, ContentLink, ContentSection, ContentWarning, DatatableLink, DatatableSection, NewElementChooser, NewElementEntry, PageHeader, };
+export { ContentDeleteIcon, ContentDivider, ContentField, ContentLink, ContentSection, ContentWarning, DatatableLink, DatatableSection, NewElementChooser, NewElementEntry, PageHeader, SectionOverview };
 /** Form components */
 export { Chooser, DialogForm, FormDateTimePicker, FormSelect, FormSelectCondensed, FormText, FormTextArea, FormToken, Multichooser, ScriptChooser, };
 /** Dialog components */

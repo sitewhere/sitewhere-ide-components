@@ -1,15 +1,12 @@
 <template>
-  <v-card flat>
-    <content-header v-if="!hideHeader" :title="title" :icon="icon" :fa="fa" />
-    <v-card flat style="margin-left: 30px;" :width="width">
-      <v-data-table class="datatable" dense :headers="headers" :items="items" hide-default-footer>
-        <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
-          <slot :name="slot" v-bind="scope" />
-        </template>
-      </v-data-table>
-      <slot name="datatable-footer" />
-      <slot name="datatable-dialogs" />
-    </v-card>
+  <v-card flat :width="width">
+    <v-data-table class="datatable" dense :headers="headers" :items="items" hide-default-footer>
+      <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
+        <slot :name="slot" v-bind="scope" />
+      </template>
+    </v-data-table>
+    <slot name="datatable-footer" />
+    <slot name="datatable-dialogs" />
   </v-card>
 </template>
 
@@ -17,12 +14,10 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-import ContentHeader from "./ContentHeader.vue";
-
 import { VCard, VDataTable } from "vuetify/lib";
 
 @Component({
-  components: { ContentHeader, VCard, VDataTable }
+  components: { VCard, VDataTable }
 })
 export default class DatatableSection extends Vue {
   @Prop() readonly icon!: string;
@@ -39,6 +34,9 @@ export default class DatatableSection extends Vue {
 </script>
 
 <style scoped>
+.datatable {
+  border: 1px solid #ddd;
+}
 .datatable >>> tr {
   height: 30px;
 }
@@ -46,10 +44,10 @@ export default class DatatableSection extends Vue {
   background: #ffffff !important;
 }
 .datatable >>> th {
-  padding: 3px !important;
+  padding: 5px !important;
 }
 .datatable >>> td {
-  padding: 3px !important;
+  padding: 5px !important;
   height: 30px;
 }
 </style>

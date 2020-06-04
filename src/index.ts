@@ -25,6 +25,7 @@ import DatatableSection from './components/configuration/DatatableSection.vue'
 import NewElementChooser from './components/configuration/NewElementChooser.vue'
 import NewElementEntry from './components/configuration/NewElementEntry.vue'
 import PageHeader from './components/configuration/PageHeader.vue'
+import SectionOverview from './components/configuration/SectionOverview.vue'
 
 /** Form components */
 import Chooser from './components/common/Chooser.vue'
@@ -111,6 +112,7 @@ export {
     NewElementChooser,
     NewElementEntry,
     PageHeader,
+    SectionOverview
 }
 
 /** Form components */
