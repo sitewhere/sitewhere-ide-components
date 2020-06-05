@@ -32,7 +32,7 @@ export default class Section extends Vue {
 <style scoped>
 .overlay {
   position: absolute;
-  left: 50%;
+  left: 60%;
   right: 0;
   top: 0;
   bottom: 0;

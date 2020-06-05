@@ -1,6 +1,13 @@
 <template>
   <v-card flat :width="width">
-    <v-data-table class="datatable" dense :headers="headers" :items="items" hide-default-footer>
+    <v-data-table
+      class="datatable"
+      dense
+      :headers="headers"
+      :items="items"
+      hide-default-footer
+      :no-data-text="noDataText"
+    >
       <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
         <slot :name="slot" v-bind="scope" />
       </template>
@@ -23,13 +30,13 @@ export default class DatatableSection extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly fa!: boolean;
   @Prop() readonly title!: string;
+  @Prop() readonly noDataText!: string;
   @Prop() readonly help!: string;
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly headers!: any[];
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly items!: any[];
   @Prop() readonly width!: string;
-  @Prop() readonly hideHeader!: boolean;
 }
 </script>
 
