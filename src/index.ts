@@ -24,8 +24,10 @@ import DatatableLink from './components/configuration/DatatableLink.vue'
 import DatatableSection from './components/configuration/DatatableSection.vue'
 import NewElementChooser from './components/configuration/NewElementChooser.vue'
 import NewElementEntry from './components/configuration/NewElementEntry.vue'
+import OptionalSelection from './components/configuration/OptionalSelection.vue'
 import PageHeader from './components/configuration/PageHeader.vue'
 import SectionOverview from './components/configuration/SectionOverview.vue'
+import Selection from './components/configuration/Selection.vue'
 
 /** Form components */
 import Chooser from './components/common/Chooser.vue'
@@ -111,8 +113,10 @@ export {
     DatatableSection,
     NewElementChooser,
     NewElementEntry,
+    OptionalSelection,
     PageHeader,
-    SectionOverview
+    SectionOverview,
+    Selection
 }
 
 /** Form components */
