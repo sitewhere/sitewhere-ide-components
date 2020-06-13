@@ -27,7 +27,7 @@ import { VSelect } from "vuetify/lib";
     VSelect
   }
 })
-export default class OptionalSelection extends Vue {
+export default class Selection extends Vue {
   @Prop() readonly value!: string | null;
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   @Prop() readonly items!: any[];

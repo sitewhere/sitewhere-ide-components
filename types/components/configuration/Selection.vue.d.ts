@@ -1,5 +1,5 @@
 import Vue from "vue";
-export default class OptionalSelection extends Vue {
+export default class Selection extends Vue {
     readonly value: string | null;
     readonly items: any[];
     readonly label: string;
