@@ -3,7 +3,9 @@
     <v-layout wrap>
       <v-flex xs8>
         <v-text-field
-          :label="text"
+          :label="label"
+          :title="title"
+          :readonly="true"
           class="text-field-input"
           placeholder=" "
           v-model="updatedColor"
@@ -15,7 +17,7 @@
           <template v-slot:activator="{ on }">
             <v-btn class="mt-3 ml-3" v-on="on" :style="{ 'background-color' : valueOrDefault }" />
           </template>
-          <chrome :value="valueOrDefault" @input="onColorChosen" />
+          <v-color-picker :value="valueOrDefault" @input="onColorChosen" :mode="mode || 'hexa'" />
         </v-menu>
       </v-flex>
     </v-layout>
@@ -32,14 +34,13 @@ import {
   VFlex,
   VTextField,
   VMenu,
-  VBtn
+  VBtn,
+  VColorPicker
 } from "vuetify/lib";
-
-import { Chrome } from "vue-color";
 
 @Component({
   components: {
-    Chrome,
+    VColorPicker,
     VContainer,
     VFlex,
     VLayout,
@@ -50,13 +51,18 @@ import { Chrome } from "vue-color";
 })
 export default class ColorInputField extends Vue {
   @Prop() readonly value!: string;
-  @Prop() readonly text!: string;
+  @Prop() readonly label!: string;
+  @Prop() readonly title!: string;
+  @Prop() readonly mode!: string;
 
   menu: string | null = null;
   updatedColor: string | null = null;
 
   @Watch("value")
   onValueChanged(val: string) {
+    if (!val.startsWith("#")) {
+      val = "#" + val;
+    }
     this.updatedColor = val;
   }
 
@@ -65,11 +71,9 @@ export default class ColorInputField extends Vue {
   }
 
   /** Called when color is chosen */
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  onColorChosen(val: any) {
-    this.updatedColor = val.hex;
-    this.$emit("input", val.hex);
-    this.$emit("opacityChanged", val.a);
+  onColorChosen(val: string) {
+    this.updatedColor = val;
+    this.$emit("input", val);
   }
 }
 </script>
