@@ -11,6 +11,7 @@
               :headers="headers"
               :items="matches"
               hide-default-footer
+              disable-pagination
               :no-data-text="noDataText"
               :style="tableStyle"
             >
@@ -48,8 +49,8 @@ import { IPaging, IPageSizes, ITableHeaders } from "sitewhere-ide-common";
     VTabItem,
     VLayout,
     VFlex,
-    VDataTable
-  }
+    VDataTable,
+  },
 })
 export default class DataTableTab extends Vue {
   @Prop() readonly tabkey!: string;
