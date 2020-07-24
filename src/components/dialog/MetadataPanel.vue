@@ -88,7 +88,8 @@ import { DialogSection } from "../core/DialogSection";
 import DialogForm from "../common/form/DialogForm.vue";
 
 import {
-  VCardText,
+  VCard,
+  VDivider,
   VDataTable,
   VTooltip,
   VBtn,
@@ -104,8 +105,9 @@ import { arrayToMetadata, metadataToArray } from "sitewhere-ide-common";
 
 @Component({
   components: {
+    VCard,
+    VDivider,
     DialogForm,
-    VCardText,
     VDataTable,
     VTooltip,
     VBtn,
