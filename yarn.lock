@@ -6549,19 +6549,19 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-sitewhere-ide-common@3.0.0-beta.6:
-  version "3.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/sitewhere-ide-common/-/sitewhere-ide-common-3.0.0-beta.6.tgz#93ba6d878e7635673c5a3ef4dd0532111c384792"
-  integrity sha512-Dj0BEaiEQVvd2VHW5AHE+1qNc0rsY9xiKbPtKNz28dFrL1X3Nc8kICR1hFWI0D7yDmIm0gLL3jMJiNvXQU1jtw==
+sitewhere-ide-common@3.0.0-beta.7:
+  version "3.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/sitewhere-ide-common/-/sitewhere-ide-common-3.0.0-beta.7.tgz#71762d6e1fc95c35d393b8b18b1a93ef56e41987"
+  integrity sha512-8hHjkjgJUDh6ReVRL/kBFzObkq/QYjznKLzA7JFD+rNu8rFAYgAtCmlGJMFbqdaRuAotMPF9+7B7hzC31vFXlw==
   dependencies:
     axios "^0.19.2"
     moment "^2.25.1"
-    sitewhere-rest-api "3.0.0-beta.9"
+    sitewhere-rest-api "3.0.0-beta.10"
 
-sitewhere-rest-api@3.0.0-beta.9:
-  version "3.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/sitewhere-rest-api/-/sitewhere-rest-api-3.0.0-beta.9.tgz#e2ee7ca63318f3165e3676a27f1ecbcbaef97de5"
-  integrity sha512-Y/pIGgrTKX90RcJHvYUtmUh/4Y/whr86r4avo+NwOr3SPgWceqmrtiWK+aRpdTX20exVE5/Ufuri1BbPGOz/lw==
+sitewhere-rest-api@3.0.0-beta.10:
+  version "3.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/sitewhere-rest-api/-/sitewhere-rest-api-3.0.0-beta.10.tgz#a19166c10a3977eec9e954e38c4471a0c969cd2a"
+  integrity sha512-MNbulIW8AQxCRCOFSuuCXfBygVJwJFMSGA7jZQQgvI5Yg4W3s27pI/YSYd6emXY4LxfIDH/SqNh/TYBlVcEpFQ==
   dependencies:
     axios "^0.19.2"
 
