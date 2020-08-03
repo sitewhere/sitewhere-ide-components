@@ -2,28 +2,20 @@
   <v-data-table
     v-model="selected"
     class="scrolling-list"
+    :headers="headers"
     :items="all"
     item-key="token"
-    hide-default-header
     hide-default-footer
+    show-select
   >
-    <template v-slot:item="props">
-      <tr
-        style="cursor: pointer;"
-        :active="props.selected"
-        @click="props.selected = !props.selected"
-      >
-        <td>
-          <v-checkbox color="#666" :input-value="props.selected" hide-details />
-        </td>
-        <td width="5%" class="pa-2">
-          <v-avatar size="36px">
-            <img :src="props.item.imageUrl" v-if="props.item.imageUrl" />
-            <v-icon v-if="props.item.icon" class="grey--text" size="2x">{{props.item.icon}}</v-icon>
-          </v-avatar>
-        </td>
-        <td width="90%" class="subheading pa-2">{{ props.item.name }}</td>
-      </tr>
+    <template v-slot:item.avatar="{ item }">
+      <v-avatar size="36px">
+        <img :src="item.imageUrl" v-if="item.imageUrl" />
+        <v-icon v-else-if="item.icon" class="grey--text" size="2x">{{item.icon}}</v-icon>
+      </v-avatar>
+    </template>
+    <template v-slot:item.name="{ item }">
+      <span class="subheading">{{ item.name }}</span>
     </template>
   </v-data-table>
 </template>
@@ -43,23 +35,27 @@ export default class Multichooser extends Vue {
   @Prop({ default: false }) readonly idMode!: boolean;
 
   selected: IBrandedEntity[] = [];
+  headers: {}[] = [
+    { text: "Icon", value: "avatar", width: "10%" },
+    { text: "Name", value: "name", width: "90%" },
+  ];
 
   @Watch("value", { immediate: true })
   onValueUpdated(updated: string[]) {
     if (updated) {
       if (
         this.selected.length != updated.length ||
-        !this.selected.every(e => updated.includes(e.token))
+        !this.selected.every((e) => updated.includes(e.token))
       ) {
         const selection: IBrandedEntity[] = [];
         if (this.idMode) {
-          this.all.forEach(item => {
+          this.all.forEach((item) => {
             if (updated.indexOf(item.id) > -1) {
               selection.push(item);
             }
           });
         } else {
-          this.all.forEach(item => {
+          this.all.forEach((item) => {
             if (updated.indexOf(item.token) > -1) {
               selection.push(item);
             }
@@ -75,7 +71,7 @@ export default class Multichooser extends Vue {
   @Watch("selected", { immediate: true })
   onSelectionUpdated() {
     const selection: string[] = [];
-    this.selected.forEach(item => {
+    this.selected.forEach((item) => {
       selection.push(item.token);
     });
     this.$emit("input", selection);

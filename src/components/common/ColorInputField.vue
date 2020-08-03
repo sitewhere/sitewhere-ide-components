@@ -35,7 +35,7 @@ import {
   VTextField,
   VMenu,
   VBtn,
-  VColorPicker
+  VColorPicker,
 } from "vuetify/lib";
 
 @Component({
@@ -46,8 +46,8 @@ import {
     VLayout,
     VTextField,
     VMenu,
-    VBtn
-  }
+    VBtn,
+  },
 })
 export default class ColorInputField extends Vue {
   @Prop() readonly value!: string;
@@ -60,7 +60,7 @@ export default class ColorInputField extends Vue {
 
   @Watch("value")
   onValueChanged(val: string) {
-    if (!val.startsWith("#")) {
+    if (val && !val.startsWith("#")) {
       val = "#" + val;
     }
     this.updatedColor = val;

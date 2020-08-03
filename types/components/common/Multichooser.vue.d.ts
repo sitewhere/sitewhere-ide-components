@@ -5,6 +5,7 @@ export default class Multichooser extends Vue {
     readonly all: IBrandedEntity[];
     readonly idMode: boolean;
     selected: IBrandedEntity[];
+    headers: {}[];
     onValueUpdated(updated: string[]): void;
     onSelectionUpdated(): void;
 }
