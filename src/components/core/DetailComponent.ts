@@ -8,7 +8,14 @@ import { Route } from "vue-router";
  * Base class for components that display data for a single record
  * based on SiteWhere REST services.
  */
-@Component
+@Component({
+    /* eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-explicit-any */
+    beforeRouteUpdate(to: Route, from: Route, next: any) {
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+        (this as any).display(to.params.token);
+        next();
+    }
+})
 export class DetailComponent<T> extends Vue {
     token: string | null = null;
     record: T | null = null;
@@ -22,13 +29,6 @@ export class DetailComponent<T> extends Vue {
     /** Called on initial create */
     created() {
         this.display(this.$route.params[this.getTokenParameter()]);
-    }
-
-    /** Called when component is reused */
-    /* eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
-    beforeRouteUpdate(to: Route, from: Route, next: any) {
-        this.display(to.params.token);
-        next();
     }
 
     /** Display record with the given token */

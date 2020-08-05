@@ -1,3 +1,10 @@
+import Component from 'vue-class-component';
+Component.registerHooks([
+    'beforeRouteEnter',
+    'beforeRouteLeave',
+    'beforeRouteUpdate',
+]);
+
 /** Common components */
 import BrandingPanel from './components/common/BrandingPanel.vue'
 import ClipboardCopyField from './components/common/ClipboardCopyField.vue'
