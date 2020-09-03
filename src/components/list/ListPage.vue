@@ -35,8 +35,8 @@ import { IPaging, IPageSizes } from "sitewhere-ide-common";
 @Component({
   components: {
     NavigationPage,
-    Pager
-  }
+    Pager,
+  },
 })
 export default class ListPage extends Vue {
   @Prop() readonly icon!: string;
@@ -75,5 +75,6 @@ export default class ListPage extends Vue {
 .list-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>

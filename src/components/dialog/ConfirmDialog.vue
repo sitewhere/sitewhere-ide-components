@@ -26,25 +26,27 @@ import Vue from "vue";
 import {
   VDialog,
   VCard,
+  VIcon,
   VToolbar,
   VToolbarTitle,
   VCardText,
   VCardActions,
   VSpacer,
-  VBtn
+  VBtn,
 } from "vuetify/lib";
 
 @Component({
   components: {
     VDialog,
     VCard,
+    VIcon,
     VToolbar,
     VToolbarTitle,
     VCardText,
     VCardActions,
     VSpacer,
-    VBtn
-  }
+    VBtn,
+  },
 })
 export default class ConfirmDialog extends Vue {
   @Prop() readonly title!: string;
