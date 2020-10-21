@@ -2,7 +2,7 @@
   <v-tooltip left>
     <template v-slot:activator="{ on }">
       <v-btn v-on="on" small icon @click="onAction">
-        <v-icon small color="#666" class="navbutton">{{icon}}</v-icon>
+        <v-icon small :light="light" class="navbutton">{{ icon }}</v-icon>
       </v-btn>
     </template>
     <span>{{ tooltip }}</span>
@@ -19,6 +19,7 @@ import { VTooltip, VBtn, VIcon } from "vuetify/lib";
 export default class NavigationActionButton extends Vue {
   @Prop() readonly icon!: string;
   @Prop() readonly tooltip!: string;
+  @Prop({ default: false }) readonly light!: boolean;
   @Prop({ default: false }) readonly material!: boolean;
 
   onAction() {

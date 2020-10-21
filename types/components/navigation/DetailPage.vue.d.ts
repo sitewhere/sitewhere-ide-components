@@ -5,6 +5,7 @@ export default class DetailPage extends Vue {
     readonly loadingMessage: string;
     readonly loaded: boolean;
     readonly record: {};
+    readonly noTabs: boolean;
     readonly tabsOnBottom: boolean;
     active: string | null;
 }

@@ -1,10 +1,20 @@
 <template>
-  <navigation-page :icon="icon" :title="title" :loadingMessage="loadingMessage" :loaded="loaded">
-    <template slot="header">
+  <navigation-page
+    :icon="icon"
+    :title="title"
+    :loadingMessage="loadingMessage"
+    :loaded="loaded"
+  >
+    <template v-slot:header>
       <slot name="header" />
     </template>
-    <template v-if="record" slot="content">
-      <div v-if="tabsOnBottom" class="flex-rows">
+    <template v-if="record" v-slot:content>
+      <div v-if="noTabs" class="flex-rows">
+        <div class="tab-items-row">
+          <slot />
+        </div>
+      </div>
+      <div v-else-if="tabsOnBottom" class="flex-rows">
         <v-tabs-items class="tab-items-row" v-model="active">
           <slot name="tab-items" />
         </v-tabs-items>
@@ -21,10 +31,10 @@
         </v-tabs-items>
       </div>
     </template>
-    <template slot="actions">
+    <template v-slot:actions>
       <slot name="actions" />
     </template>
-    <template slot="dialogs">
+    <template v-slot:dialogs>
       <slot name="dialogs" />
     </template>
   </navigation-page>
@@ -42,8 +52,8 @@ import { VTabsItems, VTabs } from "vuetify/lib";
   components: {
     NavigationPage,
     VTabsItems,
-    VTabs
-  }
+    VTabs,
+  },
 })
 export default class DetailPage extends Vue {
   @Prop() readonly icon!: string;
@@ -51,6 +61,7 @@ export default class DetailPage extends Vue {
   @Prop() readonly loadingMessage!: string;
   @Prop() readonly loaded!: boolean;
   @Prop() readonly record!: {};
+  @Prop() readonly noTabs!: boolean;
   @Prop() readonly tabsOnBottom!: boolean;
 
   active: string | null = null;
