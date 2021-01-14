@@ -6549,10 +6549,10 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-sitewhere-ide-common@3.0.0-beta.12:
-  version "3.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/sitewhere-ide-common/-/sitewhere-ide-common-3.0.0-beta.12.tgz#16559d1645df4bf3f7ba2816f91298c39ea1070a"
-  integrity sha512-CKASJewBT95G7/XA6bDFnPhLJihKcfOaDvjY9nCKtNqhMjJENE+Tu4b8+ARHq0DUCpPL8oj/U/VSrrJU0+RwvA==
+sitewhere-ide-common@3.0.0-beta.13:
+  version "3.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/sitewhere-ide-common/-/sitewhere-ide-common-3.0.0-beta.13.tgz#370c48c27fa150a9cf6b8b0cde46d883dcf2bbb1"
+  integrity sha512-+1bOQ66pCxo/bzk2CMEQZlNV1sJ+dzcZ73scQMfaAwX+babapZuAs3MdRc3512DWs7e74d2+C5GIEL9oMdITeg==
   dependencies:
     axios "^0.19.2"
     moment "^2.25.1"

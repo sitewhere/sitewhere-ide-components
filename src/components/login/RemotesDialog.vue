@@ -11,11 +11,11 @@
     @cancelClicked="onCancelClicked"
   >
     <v-card flat class="ma-2">
-      <remote-connections-list :remotes="remotes" />
+      <remote-instances-list :remotes="remotes" />
     </v-card>
     <v-divider />
     <v-card flat class="ml-2 mr-2 mb-0 mt-4">
-      <remote-connection-details class="pa-1" @added="onConnectionAdded" />
+      <remote-instances-details class="pa-1" @added="onConnectionAdded" />
     </v-card>
   </base-dialog>
 </template>
@@ -27,27 +27,27 @@ import { DialogComponent } from "../core/DialogComponent";
 import { DialogSection } from "../core/DialogSection";
 
 import BaseDialog from "../dialog/BaseDialog.vue";
-import RemoteConnectionsList from "./RemoteConnectionsList.vue";
-import RemoteConnectionDetails from "./RemoteConnectionDetails.vue";
+import RemoteInstancesList from "./RemoteInstancesList.vue";
+import RemoteInstanceDetails from "./RemoteInstanceDetails.vue";
 
 import { VCard, VDivider } from "vuetify/lib";
 
-import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
+import { IRemoteInstances, IRemoteInstance } from "sitewhere-ide-common";
 
 @Component({
   components: {
     BaseDialog,
-    RemoteConnectionsList,
-    RemoteConnectionDetails,
+    RemoteInstancesList,
+    RemoteInstanceDetails,
     VCard,
-    VDivider
-  }
+    VDivider,
+  },
 })
-export default class RemotesDialog extends DialogComponent<IRemotes> {
+export default class RemotesDialog extends DialogComponent<IRemoteInstances> {
   @Ref() readonly dialog!: ITabbedComponent;
   @Ref() readonly connections!: DialogSection;
 
-  remotes: IRemotes | null = null;
+  remotes: IRemoteInstances | null = null;
 
   /** Get icon for dialog */
   get icon(): NavigationIcon {
@@ -62,7 +62,7 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
   }
 
   // Load dialog from a given payload.
-  load(payload: IRemotes) {
+  load(payload: IRemoteInstances) {
     this.remotes = JSON.parse(JSON.stringify(payload));
     this.reset();
     if (this.connections) {
@@ -70,10 +70,10 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
     }
   }
 
-  // Called when a new connection is added.
-  onConnectionAdded(added: IRemoteConnection) {
+  // Called when a new instance is added.
+  onConnectionAdded(added: IRemoteInstance) {
     if (this.remotes) {
-      this.remotes.connections.push(added);
+      this.remotes.instances.push(added);
     }
   }
 
