@@ -1,59 +1,45 @@
 <template>
-  <v-menu offset-y lazy>
-    <span slot="activator">
-      <v-container fluid class="pa-0">
-        <v-layout row wrap>
-          <v-flex xs12>
-            <v-text-field label="Icon" placeholder=" " v-model="icon" prepend-icon="image"/>
-          </v-flex>
-        </v-layout>
+  <v-menu offset-y>
+    <template v-slot:activator="{ on }">
+      <v-container v-on="on" fluid class="pa-0">
+        <v-row>
+          <v-col cols="12">
+            <v-text-field
+              class="mr-2 text-field-input"
+              v-model="icon"
+              label="Icon"
+              placeholder=" "
+              prepend-icon="image"
+            />
+          </v-col>
+        </v-row>
       </v-container>
-    </span>
+    </template>
     <v-card>
       <v-container :style="ddStyle" fluid grid-list-sm>
-        <v-layout row wrap>
-          <v-flex class="faicon" xs1 v-for="(icon) in iconsSolid" :key="icon">
-            <v-tooltip left>
-              <font-awesome-icon
-                class="faicon text--grey"
-                :icon="icon"
-                size="lg"
-                @click="onIconSelected(icon)"
-                slot="activator"
-              />
-              <span>{{ icon }}</span>
-            </v-tooltip>
-          </v-flex>
-        </v-layout>
+        <v-row>
+          <v-col v-for="(icon) in iconsSolid" :key="icon" class="faicon" cols="1">
+            <v-icon @click="onIconSelected(icon)" color="#666">fa-{{ icon }}</v-icon>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card>
   </v-menu>
 </template>
 
 <script>
-export default {
-  computed: {
-    // Compute style of logo.
-    ddStyle: function() {
-      return {
-        width: "500px",
-        "max-height": "400px",
-        "overflow-y": "scroll"
-      };
-    },
-    icon: function() {
-      return this.value;
-    }
-  },
+import { VMenu, VContainer, VRow, VCol, VTextField, VIcon } from "vuetify/lib";
 
+export default {
   props: ["value"],
 
-  methods: {
-    // Called when icon is selected.
-    onIconSelected: function(e) {
-      this.$data.selectedIcon = e;
-      this.$emit("input", e);
-    }
+  components: {
+    VMenu,
+    VContainer,
+    VRow,
+    VCol,
+    VTextField,
+    VIcon
   },
 
   data: () => ({
@@ -1202,13 +1188,34 @@ export default {
       "youtube-square",
       "zhihu"
     ]
-  })
+  }),
+  computed: {
+    // Compute style of logo.
+    ddStyle: function() {
+      return {
+        width: "500px",
+        "max-height": "400px",
+        "overflow-y": "scroll"
+      };
+    },
+    icon: function() {
+      return this.value;
+    }
+  },
+
+  methods: {
+    // Called when icon is selected.
+    onIconSelected: function(e) {
+      this.$data.selectedIcon = "fa-" + e;
+      this.$emit("input", e);
+    }
+  }
 };
 </script>
 
 <style scoped>
-.faicon {
-  min-height: 30px;
-  text-align: center;
+.text-field-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
 }
 </style>

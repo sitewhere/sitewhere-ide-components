@@ -1,18 +1,31 @@
 <template>
-  <v-container fluid class="pa-0 mb-3">
-    <v-layout row wrap>
-      <v-flex xs6>
+  <v-container class="ma-0 pl-0" fluid>
+    <v-layout wrap>
+      <v-flex xs8>
         <v-text-field
-          :label="text"
+          :label="label"
+          :title="title"
+          :readonly="true"
+          class="text-field-input"
           placeholder=" "
           v-model="updatedColor"
           prepend-icon="color_lens"
-        ></v-text-field>
+        />
       </v-flex>
-      <v-flex xs6>
+      <v-flex xs4>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
-          <v-btn :style="{ 'background-color' : valueOrDefault }" slot="activator"></v-btn>
-          <chrome :value="valueOrDefault" @input="onColorChosen"/>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              class="mt-3 ml-3"
+              v-on="on"
+              :style="{ 'background-color': valueOrDefault }"
+            />
+          </template>
+          <v-color-picker
+            :value="valueOrDefault"
+            @input="onColorChosen"
+            :mode="mode || 'hexa'"
+          />
         </v-menu>
       </v-flex>
     </v-layout>
@@ -20,25 +33,44 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
-import { Chrome } from "vue-color";
+import {
+  VContainer,
+  VLayout,
+  VFlex,
+  VTextField,
+  VMenu,
+  VBtn,
+  VColorPicker,
+} from "vuetify/lib";
 
 @Component({
   components: {
-    Chrome
-  }
+    VColorPicker,
+    VContainer,
+    VFlex,
+    VLayout,
+    VTextField,
+    VMenu,
+    VBtn,
+  },
 })
 export default class ColorInputField extends Vue {
   @Prop() readonly value!: string;
-  @Prop() readonly text!: string;
+  @Prop() readonly label!: string;
+  @Prop() readonly title!: string;
+  @Prop() readonly mode!: string;
 
   menu: string | null = null;
   updatedColor: string | null = null;
 
   @Watch("value")
-  onValueChanged(val: string, oldVal: string) {
+  onValueChanged(val: string) {
+    if (val && !val.startsWith("#")) {
+      val = "#" + val;
+    }
     this.updatedColor = val;
   }
 
@@ -47,13 +79,16 @@ export default class ColorInputField extends Vue {
   }
 
   /** Called when color is chosen */
-  onColorChosen(val: any) {
-    this.updatedColor = val.hex;
-    this.$emit("input", val.hex);
-    this.$emit("opacityChanged", val.a);
+  onColorChosen(val: string) {
+    this.updatedColor = val;
+    this.$emit("input", val);
   }
 }
 </script>
 
 <style scoped>
+.text-field-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
+}
 </style>

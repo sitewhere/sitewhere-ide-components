@@ -1,5 +1,5 @@
 <template>
-  <sw-base-dialog
+  <base-dialog
     ref="dialog"
     :icon="icon"
     title="Edit Remote Connection Settings"
@@ -11,44 +11,43 @@
     @cancelClicked="onCancelClicked"
   >
     <v-card flat class="ma-2">
-      <remote-connections-list :remotes="remotes" />
+      <remote-instances-list :remotes="remotes" />
     </v-card>
     <v-divider />
     <v-card flat class="ml-2 mr-2 mb-0 mt-4">
-      <remote-connection-details class="pa-1" @added="onConnectionAdded" />
+      <remote-instances-details class="pa-1" @added="onConnectionAdded" />
     </v-card>
-  </sw-base-dialog>
+  </base-dialog>
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  DialogComponent,
-  DialogSection,
-  ITabbedComponent,
-  Refs
-} from "sitewhere-ide-common";
-import { NavigationIcon } from "../libraries/constants";
+import { Component, Ref } from "vue-property-decorator";
+import { ITabbedComponent, NavigationIcon } from "sitewhere-ide-common";
+import { DialogComponent } from "../core/DialogComponent";
+import { DialogSection } from "../core/DialogSection";
 
-import RemoteConnectionsList from "./RemoteConnectionsList.vue";
-import RemoteConnectionDetails from "./RemoteConnectionDetails.vue";
+import BaseDialog from "../dialog/BaseDialog.vue";
+import RemoteInstancesList from "./RemoteInstancesList.vue";
+import RemoteInstanceDetails from "./RemoteInstanceDetails.vue";
 
-import { IRemotes, IRemoteConnection } from "sitewhere-ide-common";
+import { VCard, VDivider } from "vuetify/lib";
+
+import { IRemoteInstances, IRemoteInstance } from "sitewhere-ide-common";
 
 @Component({
   components: {
-    RemoteConnectionsList,
-    RemoteConnectionDetails
-  }
+    BaseDialog,
+    RemoteInstancesList,
+    RemoteInstanceDetails,
+    VCard,
+    VDivider,
+  },
 })
-export default class RemotesDialog extends DialogComponent<IRemotes> {
-  remotes: IRemotes | null = null;
+export default class RemotesDialog extends DialogComponent<IRemoteInstances> {
+  @Ref() readonly dialog!: ITabbedComponent;
+  @Ref() readonly connections!: DialogSection;
 
-  // References.
-  $refs!: Refs<{
-    dialog: ITabbedComponent;
-    connections: DialogSection;
-  }>;
+  remotes: IRemoteInstances | null = null;
 
   /** Get icon for dialog */
   get icon(): NavigationIcon {
@@ -57,29 +56,29 @@ export default class RemotesDialog extends DialogComponent<IRemotes> {
 
   // Reset dialog contents.
   reset() {
-    if (this.$refs.details) {
-      this.$refs.connections.reset();
+    if (this.connections) {
+      this.connections.reset();
     }
   }
 
   // Load dialog from a given payload.
-  load(payload: IRemotes) {
+  load(payload: IRemoteInstances) {
     this.remotes = JSON.parse(JSON.stringify(payload));
     this.reset();
-    if (this.$refs.connections) {
-      this.$refs.connections.load(payload);
+    if (this.connections) {
+      this.connections.load(payload);
     }
   }
 
-  // Called when a new connection is added.
-  onConnectionAdded(added: IRemoteConnection) {
+  // Called when a new instance is added.
+  onConnectionAdded(added: IRemoteInstance) {
     if (this.remotes) {
-      this.remotes.connections.push(added);
+      this.remotes.instances.push(added);
     }
   }
 
   // Called after create button is clicked.
-  onCreateClicked(e: any) {
+  onCreateClicked() {
     this.$emit("save", this.remotes);
   }
 }

@@ -1,3 +1,2 @@
 # SiteWhere IDE Components
-
-Common Vue.js components used in building SiteWhere IDEs
+Provides common IDE infrastructure components used in SiteWhere IDE applications.

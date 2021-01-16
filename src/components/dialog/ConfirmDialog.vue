@@ -1,9 +1,10 @@
 <template>
-  <v-dialog v-model="visible" persistent :width="width">
+  <v-dialog v-model="visible" persistent eager :width="width">
     <v-card>
-      <v-toolbar dense flat card dark color="primary">
-        <v-toolbar-title>{{title}}</v-toolbar-title>
-      </v-toolbar>
+      <v-card flat tile class="pa-2 white--text" color="primary">
+        <v-icon class="mr-2 mb-1" style="font-size: 20px;" dark>fa-question-circle</v-icon>
+        <span style="font-size: 18px;">{{ title }}</span>
+      </v-card>
       <v-card-text>
         <slot>
           <div>Your content goes here!</div>
@@ -11,7 +12,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">Cancel</v-btn>
+        <v-btn outlined color="primary" @click="onCancelClicked">Cancel</v-btn>
         <v-btn color="primary" @click="onActionConfirmed">{{ buttonText || 'Ok' }}</v-btn>
       </v-card-actions>
     </v-card>
@@ -19,16 +20,41 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
 
-@Component({})
+import {
+  VDialog,
+  VCard,
+  VIcon,
+  VToolbar,
+  VToolbarTitle,
+  VCardText,
+  VCardActions,
+  VSpacer,
+  VBtn,
+} from "vuetify/lib";
+
+@Component({
+  components: {
+    VDialog,
+    VCard,
+    VIcon,
+    VToolbar,
+    VToolbarTitle,
+    VCardText,
+    VCardActions,
+    VSpacer,
+    VBtn,
+  },
+})
 export default class ConfirmDialog extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly width!: number;
   @Prop() readonly buttonText!: string;
 
-  visible: boolean = false;
+  visible = false;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   error: any = null;
 
   /** Called to open the dialog */
@@ -43,7 +69,7 @@ export default class ConfirmDialog extends Vue {
   }
 
   /** Called after cancel button is clicked */
-  onCancelClicked(e: any) {
+  onCancelClicked() {
     this.$emit("cancelled");
     this.visible = false;
   }

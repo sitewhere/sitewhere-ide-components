@@ -20,13 +20,17 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import LoadingOverlay from "../common/LoadingOverlay.vue";
 
+import { VTabItem, VCard } from "vuetify/lib";
+
 @Component({
   components: {
-    LoadingOverlay
+    LoadingOverlay,
+    VTabItem,
+    VCard
   }
 })
 export default class ContentTab extends Vue {
@@ -47,7 +51,7 @@ export default class ContentTab extends Vue {
 }
 .tab-content {
   flex: 1;
-  background-color: #eee;
+  background-color: #fff;
   overflow-y: auto;
 }
 .tab-footer {

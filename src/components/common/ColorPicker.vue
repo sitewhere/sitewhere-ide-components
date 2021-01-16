@@ -9,14 +9,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch } from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 
 import { Sketch as Picker } from "vue-color";
 
+import { VMenu, VBtn } from "vuetify/lib";
+
 @Component({
   components: {
-    Picker
+    Picker,
+    VMenu,
+    VBtn
   }
 })
 export default class ColorPicker extends Vue {
@@ -24,7 +28,7 @@ export default class ColorPicker extends Vue {
   @Prop({ default: 1 }) readonly opacity!: string;
   @Prop() readonly text!: string;
 
-  menu: boolean = false;
+  menu = false;
   currentColor: string | null = null;
   currentOpacity: number | null = null;
 
@@ -47,6 +51,7 @@ export default class ColorPicker extends Vue {
   }
 
   /** Called when a color is chosen */
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onColorChosen(val: any) {
     this.currentColor = val.hex;
     this.$emit("input", val.hex);

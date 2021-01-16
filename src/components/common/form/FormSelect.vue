@@ -1,6 +1,7 @@
 <template>
   <div class="mb-3">
     <v-select
+      class="text-field-input"
       :required="required"
       :title="title"
       :label="label"
@@ -11,20 +12,24 @@
       :item-value="itemValue"
       :chips="chips"
       :prepend-icon="icon"
+      :menu-props="{ closeOnContentClick: true }"
+      :hide-details="true"
       placeholder=" "
       @change="onSelectionChanged"
     />
     <div class="verror">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VSelect } from "vuetify/lib";
+
+@Component({ components: { VSelect } })
 export default class FormSelect extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;
@@ -45,6 +50,7 @@ export default class FormSelect extends Vue {
     this.$emit("input", updated);
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onSelectionChanged(selection: any) {
     this.$emit("change", selection);
   }
@@ -52,4 +58,8 @@ export default class FormSelect extends Vue {
 </script>
 
 <style scoped>
+.text-field-input >>> i.v-icon {
+  font-size: 16px;
+  color: #999;
+}
 </style>

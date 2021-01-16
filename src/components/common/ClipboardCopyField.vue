@@ -2,48 +2,54 @@
   <span>
     {{ field }}
     <v-tooltip right>
-      <span
-        slot="activator"
-        v-clipboard="field"
-        :key="field"
-        @success="onFieldCopied"
-        @error="onFieldCopyFailed"
-      >
-        <font-awesome-icon
-          class="grey--text text--lighten-1 mt-1"
-          icon="copy"
-          size="sm"
-          style="vertical-align: top;"
-        />
-      </span>
+      <template v-slot:activator="{ on }">
+        <span
+          v-on="on"
+          v-clipboard="field"
+          :key="field"
+          @success="onFieldCopied"
+          @error="onFieldCopyFailed"
+        >
+          <v-icon small class="copy-field">fa-copy</v-icon>
+        </span>
+      </template>
       <span>Copy to Clipboard</span>
     </v-tooltip>
-    <v-snackbar :timeout="2000" success v-model="showFieldCopied">
-      {{ message }}
-      <v-btn dark flat @click="showFieldCopied = false">Close</v-btn>
-    </v-snackbar>
   </span>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    showFieldCopied: false
-  }),
+<script lang="ts">
+import { Component, Prop } from "vue-property-decorator";
+import { showMessage, showError } from "sitewhere-ide-common";
+import Vue from "vue";
 
-  props: ["field", "message"],
+import { VIcon, VTooltip } from "vuetify/lib";
 
-  methods: {
-    // Called after id is copied.
-    onFieldCopied: function(e) {
-      this.$data.showFieldCopied = true;
-    },
+@Component({ components: { VIcon, VTooltip } })
+export default class ClipboardCopyField extends Vue {
+  @Prop() readonly field!: string;
+  @Prop() readonly message!: string;
 
-    // Called if unable to copy id.
-    onFieldCopyFailed: function(e) {}
+  /** Called after successful copy */
+  onFieldCopied() {
+    showMessage(this, this.message);
   }
-};
+
+  /** Called after failed copy */
+  onFieldCopyFailed() {
+    showError(this, new Error("Unable to copy content to clipboard."));
+  }
+}
 </script>
 
 <style scoped>
+.copy-field {
+  color: #eee;
+  font-size: 12px !important;
+  margin-left: 4px;
+  margin-bottom: 3px;
+}
+.copy-field:hover {
+  color: #ccc;
+}
 </style>

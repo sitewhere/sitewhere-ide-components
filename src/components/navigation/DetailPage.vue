@@ -1,37 +1,59 @@
 <template>
-  <navigation-page :icon="icon" :title="title" :loadingMessage="loadingMessage" :loaded="loaded">
-    <template slot="header">
-      <slot name="header"/>
+  <navigation-page
+    :icon="icon"
+    :title="title"
+    :loadingMessage="loadingMessage"
+    :loaded="loaded"
+  >
+    <template v-slot:header>
+      <slot name="header" />
     </template>
-    <template v-if="record" slot="content">
-      <div class="flex-rows">
+    <template v-if="record" v-slot:content>
+      <div v-if="noTabs" class="flex-rows">
+        <div class="tab-items-row">
+          <slot />
+        </div>
+      </div>
+      <div v-else-if="tabsOnBottom" class="flex-rows">
+        <v-tabs-items class="tab-items-row" v-model="active">
+          <slot name="tab-items" />
+        </v-tabs-items>
         <v-tabs class="tabs-row" v-model="active">
-          <slot name="tabs"/>
+          <slot name="tabs" />
+        </v-tabs>
+      </div>
+      <div v-else class="flex-rows">
+        <v-tabs class="tabs-row" v-model="active">
+          <slot name="tabs" />
         </v-tabs>
         <v-tabs-items class="tab-items-row" v-model="active">
-          <slot name="tab-items"/>
+          <slot name="tab-items" />
         </v-tabs-items>
       </div>
     </template>
-    <template slot="actions">
-      <slot name="actions"/>
+    <template v-slot:actions>
+      <slot name="actions" />
     </template>
-    <template slot="dialogs">
-      <slot name="dialogs"/>
+    <template v-slot:dialogs>
+      <slot name="dialogs" />
     </template>
   </navigation-page>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import NavigationPage from "../navigation/NavigationPage.vue";
 
+import { VTabsItems, VTabs } from "vuetify/lib";
+
 @Component({
   components: {
-    NavigationPage
-  }
+    NavigationPage,
+    VTabsItems,
+    VTabs,
+  },
 })
 export default class DetailPage extends Vue {
   @Prop() readonly icon!: string;
@@ -39,6 +61,8 @@ export default class DetailPage extends Vue {
   @Prop() readonly loadingMessage!: string;
   @Prop() readonly loaded!: boolean;
   @Prop() readonly record!: {};
+  @Prop() readonly noTabs!: boolean;
+  @Prop() readonly tabsOnBottom!: boolean;
 
   active: string | null = null;
 }

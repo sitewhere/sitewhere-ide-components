@@ -1,16 +1,18 @@
 <template>
-  <v-footer app>
+  <v-footer app class="pa-0" style="z-index: 10;">
     <div class="footer-content">
-      <slot/>
+      <slot />
     </div>
   </v-footer>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "sitewhere-ide-common";
+import { Component } from "vue-property-decorator";
 
-@Component({})
+import { VFooter } from "vuetify/lib";
+
+@Component({ components: { VFooter } })
 export default class InAppFooter extends Vue {}
 </script>
 

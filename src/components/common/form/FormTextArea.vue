@@ -4,22 +4,25 @@
       :required="required"
       :title="title"
       :label="label"
+      class="text-area-input"
       placeholder=" "
       v-model="wrapped"
       hide-details
       :prepend-icon="icon"
     />
     <div class="verror">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VTextarea } from "vuetify/lib";
+
+@Component({ components: { VTextarea } })
 export default class FormText extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;
@@ -38,4 +41,8 @@ export default class FormText extends Vue {
 </script>
 
 <style scoped>
+.text-area-input >>> i.v-icon {
+  font-size: 16px;
+  color: #ccc;
+}
 </style>

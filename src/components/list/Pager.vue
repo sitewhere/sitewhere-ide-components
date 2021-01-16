@@ -2,49 +2,49 @@
   <div class="pager">
     <slot v-if="results && results.numResults === 0" name="noresults"></slot>
     <v-container class="ma-0 pa-0">
-      <v-layout row wrap>
+      <v-layout wrap>
         <v-flex xs2>
-          <v-subheader class="ma-0 pt-0 pr-0">Rows per page</v-subheader>
+          <v-subheader>Rows per page</v-subheader>
         </v-flex>
         <v-flex xs3>
-          <v-btn-toggle v-model="pageSize" class="mt-1">
+          <v-btn-toggle dense v-model="pageSize" class="mt-2">
             <v-btn
-              flat
+              small
               :value="entry.value"
               v-for="entry in pageSizesWithDefaults"
               :key="entry.value"
             >{{ entry.text }}</v-btn>
           </v-btn-toggle>
         </v-flex>
-        <v-flex xs4>
+        <v-flex xs4 class="pa-2">
           <pager-button
             :disabled="!previousEnabled"
             @click="onFirstPage"
-            icon="fast-backward"
+            icon="fa-fast-backward"
             text="First Page"
           />
           <pager-button
             :disabled="!previousEnabled"
             @click="onPreviousPage"
-            icon="backward"
+            icon="fa-backward"
             text="Previous Page"
           />
-          <pager-button @click="onRefresh" icon="sync" text="Refresh" />
+          <pager-button @click="onRefresh" icon="fa-sync" text="Refresh" />
           <pager-button
             :disabled="!nextEnabled"
             @click="onNextPage"
-            icon="forward"
+            icon="fa-forward"
             text="Next Page"
           />
           <pager-button
             :disabled="!nextEnabled"
             @click="onLastPage"
-            icon="fast-forward"
+            icon="fa-fast-forward"
             text="Last Page"
           />
         </v-flex>
         <v-flex xs3>
-          <v-subheader class="ma-0 pt-0 right">{{ description }}</v-subheader>
+          <v-subheader class="ma-0 pt-0 float-right">{{ description }}</v-subheader>
         </v-flex>
       </v-layout>
     </v-container>
@@ -56,24 +56,34 @@ import Vue from "vue";
 
 import PagerButton from "./PagerButton.vue";
 
+import { Component, Prop, Watch } from "vue-property-decorator";
+import { IPaging, IPageSizes } from "sitewhere-ide-common";
+
 import {
-  Component,
-  Prop,
-  Watch,
-  IPaging,
-  IPageSizes
-} from "sitewhere-ide-common";
+  VContainer,
+  VLayout,
+  VFlex,
+  VSubheader,
+  VBtnToggle,
+  VBtn
+} from "vuetify/lib";
 
 @Component({
   components: {
-    PagerButton
+    PagerButton,
+    VContainer,
+    VLayout,
+    VFlex,
+    VSubheader,
+    VBtnToggle,
+    VBtn
   }
 })
 export default class Pager extends Vue {
   @Prop() readonly results!: { numResults: number; results: {}[] };
   @Prop() readonly pageSizes!: IPageSizes;
 
-  page: number = 1;
+  page = 1;
   pageSize: number | null = null;
   defaultResults: { numResults: number; results: {}[] } = {
     numResults: 0,
@@ -101,39 +111,39 @@ export default class Pager extends Vue {
     this.onPagingUpdated();
   }
 
-  // Refresh results on page size updated.
-  @Watch("pageSize") onPageSizeUpdated(val: number, oldVal: number) {
+  /** Refresh results on page size updated */
+  @Watch("pageSize") onPageSizeUpdated() {
     this.page = 1;
     this.onPagingUpdated();
   }
 
-  // Results with defaults fallback.
+  /** Results with defaults fallback */
   get resultsWithDefaults(): { numResults: number; results: {}[] } {
     return this.results || this.defaultResults;
   }
 
-  // Total record count.
+  /** Total record count */
   get total(): number {
     return this.resultsWithDefaults.numResults;
   }
 
-  // Description.
+  /** Description */
   get description(): string {
-    let size = this.pageSize || 0;
-    let total = this.total;
-    let page = this.page;
-    var first = size * (page - 1) + 1;
-    var last = Math.min(total, first + size - 1);
+    const size = this.pageSize || 0;
+    const total = this.total;
+    const page = this.page;
+    const first = size * (page - 1) + 1;
+    const last = Math.min(total, first + size - 1);
     return "" + first + "-" + last + " of " + total;
   }
 
-  // Calculate number of pages.
+  /** Calculate number of pages */
   get pageCount() {
-    var results = this.resultsWithDefaults;
-    var total = results.numResults;
-    var size = this.pageSize || 0;
-    var mod = total % size;
-    var count = (total / size) | 0;
+    const results = this.resultsWithDefaults;
+    const total = results.numResults;
+    const size = this.pageSize || 0;
+    const mod = total % size;
+    let count = (total / size) | 0;
     count += mod > 0 ? 1 : 0;
     return count;
   }
@@ -143,17 +153,17 @@ export default class Pager extends Vue {
     return this.pageSizes || this.defaultPageSizes;
   }
 
-  // Indicates if 'first' button should be enabled.
+  /** Indicates if 'previous' button should be enabled */
   get previousEnabled(): boolean {
     return this.page > 1;
   }
 
-  // Indicates if 'first' button should be enabled.
+  /** Indicates if 'next' button should be enabled */
   get nextEnabled(): boolean {
     return this.page < this.pageCount;
   }
 
-  // Called to move to first page.
+  /** Called to move to first page */
   onFirstPage() {
     if (this.page !== 1) {
       this.page = 1;
@@ -161,7 +171,7 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called to move to previous page.
+  /** Called to move to previous page */
   onPreviousPage() {
     if (this.page > 1) {
       this.page--;
@@ -169,12 +179,12 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called to refresh data.
+  /** Called to refresh data */
   onRefresh() {
     this.onPagingUpdated();
   }
 
-  // Called to move to next page.
+  /** Called to move to next page */
   onNextPage() {
     if (this.page < this.pageCount) {
       this.page++;
@@ -182,7 +192,7 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called to move to last page.
+  /** Called to move to last page */
   onLastPage() {
     if (this.page < this.pageCount) {
       this.page = this.pageCount;
@@ -190,9 +200,9 @@ export default class Pager extends Vue {
     }
   }
 
-  // Called when paging values are updated.
+  /** Called when paging values are updated */
   onPagingUpdated() {
-    var paging: IPaging = {
+    const paging: IPaging = {
       pageNumber: this.page,
       pageSize: this.pageSize || 0
     };
@@ -205,6 +215,6 @@ export default class Pager extends Vue {
 .pager {
   color: #333;
   background-color: #eee;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ddd;
 }
 </style>

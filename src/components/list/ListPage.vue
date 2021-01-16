@@ -29,13 +29,14 @@ import Vue from "vue";
 import NavigationPage from "../navigation/NavigationPage.vue";
 import Pager from "../list/Pager.vue";
 
-import { Component, Prop, IPaging, IPageSizes } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
+import { IPaging, IPageSizes } from "sitewhere-ide-common";
 
 @Component({
   components: {
     NavigationPage,
-    Pager
-  }
+    Pager,
+  },
 })
 export default class ListPage extends Vue {
   @Prop() readonly icon!: string;
@@ -73,7 +74,7 @@ export default class ListPage extends Vue {
 }
 .list-content {
   flex: 1;
-  background-color: #eee;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>

@@ -10,9 +10,17 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VToolbar, VToolbarTitle, VSpacer } from "vuetify/lib";
+
+@Component({
+  components: {
+    VToolbar,
+    VToolbarTitle,
+    VSpacer
+  }
+})
 export default class CondensedToolbar extends Vue {
   @Prop() readonly title!: string;
 }

@@ -2,24 +2,27 @@
   <navigation-header-left>
     <image-zoom-on-hover v-if="imageUrl" :imageUrl="imageUrl" />
     <span v-else-if="icon" class="header-icon">
-      <font-awesome-icon class="grey--text" :icon="icon" size="7x" />
+      <v-icon style="font-size: 70px;" class="grey--text pl-2 pb-2 pt-0">fa-{{icon}}</v-icon>
     </span>
   </navigation-header-left>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
 import NavigationHeaderLeft from "./NavigationHeaderLeft.vue";
 import ImageZoomOnHover from "../common/ImageZoomOnHover.vue";
+
+import { VIcon } from "vuetify/lib";
 
 import { IBrandedEntity } from "sitewhere-rest-api";
 
 @Component({
   components: {
     NavigationHeaderLeft,
-    ImageZoomOnHover
+    ImageZoomOnHover,
+    VIcon
   }
 })
 export default class HeaderBrandingPanel extends Vue {

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap>
-      <slot/>
+    <v-layout wrap>
+      <slot />
     </v-layout>
   </v-container>
 </template>
@@ -10,11 +10,10 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
+import { VContainer, VLayout } from "vuetify/lib";
+
 @Component({
-  components: {}
+  components: { VContainer, VLayout }
 })
 export default class DataEntryPanel extends Vue {}
 </script>
-
-<style scoped>
-</style>

@@ -1,6 +1,7 @@
 <template>
   <v-tooltip left>
     <v-btn
+      slot="activator"
       fab
       fixed
       bottom
@@ -9,19 +10,25 @@
       color="red darken-2"
       class="elevation-5"
       @click.stop="onButtonClicked"
-      slot="activator"
     >
-      <font-awesome-icon :icon="icon" size="lg"/>
+      <font-awesome-icon :icon="icon" size="lg" />
     </v-btn>
     <span>{{ label }}</span>
   </v-tooltip>
 </template>
 
 <script>
-export default {
-  data: () => ({}),
+import { VTooltip, VBtn } from "vuetify/lib";
 
+export default {
   props: ["label", "icon"],
+
+  components: {
+    VTooltip,
+    VBtn
+  },
+
+  data: () => ({}),
 
   methods: {
     // Called when button is clicked.
@@ -31,6 +38,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-</style>

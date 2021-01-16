@@ -1,19 +1,26 @@
 <template>
-  <v-layout row wrap class="mb-1">
-    <v-flex xs4 class="text-xs-right subheading pr-4">
+  <v-row color="grey">
+    <v-col cols="4" class="text-right body-2 pt-1 pb-1 pr-4">
       <strong>{{ label }}</strong>:
-    </v-flex>
-    <v-flex class="field" xs8>
-      <slot></slot>
-    </v-flex>
-  </v-layout>
+    </v-col>
+    <v-col class="field body-2 pt-1 pb-1" cols="8">
+      <slot />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-export default {
-  data: () => ({}),
+import { VRow, VCol } from "vuetify/lib";
 
+export default {
   props: ["label"],
+
+  components: {
+    VRow,
+    VCol
+  },
+
+  data: () => ({}),
 
   methods: {}
 };

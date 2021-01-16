@@ -13,27 +13,24 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {
-  Component,
-  Prop,
-  Watch,
-  IRemotes,
-  IRemoteConnection
-} from "sitewhere-ide-common";
+import { Component, Prop, Watch } from "vue-property-decorator";
+import { IRemoteInstances, IRemoteInstance } from "sitewhere-ide-common";
 
-@Component
+import { VSelect, VIcon } from "vuetify/lib";
+
+@Component({ components: { VSelect, VIcon } })
 export default class RemotesDropdown extends Vue {
-  @Prop() readonly remotes!: IRemotes;
+  @Prop() readonly remotes!: IRemoteInstances;
 
-  selected: IRemoteConnection | null = null;
+  selected: IRemoteInstance | null = null;
 
-  get connections(): IRemoteConnection[] {
-    return this.remotes ? this.remotes.connections : [];
+  get connections(): IRemoteInstance[] {
+    return this.remotes ? this.remotes.instances : [];
   }
 
   @Watch("connections", { immediate: true })
-  onConnectionsUpdated(updated: IRemoteConnection[]) {
-    updated.forEach(connection => {
+  onConnectionsUpdated(updated: IRemoteInstance[]) {
+    updated.forEach((connection) => {
       if (this.remotes && this.remotes.default) {
         if (this.remotes.default === connection.id) {
           this.selected = connection;
@@ -43,12 +40,12 @@ export default class RemotesDropdown extends Vue {
   }
 
   @Watch("selected", { immediate: true })
-  onSelectionChanged(updated: IRemoteConnection) {
+  onSelectionChanged(updated: IRemoteInstance) {
     this.$emit("selected", updated);
   }
 
-  getNameAndUrl(connection: IRemoteConnection): string {
-    return `${connection.name} (${connection.protocol}://${connection.host}:${connection.port})`;
+  getNameAndUrl(connection: IRemoteInstance): string {
+    return `${connection.name} (${connection.baseUrl})`;
   }
 }
 </script>

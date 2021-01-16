@@ -1,9 +1,10 @@
 <template>
-  <v-dialog v-model="visible" persistent :width="width">
+  <v-dialog v-model="visible" persistent eager :width="width">
     <v-card>
-      <v-toolbar dense flat card dark color="primary">
-        <v-toolbar-title>{{title}}</v-toolbar-title>
-      </v-toolbar>
+      <v-card flat tile class="pa-2 white--text" color="primary">
+        <v-icon class="mr-2 mb-1" style="font-size: 20px;" dark>delete</v-icon>
+        <span style="font-size: 18px;">{{ title }}</span>
+      </v-card>
       <v-alert
         class="ma-0"
         error
@@ -19,7 +20,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="primary" @click="onCancelClicked">Cancel</v-btn>
+        <v-btn outlined color="primary" @click="onCancelClicked">Cancel</v-btn>
         <v-btn color="primary" @click="onDeleteClicked">Delete</v-btn>
       </v-card-actions>
     </v-card>
@@ -27,14 +28,33 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
 
 import ErrorBanner from "../common/ErrorBanner.vue";
 
+import {
+  VDialog,
+  VCard,
+  VAlert,
+  VCardText,
+  VCardActions,
+  VSpacer,
+  VBtn,
+  VIcon
+} from "vuetify/lib";
+
 @Component({
   components: {
-    ErrorBanner
+    ErrorBanner,
+    VDialog,
+    VCard,
+    VAlert,
+    VCardText,
+    VCardActions,
+    VSpacer,
+    VBtn,
+    VIcon
   }
 })
 export default class DeleteDialog extends Vue {
@@ -43,17 +63,14 @@ export default class DeleteDialog extends Vue {
   @Prop() readonly error!: string;
   @Prop({ default: false }) readonly visible!: boolean;
 
-  // Called after create button is clicked.
-  onDeleteClicked(e: any) {
+  /** Called after create button is clicked */
+  onDeleteClicked() {
     this.$emit("delete");
   }
 
-  // Called after cancel button is clicked.
-  onCancelClicked(e: any) {
+  /** Called after cancel button is clicked */
+  onCancelClicked() {
     this.$emit("cancel");
   }
 }
 </script>
-
-<style scoped>
-</style>

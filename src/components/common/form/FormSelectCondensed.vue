@@ -18,9 +18,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "sitewhere-ide-common";
+import { Component, Prop } from "vue-property-decorator";
 
-@Component({})
+import { VSelect } from "vuetify/lib";
+
+@Component({ components: { VSelect } })
 export default class FormSelect extends Vue {
   @Prop() readonly title!: string;
   @Prop() readonly label!: string;
@@ -41,11 +43,9 @@ export default class FormSelect extends Vue {
     this.$emit("input", updated);
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onSelectionChanged(selection: any) {
     this.$emit("change", selection);
   }
 }
 </script>
-
-<style scoped>
-</style>
