@@ -1,21 +1,28 @@
 <template>
   <dialog-form>
     <v-flex xs12>
-      <form-text title="URL that points to image" label="Image URL" v-model="imageUrl" icon="image">
-        <span v-if="!$v.imageUrl.url && $v.$dirty">Image URL is not valid.</span>
+      <form-text
+        title="URL that points to image"
+        label="Image URL"
+        v-model="imageUrl"
+        icon="image"
+      >
+        <span v-if="!$v.imageUrl.url && $v.$dirty"
+          >Image URL is not valid.</span
+        >
       </form-text>
     </v-flex>
     <v-flex xs6>
       <icon-selector v-model="icon" />
     </v-flex>
     <v-flex xs6>
-      <color-input-field text="Border" v-model="borderColor" />
+      <color-input-field label="Border" v-model="borderColor" />
     </v-flex>
     <v-flex xs6>
-      <color-input-field text="Background" v-model="backgroundColor" />
+      <color-input-field label="Background" v-model="backgroundColor" />
     </v-flex>
     <v-flex xs6>
-      <color-input-field text="Foreground" v-model="foregroundColor" />
+      <color-input-field label="Foreground" v-model="foregroundColor" />
     </v-flex>
   </dialog-form>
 </template>
@@ -41,11 +48,11 @@ import { url } from "vuelidate/lib/validators";
     FormText,
     IconSelector,
     ColorInputField,
-    VFlex
+    VFlex,
   },
   validations: {
-    imageUrl: { url }
-  }
+    imageUrl: { url },
+  },
 })
 export default class BrandingPanel extends DialogSection {
   imageUrl: string | null = null;
@@ -86,7 +93,7 @@ export default class BrandingPanel extends DialogSection {
       icon: this.icon,
       backgroundColor: this.backgroundColor,
       foregroundColor: this.foregroundColor,
-      borderColor: this.borderColor
+      borderColor: this.borderColor,
     };
   }
 }

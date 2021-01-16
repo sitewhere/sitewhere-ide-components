@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ma-0 pa-0" fluid>
+  <v-container class="ma-0 pl-0" fluid>
     <v-layout wrap>
       <v-flex xs8>
         <v-text-field
@@ -15,9 +15,17 @@
       <v-flex xs4>
         <v-menu offset-y top :close-on-content-click="false" v-model="menu">
           <template v-slot:activator="{ on }">
-            <v-btn class="mt-3 ml-3" v-on="on" :style="{ 'background-color' : valueOrDefault }" />
+            <v-btn
+              class="mt-3 ml-3"
+              v-on="on"
+              :style="{ 'background-color': valueOrDefault }"
+            />
           </template>
-          <v-color-picker :value="valueOrDefault" @input="onColorChosen" :mode="mode || 'hexa'" />
+          <v-color-picker
+            :value="valueOrDefault"
+            @input="onColorChosen"
+            :mode="mode || 'hexa'"
+          />
         </v-menu>
       </v-flex>
     </v-layout>
