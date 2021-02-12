@@ -70,7 +70,6 @@ export default class ListTab extends Vue {
 }
 .list-content {
   flex: 1;
-  background-color: #eee;
   overflow-y: auto;
 }
 .list-footer {
